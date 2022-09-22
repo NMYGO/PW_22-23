@@ -7,13 +7,13 @@ package pw.p1.classes;
 public class Kart {
 		
 	public enum Estado {
-		DISPONIBLE, RESERVADO, MANTENIMIENTO
-	};
+		DISPONIBLE, RESERVADO, MANTENIMIENTO;
+	}
 	
 	/* Atributos */
 	
 	private int id;	
-	private boolean tipo;	
+	private boolean tipo; //TRUE -> NIÑO - FALSE -> ADULTO	
 	private Estado estado;
 
 	/* Constructores */
@@ -27,7 +27,7 @@ public class Kart {
 	 * Constructor parametrizado
 	 * @param id Identificador del kart
 	 * @param tipo Tipo de kart
-	 * * @param estado Estado del kart
+	 * @param estado Estado del kart
 	 * */
 	public Kart(Integer id, Boolean tipo, Estado estado) {
 		this.id = id;
@@ -35,7 +35,7 @@ public class Kart {
 		this.estado = estado;
 	}
 	
-	/* Getters and setters */
+	/* Getters y setters */
 	
 	public int getId() {
 		return id;
