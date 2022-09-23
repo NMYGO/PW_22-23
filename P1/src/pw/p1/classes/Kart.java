@@ -29,6 +29,7 @@ public class Kart {
 	 * @param tipo Tipo de kart
 	 * @param estado Estado del kart
 	 * */
+	
 	public Kart(Integer id, Boolean tipo, Estado estado) {
 		this.id = id;
 		this.tipo = tipo;

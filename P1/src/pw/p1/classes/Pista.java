@@ -34,6 +34,7 @@ public class Pista {
 	 * @param dificultad Dificultad de la pista
 	 * @param maxkarts Maximos karts de la pista
 	 * */
+	
 	public Pista(Character nombre, Boolean estado, Dificultad dificultad, Integer maxkarts) {
 		this.nombre = nombre;
 		this.estado = estado;
