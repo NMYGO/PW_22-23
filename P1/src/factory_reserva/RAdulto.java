@@ -1,5 +1,18 @@
 package factory_reserva;
 
-public abstract class RAdulto {
+import java.util.Date;
 
+public abstract class RAdulto extends ReservaAbs{
+	int participantes;
+	
+	public RAdulto() {
+		
+	}
+	
+	public int getPartipantes() {
+		return participantes;
+	}
+	public void setParticipantes(int part) {
+		this.participantes=part;
+	}
 }
