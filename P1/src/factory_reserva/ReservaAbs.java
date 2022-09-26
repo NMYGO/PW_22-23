@@ -2,6 +2,7 @@ package factory_reserva;
 import java.util.Date;
 
 public abstract class ReservaAbs {
+	
 	protected int usuario;
 	protected Date fecha;
 	protected int duracion;
