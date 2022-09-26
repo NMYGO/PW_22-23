@@ -1,5 +1,11 @@
 package factory_reserva;
 
-public class Reserva {
-
+public abstract class Reserva {
+		// Factory methods for each product
+		
+		public abstract RInfantil creaRInf();
+		
+		public abstract RFamiliar creaRFam();
+		
+		public abstract RAdulto creaRAdu();
 }
