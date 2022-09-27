@@ -15,7 +15,7 @@ public class Pista {
 	/* Atributos */
 	
 	private char nombre;	
-	private boolean estado;	//TRUE -> SI RESERVA
+	private boolean estado;	//TRUE -> RESERVADO Si
 	private Dificultad dificultad;
 	private int maxkarts;
 	private ArrayList<Kart> lkart = new ArrayList<Kart>();
