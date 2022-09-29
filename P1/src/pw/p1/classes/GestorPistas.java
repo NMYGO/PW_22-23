@@ -29,28 +29,36 @@ public class GestorPistas{
 		return true;
 	}
 
-	public void asociaKartPista(Character nombre){
+	public void asociaKartPista(){
 
 		Pista pista_;
 		Kart kart_;
 		ArrayList<Kart> listakarts_;
+		int maxkarts_, cont = 0;
 
 		for (int i = 0;i< arrayPistas.size() ; i++) {
 			pista_ = arrayPistas.get(i);
 
-			for (int j = 0;j< arrayKarts.size() ; j++) {
-				kart_ = arrayKarts.get(j);
+			if (!pista_.getEstado() && pista_.lkart.size() != pista_getMaxkarts(){
+				maxkarts_ = pista_.getMaxkarts();
 
-				if (arrayKarts.get(j).estado == "DISPONIBLE") {
-					if (kart_.tipo == true && (pista_.dificultad == "FAMILIAR" || pista_.dificultad == "INFANTIL")) {
-						listakarts_ = pista_.getLkart();
-						listakarts_.add(kart_);
-						pista_.setLkart(listakarts_);
-					}
-					if (kart_.tipo == false && (pista_.dificultad == "FAMILIAR" || pista_.dificultad == "ADULTO")) {
-						listakarts_ = pista_.getLkart();
-						listakarts_.add(kart_);
-						pista_.setLkart(listakarts_);
+				for (int j = 0; j< arrayKarts.size() && cont <= maxkarts_; j++) {
+					kart_ = arrayKarts.get(j);
+
+					if (kart_.estado == "DISPONIBLE") {
+
+						if (kart_.isTipo() == true && (pista_.getDificultad() == "FAMILIAR" || pista_.getDificultad() == "INFANTIL")) {
+							listakarts_ = pista_.getLkart();
+							listakarts_.add(kart_);
+							pista_.setLkart(listakarts_);
+							cont++;
+						}
+						if (kart_.isTipo() == false && (pista_.getDificultad() == "FAMILIAR" || pista_.getDificultad() == "ADULTO")) {
+							listakarts_ = pista_.getLkart();
+							listakarts_.add(kart_);
+							pista_.setLkart(listakarts_);
+							cont++;
+						}
 					}
 				}
 			}
@@ -70,8 +78,8 @@ public class GestorPistas{
 		ArrayList<Pista> arraypistas;
 
 		for (int i = 0; i< arrayPistas.size() ; i++) {
-			ArrayList<Kart> karts = arrayPistas.get(i).getLkart;
-			if (kartnum <= karts.size() && tipo == arrayPistas.get(i).getDificultad && arrayPistas.get(i).isEstado) {
+			ArrayList<Kart> listakarts = arrayPistas.get(i).getLkart();
+			if (kartnum <= listakarts.size() && tipo == arrayPistas.get(i).getDificultad() && arrayPistas.get(i).isEstado()) {
 				arraypistas.add(arrayPistas.get(i));
 			}
 		}
