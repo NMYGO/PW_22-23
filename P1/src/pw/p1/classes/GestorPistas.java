@@ -1,5 +1,7 @@
 package pw.p1.classes;
 
+import java.util.ArrayList;
+
 public class GestorPistas{
 
 	private ArrayList<Pista> arrayPistas;
