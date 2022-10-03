@@ -7,10 +7,23 @@ import java.util.Scanner;
 
 //CREAR USUARIO CON LA FECHA ACTUAL DEL SISTEMA
 
+/**
+ * Clase que Gestiona los usuarios
+ * @author 
+ * */
+
 public class GestorUsuarios {
 
 	ArrayList<Usuario> lUsuarios;
 	
+	/**
+	 * Funcion que registra un usuario comprobando que no exista antes
+	 * @param nombre Nombre del usuario
+	 * @param apellidos Apellidos del usuario
+	 * @param nacimiento Nacimiento del usuario
+	 * @param correo Correo unico del usuario
+	 * @author 
+	 * */
 	public Boolean registrarUsuario(Character nombre, Character apellidos, LocalDate nacimiento, Character correo) {
 		for (int i = 0; i < lUsuarios.size(); i++) {
 			if (correo == lUsuarios.get(i).getCorreo()) {
@@ -22,6 +35,11 @@ public class GestorUsuarios {
 		return true;//El usuario se añade exitosamente
 	}
 	
+	/**
+	 * Funcion para modificar un usuario existente
+	 * @param correo Correo unico del usuario
+	 * @return Devuelve TRUE  
+	 * */
 	public Boolean ModificarUsuario(Character correo) { //TRUE si el usuario a modificar se encuentra en la lista
 		for (int i = 0; i < lUsuarios.size(); i++) {
 			if (correo == lUsuarios.get(i).getCorreo()) {
