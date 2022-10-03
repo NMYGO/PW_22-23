@@ -12,6 +12,9 @@ public class MainProgram{
         Scanner scan_ = new Scanner(System.in);
         boolean exit_ = false;
         int option_;
+        GestorPistas GestorPistas_ = new GestorPistas();
+        GestorUsuarios GestorUsuarios_ = new GestorUsuarios();
+        GestorReservas GestorReservas_ = new GestorReservas();
 
         while(!exit_){
             System.out.println("1. Crear Pista");
@@ -23,14 +26,13 @@ public class MainProgram{
             System.out.println("6. Registrar Usuario");
             System.out.println("7. Modificar Usuario");
             System.out.println("8. Listar Usuarios");
-            System.out.println("9. Crear Pista");
             System.out.println("--------------------------------------------");
-            System.out.println("11. Hacer reserva individual");
-            System.out.println("12. Hacer reserva en bono");
+            System.out.println("9. Hacer reserva individual");
+            System.out.println("10. Hacer reserva en bono");
+            System.out.println("11. PLACEHOLDER");
+            System.out.println("12. PLACEHOLDER");
             System.out.println("13. PLACEHOLDER");
             System.out.println("14. PLACEHOLDER");
-            System.out.println("15. PLACEHOLDER");
-            System.out.println("16. PLACEHOLDER");
             System.out.println("--------------------------------------------");
             System.out.println("0. Salir");
 
@@ -43,28 +45,28 @@ public class MainProgram{
                     exit_=true;
                     break;
                 case 1:
-                    
+                    //GestorPistas_.crearPista();
                     break;
                 case 2:
-
+                    //GestorPistas_.crearKart();
                     break;
                 case 3:
-
+                    GestorPistas_.asociarKartPista();
                     break;
                 case 4:
-
+                    GestorPistas_.listaPistasMantenimiento();
                     break;
                 case 5:
-
+                    //GestorPistas_.pistasLibres();
                     break;
                 case 6:
-
+                    //GestorUsuarios_.registrarUsuario();
                     break;
                 case 7:
-
+                    //GestorUsuarios_.ModificarUsuario();
                     break;
                 case 8:
-
+                    GestorUsuarios_.listarUsuarios();
                     break;
                 case 9:
 
@@ -82,12 +84,6 @@ public class MainProgram{
 
                     break;
                 case 14:
-
-                    break;
-                case 15:
-
-                    break;
-                case 16:
 
                     break;
             }
