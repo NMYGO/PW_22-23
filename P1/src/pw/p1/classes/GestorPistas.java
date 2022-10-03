@@ -1,14 +1,30 @@
 package pw.p1.classes;
 
 import java.util.ArrayList;
-
+/**
+ * Una clase que implementa las clases Pista y Kart
+ * 
+ */
 public class GestorPistas{
+
+	/* Atributos */
 
 	private ArrayList<Pista> arrayPistas;
 	private ArrayList<Kart> arrayKarts;
 
+	/**
+	 * Constructor por defecto
+	 */
 	public GestorPistas(){}
 
+	/**
+	 * Crea una pista y la añade al array
+	 * @param nombre
+	 * @param estado
+	 * @param dificultad
+	 * @param maxkarts
+	 * @return
+	 */
 	public boolean crearPista(Character nombre, Boolean estado, Pista.Dificultad dificultad, Integer maxkarts){
 		for (int i = 0;i < arrayPistas.size() ; i++) {
 			if (nombre ==(arrayPistas.get(i)).getNombre()) {
@@ -20,6 +36,13 @@ public class GestorPistas{
 		return true;
 	}
 
+	/**
+	 * Crea un kart y lo añade al array
+	 * @param id
+	 * @param tipo
+	 * @param estado
+	 * @return
+	 */
 	public boolean crearKart(Integer id, Boolean tipo, Kart.Estado estado){
 		for (int i = 0;i < arrayKarts.size() ; i++) {
 			if (id ==(arrayKarts.get(i)).getId()) {
@@ -31,6 +54,9 @@ public class GestorPistas{
 		return true;
 	}
 
+	/**
+	 * Añade karts válidos al array de karts de las pistas válidas
+	 */
 	public void asociaKartPista(){
 
 		Pista pista_;
@@ -68,6 +94,9 @@ public class GestorPistas{
 		}
 	}
 
+	/**
+	 * Lista por pantalla el nombre de las pistas en mantenimiento
+	 */
 	public void listaPistasMantenimiento(){
 		for (int i = 0;i< arrayPistas.size() ; i++) {
 			if (arrayPistas.get(i).isEstado()) {
@@ -76,6 +105,12 @@ public class GestorPistas{
 		}
 	}
 
+	/**
+	 * Devuelve un array de las pistas libres
+	 * @param kartnum
+	 * @param tipo
+	 * @return
+	 */
 	public ArrayList<Pista> pistasLibres(Integer kartnum, Pista.Dificultad tipo){
 		
 		ArrayList<Pista> arraypistaslibres_ = new ArrayList<Pista>();
