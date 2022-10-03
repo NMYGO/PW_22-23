@@ -9,7 +9,7 @@ public class GestorPistas{
 
 	public GestorPistas(){}
 
-	public boolean crearPista(Character nombre, Boolean estado, Dificultad dificultad, Integer maxkarts){
+	public boolean crearPista(Character nombre, Boolean estado, Pista.Dificultad dificultad, Integer maxkarts){
 		for (int i = 0;i < arrayPistas.size() ; i++) {
 			if (nombre ==(arrayPistas.get(i)).getNombre()) {
 				return false;
@@ -20,7 +20,7 @@ public class GestorPistas{
 		return true;
 	}
 
-	public boolean crearKart(Integer id, Boolean tipo, Estado estado){
+	public boolean crearKart(Integer id, Boolean tipo, Kart.Estado estado){
 		for (int i = 0;i < arrayKarts.size() ; i++) {
 			if (id ==(arrayKarts.get(i)).getId()) {
 				return false;
@@ -76,16 +76,16 @@ public class GestorPistas{
 		}
 	}
 
-	public ArrayList<Pista> pistasLibres(Integer kartnum, Dificultad tipo){
+	public ArrayList<Pista> pistasLibres(Integer kartnum, Pista.Dificultad tipo){
 		
-		ArrayList<Pista> arraypistas;
+		ArrayList<Pista> arraypistaslibres_ = new ArrayList<Pista>();
 
 		for (int i = 0; i< arrayPistas.size() ; i++) {
 			ArrayList<Kart> listakarts = arrayPistas.get(i).getLkart();
 			if (kartnum <= listakarts.size() && tipo == arrayPistas.get(i).getDificultad() && arrayPistas.get(i).isEstado()) {
-				arraypistas.add(arrayPistas.get(i));
+				arraypistaslibres_.add(arrayPistas.get(i));
 			}
 		}
-		return arraypistas;
+		return arraypistaslibres_;
 	}
 }
