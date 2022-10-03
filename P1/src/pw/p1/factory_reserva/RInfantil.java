@@ -2,11 +2,11 @@ package pw.p1.factory_reserva;
 
 import java.util.Date;
 
-public abstract class RInfantil extends Reserva{
+public class RInfantil extends Reserva{
 	
 	/* Atributos */
 	
-	protected int participantes;
+	private int participantes;
 	
 	/* Constructores */
 	
@@ -17,7 +17,7 @@ public abstract class RInfantil extends Reserva{
 	
 	/* Getters y setters */
 	
-	public int getPartipantes() {
+	public int getParticipantes() {
 		return participantes;
 	}
 	public void setParticipantes(int part) {

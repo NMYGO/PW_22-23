@@ -14,7 +14,7 @@ public class Pista {
 	
 	/* Atributos */
 	
-	private char nombre;	
+	private String nombre;	
 	private boolean estado;	//TRUE -> RESERVADO Si
 	private Dificultad dificultad;
 	private int maxkarts;
@@ -35,7 +35,7 @@ public class Pista {
 	 * @param maxkarts Maximos karts de la pista
 	 * */
 	
-	public Pista(Character nombre, Boolean estado, Dificultad dificultad, Integer maxkarts) {
+	public Pista(String nombre, Boolean estado, Dificultad dificultad, Integer maxkarts) {
 		this.nombre = nombre;
 		this.estado = estado;
 		this.dificultad = dificultad;
@@ -44,11 +44,11 @@ public class Pista {
 	
 	/* Getters y setters */
 
-	public char getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(char nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 

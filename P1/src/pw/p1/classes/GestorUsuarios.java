@@ -11,7 +11,7 @@ public class GestorUsuarios {
 
 	ArrayList<Usuario> lUsuarios;
 	
-	public Boolean registrarUsuario(Character nombre, Character apellidos, LocalDate nacimiento, Character correo) {
+	public Boolean registrarUsuario(String nombre, String apellidos, LocalDate nacimiento, String correo) {
 		for (int i = 0; i < lUsuarios.size(); i++) {
 			if (correo == lUsuarios.get(i).getCorreo()) {
 				return false; //El usuario ya se encuentra registrado
@@ -22,7 +22,7 @@ public class GestorUsuarios {
 		return true;//El usuario se añade exitosamente
 	}
 	
-	public Boolean ModificarUsuario(Character correo) { //TRUE si el usuario a modificar se encuentra en la lista
+	public Boolean ModificarUsuario(String correo) { //TRUE si el usuario a modificar se encuentra en la lista
 		for (int i = 0; i < lUsuarios.size(); i++) {
 			if (correo == lUsuarios.get(i).getCorreo()) {
 				Scanner modificacion = new Scanner(System.in); //Para leer las variables introducidas
