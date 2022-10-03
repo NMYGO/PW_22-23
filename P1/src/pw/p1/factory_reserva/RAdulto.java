@@ -2,7 +2,7 @@ package pw.p1.factory_reserva;
 
 import java.util.Date;
 
-public abstract class RAdulto extends Reserva{
+public class RAdulto extends Reserva{
 	
 	/* Atributos */
 	
