@@ -25,7 +25,7 @@ public class GestorPistas{
 	 * @param maxkarts
 	 * @return
 	 */
-	public boolean crearPista(Character nombre, Boolean estado, Pista.Dificultad dificultad, Integer maxkarts){
+	public boolean crearPista(String nombre, Boolean estado, Pista.Dificultad dificultad, Integer maxkarts){
 		for (int i = 0;i < arrayPistas.size() ; i++) {
 			if (nombre ==(arrayPistas.get(i)).getNombre()) {
 				return false;
