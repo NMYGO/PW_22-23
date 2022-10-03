@@ -6,7 +6,7 @@ public class RInfantil extends Reserva{
 	
 	/* Atributos */
 	
-	protected int participantes;
+	private int participantes;
 	
 	/* Constructores */
 	
@@ -17,7 +17,7 @@ public class RInfantil extends Reserva{
 	
 	/* Getters y setters */
 	
-	public int getPartipantes() {
+	public int getParticipantes() {
 		return participantes;
 	}
 	public void setParticipantes(int part) {
