@@ -69,7 +69,7 @@ public class MainProgram{
                     GestorUsuarios_.listarUsuarios();
                     break;
                 case 9:
-
+                    //GestorReservas_
                     break;
                 case 10:
 
@@ -88,6 +88,7 @@ public class MainProgram{
                     break;
             }
         }
+        scan_.close();
     }
 
 }
