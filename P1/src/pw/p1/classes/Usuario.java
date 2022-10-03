@@ -11,11 +11,11 @@ public class Usuario {
 	
 	/* Atributos */
 	
-	private char nombre;
-	private char apellidos;
+	private String nombre;
+	private String apellidos;
 	private LocalDate nacimiento;
 	private LocalDate inscripcion = LocalDate.now();
-	private char correo;
+	private String correo;
 	
 	/* Constructores */
 	
@@ -32,7 +32,7 @@ public class Usuario {
 	 * @param correo Correo unico del usuario
 	 * */
 	
-	public Usuario(Character nombre, Character apellidos, LocalDate nacimiento, Character correo) {
+	public Usuario(String nombre, String apellidos, LocalDate nacimiento, String correo) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.nacimiento = nacimiento;
@@ -41,19 +41,19 @@ public class Usuario {
 	
 	/* Getters y setters */
 
-	public char getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(char nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public char getApellidos() {
+	public String getApellidos() {
 		return apellidos;
 	}
 
-	public void setApellidos(char apellidos) {
+	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
 
@@ -73,11 +73,11 @@ public class Usuario {
 		this.inscripcion = inscripcion;
 	}
 
-	public char getCorreo() {
+	public String getCorreo() {
 		return correo;
 	}
 
-	public void setCorreo(char correo) {
+	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
 	
