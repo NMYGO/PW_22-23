@@ -57,7 +57,7 @@ public class GestorPistas{
 	/**
 	 * Añade karts válidos al array de karts de las pistas válidas
 	 */
-	public void asociaKartPista(){
+	public void asociarKartPista(){
 
 		Pista pista_;
 		Kart kart_;
