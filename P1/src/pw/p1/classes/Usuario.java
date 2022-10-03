@@ -14,7 +14,7 @@ public class Usuario {
 	private char nombre;
 	private char apellidos;
 	private LocalDate nacimiento;
-	private LocalDate inscripcion = LocalDate.parse("2010-01-01");
+	private LocalDate inscripcion = LocalDate.now();
 	private char correo;
 	
 	/* Constructores */
