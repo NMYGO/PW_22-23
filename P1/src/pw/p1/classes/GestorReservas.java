@@ -1,12 +1,14 @@
 package pw.p1.classes;
+import pw.p1.factory_reserva.*;	//Para usar todas las clases de pw.p1.factory_reserva
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GestorReservas {
 
 	/* Atributos */
-	
+	ArrayList<RBonoCreador> bonos = new ArrayList<RBonoCreador>();
 	/**
 	 * Constructor por defecto
 	 **/	
@@ -35,6 +37,19 @@ public class GestorReservas {
 			}
 		}
 		
+		return true;
+	}
+	
+	public boolean ReservaBono(Usuario usuario, Pista pista, int nparticipantes, int cBono) {
+		boolean encontrado=false;
+		for (int i = 0; i < bonos.size(); i++)
+			if (cBono == bonos.get(i).getId())
+				encontrado=true;
+		if(!encontrado) {
+			System.out.println("El bono usado no existe\n");
+			return false;
+		}
+			
 		return true;
 	}
 	
