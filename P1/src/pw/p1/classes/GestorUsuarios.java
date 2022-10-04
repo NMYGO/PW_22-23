@@ -1,8 +1,8 @@
 package pw.p1.classes;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 
 //CREAR USUARIO CON LA FECHA ACTUAL DEL SISTEMA
@@ -24,7 +24,8 @@ public class GestorUsuarios {
 	 * @param correo Correo unico del usuario
 	 * @author 
 	 * */
-	public Boolean registrarUsuario(Character nombre, Character apellidos, LocalDate nacimiento, Character correo) {
+
+	public Boolean registrarUsuario(String nombre, String apellidos, LocalDate nacimiento, String correo) {
 		for (int i = 0; i < lUsuarios.size(); i++) {
 			if (correo == lUsuarios.get(i).getCorreo()) {
 				return false; //El usuario ya se encuentra registrado
@@ -40,7 +41,8 @@ public class GestorUsuarios {
 	 * @param correo Correo unico del usuario
 	 * @return Devuelve TRUE  
 	 * */
-	public Boolean ModificarUsuario(Character correo) { //TRUE si el usuario a modificar se encuentra en la lista
+
+	public Boolean ModificarUsuario(String correo) { //TRUE si el usuario a modificar se encuentra en la lista
 		for (int i = 0; i < lUsuarios.size(); i++) {
 			if (correo == lUsuarios.get(i).getCorreo()) {
 				Scanner modificacion = new Scanner(System.in); //Para leer las variables introducidas
@@ -54,12 +56,12 @@ public class GestorUsuarios {
 					+ "3: Cambiar fecha de nacimiento.\n"
 					+ "4: Cambiar direccion de Correo."); 
 					
-					opcion = System.in.read();
+					opcion = modificacion.nextInt();
+					//opcion = System.in.read();
 					
 					switch (opcion) {
 					case 0: 
 						System.out.println("Terminando Modificaciones"); 
-						return true;
 						
 						break;
 					case 1:		//Cambio de Nombre
@@ -78,8 +80,10 @@ public class GestorUsuarios {
 					case 3:		//Cambio de fecha de nacimiento
 						System.out.println("Introduzca la nueva fecha de nacimiento");
 						String nuevaFechaNacimiento = modificacion.next();
-						lUsuarios.get(i).setNacimiento(nuevaFechaNacimiento);
-	
+						DateTimeFormatter formato= DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+						LocalDate date = LocalDate.parse(nuevaFechaNacimiento, formato);
+						lUsuarios.get(i).setNacimiento(date);
+						
 						break;
 						
 					case 4:		//Cambio de correo
@@ -94,6 +98,8 @@ public class GestorUsuarios {
 						break;
 					}
 				}
+				modificacion.close();
+				return true;
 			}
 		}
 		return false; //NO SE HA ENCONTRADO EL USUARIO
