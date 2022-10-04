@@ -1,6 +1,8 @@
 package pw.p1.classes;
 
 import java.util.ArrayList;
+import java.io.*;
+
 /**
  * Una clase que implementa las clases Pista y Kart
  * 
@@ -25,7 +27,7 @@ public class GestorPistas{
 	 * @param maxkarts
 	 * @return
 	 */
-	public boolean crearPista(String nombre, Boolean estado, Pista.Dificultad dificultad, Integer maxkarts){
+	public boolean crearPista(String nombre, Boolean estado, Pista.Dificultad dificultad, Integer maxkarts) throws IOException{
 		for (int i = 0;i < arrayPistas.size() ; i++) {
 			if (nombre ==(arrayPistas.get(i)).getNombre()) {
 				return false;
@@ -33,6 +35,11 @@ public class GestorPistas{
 		}
 		Pista newPista = new Pista(nombre, estado, dificultad, maxkarts);
 		arrayPistas.add(newPista);
+		
+		/*BufferedWriter writerP_ = new BufferedWriter(new FileWriter(new File("Pistas.txt")));
+		writerP_.write(newPista.toString());
+		writerP_.close();*/ //Tengo que ver que hacer con el array de karts
+		
 		return true;
 	}
 
@@ -43,7 +50,7 @@ public class GestorPistas{
 	 * @param estado
 	 * @return
 	 */
-	public boolean crearKart(Integer id, Boolean tipo, Kart.Estado estado){
+	public boolean crearKart(Integer id, Boolean tipo, Kart.Estado estado) throws IOException{
 		for (int i = 0;i < arrayKarts.size() ; i++) {
 			if (id ==(arrayKarts.get(i)).getId()) {
 				return false;
@@ -51,13 +58,18 @@ public class GestorPistas{
 		}
 		Kart newKarts = new Kart(id, tipo, estado);
 		arrayKarts.add(newKarts);
+		
+		BufferedWriter writerK_ = new BufferedWriter(new FileWriter(new File("Karts.txt")));
+		writerK_.write(newKarts.toString());
+		writerK_.close();
+		
 		return true;
 	}
 
 	/**
 	 * Añade karts válidos al array de karts de las pistas válidas
 	 */
-	public void asociarKartPista(){
+	public void asociarKartPista() throws IOException{
 
 		Pista pista_;
 		Kart kart_;

@@ -6,20 +6,35 @@ package pw.p1.classes;
  * */
 import java.util.Scanner;
 import java.time.LocalDate;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class MainProgram{
 
     public static void main(String[] args) throws IOException{
         Scanner scan_ = new Scanner(System.in);
         BufferedReader scanline_ = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader readerU_ = new BufferedReader(new FileReader(new File("Usuarios.txt")));
+        BufferedReader readerP_ = new BufferedReader(new FileReader(new File("Pistas.txt")));
+        BufferedReader readerK_ = new BufferedReader(new FileReader(new File("Karts.txt")));
         boolean exit_ = false;
         int option_;
+        String line;
         GestorPistas GestorPistas_ = new GestorPistas();
         GestorUsuarios GestorUsuarios_ = new GestorUsuarios();
         GestorReservas GestorReservas_ = new GestorReservas();
+        
+        while((line = readerU_.readLine()) != null) {
+        	String nombre = line.substring(line.indexOf("e=") + 2, line.indexOf(", apellidos"));
+        	String apellidos = line.substring(line.indexOf("s=") + 2, line.indexOf(", nacimiento"));
+        	String nacimiento = line.substring(line.indexOf("o=") + 2, line.indexOf(", inscripcion"));
+        	String correo = line.substring(line.indexOf("eo=") + 3, line.indexOf("]"));
+        	Usuario newUsuario = new Usuario(nombre, apellidos, LocalDate.parse(nacimiento), correo); 
+        	GestorUsuarios_.lUsuarios.add(newUsuario);
+		}
+        
+        readerU_.close();
+        readerP_.close();
+        readerK_.close();
         
         while(!exit_){
             System.out.println("0. Registrarse como usuario");
@@ -129,6 +144,7 @@ public class MainProgram{
         }
         
         scan_.close();
+        scanline_.close();
     }
 
 }

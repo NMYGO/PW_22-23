@@ -1,5 +1,7 @@
 package pw.p1.classes;
 
+import java.io.BufferedWriter;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ public class GestorUsuarios {
 	 * @author 
 	 * */
 
-	public Boolean registrarUsuario(String nombre, String apellidos, LocalDate nacimiento, String correo) {
+	public Boolean registrarUsuario(String nombre, String apellidos, LocalDate nacimiento, String correo) throws IOException{
 		for (int i = 0; i < lUsuarios.size(); i++) {
 			if (correo == lUsuarios.get(i).getCorreo()) {
 				return false; //El usuario ya se encuentra registrado
@@ -35,6 +37,11 @@ public class GestorUsuarios {
 		}
 		Usuario newUsuario = new Usuario(nombre, apellidos, nacimiento, correo);
 		lUsuarios.add(newUsuario);
+		
+		BufferedWriter writerU_ = new BufferedWriter(new FileWriter(new File("Usuarios.txt")));
+		writerU_.write(newUsuario.toString());
+		writerU_.close();
+		
 		return true;//El usuario se añade exitosamente
 	}
 	
