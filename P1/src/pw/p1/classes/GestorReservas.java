@@ -8,7 +8,9 @@ import java.util.Scanner;
 public class GestorReservas {
 
 	/* Atributos */
+	
 	ArrayList<RBonoCreador> bonos = new ArrayList<RBonoCreador>();
+	
 	/**
 	 * Constructor por defecto
 	 **/	

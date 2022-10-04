@@ -9,8 +9,8 @@ public class GestorPistas{
 
 	/* Atributos */
 
-	private ArrayList<Pista> arrayPistas;
-	private ArrayList<Kart> arrayKarts;
+	ArrayList<Pista> arrayPistas = new ArrayList<Pista>();
+	ArrayList<Kart> arrayKarts = new ArrayList<Kart>();
 
 	/**
 	 * Constructor por defecto

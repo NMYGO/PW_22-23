@@ -13,8 +13,10 @@ import java.util.Scanner;
  * */
 
 public class GestorUsuarios {
-
-	ArrayList<Usuario> lUsuarios;
+	
+	/* Atributos */
+	
+	ArrayList<Usuario> lUsuarios = new ArrayList<Usuario>();
 	
 	/**
 	 * Funcion que registra un usuario comprobando que no exista antes
