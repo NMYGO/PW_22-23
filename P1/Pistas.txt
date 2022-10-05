@@ -1,2 +1,2 @@
-Pista [nombre=pista1, estado=false, dificultad=FAMILIAR, maxkarts=20, lkart=[]]
-Pista [nombre=pista2, estado=true, dificultad=ADULTO, maxkarts=15, lkart=[]]
+Pista [nombre=pista1, estado=false, dificultad=FAMILIAR, maxkarts=4]
+Pista [nombre=pista2, estado=false, dificultad=ADULTO, maxkarts=10]

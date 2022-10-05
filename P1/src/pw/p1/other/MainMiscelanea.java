@@ -1,15 +1,14 @@
 package pw.p1.other;
 
 import pw.p1.classes.*;
-
-import java.util.ArrayList;
+import pw.p1.classes.Kart.Estado;
 import java.util.Scanner;
 
 public class MainMiscelanea {
 	public static void menu () {
 		System.out.println("1. Crear Pista");
         System.out.println("2. Crear Kart");
-        System.out.println("3. Asociar Karts y Pistas");
+        System.out.println("3. Asociar Karts a Pistas");
         System.out.println("4. Listar Pistas en mantenimiento");
         System.out.println("5. Recoger Array de pistas libres");
         System.out.println("--------------------------------------------");
@@ -40,41 +39,18 @@ public class MainMiscelanea {
 		return false;
 	}
 	
-}
-
-/*public void asociarKartPista() {
-
-	Pista pista_;
-	Kart kart_;
-	ArrayList<Kart> listakarts_;
-	int maxkarts_, cont = 0;
-
-	for (int i = 0;i< arrayPistas.size() ; i++) {
-		pista_ = arrayPistas.get(i);
-		ArrayList<Kart> list_ = pista_.getLkart();
-
-		if (!pista_.isEstado() && list_.size() != pista_.getMaxkarts()){
-			maxkarts_ = pista_.getMaxkarts();
-
-			for (int j = 0; j< arrayKarts.size() && cont <= maxkarts_; j++) {
-				kart_ = arrayKarts.get(j);
-
-				if (kart_.getEstado() == Kart.Estado.DISPONIBLE) {
-
-					if (kart_.isTipo() == true && (pista_.getDificultad() == Pista.Dificultad.FAMILIAR || pista_.getDificultad() == Pista.Dificultad.INFANTIL)) {
-						listakarts_ = pista_.getLkart();
-						listakarts_.add(kart_);
-						pista_.setLkart(listakarts_);
-						cont++;
-					}
-					if (kart_.isTipo() == false && (pista_.getDificultad() == Pista.Dificultad.FAMILIAR || pista_.getDificultad() == Pista.Dificultad.ADULTO)) {
-						listakarts_ = pista_.getLkart();
-						listakarts_.add(kart_);
-						pista_.setLkart(listakarts_);
-						cont++;
-					}
-				}
+	public static void restaurar (GestorPistas GestorPistas_) {
+		for (int i = 0; i < GestorPistas_.arrayKarts.size(); i++) {
+			if (GestorPistas_.arrayKarts.get(i).getEstado() == Estado.RESERVADO) {
+				GestorPistas_.arrayKarts.get(i).setEstado(Estado.DISPONIBLE);
+			}
+		}
+		
+		for (int i = 0; i < GestorPistas_.arrayPistas.size(); i++) {
+			if (GestorPistas_.arrayPistas.get(i).isEstado()) {
+				GestorPistas_.arrayPistas.get(i).setEstado(false);
 			}
 		}
 	}
-}*/
+	
+}

@@ -44,7 +44,7 @@ public class RBonoCreador extends ReservaCreador {
 	@Override
 	public RInfantil creaRInf() {
 		RInfantil reserva = new RInfantil();
-		usuario=reserva.getUsuario();
+		//usuario=reserva.getUsuario();
 		return reserva;
 	}
 	
@@ -54,7 +54,7 @@ public class RBonoCreador extends ReservaCreador {
 	@Override
 	public RFamiliar creaRFam() {
 		RFamiliar reserva = new RFamiliar();
-		usuario=reserva.getUsuario();
+		//usuario=reserva.getUsuario();
 		return reserva;
 	}
 	
@@ -64,7 +64,7 @@ public class RBonoCreador extends ReservaCreador {
 	@Override
 	public RAdulto creaRAdu() {
 		RAdulto reserva = new RAdulto();
-		usuario=reserva.getUsuario();		
+		//usuario=reserva.getUsuario();		
 		return reserva;
 	}
 }

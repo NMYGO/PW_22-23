@@ -7,7 +7,6 @@ import java.util.ArrayList;
  * */
 import java.util.Scanner;
 import pw.p1.other.*;
-import java.time.LocalDate;
 import java.io.*;
 
 public class MainProgram{
@@ -106,6 +105,7 @@ public class MainProgram{
             	}
             }         
         }
+        MainMiscelanea.restaurar(GestorPistas_);
         Escritor.escritor(GestorPistas_, GestorUsuarios_, GestorReservas_); //Escribo los arrays de los lectores en los ficheros
         scan_.close();
     }

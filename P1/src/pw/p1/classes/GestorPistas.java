@@ -93,11 +93,12 @@ public class GestorPistas{
 	public boolean asociarKartPista(Integer idkart, String nombrepista) {
 		for (int i = 0;i< arrayPistas.size() ; i++) {
 			if (arrayPistas.get(i).getNombre().equals(nombrepista)) {
-				if(!arrayPistas.get(i).isEstado()) {//consultar karts disponibles hacer con un for
-					ArrayList<Kart> listakarts = arrayPistas.get(i).consultarKartsDisponibles();
+				if(!arrayPistas.get(i).isEstado()) {
+					ArrayList<Kart> listakarts = arrayPistas.get(i).consultarKartsDisponibles(arrayKarts);
 					for (int j = 0;j< listakarts.size() ; j++) {
-						if (idkart == (listakarts.get(i).getId())) {
-							if(arrayPistas.get(i).asociarKartAPista(listakarts.get(i), arrayPistas.get(i))) {
+						if (idkart == (listakarts.get(j).getId())) {
+							if(arrayPistas.get(i).asociarKartAPista(listakarts.get(j), arrayPistas.get(i))) {
+								arrayKarts.get(j).setEstado(Estado.RESERVADO);
 								System.out.println("Kart asociado con exito");
 								System.out.println("-------------------------------------");
 								System.out.println("");
@@ -133,9 +134,9 @@ public class GestorPistas{
 	 */
 	public ArrayList<Pista> pistasLibres(Scanner scan_){
 		System.out.println("Introduzca el numero de karts solicitados");
-		Integer kartnum = Integer.parseInt(scan_.nextLine());							
+			Integer kartnum = Integer.parseInt(scan_.nextLine());							
 		System.out.println("Introduzca la dificultad de pista");
-		Pista.Dificultad dificultad = Pista.Dificultad.valueOf(scan_.nextLine());
+			Pista.Dificultad dificultad = Pista.Dificultad.valueOf(scan_.nextLine());
 
 		ArrayList<Pista> arraypistaslibres_ = new ArrayList<Pista>();
 		ArrayList<Kart> listakarts = new ArrayList<Kart>();

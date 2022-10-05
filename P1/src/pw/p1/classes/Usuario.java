@@ -14,7 +14,7 @@ public class Usuario {
 	private String nombre;
 	private String apellidos;
 	private LocalDate nacimiento;
-	private LocalDate inscripcion = LocalDate.now();
+	private LocalDate inscripcion;
 	private String correo;
 	
 	/* Constructores */
@@ -36,6 +36,7 @@ public class Usuario {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.nacimiento = nacimiento;
+		this.inscripcion = LocalDate.now();
 		this.correo = correo;
 	}
 	

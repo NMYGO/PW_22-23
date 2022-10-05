@@ -20,9 +20,9 @@ public class GestorReservas {
 	 * Realiza una reserva individual
 	 **/
 	
-	public boolean ReservaIndividualInfantil(Usuario usuario, Pista pista, int nParticipantes, Scanner scan_) {
+	public boolean ReservaIndividualInfantil(Usuario usuario, Pista pista, int nParticipantes, Scanner scan_, GestorPistas GestorPistas_) {
 		if ((usuario.getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
-			ArrayList<Kart> dkart = pista.consultarKartsDisponibles();
+			ArrayList<Kart> dkart = pista.consultarKartsDisponibles(GestorPistas_.arrayKarts);
 			int karts = 0;
 			for (int i = 0;i < dkart.size() ; i++) {
 				if ((dkart.get(i)).isTipo() == false) {
@@ -72,9 +72,9 @@ public class GestorReservas {
 	
 	
 	
-	public boolean ReservaIndividualAdulto(Usuario usuario, Pista pista, int nParticipantes, Scanner scan_) {
+	public boolean ReservaIndividualAdulto(Usuario usuario, Pista pista, int nParticipantes, Scanner scan_, GestorPistas GestorPistas_) {
 		if ((usuario.getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
-			ArrayList<Kart> dkart = pista.consultarKartsDisponibles();
+			ArrayList<Kart> dkart = pista.consultarKartsDisponibles(GestorPistas_.arrayKarts);
 			int karts = 0;
 			for (int i = 0;i < dkart.size() ; i++) {
 				if ((dkart.get(i)).isTipo() == false) {

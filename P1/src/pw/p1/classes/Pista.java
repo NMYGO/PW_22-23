@@ -2,6 +2,8 @@ package pw.p1.classes;
 
 import java.util.ArrayList;
 
+import pw.p1.classes.Kart.Estado;
+
 /**
  * Clase Pista
  * */
@@ -18,7 +20,7 @@ public class Pista {
 	private boolean estado;	//TRUE -> RESERVADO Si
 	private Dificultad dificultad;
 	private int maxkarts;
-	private ArrayList<Kart> lkart = new ArrayList<Kart>();
+	private ArrayList<Kart> lkart;
 	
 	/* Constructores */
 	
@@ -40,6 +42,7 @@ public class Pista {
 		this.estado = estado;
 		this.dificultad = dificultad;
 		this.maxkarts = maxkarts;
+		this.lkart = new ArrayList<Kart>();
 	}
 	
 	/* Getters y setters */
@@ -90,26 +93,32 @@ public class Pista {
 	public String toString() {
 		return "Pista [nombre=" + nombre + ", estado=" + estado + ", "
 				+ "dificultad=" + dificultad + ", maxkarts=" + maxkarts 
-				+ ", lkart=" + lkart + "]\n";
+				+ "]\n";
 	}
 	
-	public ArrayList<Kart> consultarKartsDisponibles() {
+	public ArrayList<Kart> consultarKartsDisponibles(ArrayList<Kart> arrayKarts) {
 		ArrayList<Kart> dkart = new ArrayList<Kart>();
-		for(int i = 0; i < lkart.size(); i++) {
-			if((lkart.get(i)).getEstado() == Kart.Estado.DISPONIBLE) {
-				dkart.add(lkart.get(i));
+		for(int i = 0; i < arrayKarts.size(); i++) {
+			if((arrayKarts.get(i)).getEstado() == Kart.Estado.DISPONIBLE) {
+				dkart.add(arrayKarts.get(i));
 			}
 		}
 		return dkart;
 	}
 
 	public boolean asociarKartAPista(Kart kart, Pista pista) {
+		if(pista.getMaxkarts() == pista.lkart.size()) {
+			return false;
+		}
 		if(pista.getDificultad() == Dificultad.INFANTIL && kart.isTipo()) {
-			lkart.add(kart);
+			kart.setEstado(Estado.RESERVADO);
+			pista.lkart.add(kart);
 		}else if(pista.getDificultad() == Dificultad.ADULTO && !kart.isTipo()) {
-			lkart.add(kart);
+			kart.setEstado(Estado.RESERVADO);
+			pista.lkart.add(kart);
 		}else if(pista.getDificultad() == Dificultad.FAMILIAR) {
-			lkart.add(kart);
+			kart.setEstado(Estado.RESERVADO);
+			pista.lkart.add(kart);
 		}else {
 			return false;
 		}

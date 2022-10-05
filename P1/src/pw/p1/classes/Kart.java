@@ -68,5 +68,4 @@ public class Kart {
 	public String toString() {
 		return "Kart [id=" + id + ", tipo=" + tipo + ", estado=" + estado + "]\n";
 	}
-	
 }

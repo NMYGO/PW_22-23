@@ -38,7 +38,7 @@ public class Lector {
 		    		Boolean estado = Boolean.parseBoolean(sestado);
 		    	String sdificultad = line.substring(line.indexOf("d=") + 2, line.indexOf(", maxkarts"));
 		    		Pista.Dificultad dificultad = Pista.Dificultad.valueOf(sdificultad);
-		    	String smaxkarts = line.substring(line.indexOf("s=") + 2, line.indexOf(", lkart"));
+		    	String smaxkarts = line.substring(line.indexOf("s=") + 2, line.indexOf("]"));
 		    		int maxkarts = Integer.parseInt(smaxkarts);
 		    	Pista newPista = new Pista(nombre, estado, dificultad, maxkarts); 
 		    	GestorPistas_.arrayPistas.add(newPista);

@@ -1,7 +1,5 @@
 package pw.p1.factory_reserva;
 
-import java.util.Date;
-
 public class RInfantil extends Reserva{
 	
 	/* Atributos */
