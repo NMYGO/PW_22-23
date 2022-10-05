@@ -11,8 +11,8 @@ public class GestorPistas{
 
 	/* Atributos */
 
-	ArrayList<Pista> arrayPistas = new ArrayList<Pista>();
-	ArrayList<Kart> arrayKarts = new ArrayList<Kart>();
+	public ArrayList<Pista> arrayPistas = new ArrayList<Pista>();
+	public ArrayList<Kart> arrayKarts = new ArrayList<Kart>();
 
 	/**
 	 * Constructor por defecto
@@ -50,26 +50,21 @@ public class GestorPistas{
 	 * @param estado
 	 * @return
 	 */
-	public boolean crearKart(Integer id, Boolean tipo, Kart.Estado estado) throws IOException{
+	public boolean crearKart(Integer id, Boolean tipo, Kart.Estado estado) {
 		for (int i = 0;i < arrayKarts.size() ; i++) {
 			if (id ==(arrayKarts.get(i)).getId()) {
 				return false;
 			}
 		}
 		Kart newKarts = new Kart(id, tipo, estado);
-		arrayKarts.add(newKarts);
-		
-		BufferedWriter writerK_ = new BufferedWriter(new FileWriter(new File("Karts.txt")));
-		writerK_.write(newKarts.toString());
-		writerK_.close();
-		
+		arrayKarts.add(newKarts);		
 		return true;
 	}
 
 	/**
 	 * Añade karts válidos al array de karts de las pistas válidas
 	 */
-	public void asociarKartPista() throws IOException{
+	public void asociarKartPista() {
 
 		Pista pista_;
 		Kart kart_;

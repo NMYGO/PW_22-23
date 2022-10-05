@@ -5,6 +5,7 @@ package pw.p1.classes;
  * las funcionalidades de las clases
  * */
 import java.util.Scanner;
+import pw.p1.reader_writer.*;
 import java.time.LocalDate;
 import java.io.*;
 
@@ -13,29 +14,13 @@ public class MainProgram{
     public static void main(String[] args) throws IOException{
         Scanner scan_ = new Scanner(System.in);
         BufferedReader scanline_ = new BufferedReader(new InputStreamReader(System.in));
-        BufferedReader readerU_ = new BufferedReader(new FileReader(new File("Usuarios.txt")));
-        BufferedReader readerP_ = new BufferedReader(new FileReader(new File("Pistas.txt")));
-        BufferedReader readerK_ = new BufferedReader(new FileReader(new File("Karts.txt")));
         boolean exit_ = false;
         int option_;
-        String line;
         GestorPistas GestorPistas_ = new GestorPistas();
         GestorUsuarios GestorUsuarios_ = new GestorUsuarios();
         GestorReservas GestorReservas_ = new GestorReservas();
         
-        while((line = readerU_.readLine()) != null) {
-        	String nombre = line.substring(line.indexOf("e=") + 2, line.indexOf(", apellidos"));
-        	String apellidos = line.substring(line.indexOf("s=") + 2, line.indexOf(", nacimiento"));
-        	String nacimiento = line.substring(line.indexOf("o=") + 2, line.indexOf(", inscripcion"));
-        	String correo = line.substring(line.indexOf("eo=") + 3, line.indexOf("]"));
-        	Usuario newUsuario = new Usuario(nombre, apellidos, LocalDate.parse(nacimiento), correo); 
-        	GestorUsuarios_.lUsuarios.add(newUsuario);
-		}
-        
-        readerU_.close();
-        readerP_.close();
-        readerK_.close();
-        
+        Lector.lector(GestorPistas_, GestorUsuarios_, GestorReservas_); //Cargo los ficheros en los arrayList de los gestores
         while(!exit_){
             System.out.println("0. Registrarse como usuario");
             System.out.println("1. Loguearse como usuario");
@@ -63,8 +48,17 @@ public class MainProgram{
             }else if(option_ == 1) {           
             	System.out.println("Introduzca su correo");
         		String lcorreo = scan_.next();
-        		if(lcorreo == "") {
-                	
+        		//
+        		boolean encontrado = false;
+        		for (int i = 0; i < GestorUsuarios_.arrayUsuarios.size(); i++) {
+        			System.out.println(GestorUsuarios_.arrayUsuarios.get(i).toString());
+        			if (GestorUsuarios_.arrayUsuarios.get(i).getCorreo().contains(lcorreo)) {
+        				encontrado = true;
+        			}
+        		}
+        		//
+        		if(encontrado == false) {
+        			System.out.println("Debe loguearse");
                 }else {
                 	exit_ = false;
         	        while(!exit_){
@@ -142,7 +136,7 @@ public class MainProgram{
             	}
             }         
         }
-        
+        Escritor.escritor(GestorPistas_, GestorUsuarios_, GestorReservas_); //Escribo los arrays de los lectores en los ficheros
         scan_.close();
         scanline_.close();
     }

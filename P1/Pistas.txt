@@ -1,3 +1,0 @@
-pista1 true INFANTIL 10 null
-pista2 true ADULTO 4 null
-pista3 false INFANTIL 15 null

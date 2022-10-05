@@ -1,0 +1,1 @@
+Usuario [nombre=a, apellidos=a b, nacimiento=1111-11-11, inscripcion=2022-10-05, correo=ab@]

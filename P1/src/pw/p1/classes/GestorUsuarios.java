@@ -1,7 +1,5 @@
 package pw.p1.classes;
 
-import java.io.BufferedWriter;
-import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -18,7 +16,7 @@ public class GestorUsuarios {
 	
 	/* Atributos */
 	
-	ArrayList<Usuario> lUsuarios = new ArrayList<Usuario>();
+	public ArrayList<Usuario> arrayUsuarios = new ArrayList<Usuario>();
 	
 	/**
 	 * Funcion que registra un usuario comprobando que no exista antes
@@ -29,19 +27,14 @@ public class GestorUsuarios {
 	 * @author 
 	 * */
 
-	public Boolean registrarUsuario(String nombre, String apellidos, LocalDate nacimiento, String correo) throws IOException{
-		for (int i = 0; i < lUsuarios.size(); i++) {
-			if (correo == lUsuarios.get(i).getCorreo()) {
+	public Boolean registrarUsuario(String nombre, String apellidos, LocalDate nacimiento, String correo) {
+		for (int i = 0; i < arrayUsuarios.size(); i++) {
+			if (correo == arrayUsuarios.get(i).getCorreo()) {
 				return false; //El usuario ya se encuentra registrado
 			}
 		}
 		Usuario newUsuario = new Usuario(nombre, apellidos, nacimiento, correo);
-		lUsuarios.add(newUsuario);
-		
-		BufferedWriter writerU_ = new BufferedWriter(new FileWriter(new File("Usuarios.txt")));
-		writerU_.write(newUsuario.toString());
-		writerU_.close();
-		
+		arrayUsuarios.add(newUsuario);				
 		return true;//El usuario se añade exitosamente
 	}
 	
@@ -52,8 +45,8 @@ public class GestorUsuarios {
 	 * */
 
 	public Boolean ModificarUsuario(String correo) { //TRUE si el usuario a modificar se encuentra en la lista
-		for (int i = 0; i < lUsuarios.size(); i++) {
-			if (correo == lUsuarios.get(i).getCorreo()) {
+		for (int i = 0; i < arrayUsuarios.size(); i++) {
+			if (correo == arrayUsuarios.get(i).getCorreo()) {
 				Scanner modificacion = new Scanner(System.in); //Para leer las variables introducidas
 				
 				Integer opcion = 1;
@@ -76,14 +69,14 @@ public class GestorUsuarios {
 					case 1:		//Cambio de Nombre
 						System.out.println("Introduzca el nuevo nombre");
 						String nuevoNombre = modificacion.next();
-						lUsuarios.get(i).setNombre(nuevoNombre);
+						arrayUsuarios.get(i).setNombre(nuevoNombre);
 	
 						break;
 							
 					case 2:		//Cambio de Apellidos
 						System.out.println("Introduzca los nuevos apellidos");
 						String nuevoApellidos = modificacion.next();
-						lUsuarios.get(i).setApellidos(nuevoApellidos);
+						arrayUsuarios.get(i).setApellidos(nuevoApellidos);
 	
 						break;
 					case 3:		//Cambio de fecha de nacimiento
@@ -91,14 +84,14 @@ public class GestorUsuarios {
 						String nuevaFechaNacimiento = modificacion.next();
 						DateTimeFormatter formato= DateTimeFormatter.ofPattern("dd-MMM-yyyy");
 						LocalDate date = LocalDate.parse(nuevaFechaNacimiento, formato);
-						lUsuarios.get(i).setNacimiento(date);
+						arrayUsuarios.get(i).setNacimiento(date);
 						
 						break;
 						
 					case 4:		//Cambio de correo
 						System.out.println("Introduzca la nueva direccion de correo");
 						String nuevoCorreo = modificacion.next();
-						lUsuarios.get(i).setCorreo(nuevoCorreo);
+						arrayUsuarios.get(i).setCorreo(nuevoCorreo);
 	
 						break;
 					default:
@@ -115,8 +108,8 @@ public class GestorUsuarios {
 	}
 	
 	public void listarUsuarios() {
-		for (int i = 0; i < lUsuarios.size(); i++) {
-			lUsuarios.get(i).toString();
+		for (int i = 0; i < arrayUsuarios.size(); i++) {
+			System.out.println(arrayUsuarios.get(i).toString());
 		}
 	}
 }
