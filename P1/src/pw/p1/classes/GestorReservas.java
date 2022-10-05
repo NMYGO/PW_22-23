@@ -72,7 +72,7 @@ public class GestorReservas {
 	
 	
 	
-	public boolean ReservaIndividualAdula(Usuario usuario, Pista pista, int nParticipantes, Scanner scan_) {
+	public boolean ReservaIndividualAdulto(Usuario usuario, Pista pista, int nParticipantes, Scanner scan_) {
 		if ((usuario.getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
 			ArrayList<Kart> dkart = pista.consultarKartsDisponibles();
 			int karts = 0;
