@@ -66,7 +66,7 @@ public class Kart {
 
 	@Override
 	public String toString() {
-		return "Kart [id=" + id + ", tipo=" + tipo + ", estado=" + estado + "]";
+		return "Kart [id=" + id + ", tipo=" + tipo + ", estado=" + estado + "]\n";
 	}
 	
 }

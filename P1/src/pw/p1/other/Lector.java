@@ -1,4 +1,4 @@
-package pw.p1.reader_writer;
+package pw.p1.other;
 
 import java.time.LocalDate;
 import java.io.*;
@@ -23,7 +23,9 @@ public class Lector {
 			readerU_.close();
 	    }else {
 	    	if(Ufile.createNewFile()) {
+	    		System.out.println("--------------------------------------------------------------------------");
 	    		System.out.println("Se ha creado el fichero Usuarios.txt porque no existia");
+	    		System.out.println("--------------------------------------------------------------------------");
 	    	}
 	    }
 	    
@@ -32,7 +34,7 @@ public class Lector {
 	    	BufferedReader readerP_ = new BufferedReader(new FileReader(new File("Pistas.txt")));
 		    while((line = readerP_.readLine()) != null) {
 		    	String nombre = line.substring(line.indexOf("e=") + 2, line.indexOf(", estado"));
-		    	String sestado = line.substring(line.indexOf("s=") + 2, line.indexOf(", dificultad"));
+		    	String sestado = line.substring(line.indexOf("o=") + 2, line.indexOf(", dificultad"));
 		    		Boolean estado = Boolean.parseBoolean(sestado);
 		    	String sdificultad = line.substring(line.indexOf("d=") + 2, line.indexOf(", maxkarts"));
 		    		Pista.Dificultad dificultad = Pista.Dificultad.valueOf(sdificultad);
@@ -44,7 +46,9 @@ public class Lector {
 		    readerP_.close();
 	    }else {
 	    	if(Pfile.createNewFile()) {
+	    		System.out.println("--------------------------------------------------------------------------");
 	    		System.out.println("Se ha creado el fichero Pistas.txt porque no existia");
+	    		System.out.println("--------------------------------------------------------------------------");
 	    	}
 	    }
 	    
@@ -64,7 +68,9 @@ public class Lector {
 		    readerK_.close();
 	    }else {
 	    	if(Kfile.createNewFile()) {
+	    		System.out.println("--------------------------------------------------------------------------");
 	    		System.out.println("Se ha creado el fichero Karts.txt porque no existia");
+	    		System.out.println("--------------------------------------------------------------------------");
 	    	}
 	    }
 	}

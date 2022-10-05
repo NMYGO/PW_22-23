@@ -36,7 +36,7 @@ public class RFamiliar extends Reserva{
 	
 	public String toString() {
 		String info = super.toString();
-			info += " -> Reserva Familiar";
+			info += " -> Reserva Familiar\n";
 			return info;
 	}
 }

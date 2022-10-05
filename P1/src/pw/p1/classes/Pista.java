@@ -90,7 +90,7 @@ public class Pista {
 	public String toString() {
 		return "Pista [nombre=" + nombre + ", estado=" + estado + ", "
 				+ "dificultad=" + dificultad + ", maxkarts=" + maxkarts 
-				+ ", lkart=" + lkart + "]";
+				+ ", lkart=" + lkart + "]\n";
 	}
 	
 	public ArrayList<Kart> consultarKartsDisponibles() {

@@ -28,7 +28,7 @@ public class RInfantil extends Reserva{
 	
 	public String toString() {
 		String info = super.toString();
-			info += " -> Reserva Infantil";
+			info += " -> Reserva Infantil\n";
 			return info;
 	}
 }

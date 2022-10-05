@@ -28,7 +28,7 @@ public class RAdulto extends Reserva{
 	
 	public String toString() {
 		String info = super.toString();
-			info += " -> Reserva Adulto";
+			info += " -> Reserva Adulto\n";
 			return info;
 	}
 }

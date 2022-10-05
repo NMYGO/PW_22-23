@@ -87,7 +87,7 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [nombre=" + nombre + ", apellidos=" + apellidos 
 				+ ", nacimiento=" + nacimiento + ", inscripcion=" + inscripcion 
-				+ ", correo=" + correo + "]";
+				+ ", correo=" + correo + "]\n";
 	}
 	
 	public void calcularAntiguedad() {

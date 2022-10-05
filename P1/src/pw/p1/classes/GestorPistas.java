@@ -1,7 +1,7 @@
 package pw.p1.classes;
 
 import java.util.ArrayList;
-import java.io.*;
+import java.util.Scanner;
 
 /**
  * Una clase que implementa las clases Pista y Kart
@@ -27,19 +27,26 @@ public class GestorPistas{
 	 * @param maxkarts
 	 * @return
 	 */
-	public boolean crearPista(String nombre, Boolean estado, Pista.Dificultad dificultad, Integer maxkarts) throws IOException{
+	public boolean crearPista(Scanner scan_) {
+		System.out.println("Introduzca el nombre de pista");
+			String nombre = scan_.nextLine();							
+		System.out.println("Introduzca el estado de pista");
+			Boolean estado = Boolean.parseBoolean(scan_.nextLine());
+		System.out.println("Introduzca la dificultad de pista");
+			Pista.Dificultad dificultad = Pista.Dificultad.valueOf(scan_.nextLine());
+		System.out.println("Introduzca el numero maximo de karts de pista");
+			Integer maxkarts = Integer.parseInt(scan_.nextLine());
+			
 		for (int i = 0;i < arrayPistas.size() ; i++) {
-			if (nombre ==(arrayPistas.get(i)).getNombre()) {
+			if (arrayPistas.get(i).getNombre().equals(nombre)) {
+				System.out.println("Error. Esa pista ya existe");
 				return false;
 			}
 		}
+		
 		Pista newPista = new Pista(nombre, estado, dificultad, maxkarts);
 		arrayPistas.add(newPista);
-		
-		/*BufferedWriter writerP_ = new BufferedWriter(new FileWriter(new File("Pistas.txt")));
-		writerP_.write(newPista.toString());
-		writerP_.close();*/ //Tengo que ver que hacer con el array de karts
-		
+		System.out.println("Pista creada con exito");
 		return true;
 	}
 

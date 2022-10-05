@@ -1,4 +1,4 @@
-package pw.p1.reader_writer;
+package pw.p1.other;
 
 import java.io.*;
 import pw.p1.classes.*;

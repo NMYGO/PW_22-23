@@ -5,7 +5,7 @@ package pw.p1.classes;
  * las funcionalidades de las clases
  * */
 import java.util.Scanner;
-import pw.p1.reader_writer.*;
+import pw.p1.other.*;
 import java.time.LocalDate;
 import java.io.*;
 
@@ -13,84 +13,44 @@ public class MainProgram{
 
     public static void main(String[] args) throws IOException{
         Scanner scan_ = new Scanner(System.in);
-        BufferedReader scanline_ = new BufferedReader(new InputStreamReader(System.in));
         boolean exit_ = false;
         int option_;
         GestorPistas GestorPistas_ = new GestorPistas();
         GestorUsuarios GestorUsuarios_ = new GestorUsuarios();
-        GestorReservas GestorReservas_ = new GestorReservas();
+        GestorReservas GestorReservas_ = new GestorReservas();        
+        	Lector.lector(GestorPistas_, GestorUsuarios_, GestorReservas_);
         
-        Lector.lector(GestorPistas_, GestorUsuarios_, GestorReservas_); //Cargo los ficheros en los arrayList de los gestores
         while(!exit_){
+        	System.out.println("PROGRAMA MAIN");
+        	System.out.println("=====================================");
             System.out.println("0. Registrarse como usuario");
             System.out.println("1. Loguearse como usuario");
-            
-            System.out.println("Elija una opción escribiendo su numero");
-            option_=scan_.nextInt();
-            
-            if(option_ == 0) {
-            	System.out.println("Introduzca su nombre");
-        			String rnombre = scan_.next();
-        		System.out.println("Introduzca sus apellidos");        			
-        				String rapellidos = scanline_.readLine();
-        		System.out.println("Introduzca fecha de nacimiento (yyyy-mm-dd)");
-    				String rsnacimiento = scan_.next();
-    				LocalDate rnacimiento = LocalDate.parse(rsnacimiento);
-    			System.out.println("Introduzca su correo");
-        			String rcorreo = scan_.next();
-	            if(GestorUsuarios_.registrarUsuario(rnombre, rapellidos, rnacimiento, rcorreo)) {
-	            	System.out.println("Se ha registrado correctamente");
-	            	System.out.println("");
-	            }else {
-	            	System.out.println("Error al registrarse");
-	            	System.out.println("");
-	            }
+            	System.out.println("");
+            System.out.println("Elija una opcion escribiendo su numero");
+            option_= Integer.parseInt(scan_.nextLine());
+            System.out.println("");
+            if(option_ == 0) {  	
+	            GestorUsuarios_.registrarUsuario(scan_);	            
             }else if(option_ == 1) {           
-            	System.out.println("Introduzca su correo");
-        		String lcorreo = scan_.next();
-        		//
-        		boolean encontrado = false;
-        		for (int i = 0; i < GestorUsuarios_.arrayUsuarios.size(); i++) {
-        			System.out.println(GestorUsuarios_.arrayUsuarios.get(i).toString());
-        			if (GestorUsuarios_.arrayUsuarios.get(i).getCorreo().contains(lcorreo)) {
-        				encontrado = true;
-        			}
-        		}
-        		//
-        		if(encontrado == false) {
-        			System.out.println("Debe loguearse");
-                }else {
+        		if(!MainMiscelanea.login(GestorUsuarios_, scan_)) {
+        			System.out.println("	Debe registrarse antes de iniciar sesion");
+        			System.out.println("");
+        		}else {
+                	System.out.println("");
+                	System.out.println("¡¡BIENVENIDO!!");
+                	System.out.println("");
                 	exit_ = false;
-        	        while(!exit_){
-        	            System.out.println("1. Crear Pista");
-        	            System.out.println("2. Crear Kart");
-        	            System.out.println("3. Asociar Karts y Pistas");
-        	            System.out.println("4. Listar Pistas en mantenimiento");
-        	            System.out.println("5. Recoger Array de pistas libres");
-        	            System.out.println("--------------------------------------------");
-        	            System.out.println("6. Registrar Usuario");
-        	            System.out.println("7. Modificar Usuario");
-        	            System.out.println("8. Listar Usuarios");
-        	            System.out.println("--------------------------------------------");
-        	            System.out.println("9. Hacer reserva individual");
-        	            System.out.println("10. Hacer reserva en bono");
-        	            System.out.println("11. PLACEHOLDER");
-        	            System.out.println("12. PLACEHOLDER");
-        	            System.out.println("13. PLACEHOLDER");
-        	            System.out.println("14. PLACEHOLDER");
-        	            System.out.println("--------------------------------------------");
-        	            System.out.println("0. Salir");
-        	
-        	
-        	            System.out.println("Elija una opción escribiendo su numero");
-        	            option_=scan_.nextInt();
-        	
+        	        while(!exit_){      	                  	        	
+        	        	MainMiscelanea.menu();
+        	            System.out.println("Elija una opcion escribiendo su numero");
+        	            option_= Integer.parseInt(scan_.nextLine());
+        	            
         	            switch(option_){
         	                case 0:
         	                    exit_=true;
         	                    break;
         	                case 1:
-        	                    //GestorPistas_.crearPista();
+        	                    GestorPistas_.crearPista(scan_);
         	                    break;
         	                case 2:
         	                    //GestorPistas_.crearKart();
@@ -105,10 +65,10 @@ public class MainProgram{
         	                    //GestorPistas_.pistasLibres();
         	                    break;
         	                case 6:
-        	                    //GestorUsuarios_.registrarUsuario();
+        	                    //GestorUsuarios_.registrarUsuario(scan_);
         	                    break;
-        	                case 7:
-        	                    //GestorUsuarios_.ModificarUsuario();
+        	                case 7:       	                	
+        	                    GestorUsuarios_.ModificarUsuario(scan_);
         	                    break;
         	                case 8:
         	                    GestorUsuarios_.listarUsuarios();
@@ -138,7 +98,6 @@ public class MainProgram{
         }
         Escritor.escritor(GestorPistas_, GestorUsuarios_, GestorReservas_); //Escribo los arrays de los lectores en los ficheros
         scan_.close();
-        scanline_.close();
     }
 
 }

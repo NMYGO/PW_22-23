@@ -27,15 +27,28 @@ public class GestorUsuarios {
 	 * @author 
 	 * */
 
-	public Boolean registrarUsuario(String nombre, String apellidos, LocalDate nacimiento, String correo) {
+	public Boolean registrarUsuario(Scanner scan_) {
+		System.out.println("Introduzca el nombre de usuario");
+			String nombre = scan_.nextLine();
+		System.out.println("Introduzca los apellidos de usuario");        			
+			String apellidos = scan_.nextLine();
+		System.out.println("Introduzca la fecha de nacimiento de usuario (yyyy-mm-dd)");
+			LocalDate nacimiento = LocalDate.parse(scan_.nextLine());
+		System.out.println("Introduzca el correo de usuario");
+			String correo = scan_.nextLine();
+			
 		for (int i = 0; i < arrayUsuarios.size(); i++) {
-			if (correo == arrayUsuarios.get(i).getCorreo()) {
-				return false; //El usuario ya se encuentra registrado
+			if (arrayUsuarios.get(i).getCorreo().equals(correo)) {
+				System.out.println("Error. Ese usuario ya existe");
+				return false;
 			}
 		}
 		Usuario newUsuario = new Usuario(nombre, apellidos, nacimiento, correo);
-		arrayUsuarios.add(newUsuario);				
-		return true;//El usuario se añade exitosamente
+		arrayUsuarios.add(newUsuario);
+		System.out.println("Usuario creado con exito");
+		System.out.println("-------------------------------------");
+		System.out.println("");
+		return true;
 	}
 	
 	/**
@@ -44,7 +57,9 @@ public class GestorUsuarios {
 	 * @return Devuelve TRUE  
 	 * */
 
-	public Boolean ModificarUsuario(String correo) { //TRUE si el usuario a modificar se encuentra en la lista
+	public Boolean ModificarUsuario(Scanner scan_) { //TRUE si el usuario a modificar se encuentra en la lista
+		System.out.println("Introduzca su correo de usuario");
+		String correo = scan_.nextLine();
 		for (int i = 0; i < arrayUsuarios.size(); i++) {
 			if (correo == arrayUsuarios.get(i).getCorreo()) {
 				Scanner modificacion = new Scanner(System.in); //Para leer las variables introducidas
@@ -63,24 +78,24 @@ public class GestorUsuarios {
 					
 					switch (opcion) {
 					case 0: 
-						System.out.println("Terminando Modificaciones"); 
+						System.out.println("Usuario modificado con exito"); 
 						
 						break;
 					case 1:		//Cambio de Nombre
-						System.out.println("Introduzca el nuevo nombre");
+						System.out.println("Introduzca el nuevo nombre de usuario");
 						String nuevoNombre = modificacion.next();
 						arrayUsuarios.get(i).setNombre(nuevoNombre);
 	
 						break;
 							
 					case 2:		//Cambio de Apellidos
-						System.out.println("Introduzca los nuevos apellidos");
+						System.out.println("Introduzca los nuevos apellidos de usuario");
 						String nuevoApellidos = modificacion.next();
 						arrayUsuarios.get(i).setApellidos(nuevoApellidos);
 	
 						break;
 					case 3:		//Cambio de fecha de nacimiento
-						System.out.println("Introduzca la nueva fecha de nacimiento");
+						System.out.println("Introduzca la nueva fecha de nacimiento de usuario");
 						String nuevaFechaNacimiento = modificacion.next();
 						DateTimeFormatter formato= DateTimeFormatter.ofPattern("dd-MMM-yyyy");
 						LocalDate date = LocalDate.parse(nuevaFechaNacimiento, formato);
@@ -89,7 +104,7 @@ public class GestorUsuarios {
 						break;
 						
 					case 4:		//Cambio de correo
-						System.out.println("Introduzca la nueva direccion de correo");
+						System.out.println("Introduzca la nueva direccion de correo de usuario");
 						String nuevoCorreo = modificacion.next();
 						arrayUsuarios.get(i).setCorreo(nuevoCorreo);
 	
@@ -104,6 +119,7 @@ public class GestorUsuarios {
 				return true;
 			}
 		}
+		System.out.println("Error. Ese usuario no existe");
 		return false; //NO SE HA ENCONTRADO EL USUARIO
 	}
 	
