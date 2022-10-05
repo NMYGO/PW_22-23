@@ -7,10 +7,10 @@ public abstract class Reserva {
 	
 	/* Atributos */
 	
-	protected int usuario;
+	protected String usuario;
 	protected LocalDate fecha;
 	protected int duracion;
-	protected int pista;
+	protected String pista;
 	protected float precio;
 	protected int descuento;
 	
@@ -23,10 +23,10 @@ public abstract class Reserva {
 	
 	/* Getters y setters */
 	
-	public int getUsuario() {
+	public String getUsuario() {
 		return usuario;
 	}
-	public void setUsuario(int user) {
+	public void setUsuario(String user) {
 		this.usuario=user;
 	}
 	
@@ -44,10 +44,10 @@ public abstract class Reserva {
 		this.duracion=dura;
 	}
 	
-	public int getPista() {
+	public String getPista() {
 		return pista;
 	}
-	public void setPista(int pist) {
+	public void setPista(String pist) {
 		this.pista=pist;
 	}
 	
