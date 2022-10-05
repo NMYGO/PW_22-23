@@ -1,5 +1,6 @@
 package pw.p1.classes;
 
+import java.util.ArrayList;
 /**
  * Un programa main para implementar 
  * las funcionalidades de las clases
@@ -44,6 +45,7 @@ public class MainProgram{
         	        	MainMiscelanea.menu();
         	            System.out.println("Elija una opcion escribiendo su numero");
         	            option_= Integer.parseInt(scan_.nextLine());
+        	            System.out.println("");
         	            
         	            switch(option_){
         	                case 0:
@@ -53,19 +55,27 @@ public class MainProgram{
         	                    GestorPistas_.crearPista(scan_);
         	                    break;
         	                case 2:
-        	                    //GestorPistas_.crearKart();
+        	                    GestorPistas_.crearKart(scan_);
         	                    break;
         	                case 3:
-        	                    GestorPistas_.asociarKartPista();
+        	                	System.out.println("Introduzca el identificador de kart");
+        	        				Integer id = Integer.parseInt(scan_.nextLine());							
+        	        			System.out.println("Introduzca el nombre de pista");
+        	        				String nombre = scan_.nextLine();
+        	                    GestorPistas_.asociarKartPista(id, nombre);
         	                    break;
         	                case 4:
         	                    GestorPistas_.listaPistasMantenimiento();
         	                    break;
         	                case 5:
-        	                    //GestorPistas_.pistasLibres();
-        	                    break;
+        	                	ArrayList<Pista> arraypistaslibres = GestorPistas_.pistasLibres(scan_);
+        	                	for (int i = 0;i< arraypistaslibres.size() ; i++) {
+        	            				System.out.println(arraypistaslibres.get(i).toString());
+        	            		}
+        	                	System.out.println("");
+        	                	break;
         	                case 6:
-        	                    //GestorUsuarios_.registrarUsuario(scan_);
+        	                    GestorUsuarios_.registrarUsuario(scan_);
         	                    break;
         	                case 7:       	                	
         	                    GestorUsuarios_.ModificarUsuario(scan_);

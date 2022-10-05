@@ -3,6 +3,8 @@ package pw.p1.classes;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import pw.p1.classes.Kart.Estado;
+
 /**
  * Una clase que implementa las clases Pista y Kart
  * 
@@ -40,6 +42,8 @@ public class GestorPistas{
 		for (int i = 0;i < arrayPistas.size() ; i++) {
 			if (arrayPistas.get(i).getNombre().equals(nombre)) {
 				System.out.println("Error. Esa pista ya existe");
+				System.out.println("-------------------------------------");
+				System.out.println("");
 				return false;
 			}
 		}
@@ -47,6 +51,8 @@ public class GestorPistas{
 		Pista newPista = new Pista(nombre, estado, dificultad, maxkarts);
 		arrayPistas.add(newPista);
 		System.out.println("Pista creada con exito");
+		System.out.println("-------------------------------------");
+		System.out.println("");
 		return true;
 	}
 
@@ -57,55 +63,55 @@ public class GestorPistas{
 	 * @param estado
 	 * @return
 	 */
-	public boolean crearKart(Integer id, Boolean tipo, Kart.Estado estado) {
+	public boolean crearKart(Scanner scan_) {
+		System.out.println("Introduzca el identificador de kart");
+			Integer id = Integer.parseInt(scan_.nextLine());							
+		System.out.println("Introduzca el tipo de kart");
+			Boolean tipo = Boolean.parseBoolean(scan_.nextLine());
+		System.out.println("Introduzca el estado de kart");
+			Kart.Estado estado = Kart.Estado.valueOf(scan_.nextLine());
+		
 		for (int i = 0;i < arrayKarts.size() ; i++) {
-			if (id ==(arrayKarts.get(i)).getId()) {
+			if (id == (arrayKarts.get(i)).getId()) {
+				System.out.println("Error. Ese kart ya existe");
+				System.out.println("-------------------------------------");
+				System.out.println("");
 				return false;
 			}
 		}
 		Kart newKarts = new Kart(id, tipo, estado);
-		arrayKarts.add(newKarts);		
+		arrayKarts.add(newKarts);	
+		System.out.println("Kart creado con exito");
+		System.out.println("-------------------------------------");
+		System.out.println("");
 		return true;
 	}
 
 	/**
 	 * Añade karts válidos al array de karts de las pistas válidas
 	 */
-	public void asociarKartPista() {
-
-		Pista pista_;
-		Kart kart_;
-		ArrayList<Kart> listakarts_;
-		int maxkarts_, cont = 0;
-
+	public boolean asociarKartPista(Integer idkart, String nombrepista) {
 		for (int i = 0;i< arrayPistas.size() ; i++) {
-			pista_ = arrayPistas.get(i);
-			ArrayList<Kart> list_ = pista_.getLkart();
-
-			if (!pista_.isEstado() && list_.size() != pista_.getMaxkarts()){
-				maxkarts_ = pista_.getMaxkarts();
-
-				for (int j = 0; j< arrayKarts.size() && cont <= maxkarts_; j++) {
-					kart_ = arrayKarts.get(j);
-
-					if (kart_.getEstado() == Kart.Estado.DISPONIBLE) {
-
-						if (kart_.isTipo() == true && (pista_.getDificultad() == Pista.Dificultad.FAMILIAR || pista_.getDificultad() == Pista.Dificultad.INFANTIL)) {
-							listakarts_ = pista_.getLkart();
-							listakarts_.add(kart_);
-							pista_.setLkart(listakarts_);
-							cont++;
+			if (arrayPistas.get(i).getNombre().equals(nombrepista)) {
+				if(!arrayPistas.get(i).isEstado()) {//consultar karts disponibles hacer con un for
+					ArrayList<Kart> listakarts = arrayPistas.get(i).consultarKartsDisponibles();
+					for (int j = 0;j< listakarts.size() ; j++) {
+						if (idkart == (listakarts.get(i).getId())) {
+							if(arrayPistas.get(i).asociarKartAPista(listakarts.get(i), arrayPistas.get(i))) {
+								System.out.println("Kart asociado con exito");
+								System.out.println("-------------------------------------");
+								System.out.println("");
+								return true;
+							}
 						}
-						if (kart_.isTipo() == false && (pista_.getDificultad() == Pista.Dificultad.FAMILIAR || pista_.getDificultad() == Pista.Dificultad.ADULTO)) {
-							listakarts_ = pista_.getLkart();
-							listakarts_.add(kart_);
-							pista_.setLkart(listakarts_);
-							cont++;
-						}
-					}
+					}					
 				}
 			}
 		}
+		System.out.println("Error. No se ha asociado el kart a la pista");
+		System.out.println("-------------------------------------");
+		System.out.println("");
+		return false;
 	}
 
 	/**
@@ -114,7 +120,7 @@ public class GestorPistas{
 	public void listaPistasMantenimiento(){
 		for (int i = 0;i< arrayPistas.size() ; i++) {
 			if (arrayPistas.get(i).isEstado()) {
-				System.out.println(arrayPistas.get(i).getNombre());
+				System.out.println(arrayPistas.get(i).toString());
 			}
 		}
 	}
@@ -125,13 +131,18 @@ public class GestorPistas{
 	 * @param tipo
 	 * @return
 	 */
-	public ArrayList<Pista> pistasLibres(Integer kartnum, Pista.Dificultad tipo){
-		
-		ArrayList<Pista> arraypistaslibres_ = new ArrayList<Pista>();
+	public ArrayList<Pista> pistasLibres(Scanner scan_){
+		System.out.println("Introduzca el numero de karts solicitados");
+		Integer kartnum = Integer.parseInt(scan_.nextLine());							
+		System.out.println("Introduzca la dificultad de pista");
+		Pista.Dificultad dificultad = Pista.Dificultad.valueOf(scan_.nextLine());
 
+		ArrayList<Pista> arraypistaslibres_ = new ArrayList<Pista>();
+		ArrayList<Kart> listakarts = new ArrayList<Kart>();
+		
 		for (int i = 0; i< arrayPistas.size() ; i++) {
-			ArrayList<Kart> listakarts = arrayPistas.get(i).getLkart();
-			if (kartnum <= listakarts.size() && tipo == arrayPistas.get(i).getDificultad() && arrayPistas.get(i).isEstado()) {
+			listakarts = arrayPistas.get(i).getLkart();
+			if ((kartnum <= listakarts.size()) && (dificultad == arrayPistas.get(i).getDificultad()) && (!arrayPistas.get(i).isEstado())) {
 				arraypistaslibres_.add(arrayPistas.get(i));
 			}
 		}

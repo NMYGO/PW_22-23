@@ -1,0 +1,2 @@
+Usuario [nombre=Antonio, apellidos=Cano Almeida, nacimiento=1978-10-23, inscripcion=2022-10-05, correo=a@gmail.com]
+Usuario [nombre=Marcos, apellidos=Miranda Lozano, nacimiento=2005-06-14, inscripcion=2022-10-05, correo=m@gmail.com]

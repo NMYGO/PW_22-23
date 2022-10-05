@@ -56,11 +56,11 @@ public class Lector {
 	    if(Kfile.isFile()) {
 	    	BufferedReader readerK_ = new BufferedReader(new FileReader(new File("Karts.txt")));
 		    while((line = readerK_.readLine()) != null) {
-		    	String sid = line.substring(line.indexOf("s=") + 2, line.indexOf(", lkart"));
+		    	String sid = line.substring(line.indexOf("d=") + 2, line.indexOf(", tipo"));
 					int id = Integer.parseInt(sid);
-		    	String stipo = line.substring(line.indexOf("s=") + 2, line.indexOf(", dificultad"));
+		    	String stipo = line.substring(line.indexOf("o=") + 2, line.indexOf(", estado"));
 		    		Boolean tipo = Boolean.parseBoolean(stipo);
-		    	String sestado = line.substring(line.indexOf("d=") + 2, line.indexOf(", maxkarts"));
+		    	String sestado = line.substring(line.indexOf("do=") + 3, line.indexOf("]"));
 		    		Kart.Estado estado = Kart.Estado.valueOf(sestado);
 		    	Kart newKart = new Kart(id, tipo, estado); 
 		    	GestorPistas_.arrayKarts.add(newKart);

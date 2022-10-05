@@ -1,0 +1,3 @@
+Kart [id=1, tipo=true, estado=DISPONIBLE]
+Kart [id=2, tipo=true, estado=DISPONIBLE]
+Kart [id=3, tipo=false, estado=DISPONIBLE]

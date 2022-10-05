@@ -103,13 +103,16 @@ public class Pista {
 		return dkart;
 	}
 
-	public void asociarKartAPista(Kart kart) {
-		if(this.getDificultad() == Dificultad.INFANTIL && kart.isTipo()) {
+	public boolean asociarKartAPista(Kart kart, Pista pista) {
+		if(pista.getDificultad() == Dificultad.INFANTIL && kart.isTipo()) {
 			lkart.add(kart);
-		}else if(this.getDificultad() == Dificultad.ADULTO && !kart.isTipo()) {
+		}else if(pista.getDificultad() == Dificultad.ADULTO && !kart.isTipo()) {
 			lkart.add(kart);
-		}else if(this.getDificultad() == Dificultad.FAMILIAR) {
+		}else if(pista.getDificultad() == Dificultad.FAMILIAR) {
 			lkart.add(kart);
+		}else {
+			return false;
 		}
+		return true;
 	}
 }

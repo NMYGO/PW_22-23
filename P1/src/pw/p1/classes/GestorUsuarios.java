@@ -40,6 +40,8 @@ public class GestorUsuarios {
 		for (int i = 0; i < arrayUsuarios.size(); i++) {
 			if (arrayUsuarios.get(i).getCorreo().equals(correo)) {
 				System.out.println("Error. Ese usuario ya existe");
+				System.out.println("-------------------------------------");
+				System.out.println("");
 				return false;
 			}
 		}
@@ -60,66 +62,70 @@ public class GestorUsuarios {
 	public Boolean ModificarUsuario(Scanner scan_) { //TRUE si el usuario a modificar se encuentra en la lista
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
+		System.out.println("");
 		for (int i = 0; i < arrayUsuarios.size(); i++) {
-			if (correo == arrayUsuarios.get(i).getCorreo()) {
-				Scanner modificacion = new Scanner(System.in); //Para leer las variables introducidas
-				
-				Integer opcion = 1;
+			if (arrayUsuarios.get(i).getCorreo().equals(correo)) {
+
+				int opcion = 1;
 				while (opcion != 0) {
-					System.out.println("Introduzca una opcion:\n"
-					+ "0: Terminar modificacion.\n"
+					System.out.println("0: Terminar modificacion.\n"
 					+ "1: Cambiar Nombre.\n"
 					+ "2: Cambiar Apellidos.\n"
 					+ "3: Cambiar fecha de nacimiento.\n"
-					+ "4: Cambiar direccion de Correo."); 
+					+ "4: Cambiar direccion de Correo.\n"
+					+ "Introduzca una opcion:"); 
 					
-					opcion = modificacion.nextInt();
-					//opcion = System.in.read();
-					
+					opcion = Integer.parseInt(scan_.nextLine());
+					System.out.println("");
 					switch (opcion) {
 					case 0: 
-						System.out.println("Usuario modificado con exito"); 
+						System.out.println("Usuario modificado con exito");
+						System.out.println("-------------------------------------");
+						System.out.println("");
 						
 						break;
 					case 1:		//Cambio de Nombre
 						System.out.println("Introduzca el nuevo nombre de usuario");
-						String nuevoNombre = modificacion.next();
+						String nuevoNombre = scan_.nextLine();
+						System.out.println("");
 						arrayUsuarios.get(i).setNombre(nuevoNombre);
 	
 						break;
 							
 					case 2:		//Cambio de Apellidos
 						System.out.println("Introduzca los nuevos apellidos de usuario");
-						String nuevoApellidos = modificacion.next();
+						String nuevoApellidos = scan_.nextLine();
+						System.out.println("");
 						arrayUsuarios.get(i).setApellidos(nuevoApellidos);
 	
 						break;
 					case 3:		//Cambio de fecha de nacimiento
 						System.out.println("Introduzca la nueva fecha de nacimiento de usuario");
-						String nuevaFechaNacimiento = modificacion.next();
-						DateTimeFormatter formato= DateTimeFormatter.ofPattern("dd-MMM-yyyy");
-						LocalDate date = LocalDate.parse(nuevaFechaNacimiento, formato);
-						arrayUsuarios.get(i).setNacimiento(date);
+						LocalDate nuevaFechaNacimiento = LocalDate.parse(scan_.nextLine());					
+						System.out.println("");
+						arrayUsuarios.get(i).setNacimiento(nuevaFechaNacimiento);
 						
 						break;
 						
 					case 4:		//Cambio de correo
 						System.out.println("Introduzca la nueva direccion de correo de usuario");
-						String nuevoCorreo = modificacion.next();
+						String nuevoCorreo = scan_.nextLine();
+						System.out.println("");
 						arrayUsuarios.get(i).setCorreo(nuevoCorreo);
 	
 						break;
 					default:
 						System.out.println("Opcion no reconocida");
-						
+						System.out.println("");
 						break;
 					}
 				}
-				modificacion.close();
 				return true;
 			}
 		}
 		System.out.println("Error. Ese usuario no existe");
+		System.out.println("-------------------------------------");
+		System.out.println("");
 		return false; //NO SE HA ENCONTRADO EL USUARIO
 	}
 	
