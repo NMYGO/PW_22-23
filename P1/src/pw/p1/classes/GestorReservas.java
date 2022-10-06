@@ -124,6 +124,70 @@ public class GestorReservas {
 	
 	
 	
+	public boolean ReservaIndividualFamiliar(Usuario usuario, Pista pista, Scanner scan_, GestorPistas GestorPistas_) {
+		if ((usuario.getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
+			ArrayList<Kart> dkart = pista.consultarKartsDisponibles(GestorPistas_.arrayKarts);
+			int karts = 0;
+			int nParticipantes;
+			System.out.println("Introduzca numero de adultos");
+			int adultos = Integer.parseInt(scan_.nextLine());
+			System.out.println("Introduzca numero de niños");
+			int ninos = Integer.parseInt(scan_.nextLine());
+			for (int i = 0;i < adultos ; i++) {
+				if ((dkart.get(i)).isTipo() == false) {
+					karts++;
+				}
+			}
+			for (int i = 0; i< ninos; i++) {
+				if ((dkart.get(i)).isTipo() == true) {
+					karts++;
+				}
+			}
+			nParticipantes=adultos+ninos;
+			if(dkart.size()>=nParticipantes) {
+				RIndividualCreador individualCreador = new RIndividualCreador();
+				RFamiliar reserva = individualCreador.creaRFam();
+				System.out.println("Introduzca la duración de la reserva (30/60/90 minutos)");
+				int tiempo = Integer.parseInt(scan_.nextLine());
+				System.out.println("Introduzca la fecha de la reserva");
+				LocalDate fecha = LocalDate.parse(scan_.nextLine());
+				reserva.setDur(tiempo);
+				reserva.setFecha(fecha);
+				reserva.setadultos(adultos);
+				reserva.setninos(ninos);
+				reserva.setUsuario(usuario.getNombre());
+				reserva.setPista(pista.getNombre());
+				switch(tiempo) {
+				case 30:
+					reserva.setPrecio(20);
+					break;
+				case 60:
+					reserva.setPrecio(30);
+					break;
+				case 90:
+					reserva.setPrecio(40);
+					break;
+				}
+				if(usuario.getInscripcion().isBefore(LocalDate.now().minusYears(2))) {
+					reserva.setDesc(10);
+				}
+				else reserva.setDesc(0);
+			}
+			else {
+				System.out.println("No hay suficientes karts en esa pista para los participantes.\n");
+				return false;
+			}
+		}
+		else {
+			System.out.println("No se puede hacer una reserva para adultos con un usuario menor de edad.\n");
+			return false;
+		}
+		
+		return true;
+	}
+	
+	
+	
 	public boolean ReservaBono(Usuario usuario, Pista pista, int nparticipantes, int cBono) {
 		boolean encontrado=false;
 		for (int i = 0; i < bonos.size(); i++)
