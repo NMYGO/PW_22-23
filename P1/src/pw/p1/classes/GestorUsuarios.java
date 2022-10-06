@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//CREAR USUARIO CON LA FECHA ACTUAL DEL SISTEMA
-
 /**
  * Clase que Gestiona los usuarios
  * @author 
@@ -18,12 +16,14 @@ public class GestorUsuarios {
 	public ArrayList<Usuario> arrayUsuarios = new ArrayList<Usuario>();
 	
 	/**
+	 * Constructor por defecto
+	 **/	
+	public GestorUsuarios(){}
+	
+	/**
 	 * Funcion que registra un usuario comprobando que no exista antes
-	 * @param nombre Nombre del usuario
-	 * @param apellidos Apellidos del usuario
-	 * @param nacimiento Nacimiento del usuario
-	 * @param correo Correo unico del usuario
-	 * @author 
+	 * @param scan_ Scanner para leer por teclado
+	 * @return Devuelve un booleano 
 	 * */
 
 	public Boolean registrarUsuario(Scanner scan_) {
@@ -54,11 +54,11 @@ public class GestorUsuarios {
 	
 	/**
 	 * Funcion para modificar un usuario existente
-	 * @param correo Correo unico del usuario
-	 * @return Devuelve TRUE  
+	 * @param scan_ Scanner para leer por teclado
+	 * @return Devuelve un booleano  
 	 * */
 
-	public Boolean ModificarUsuario(Scanner scan_) { //TRUE si el usuario a modificar se encuentra en la lista
+	public Boolean ModificarUsuario(Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
@@ -127,6 +127,12 @@ public class GestorUsuarios {
 		System.out.println("");
 		return false; //NO SE HA ENCONTRADO EL USUARIO
 	}
+	
+	/**
+	 * Funcion para listar los usuarios existentes
+	 * @param
+	 * @return void  
+	 * */
 	
 	public void listarUsuarios() {
 		for (int i = 0; i < arrayUsuarios.size(); i++) {

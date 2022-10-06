@@ -1,5 +1,5 @@
 package pw.p1.classes;
-import pw.p1.factory_reserva.*;	//Para usar todas las clases de pw.p1.factory_reserva
+import pw.p1.factory_reserva.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

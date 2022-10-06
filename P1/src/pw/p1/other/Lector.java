@@ -4,7 +4,21 @@ import java.time.LocalDate;
 import java.io.*;
 import pw.p1.classes.*;
 
+/**
+ * Clase que gestiona la lectura de los ficheros
+ * @author 
+ * */
+
 public class Lector {
+	
+	/**
+	 * Funcion que lee el contenido de los ficheros .txt y los carga en los ArrayList
+	 * @param GestorPistas
+	 * @param GestorUsuarios
+	 * @param GestorReservas
+	 * @return void
+	 */
+	
 	public static void lector(GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, GestorReservas GestorReservas_) throws IOException{
 	    String line;
 

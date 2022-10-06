@@ -4,7 +4,19 @@ import pw.p1.classes.*;
 import pw.p1.classes.Kart.Estado;
 import java.util.Scanner;
 
+/**
+ * Clase que gestiona distintas funcionalidades del main
+ * @author 
+ * */
+
 public class MainMiscelanea {
+	
+	/**
+	 * Funcion que imprime el menu de opciones del main
+	 * @param 
+	 * @return void
+	 */
+	
 	public static void menu () {
 		System.out.println("1. Crear Pista");
         System.out.println("2. Crear Kart");
@@ -27,6 +39,13 @@ public class MainMiscelanea {
         System.out.println("");
 	}
 	
+	/**
+	 * Funcion que comprueba que un usuario esta registrado
+	 * @param GestorUsuarios
+	 * @param scan_ Scanner para leer por teclado
+	 * @return Devuelve un booleano
+	 */
+	
 	public static boolean login (GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
@@ -38,6 +57,12 @@ public class MainMiscelanea {
 		}
 		return false;
 	}
+	
+	/**
+	 * Funcion que restaura las pistas al finalizar el programa
+	 * @param GestorPistas
+	 * @return void
+	 */
 	
 	public static void restaurar (GestorPistas GestorPistas_) {
 		for (int i = 0; i < GestorPistas_.arrayKarts.size(); i++) {

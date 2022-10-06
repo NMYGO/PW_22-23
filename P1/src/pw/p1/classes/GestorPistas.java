@@ -6,9 +6,10 @@ import java.util.Scanner;
 import pw.p1.classes.Kart.Estado;
 
 /**
- * Una clase que implementa las clases Pista y Kart
- * 
- */
+ * Clase que Gestiona las pistas
+ * @author 
+ * */
+
 public class GestorPistas{
 
 	/* Atributos */
@@ -22,13 +23,11 @@ public class GestorPistas{
 	public GestorPistas(){}
 
 	/**
-	 * Crea una pista y la añade al array
-	 * @param nombre
-	 * @param estado
-	 * @param dificultad
-	 * @param maxkarts
-	 * @return
+	 * Funcion que crea una pista y la añade al arrayPistas
+	 * @param scan_ Scanner para leer por teclado
+	 * @return Devuelve un booleano 
 	 */
+	
 	public boolean crearPista(Scanner scan_) {
 		System.out.println("Introduzca el nombre de pista");
 			String nombre = scan_.nextLine();							
@@ -57,12 +56,11 @@ public class GestorPistas{
 	}
 
 	/**
-	 * Crea un kart y lo añade al array
-	 * @param id
-	 * @param tipo
-	 * @param estado
-	 * @return
+	 * Funcion que crea un kart y lo añade al arrayPistas
+	 * @param scan_ Scanner para leer por teclado
+	 * @return Devuelve un booleano 
 	 */
+	
 	public boolean crearKart(Scanner scan_) {
 		System.out.println("Introduzca el identificador de kart");
 			Integer id = Integer.parseInt(scan_.nextLine());							
@@ -88,8 +86,12 @@ public class GestorPistas{
 	}
 
 	/**
-	 * Añade karts válidos al array de karts de las pistas válidas
+	 * Funcion que añade karts válidos al array de karts de las pistas válidas
+	 * @param idkart Identificador del kart a asociar
+	 * @param nombrepista Nombre de la pista a la que asociamos los karts
+	 * @return Devuelve un booleano
 	 */
+	
 	public boolean asociarKartPista(Integer idkart, String nombrepista) {
 		for (int i = 0;i< arrayPistas.size() ; i++) {
 			if (arrayPistas.get(i).getNombre().equals(nombrepista)) {
@@ -116,8 +118,11 @@ public class GestorPistas{
 	}
 
 	/**
-	 * Lista por pantalla el nombre de las pistas en mantenimiento
+	 * Funcion que lista por pantalla el nombre de las pistas en mantenimiento
+	 * @param
+	 * @return void
 	 */
+	
 	public void listaPistasMantenimiento(){
 		for (int i = 0;i< arrayPistas.size() ; i++) {
 			if (arrayPistas.get(i).isEstado()) {
@@ -127,11 +132,11 @@ public class GestorPistas{
 	}
 
 	/**
-	 * Devuelve un array de las pistas libres
-	 * @param kartnum
-	 * @param tipo
-	 * @return
+	 * Funcion que devuelve un array de las pistas libres con un minimo numero de karts
+	 * @param scan_ Scanner para leer por teclado
+	 * @return Devuelve un ArrayList de pistas libres
 	 */
+	
 	public ArrayList<Pista> pistasLibres(Scanner scan_){
 		System.out.println("Introduzca el numero de karts solicitados");
 			Integer kartnum = Integer.parseInt(scan_.nextLine());							

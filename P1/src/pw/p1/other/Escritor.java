@@ -3,7 +3,21 @@ package pw.p1.other;
 import java.io.*;
 import pw.p1.classes.*;
 
+/**
+ * Clase que gestiona la escritura en los ficheros
+ * @author 
+ * */
+
 public class Escritor {
+	
+	/**
+	 * Funcion que escribe el contenido de los ArrayList a los ficheros .txt
+	 * @param GestorPistas
+	 * @param GestorUsuarios
+	 * @param GestorReservas
+	 * @return void
+	 */
+	
 	public static void escritor(GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, GestorReservas GestorReservas_) throws IOException{
 	    BufferedWriter writerU_ = new BufferedWriter(new FileWriter(new File("Usuarios.txt")));
 	    BufferedWriter writerP_ = new BufferedWriter(new FileWriter(new File("Pistas.txt")));
