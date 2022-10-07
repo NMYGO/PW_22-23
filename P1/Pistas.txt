@@ -1,2 +1,3 @@
 Pista [nombre=pista1, estado=false, dificultad=FAMILIAR, maxkarts=4]
 Pista [nombre=pista2, estado=false, dificultad=ADULTO, maxkarts=10]
+Pista [nombre=pista3, estado=false, dificultad=INFANTIL, maxkarts=5]

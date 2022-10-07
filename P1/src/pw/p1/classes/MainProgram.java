@@ -67,7 +67,14 @@ public class MainProgram{
         	                    GestorPistas_.listaPistasMantenimiento();
         	                    break;
         	                case 5:
-        	                	ArrayList<Pista> arraypistaslibres = GestorPistas_.pistasLibres(scan_);
+        	                	System.out.println("Introduzca el numero de participantes (niños)");
+        							int participantes= Integer.parseInt(scan_.nextLine());
+        							System.out.println("");
+        						System.out.println("Introduzca la dificultad de pista");
+        							Pista.Dificultad dificultad = Pista.Dificultad.valueOf(scan_.nextLine());
+        							System.out.println("");
+        							
+        	                	ArrayList<Pista> arraypistaslibres = GestorPistas_.pistasLibres(scan_, participantes, dificultad);
         	                	for (int i = 0;i< arraypistaslibres.size() ; i++) {
         	            				System.out.println(arraypistaslibres.get(i).toString());
         	            		}
@@ -83,7 +90,7 @@ public class MainProgram{
         	                    GestorUsuarios_.listarUsuarios();
         	                    break;
         	                case 9:
-        	                    //GestorReservas_
+        	                    MainMiscelanea.reservaIndividual(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
         	                    break;
         	                case 10:
         	
@@ -103,7 +110,10 @@ public class MainProgram{
         	            }
         	        }
             	}
-            }         
+            }  else {
+            	System.out.println("Opcion no reconocida");
+				System.out.println("");
+            }
         }
         MainMiscelanea.restaurar(GestorPistas_);
         Escritor.escritor(GestorPistas_, GestorUsuarios_, GestorReservas_); //Escribo los arrays de los lectores en los ficheros

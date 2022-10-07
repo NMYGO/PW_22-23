@@ -137,11 +137,7 @@ public class GestorPistas{
 	 * @return Devuelve un ArrayList de pistas libres
 	 */
 	
-	public ArrayList<Pista> pistasLibres(Scanner scan_){
-		System.out.println("Introduzca el numero de karts solicitados");
-			Integer kartnum = Integer.parseInt(scan_.nextLine());							
-		System.out.println("Introduzca la dificultad de pista");
-			Pista.Dificultad dificultad = Pista.Dificultad.valueOf(scan_.nextLine());
+	public ArrayList<Pista> pistasLibres(Scanner scan_, Integer kartnum, Pista.Dificultad dificultad){							
 
 		ArrayList<Pista> arraypistaslibres_ = new ArrayList<Pista>();
 		ArrayList<Kart> listakarts = new ArrayList<Kart>();

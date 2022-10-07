@@ -1,5 +1,7 @@
 package pw.p1.factory_reserva;
 
+import java.time.LocalDate;
+
 /**
  * La factoria concreta que realiza la reserva individual
  * */
@@ -7,8 +9,8 @@ package pw.p1.factory_reserva;
 public class RIndividualCreador extends ReservaCreador{
 	
 	@Override
-	public RInfantil creaRInf() {
-		RInfantil reserva = new RInfantil();
+	public RInfantil creaRInf(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento, int ninos) {
+		RInfantil reserva = new RInfantil(usuario, fecha, duracion, pista, precio, descuento, ninos);
 		return reserva;
 	}
 	

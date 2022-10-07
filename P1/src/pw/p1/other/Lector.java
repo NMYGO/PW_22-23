@@ -3,6 +3,8 @@ package pw.p1.other;
 import java.time.LocalDate;
 import java.io.*;
 import pw.p1.classes.*;
+import pw.p1.factory_reserva.RIndividualCreador;
+import pw.p1.factory_reserva.RInfantil;
 
 /**
  * Clase que gestiona la lectura de los ficheros
@@ -84,6 +86,35 @@ public class Lector {
 	    	if(Kfile.createNewFile()) {
 	    		System.out.println("--------------------------------------------------------------------------");
 	    		System.out.println("Se ha creado el fichero Karts.txt porque no existia");
+	    		System.out.println("--------------------------------------------------------------------------");
+	    	}
+	    }
+	    
+	    File RIfile = new File("ReservasIndividuales.txt");
+	    if(RIfile.isFile()) {
+	    	BufferedReader readerRI_ = new BufferedReader(new FileReader(new File("ReservasIndividuales.txt")));
+		    while((line = readerRI_.readLine()) != null) {
+		    	String usuario = line.substring(line.indexOf("o=") + 2, line.indexOf(", fecha"));
+		    	String sfecha = line.substring(line.indexOf("a=") + 2, line.indexOf(", duracion"));
+		    		LocalDate fecha = LocalDate.parse(sfecha);
+		    	String sduracion = line.substring(line.indexOf("n=") + 2, line.indexOf(", pista"));
+		    		int duracion = Integer.parseInt(sduracion);
+		    	String pista = line.substring(line.indexOf("ta=") + 3, line.indexOf(", precio"));
+		    	String sprecio = line.substring(line.indexOf("io=") + 3, line.indexOf(", descuento"));
+		    		float precio = Float.parseFloat(sprecio);
+		    	String sdescuento = line.substring(line.indexOf("to=") + 3, line.indexOf(", participantes"));
+		    		int descuento = Integer.parseInt(sdescuento);
+		    	String sparticipantes = line.substring(line.indexOf("s=") + 2, line.indexOf("]"));
+		    		int participantes = Integer.parseInt(sparticipantes);
+	    		RIndividualCreador individualCreador = new RIndividualCreador();
+				RInfantil newReserva = individualCreador.creaRInf(usuario, fecha, duracion, pista, precio, descuento, participantes); 
+		    	GestorReservas_.arrayReservaIndividual.add(newReserva);
+			}
+		    readerRI_.close();
+	    }else {
+	    	if(RIfile.createNewFile()) {
+	    		System.out.println("--------------------------------------------------------------------------");
+	    		System.out.println("Se ha creado el fichero ReservasIndividuales.txt porque no existia");
 	    		System.out.println("--------------------------------------------------------------------------");
 	    	}
 	    }

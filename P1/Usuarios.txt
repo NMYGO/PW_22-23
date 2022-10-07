@@ -1,3 +1,3 @@
-Usuario [nombre=Antonio, apellidos=Cano Almeida, nacimiento=1978-10-23, inscripcion=2022-10-06, correo=a@gmail.com]
-Usuario [nombre=Marcos, apellidos=Miranda Lozano, nacimiento=2005-06-14, inscripcion=2022-10-06, correo=m@gmail.com]
-Usuario [nombre=Manuel, apellidos=Rosa Lugo, nacimiento=1999-04-05, inscripcion=2022-10-06, correo=manuel@gmail.com]
+Usuario [nombre=Antonio, apellidos=Cano Almeida, nacimiento=1978-10-23, inscripcion=2022-10-07, correo=a@gmail.com]
+Usuario [nombre=Marcos, apellidos=Miranda Lozano, nacimiento=2005-06-14, inscripcion=2022-10-07, correo=m@gmail.com]
+Usuario [nombre=Manuel, apellidos=Rosa Lugo, nacimiento=1999-04-05, inscripcion=2022-10-07, correo=manuel@gmail.com]

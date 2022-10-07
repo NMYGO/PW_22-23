@@ -1,5 +1,6 @@
 package pw.p1.factory_reserva;
 
+import java.time.LocalDate;
 
 public class RBonoCreador extends ReservaCreador {
 	public enum Tipo {
@@ -42,8 +43,8 @@ public class RBonoCreador extends ReservaCreador {
 	 * Crea una reserva infantil
 	 */
 	@Override
-	public RInfantil creaRInf() {
-		RInfantil reserva = new RInfantil();
+	public RInfantil creaRInf(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento, int ninos) {
+		RInfantil reserva = new RInfantil(usuario, fecha, duracion, pista, precio, descuento, ninos);
 		//usuario=reserva.getUsuario();
 		return reserva;
 	}

@@ -29,7 +29,7 @@ public class MainMiscelanea {
         System.out.println("8. Listar Usuarios");
         System.out.println("--------------------------------------------");
         System.out.println("9. Hacer reserva individual");
-        System.out.println("10. Hacer reserva en bono");
+        System.out.println("10. Hacer reserva con bono");
         System.out.println("11. PLACEHOLDER");
         System.out.println("12. PLACEHOLDER");
         System.out.println("13. PLACEHOLDER");
@@ -76,6 +76,25 @@ public class MainMiscelanea {
 				GestorPistas_.arrayPistas.get(i).setEstado(false);
 			}
 		}
+	}
+	
+	public static void reservaIndividual (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
+		System.out.println("0. Reserva individual infantil");
+        System.out.println("1. Reserva individual familiar");
+        System.out.println("2. Reserva individual adulto");
+        	System.out.println("");
+        System.out.println("Elija una opcion escribiendo su numero");
+        int option_= Integer.parseInt(scan_.nextLine());
+        if(option_ == 0) {  	
+        	GestorReservas_.ReservaIndividualInfantil(GestorReservas_, GestorPistas_, GestorUsuarios_, option_, scan_);	            
+        }else if(option_ == 1) {
+        	GestorReservas_.ReservaIndividualFamiliar(null, null, scan_, null);
+        }else if(option_ == 2) {
+        	GestorReservas_.ReservaIndividualAdulto(null, null, option_, scan_, null);
+        }else {
+        	System.out.println("Opcion no reconocida");
+			System.out.println("");
+        }
 	}
 	
 }

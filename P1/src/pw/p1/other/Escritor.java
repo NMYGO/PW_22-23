@@ -22,6 +22,7 @@ public class Escritor {
 	    BufferedWriter writerU_ = new BufferedWriter(new FileWriter(new File("Usuarios.txt")));
 	    BufferedWriter writerP_ = new BufferedWriter(new FileWriter(new File("Pistas.txt")));
 	    BufferedWriter writerK_ = new BufferedWriter(new FileWriter(new File("Karts.txt")));
+	    BufferedWriter writerRI_ = new BufferedWriter(new FileWriter(new File("ReservasIndividuales.txt")));
 	    
 	    for (int i = 0;i < GestorUsuarios_.arrayUsuarios.size() ; i++) {
 	    	writerU_.write(GestorUsuarios_.arrayUsuarios.get(i).toString());
@@ -37,6 +38,11 @@ public class Escritor {
 	    	writerK_.write(GestorPistas_.arrayKarts.get(i).toString());
 		}	
 		writerK_.close();
+		
+		for (int i = 0;i < GestorReservas_.arrayReservaIndividual.size() ; i++) {
+			writerRI_.write(GestorReservas_.arrayReservaIndividual.get(i).toString());
+		}	
+		writerRI_.close();
 		
 	}
 }
