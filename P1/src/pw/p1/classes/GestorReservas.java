@@ -557,4 +557,81 @@ public class GestorReservas {
 		}//end FOR
 		return true;
 	}
+	
+	/**
+	 * @return
+	 */
+	public int consultarReservasFuturas(){
+
+		int aux = 0;
+		for(int i=0; i < arrayReservaIndividual.size() ; i++){
+			if( arrayReservaIndividual.get(i).getFecha().isBefore(LocalDate.now())){
+				aux++;
+			}
+		}
+		return aux;
+	}
+
+	/**
+	 * @param nombrepista
+	 * @param fechareserva
+	 */
+	public void consultarReservaConcreta(String nombrepista, LocalDate fechareserva){
+
+		for(int i=0; i < arrayReservaIndividual.size() ; i++){
+			if(arrayReservaIndividual.get(i).getFecha().isEqual(fechareserva) && arrayReservaIndividual.get(i).getPista() == nombrepista){
+				System.out.println(arrayReservaIndividual.get(i).getUsuario());
+				System.out.println(arrayReservaIndividual.get(i).getFecha());
+				System.out.println(arrayReservaIndividual.get(i).getDur());
+				System.out.println(arrayReservaIndividual.get(i).getPista());
+				System.out.println(arrayReservaIndividual.get(i).getPrecio());
+				System.out.println(arrayReservaIndividual.get(i).getDesc());
+			}
+		}
+	}
+
+	/**
+	 * @param usuario
+	 * @param fecha
+	 * @param duracion
+	 * @param pista
+	 * @param precio
+	 * @param descuento
+	 */
+	public void eliminarReserva(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento){
+		for(int i=0 ; i< arrayReservaIndividual.size(); i++){
+			if (arrayReservaIndividual.get(i).getUsuario() == usuario &&
+				arrayReservaIndividual.get(i).getFecha() == fecha &&
+				arrayReservaIndividual.get(i).getDur() == duracion &&
+				arrayReservaIndividual.get(i).getPista() == pista &&
+				arrayReservaIndividual.get(i).getPrecio() == precio &&
+				arrayReservaIndividual.get(i).getDesc() == descuento
+			){
+				arrayReservaIndividual.remove(i);
+			}
+		}
+	}
+
+	/**
+	 * @param usuario
+	 * @param fecha
+	 * @param nuevafecha
+	 * @param nuevaduracion
+	 * @param nuevapista
+	 * @param nuevoprecio
+	 * @param nuevodescuento
+	 */
+	public void modificarReserva(String usuario, LocalDate fecha, LocalDate nuevafecha, int nuevaduracion, String nuevapista, float nuevoprecio, int nuevodescuento){
+		for(int i=0 ; i< arrayReservaIndividual.size(); i++){
+			if (arrayReservaIndividual.get(i).getUsuario() == usuario && arrayReservaIndividual.get(i).getFecha().isEqual(fecha)){
+				arrayReservaIndividual.get(i).setFecha(nuevafecha);
+				arrayReservaIndividual.get(i).setDur(nuevaduracion);
+				arrayReservaIndividual.get(i).setPista(nuevapista);
+				arrayReservaIndividual.get(i).setPrecio(nuevoprecio);
+				arrayReservaIndividual.get(i).setDesc(nuevodescuento);
+			}
+		}
 }
+}
+
+
