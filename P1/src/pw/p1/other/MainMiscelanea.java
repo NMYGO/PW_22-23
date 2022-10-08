@@ -88,9 +88,9 @@ public class MainMiscelanea {
         if(option_ == 0) {  	
         	GestorReservas_.ReservaIndividualInfantil(GestorReservas_, GestorPistas_, GestorUsuarios_, option_, scan_);	            
         }else if(option_ == 1) {
-        	GestorReservas_.ReservaIndividualFamiliar(null, null, scan_, null);
+        	//GestorReservas_.ReservaIndividualFamiliar(null, null, scan_, null);
         }else if(option_ == 2) {
-        	GestorReservas_.ReservaIndividualAdulto(null, null, option_, scan_, null);
+        	//GestorReservas_.ReservaIndividualAdulto(null, null, option_, scan_, null);
         }else {
         	System.out.println("Opcion no reconocida");
 			System.out.println("");

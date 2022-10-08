@@ -48,7 +48,7 @@ public class Escritor {
 		for (int i = 0;i < GestorReservas_.arrayBonos.size() ; i++) {
 			writerRB_.write(GestorReservas_.arrayBonos.get(i).toString());
 		}	
-		writerRI_.close();
+		writerRB_.close();
 		
 	}
 }

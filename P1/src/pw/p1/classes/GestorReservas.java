@@ -57,19 +57,19 @@ public class GestorReservas {
 						}
 						float precio = 0;
 						int descuento = 0;
-						System.out.println("Introduzca la duración de la reserva (30/60/90 minutos)");
+						System.out.println("Introduzca la duración de la reserva (60/90/120 minutos)");
 							int duracion = Integer.parseInt(scan_.nextLine());
 						System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
 							LocalDate fecha = LocalDate.parse(scan_.nextLine());
 							switch(duracion) {
-							case 30:
-								precio = 20;
-								break;
 							case 60:
-								precio = 30;
+								precio = 20.00f;
 								break;
 							case 90:
-								precio = 40;
+								precio = 30.00f;
+								break;
+							case 120:
+								precio = 40.00f;
 								break;
 							}	
 						if(GestorUsuarios_.arrayUsuarios.get(i).getInscripcion().isBefore(LocalDate.now().minusYears(2))) {
@@ -251,25 +251,25 @@ public class GestorReservas {
 													}else {
 														valido = true;
 													}
-												}//end FOR
-											}//end WHILE
+												}
+											}
 											float precio = 0;
 											int descuento = 5;
-											System.out.println("Introduzca la duración de la reserva (30/60/90 minutos)");
+											System.out.println("Introduzca la duración de la reserva (60/90/120 minutos)");
 												int duracion = Integer.parseInt(scan_.nextLine());
 											System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
 												LocalDate fecha = LocalDate.parse(scan_.nextLine());
 												switch(duracion) {
-												case 30:
+												case 60:
 													precio = 20;
 													break;
-												case 60:
+												case 90:
 													precio = 30;
 													break;
-												case 90:
+												case 120:
 													precio = 40;
 													break;
-												}//end CASE	
+												}
 											
 											RBonoCreador BonoCreador = new RBonoCreador();
 											RInfantil newReserva = BonoCreador.creaRInf(GestorUsuarios_.arrayUsuarios.get(i).getNombre(), fecha, duracion, pista, precio, descuento, participantes);
@@ -297,14 +297,14 @@ public class GestorReservas {
 							System.out.println("");
 							return false;
 						}
-					}//end FOR
+					}
 				} else {
 					System.out.println("Error. Las reservas se realizan solo por adultos");
 					System.out.println("");
 					return false;
 				}
-			}//end IF
-		}//end FOR
+			}
+		}
 		return true;
 	}
 	

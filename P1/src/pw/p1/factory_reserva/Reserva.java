@@ -3,9 +3,6 @@ package pw.p1.factory_reserva;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import pw.p1.classes.Kart;
-import pw.p1.classes.Pista.Dificultad;
-
 public abstract class Reserva {
 	
 	/* Atributos */
@@ -62,29 +59,29 @@ public abstract class Reserva {
 	public int getDur() {
 		return duracion;
 	}
-	public void setDur(int dura) {
-		this.duracion=dura;
+	public void setDur(int duracion) {
+		this.duracion = duracion;
 	}
 	
 	public String getPista() {
 		return pista;
 	}
-	public void setPista(String pist) {
-		this.pista=pist;
+	public void setPista(String pista) {
+		this.pista = pista;
 	}
 	
 	public float getPrecio() {
 		return precio;
 	}
-	public void setPrecio(int prec) {
-		this.precio=prec;
+	public void setPrecio(float precio) {
+		this.precio = precio;
 	}
 	
 	public int getDesc() {
 		return descuento;
 	}
-	public void setDesc(int desc) {
-		this.descuento=desc;
+	public void setDesc(int descuento) {
+		this.descuento = descuento;
 	}
 	
 	/* Otros metodos */
