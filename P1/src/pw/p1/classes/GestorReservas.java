@@ -215,7 +215,7 @@ public class GestorReservas {
 	
 	
 	
-	public boolean ReservaBonoInfantil(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, int nParticipantes, Scanner scan_) {
+	public boolean ReservaBonoInfantil(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
@@ -308,7 +308,7 @@ public class GestorReservas {
 		return true;
 	}
 	
-	public boolean ReservaBonoAdultos(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, int nParticipantes, Scanner scan_) {
+	public boolean ReservaBonoAdulto(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
@@ -401,7 +401,7 @@ public class GestorReservas {
 		return true;
 	}
 	
-	public boolean ReservaBonoFamiliar(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, int nParticipantes, Scanner scan_) {
+	public boolean ReservaBonoFamiliar(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
@@ -420,7 +420,8 @@ public class GestorReservas {
 										System.out.println("Introduzca el numero de participantes (adultos)");
 										int adultos= Integer.parseInt(scan_.nextLine());
 										System.out.println("");
-										ArrayList<Pista> lpista = GestorPistas_.pistasLibres(scan_, nParticipantes, Dificultad.FAMILIAR);			
+										int participantes=ninos+adultos;
+										ArrayList<Pista> lpista = GestorPistas_.pistasLibres(scan_, participantes, Dificultad.FAMILIAR);			
 										if(lpista.size() > 0) {
 											System.out.println("Pistas libres:");
 											for (int j = 0; j < lpista.size(); j++) {

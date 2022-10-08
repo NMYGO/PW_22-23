@@ -93,7 +93,7 @@ public class MainProgram{
         	                    MainMiscelanea.reservaIndividual(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
         	                    break;
         	                case 10:
-        	
+        	                	MainMiscelanea.reservaBono(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
         	                    break;
         	                case 11:
         	

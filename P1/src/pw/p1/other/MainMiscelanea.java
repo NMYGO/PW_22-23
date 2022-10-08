@@ -97,4 +97,23 @@ public class MainMiscelanea {
         }
 	}
 	
+	public static void reservaBono (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
+		System.out.println("0. Reserva bono infantil");
+        System.out.println("1. Reserva bono familiar");
+        System.out.println("2. Reserva bono adulto");
+        	System.out.println("");
+        System.out.println("Elija una opcion escribiendo su numero");
+        int option_= Integer.parseInt(scan_.nextLine());
+        if(option_ == 0) {  	
+        	GestorReservas_.ReservaBonoInfantil(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);	            
+        }else if(option_ == 1) {
+        	GestorReservas_.ReservaBonoFamiliar(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
+        }else if(option_ == 2) {
+        	GestorReservas_.ReservaBonoAdulto(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
+        }else {
+        	System.out.println("Opcion no reconocida");
+			System.out.println("");
+        }
+	}
+	
 }
