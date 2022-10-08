@@ -1,5 +1,6 @@
 package pw.p1.classes;
 import pw.p1.classes.Pista.Dificultad;
+import pw.p1.factory_reserva.RBonoCreador.Tipo;
 import pw.p1.factory_reserva.*;
 
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ public class GestorReservas {
 	/* Atributos */
 	
 	public ArrayList<Reserva> arrayReservaIndividual = new ArrayList<Reserva>();
-	ArrayList<RBonoCreador> bonos = new ArrayList<RBonoCreador>();
+	public ArrayList<RBonoCreador> arrayBonos = new ArrayList<RBonoCreador>();
 	
 	/**
 	 * Constructor por defecto
@@ -214,16 +215,285 @@ public class GestorReservas {
 	
 	
 	
-	public boolean ReservaBono(Usuario usuario, Pista pista, int nparticipantes, int cBono) {
-		boolean encontrado=false;
-		for (int i = 0; i < bonos.size(); i++)
-			if (cBono == bonos.get(i).getId())
-				encontrado=true;
-		if(!encontrado) {
-			System.out.println("El bono usado no existe\n");
-			return false;
-		}
-			
+	public boolean ReservaBonoInfantil(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, int nParticipantes, Scanner scan_) {
+		System.out.println("Introduzca su correo de usuario");
+		String correo = scan_.nextLine();
+		System.out.println("");
+		for (int i = 0; i < GestorUsuarios_.arrayUsuarios.size(); i++) {
+			if (GestorUsuarios_.arrayUsuarios.get(i).getCorreo().equals(correo)) {
+				if ((GestorUsuarios_.arrayUsuarios.get(i).getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
+					for (int k = 0; k< arrayBonos.size(); k++) {
+						if(GestorUsuarios_.arrayUsuarios.get(i).getNombre().equals(arrayBonos.get(k).getUsuario())) {	//comprobar que el usuario tiene un bono asociado
+							if(arrayBonos.get(k).arrayReservas.isEmpty()) {
+								arrayBonos.get(k).setTipo(Tipo.INFANTIL);
+							} else if (arrayBonos.get(k).arrayReservas.size()<5) {
+									if(arrayBonos.get(k).getTipo() == Tipo.INFANTIL) {
+										System.out.println("Introduzca el numero de participantes (niños)");
+										int participantes= Integer.parseInt(scan_.nextLine());
+										System.out.println("");
+										ArrayList<Pista> lpista = GestorPistas_.pistasLibres(scan_, participantes, Dificultad.INFANTIL);			
+										if(lpista.size() > 0) {
+											System.out.println("Pistas libres:");
+											for (int j = 0; j < lpista.size(); j++) {
+												System.out.println(lpista.get(j).toString());
+											}
+											System.out.println("");
+											System.out.println("Escoja una pista mediante su nombre");
+											String pista = scan_.nextLine();
+											System.out.println("");
+											boolean valido = false;
+											while(!valido) {
+												for (int j = 0; j < lpista.size(); j++) {
+													if(!lpista.get(j).getNombre().equals(pista)) {
+														System.out.println("Escoja una pista mediante su nombre");
+														pista = scan_.nextLine();
+														System.out.println("");
+													}else {
+														valido = true;
+													}
+												}//end FOR
+											}//end WHILE
+											float precio = 0;
+											int descuento = 5;
+											System.out.println("Introduzca la duración de la reserva (30/60/90 minutos)");
+												int duracion = Integer.parseInt(scan_.nextLine());
+											System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
+												LocalDate fecha = LocalDate.parse(scan_.nextLine());
+												switch(duracion) {
+												case 30:
+													precio = 20;
+													break;
+												case 60:
+													precio = 30;
+													break;
+												case 90:
+													precio = 40;
+													break;
+												}//end CASE	
+											
+											RBonoCreador BonoCreador = new RBonoCreador();
+											RInfantil newReserva = BonoCreador.creaRInf(GestorUsuarios_.arrayUsuarios.get(i).getNombre(), fecha, duracion, pista, precio, descuento, participantes);
+											arrayBonos.get(k).arrayReservas.add(newReserva);
+											System.out.println("Reserva creada con exito");
+											System.out.println("-------------------------------------");
+											System.out.println("");
+										} else {
+											System.out.println("Error. No existen pistas libres");
+											System.out.println("");
+											return false;
+										}
+									} else {
+										System.out.println("Error. Las reservas de un bono solo pueden ser de un tipo");
+										System.out.println("");
+										return false;
+									}
+							} else {
+								System.out.println("Error. Solo puede haber hasta 5 reservas en un bono");
+								System.out.println("");
+								return false;
+							}
+						} else { 
+							System.out.println("Error. No hay un bono asociado a este usuario");
+							System.out.println("");
+							return false;
+						}
+					}//end FOR
+				} else {
+					System.out.println("Error. Las reservas se realizan solo por adultos");
+					System.out.println("");
+					return false;
+				}
+			}//end IF
+		}//end FOR
+		return true;
+	}
+	
+	public boolean ReservaBonoAdultos(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, int nParticipantes, Scanner scan_) {
+		System.out.println("Introduzca su correo de usuario");
+		String correo = scan_.nextLine();
+		System.out.println("");
+		for (int i = 0; i < GestorUsuarios_.arrayUsuarios.size(); i++) {
+			if (GestorUsuarios_.arrayUsuarios.get(i).getCorreo().equals(correo)) {
+				if ((GestorUsuarios_.arrayUsuarios.get(i).getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
+					for (int k = 0; k< arrayBonos.size(); k++) {
+						if(GestorUsuarios_.arrayUsuarios.get(i).getNombre().equals(arrayBonos.get(k).getUsuario())) {	//comprobar que el usuario tiene un bono asociado
+							if(arrayBonos.get(k).arrayReservas.isEmpty()) {
+								arrayBonos.get(k).setTipo(Tipo.ADULTO);
+							} else if (arrayBonos.get(k).arrayReservas.size()<5) {
+									if(arrayBonos.get(k).getTipo() == Tipo.ADULTO) {
+										System.out.println("Introduzca el numero de participantes (adultos)");
+										int participantes= Integer.parseInt(scan_.nextLine());
+										System.out.println("");
+										ArrayList<Pista> lpista = GestorPistas_.pistasLibres(scan_, participantes, Dificultad.ADULTO);			
+										if(lpista.size() > 0) {
+											System.out.println("Pistas libres:");
+											for (int j = 0; j < lpista.size(); j++) {
+												System.out.println(lpista.get(j).toString());
+											}
+											System.out.println("");
+											System.out.println("Escoja una pista mediante su nombre");
+											String pista = scan_.nextLine();
+											System.out.println("");
+											boolean valido = false;
+											while(!valido) {
+												for (int j = 0; j < lpista.size(); j++) {
+													if(!lpista.get(j).getNombre().equals(pista)) {
+														System.out.println("Escoja una pista mediante su nombre");
+														pista = scan_.nextLine();
+														System.out.println("");
+													}else {
+														valido = true;
+													}
+												}//end FOR
+											}//end WHILE
+											float precio = 0;
+											int descuento = 5;
+											System.out.println("Introduzca la duración de la reserva (30/60/90 minutos)");
+												int duracion = Integer.parseInt(scan_.nextLine());
+											System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
+												LocalDate fecha = LocalDate.parse(scan_.nextLine());
+												switch(duracion) {
+												case 30:
+													precio = 20;
+													break;
+												case 60:
+													precio = 30;
+													break;
+												case 90:
+													precio = 40;
+													break;
+												}//end CASE	
+											
+											RBonoCreador BonoCreador = new RBonoCreador();
+											RAdulto newReserva = BonoCreador.creaRAdu(GestorUsuarios_.arrayUsuarios.get(i).getNombre(), fecha, duracion, pista, precio, descuento, participantes);
+											arrayBonos.get(k).arrayReservas.add(newReserva);
+											System.out.println("Reserva creada con exito");
+											System.out.println("-------------------------------------");
+											System.out.println("");
+										} else {
+											System.out.println("Error. No existen pistas libres");
+											System.out.println("");
+											return false;
+										}
+									} else {
+										System.out.println("Error. Las reservas de un bono solo pueden ser de un tipo");
+										System.out.println("");
+										return false;
+									}
+							} else {
+								System.out.println("Error. Solo puede haber hasta 5 reservas en un bono");
+								System.out.println("");
+								return false;
+							}
+						} else { 
+							System.out.println("Error. No hay un bono asociado a este usuario");
+							System.out.println("");
+							return false;
+						}
+					}//end FOR
+				} else {
+					System.out.println("Error. Las reservas se realizan solo por adultos");
+					System.out.println("");
+					return false;
+				}
+			}//end IF
+		}//end FOR
+		return true;
+	}
+	
+	public boolean ReservaBonoFamiliar(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, int nParticipantes, Scanner scan_) {
+		System.out.println("Introduzca su correo de usuario");
+		String correo = scan_.nextLine();
+		System.out.println("");
+		for (int i = 0; i < GestorUsuarios_.arrayUsuarios.size(); i++) {
+			if (GestorUsuarios_.arrayUsuarios.get(i).getCorreo().equals(correo)) {
+				if ((GestorUsuarios_.arrayUsuarios.get(i).getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
+					for (int k = 0; k< arrayBonos.size(); k++) {
+						if(GestorUsuarios_.arrayUsuarios.get(i).getNombre().equals(arrayBonos.get(k).getUsuario())) {	//comprobar que el usuario tiene un bono asociado
+							if(arrayBonos.get(k).arrayReservas.isEmpty()) {
+								arrayBonos.get(k).setTipo(Tipo.FAMILIAR);
+							} else if (arrayBonos.get(k).arrayReservas.size()<5) {
+									if(arrayBonos.get(k).getTipo() == Tipo.FAMILIAR) {
+										System.out.println("Introduzca el numero de participantes (niños)");
+										int ninos= Integer.parseInt(scan_.nextLine());
+										System.out.println("");
+										System.out.println("Introduzca el numero de participantes (adultos)");
+										int adultos= Integer.parseInt(scan_.nextLine());
+										System.out.println("");
+										ArrayList<Pista> lpista = GestorPistas_.pistasLibres(scan_, nParticipantes, Dificultad.FAMILIAR);			
+										if(lpista.size() > 0) {
+											System.out.println("Pistas libres:");
+											for (int j = 0; j < lpista.size(); j++) {
+												System.out.println(lpista.get(j).toString());
+											}
+											System.out.println("");
+											System.out.println("Escoja una pista mediante su nombre");
+											String pista = scan_.nextLine();
+											System.out.println("");
+											boolean valido = false;
+											while(!valido) {
+												for (int j = 0; j < lpista.size(); j++) {
+													if(!lpista.get(j).getNombre().equals(pista)) {
+														System.out.println("Escoja una pista mediante su nombre");
+														pista = scan_.nextLine();
+														System.out.println("");
+													}else {
+														valido = true;
+													}
+												}//end FOR
+											}//end WHILE
+											float precio = 0;
+											int descuento = 5;
+											System.out.println("Introduzca la duración de la reserva (30/60/90 minutos)");
+												int duracion = Integer.parseInt(scan_.nextLine());
+											System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
+												LocalDate fecha = LocalDate.parse(scan_.nextLine());
+												switch(duracion) {
+												case 30:
+													precio = 20;
+													break;
+												case 60:
+													precio = 30;
+													break;
+												case 90:
+													precio = 40;
+													break;
+												}//end CASE	
+											
+											RBonoCreador BonoCreador = new RBonoCreador();
+											RFamiliar newReserva = BonoCreador.creaRFam(GestorUsuarios_.arrayUsuarios.get(i).getNombre(), fecha, duracion, pista, precio, descuento, ninos, adultos);
+											arrayBonos.get(k).arrayReservas.add(newReserva);
+											System.out.println("Reserva creada con exito");
+											System.out.println("-------------------------------------");
+											System.out.println("");
+										} else {
+											System.out.println("Error. No existen pistas libres");
+											System.out.println("");
+											return false;
+										}
+									} else {
+										System.out.println("Error. Las reservas de un bono solo pueden ser de un tipo");
+										System.out.println("");
+										return false;
+									}
+							} else {
+								System.out.println("Error. Solo puede haber hasta 5 reservas en un bono");
+								System.out.println("");
+								return false;
+							}
+						} else { 
+							System.out.println("Error. No hay un bono asociado a este usuario");
+							System.out.println("");
+							return false;
+						}
+					}//end FOR
+				} else {
+					System.out.println("Error. Las reservas se realizan solo por adultos");
+					System.out.println("");
+					return false;
+				}
+			}//end IF
+		}//end FOR
 		return true;
 	}
 }

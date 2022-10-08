@@ -20,11 +20,11 @@ public abstract class ReservaCreador {
 	 * Crea una reserva familiar
 	 *  */
 	
-	public abstract RFamiliar creaRFam();
+	public abstract RFamiliar creaRFam(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento, int ninos, int adultos);
 	
 	/** 
 	 * Crea una reserva adulta
 	 *  */
 	
-	public abstract RAdulto creaRAdu();
+	public abstract RAdulto creaRAdu(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento, int adultos);
 }

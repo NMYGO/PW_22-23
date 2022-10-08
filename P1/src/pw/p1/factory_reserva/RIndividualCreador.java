@@ -15,14 +15,14 @@ public class RIndividualCreador extends ReservaCreador{
 	}
 	
 	@Override
-	public RFamiliar creaRFam() {
-		RFamiliar reserva = new RFamiliar();
+	public RFamiliar creaRFam(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento, int ninos, int adultos) {
+		RFamiliar reserva = new RFamiliar(usuario, fecha, duracion, pista, precio, descuento, ninos, adultos);
 		return reserva;
 	}
 	
 	@Override
-	public RAdulto creaRAdu() {
-		RAdulto reserva = new RAdulto();
+	public RAdulto creaRAdu(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento, int adultos) {
+		RAdulto reserva = new RAdulto(usuario, fecha, duracion, pista, precio, descuento, adultos);
 		return reserva;
 	}
 }

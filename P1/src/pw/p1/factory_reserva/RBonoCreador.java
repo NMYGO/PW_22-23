@@ -1,6 +1,7 @@
 package pw.p1.factory_reserva;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class RBonoCreador extends ReservaCreador {
 	public enum Tipo {
@@ -10,8 +11,9 @@ public class RBonoCreador extends ReservaCreador {
 	/* Atributos */
 	private int id;
 	private int sesion;
-	private int usuario;
+	private String bUsuario;
 	private Tipo tipo;
+	public ArrayList<Reserva> arrayReservas = new ArrayList<Reserva>();
 	/**
 	 * Funciones get y set de los atributos
 	 */
@@ -27,11 +29,11 @@ public class RBonoCreador extends ReservaCreador {
 	public void setSesion(int ses) {
 		this.sesion=ses;
 	}
-	public int getUsuario() {
-		return usuario;
+	public String getUsuario() {
+		return bUsuario;
 	}
-	public void setUsuario(int user) {
-		this.usuario=user;
+	public void setUsuario(String user) {
+		this.bUsuario=user;
 	}
 	public Tipo getTipo() {
 		return tipo;
@@ -53,8 +55,8 @@ public class RBonoCreador extends ReservaCreador {
 	 * Crea una reserva familiar
 	 *  */
 	@Override
-	public RFamiliar creaRFam() {
-		RFamiliar reserva = new RFamiliar();
+	public RFamiliar creaRFam(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento, int ninos, int adultos) {
+		RFamiliar reserva = new RFamiliar(usuario, fecha, duracion, pista, precio, descuento, ninos, adultos);
 		//usuario=reserva.getUsuario();
 		return reserva;
 	}
@@ -63,8 +65,8 @@ public class RBonoCreador extends ReservaCreador {
 	 * Crea una reserva adulta
 	 *  */
 	@Override
-	public RAdulto creaRAdu() {
-		RAdulto reserva = new RAdulto();
+	public RAdulto creaRAdu(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento, int adultos) {
+		RAdulto reserva = new RAdulto(usuario, fecha, duracion, pista, precio, descuento, adultos);
 		//usuario=reserva.getUsuario();		
 		return reserva;
 	}
