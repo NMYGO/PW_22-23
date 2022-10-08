@@ -74,8 +74,7 @@ public class RBonoCreador extends ReservaCreador {
 	
 	@Override
 	public String toString() {
-		return "Bono [id=" + id + ", sesion=" + sesion + ", bUsuario=" + bUsuario + ", tipo=" + tipo + "] :"
-				+ ", arrayReservas=\n" + arrayReservas;
+		return "Bono [id=" + id + ", sesion=" + sesion + ", bUser=" + bUsuario + ", tipo=" + tipo + "]\n";
 	}
 	
 	/**

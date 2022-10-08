@@ -3,8 +3,7 @@ package pw.p1.other;
 import java.time.LocalDate;
 import java.io.*;
 import pw.p1.classes.*;
-import pw.p1.factory_reserva.RIndividualCreador;
-import pw.p1.factory_reserva.RInfantil;
+import pw.p1.factory_reserva.*;
 
 /**
  * Clase que gestiona la lectura de los ficheros
@@ -100,21 +99,24 @@ public class Lector {
 		    	String sduracion = line.substring(line.indexOf("n=") + 2, line.indexOf(", pista"));
 		    		int duracion = Integer.parseInt(sduracion);
 		    	String pista = line.substring(line.indexOf("ta=") + 3, line.indexOf(", precio"));
-		    	String sprecio = line.substring(line.indexOf("io=") + 3, line.indexOf(", descuento"));
+		    	String sprecio = line.substring(line.indexOf("cio=") + 4, line.indexOf(", descuento"));
 		    		float precio = Float.parseFloat(sprecio);
 		    	String sdescuento = line.substring(line.indexOf("to=") + 3, line.indexOf(", participantes"));
 		    		int descuento = Integer.parseInt(sdescuento);
-		    	String sparticipantes = line.substring(line.indexOf("s=") + 2, line.indexOf("]"));
-		    		int participantes = Integer.parseInt(sparticipantes);
-		    	String tipoReserva = line.substring(line.indexOf("->"), line.indexOf('\n'));
+		    	String sparticipantesninios = line.substring(line.indexOf("ños=") + 4, line.indexOf(", participantes adultos"));
+		    		int participantesninios = Integer.parseInt(sparticipantesninios);
+		    	String sparticipantesadultos = line.substring(line.indexOf("tos=") + 4, line.indexOf("]"));
+		    	int participantesadultos = Integer.parseInt(sparticipantesadultos);
 	    		RIndividualCreador individualCreador = new RIndividualCreador();
-	    		if(tipoReserva.equals("-> Reserva Infantil")) {
-	    			RInfantil newReserva = individualCreador.creaRInf(usuario, fecha, duracion, pista, precio, descuento, participantes); 
+	    		if(line.contains("-> Reserva Infantil")) {
+	    			RInfantil newReserva = individualCreador.creaRInf(usuario, fecha, duracion, pista, precio, descuento, participantesninios); 
 	    			GestorReservas_.arrayReservaIndividual.add(newReserva);
-	    		}else if(tipoReserva.equals("-> Reserva Familiar")) {
-	    			
-	    		}else if(tipoReserva.equals("-> Reserva Adulto")){
-	    			
+	    		}else if(line.contains("-> Reserva Familiar")) {
+	    			RFamiliar newReserva = individualCreador.creaRFam(usuario, fecha, duracion, pista, precio, descuento, participantesninios, participantesadultos); 
+	    			GestorReservas_.arrayReservaIndividual.add(newReserva);
+	    		}else if(line.contains("-> Reserva Adulto")){
+	    			RAdulto newReserva = individualCreador.creaRAdu(usuario, fecha, duracion, pista, precio, descuento, participantesadultos); 
+	    			GestorReservas_.arrayReservaIndividual.add(newReserva);
 	    		}else {
 	    			System.out.println("Error. Fallo en el lector de reserva individual");
 	    		}
@@ -127,26 +129,46 @@ public class Lector {
 	    		System.out.println("--------------------------------------------------------------------------");
 	    	}
 	    }
-	    
-	 /*   File RBfile = new File("ReservasBonos.txt");
+
+	    File RBfile = new File("ReservasBonos.txt");
 	    if(RBfile.isFile()) {
 	    	BufferedReader readerRB_ = new BufferedReader(new FileReader(new File("ReservasBonos.txt")));
 		    while((line = readerRB_.readLine()) != null) {
-		    	String usuario = line.substring(line.indexOf("o=") + 2, line.indexOf(", fecha"));
-		    	String sfecha = line.substring(line.indexOf("a=") + 2, line.indexOf(", duracion"));
-		    		LocalDate fecha = LocalDate.parse(sfecha);
-		    	String sduracion = line.substring(line.indexOf("n=") + 2, line.indexOf(", pista"));
-		    		int duracion = Integer.parseInt(sduracion);
-		    	String pista = line.substring(line.indexOf("ta=") + 3, line.indexOf(", precio"));
-		    	String sprecio = line.substring(line.indexOf("io=") + 3, line.indexOf(", descuento"));
-		    		float precio = Float.parseFloat(sprecio);
-		    	String sdescuento = line.substring(line.indexOf("to=") + 3, line.indexOf(", participantes"));
-		    		int descuento = Integer.parseInt(sdescuento);
-		    	String sparticipantes = line.substring(line.indexOf("s=") + 2, line.indexOf("]"));
-		    		int participantes = Integer.parseInt(sparticipantes);
-	    		RBonoCreador bonoCreador = new RBonoCreador();
-				RInfantil newReserva = individualCreador.creaRInf(usuario, fecha, duracion, pista, precio, descuento, participantes); 
-		    	GestorReservas_.arrayBonos.add(newReserva);
+		    	String sid = line.substring(line.indexOf("d=") + 2, line.indexOf(", sesion"));
+		    		int id = Integer.parseInt(sid);
+		    	String ssesion = line.substring(line.indexOf("ion=") + 4, line.indexOf(", bUser"));
+		    		int sesion = Integer.parseInt(ssesion);
+		    	String bUsuario = line.substring(line.indexOf("er=") + 3, line.indexOf(", tipo"));
+		    	String stipo = line.substring(line.indexOf("po=") + 3, line.indexOf("]"));
+		    		RBonoCreador.Tipo tipo = RBonoCreador.Tipo.valueOf(stipo);
+	    		RBonoCreador newBono = new RBonoCreador(id, sesion, bUsuario, tipo);
+	    		
+	    		/*while(!line.contains("Bono")) {
+			    	String usuario = line.substring(line.indexOf("rio=") + 4, line.indexOf(", fecha"));
+			    	String sfecha = line.substring(line.indexOf("cha=") + 4, line.indexOf(", duracion"));
+			    		LocalDate fecha = LocalDate.parse(sfecha);
+			    	String sduracion = line.substring(line.indexOf("cion=") + 5, line.indexOf(", pista"));
+			    		int duracion = Integer.parseInt(sduracion);
+			    	String pista = line.substring(line.indexOf("ta=") + 3, line.indexOf(", precio"));
+			    	String sprecio = line.substring(line.indexOf("cio=") + 4, line.indexOf(", descuento"));
+			    		float precio = Float.parseFloat(sprecio);
+			    	String sdescuento = line.substring(line.indexOf("to=") + 3, line.indexOf(", participantes"));
+			    		int descuento = Integer.parseInt(sdescuento);
+			    	String sparticipantes = line.substring(line.indexOf("s=") + 2, line.indexOf("]"));
+			    		int participantes = Integer.parseInt(sparticipantes);
+		    		RIndividualCreador individualCreador = new RIndividualCreador();
+		    		if(line.contains("-> Reserva Infantil")) {
+		    			RInfantil newReserva = individualCreador.creaRInf(usuario, fecha, duracion, pista, precio, descuento, participantes); 
+		    			GestorReservas_.arrayBonos.add(newReserva);
+		    		}else if(line.contains("-> Reserva Familiar")) {
+		    			
+		    		}else if(line.contains("-> Reserva Adulto")){
+		    			
+		    		}else {
+		    			System.out.println("Error. Fallo en el lector de reserva individual");
+		    		}
+	    		}*/
+		    	GestorReservas_.arrayBonos.add(newBono);
 			}
 		    readerRB_.close();
 	    }else {
@@ -155,6 +177,6 @@ public class Lector {
 	    		System.out.println("Se ha creado el fichero ReservasBonos.txt porque no existia");
 	    		System.out.println("--------------------------------------------------------------------------");
 	    	}
-	    }*/
+	    }
 	}
 }

@@ -38,7 +38,7 @@ public class RInfantil extends Reserva{
 	
 	public String toString() {
 		String info = super.toString();
-			info += ", participantes=" + ninos + "] -> Reserva Infantil\n";
+			info += ", participantes niños=" + ninos+ ", participantes adultos=0] -> Reserva Infantil\n";
 			return info;
 	}
 }

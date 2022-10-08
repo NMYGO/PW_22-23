@@ -1,1 +1,3 @@
-Reserva [usuario=Antonio, fecha=2023-04-04, duracion=120, pista=pista3, precio=40.0, descuento=0, participantes=1] -> Reserva Infantil
+Reserva [usuario=Antonio, fecha=2023-01-01, duracion=60, pista=pista3, precio=20.0, descuento=0, participantes niños=1, participantes adultos=0] -> Reserva Infantil
+Reserva [usuario=Manuel, fecha=2023-02-02, duracion=90, pista=pista1, precio=30.0, descuento=0, participantes niños=1, participantes adultos=1] -> Reserva Familiar
+Reserva [usuario=Manuel, fecha=2023-03-03, duracion=120, pista=pista2, precio=40.0, descuento=0, participantes niños=0, participantes adultos=1] -> Reserva Adulto

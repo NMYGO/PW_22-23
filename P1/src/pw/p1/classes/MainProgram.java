@@ -67,7 +67,7 @@ public class MainProgram{
         	                    GestorPistas_.listaPistasMantenimiento();
         	                    break;
         	                case 5:
-        	                	System.out.println("Introduzca el numero de participantes (niños)");
+        	                	System.out.println("Introduzca el numero de participantes");
         							int participantes= Integer.parseInt(scan_.nextLine());
         							System.out.println("");
         						System.out.println("Introduzca la dificultad de pista");
@@ -96,7 +96,7 @@ public class MainProgram{
         	                	MainMiscelanea.reservaBono(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
         	                    break;
         	                case 11:
-        	
+        	                	MainMiscelanea.listarKartsDisponibles(GestorPistas_);
         	                    break;
         	                case 12:
         	
@@ -116,7 +116,7 @@ public class MainProgram{
             }
         }
         MainMiscelanea.restaurar(GestorPistas_);
-        Escritor.escritor(GestorPistas_, GestorUsuarios_, GestorReservas_); //Escribo los arrays de los lectores en los ficheros
+        Escritor.escritor(GestorPistas_, GestorUsuarios_, GestorReservas_);
         scan_.close();
     }
 

@@ -99,8 +99,7 @@ public class GestorPistas{
 					ArrayList<Kart> listakarts = arrayPistas.get(i).consultarKartsDisponibles(arrayKarts);
 					for (int j = 0;j< listakarts.size() ; j++) {
 						if (idkart == (listakarts.get(j).getId())) {
-							if(arrayPistas.get(i).asociarKartAPista(listakarts.get(j), arrayPistas.get(i))) {
-								arrayKarts.get(j).setEstado(Estado.RESERVADO);
+							if(arrayPistas.get(i).asociarKartAPista(listakarts.get(j), arrayPistas.get(i))) {							
 								System.out.println("Kart asociado con exito");
 								System.out.println("-------------------------------------");
 								System.out.println("");
@@ -111,10 +110,11 @@ public class GestorPistas{
 				}
 			}
 		}
-		System.out.println("Error. No se ha asociado el kart a la pista");
+		System.out.println("Error. No se ha podido asociar el kart a la pista");
 		System.out.println("-------------------------------------");
 		System.out.println("");
-		return false;
+		return true;
+		
 	}
 
 	/**
