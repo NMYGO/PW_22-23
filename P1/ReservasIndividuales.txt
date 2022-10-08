@@ -1,0 +1,1 @@
+Reserva [usuario=Antonio, fecha=2023-04-04, duracion=120, pista=pista3, precio=40.0, descuento=0, participantes=1] -> Reserva Infantil
