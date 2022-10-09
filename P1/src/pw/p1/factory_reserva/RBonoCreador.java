@@ -25,6 +25,7 @@ public class RBonoCreador extends ReservaCreador {
 	private int sesion;
 	private String bUsuario;
 	private Tipo tipo;
+	private LocalDate fcaducidad;
 	public ArrayList<Reserva> arrayReservas = new ArrayList<Reserva>();
 	
 	/* Constructores */
@@ -40,13 +41,15 @@ public class RBonoCreador extends ReservaCreador {
 	 * @param sesion
 	 * @param bUsuario
 	 * @param tipo
+	 * @param fecha_de_caducidad
 	 */
 	
-	public RBonoCreador(Integer id, Integer sesion, String bUsuario, Tipo tipo) {
+	public RBonoCreador(Integer id, Integer sesion, String bUsuario, Tipo tipo, LocalDate fcaducidad) {
 		this.id = id;
 		this.sesion = sesion;
 		this.bUsuario = bUsuario;
 		this.tipo = tipo;
+		this.fcaducidad = fcaducidad;
 	}
 	
 	/* Getters y setters */
@@ -83,6 +86,14 @@ public class RBonoCreador extends ReservaCreador {
 		this.tipo = tipo;
 	}
 	
+	public LocalDate getFcaducidad() {
+		return fcaducidad;
+	}
+
+	public void setFcaducidad(LocalDate fcaducidad) {
+		this.fcaducidad = fcaducidad;
+	}
+	
 	public ArrayList<Reserva> getArrayReservas() {
 		return arrayReservas;
 	}
@@ -95,7 +106,7 @@ public class RBonoCreador extends ReservaCreador {
 
 	@Override
 	public String toString() {
-		return "Bono [id=" + id + ", sesion=" + sesion + ", bUser=" + bUsuario + ", tipo=" + tipo + "]\n";
+		return "Bono [id=" + id + ", sesion=" + sesion + ", bUser=" + bUsuario + ", tipo=" + tipo + ", fecha de caducidad=" + fcaducidad + "]\n";
 	}
 	
 	/**

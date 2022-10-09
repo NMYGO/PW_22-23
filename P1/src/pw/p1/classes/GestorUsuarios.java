@@ -90,7 +90,7 @@ public class GestorUsuarios {
 						System.out.println("");
 						
 						break;
-					case 1:		//Cambio de Nombre
+					case 1:
 						System.out.println("Introduzca el nuevo nombre de usuario");
 						String nuevoNombre = scan_.nextLine();
 						System.out.println("");
@@ -98,14 +98,14 @@ public class GestorUsuarios {
 	
 						break;
 							
-					case 2:		//Cambio de Apellidos
+					case 2:
 						System.out.println("Introduzca los nuevos apellidos de usuario");
 						String nuevoApellidos = scan_.nextLine();
 						System.out.println("");
 						arrayUsuarios.get(i).setApellidos(nuevoApellidos);
 	
 						break;
-					case 3:		//Cambio de fecha de nacimiento
+					case 3:
 						System.out.println("Introduzca la nueva fecha de nacimiento de usuario");
 						LocalDate nuevaFechaNacimiento = LocalDate.parse(scan_.nextLine());					
 						System.out.println("");
@@ -113,7 +113,7 @@ public class GestorUsuarios {
 						
 						break;
 						
-					case 4:		//Cambio de correo
+					case 4:
 						System.out.println("Introduzca la nueva direccion de correo de usuario");
 						String nuevoCorreo = scan_.nextLine();
 						System.out.println("");

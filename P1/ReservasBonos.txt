@@ -1,2 +1,2 @@
-Bono [id=1, sesion=2, bUser=Antonio, tipo=INFANTIL]
-Bono [id=2, sesion=3, bUser=Manuel, tipo=FAMILIAR]
+Bono [id=1, sesion=2, bUser=Antonio, tipo=INFANTIL, fecha de caducidad=2023-10-09]
+Bono [id=2, sesion=2, bUser=Manuel, tipo=FAMILIAR, fecha de caducidad=2023-10-09]

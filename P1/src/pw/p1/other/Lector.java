@@ -168,9 +168,11 @@ public class Lector {
 		    	String ssesion = line.substring(line.indexOf("ion=") + 4, line.indexOf(", bUser"));
 		    		int sesion = Integer.parseInt(ssesion);
 		    	String bUsuario = line.substring(line.indexOf("er=") + 3, line.indexOf(", tipo"));
-		    	String stipo = line.substring(line.indexOf("po=") + 3, line.indexOf("]"));
+		    	String stipo = line.substring(line.indexOf("po=") + 3, line.indexOf(", fecha de caducidad"));
 		    		RBonoCreador.Tipo tipo = RBonoCreador.Tipo.valueOf(stipo);
-	    		RBonoCreador newBono = new RBonoCreador(id, sesion, bUsuario, tipo);
+	    		String sfcaducidad = line.substring(line.indexOf("ad=") + 3, line.indexOf("]"));
+	    			LocalDate fcaducidad = LocalDate.parse(sfcaducidad);
+	    		RBonoCreador newBono = new RBonoCreador(id, sesion, bUsuario, tipo, fcaducidad);
 	    		
 		    	GestorReservas_.arrayBonos.add(newBono);
 			}

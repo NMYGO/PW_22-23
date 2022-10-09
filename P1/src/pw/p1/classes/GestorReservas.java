@@ -220,6 +220,10 @@ public class GestorReservas {
 						System.out.println("");
 						System.out.println("Introduzca el numero de participantes (adultos)");
 						int participantesAdultos= Integer.parseInt(scan_.nextLine());
+						while(participantesAdultos <= 0) {
+							System.out.println("Introduzca el numero de participantes (adultos)");
+							participantesAdultos= Integer.parseInt(scan_.nextLine());
+						}
 						System.out.println("");
 						int participantes = participantesAdultos + participantesInfantiles;
 					ArrayList<Pista> lpista = GestorPistas_.pistasLibres(scan_, participantes, Dificultad.FAMILIAR);			
@@ -321,7 +325,7 @@ public class GestorReservas {
 				if ((GestorUsuarios_.arrayUsuarios.get(i).getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
 					if(arrayBonos.size() == 0) {
 						System.out.println("No existe ningun bono. Creando nuevo bono...");
-						RBonoCreador newBono = new RBonoCreador(1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.INFANTIL);
+						RBonoCreador newBono = new RBonoCreador(1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.INFANTIL, LocalDate.now().plusYears(1));
 						arrayBonos.add(newBono);
 					}
 					boolean encontrado = false;
@@ -334,7 +338,7 @@ public class GestorReservas {
 						}
 						if(!encontrado) {
 							System.out.println("No hay un bono asociado a este usuario. Creando nuevo bono...");
-								RBonoCreador newBono = new RBonoCreador(arrayBonos.size()+1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.INFANTIL);
+								RBonoCreador newBono = new RBonoCreador(arrayBonos.size()+1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.INFANTIL, LocalDate.now().plusYears(1));
 								arrayBonos.add(newBono);
 							System.out.println("");
 						}
@@ -437,7 +441,7 @@ public class GestorReservas {
 				if ((GestorUsuarios_.arrayUsuarios.get(i).getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
 					if(arrayBonos.size() == 0) {
 						System.out.println("No existe ningun bono. Creando nuevo bono...");
-						RBonoCreador newBono = new RBonoCreador(1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.ADULTO);
+						RBonoCreador newBono = new RBonoCreador(1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.ADULTO, LocalDate.now().plusYears(1));
 						arrayBonos.add(newBono);
 					}
 					boolean encontrado = false;
@@ -450,7 +454,7 @@ public class GestorReservas {
 						}
 						if(!encontrado) {
 							System.out.println("No hay un bono asociado a este usuario. Creando nuevo bono...");
-								RBonoCreador newBono = new RBonoCreador(arrayBonos.size()+1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.ADULTO);
+								RBonoCreador newBono = new RBonoCreador(arrayBonos.size()+1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.ADULTO, LocalDate.now().plusYears(1));
 								arrayBonos.add(newBono);
 							System.out.println("");
 						}
@@ -553,7 +557,7 @@ public class GestorReservas {
 				if ((GestorUsuarios_.arrayUsuarios.get(i).getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
 					if(arrayBonos.size() == 0) {
 						System.out.println("No existe ningun bono. Creando nuevo bono...");
-						RBonoCreador newBono = new RBonoCreador(1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.FAMILIAR);
+						RBonoCreador newBono = new RBonoCreador(1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.FAMILIAR, LocalDate.now().plusYears(1));
 						arrayBonos.add(newBono);
 					}
 					boolean encontrado = false;
@@ -566,7 +570,7 @@ public class GestorReservas {
 						}
 						if(!encontrado) {
 							System.out.println("No hay un bono asociado a este usuario. Creando nuevo bono...");
-								RBonoCreador newBono = new RBonoCreador(arrayBonos.size()+1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.FAMILIAR);
+								RBonoCreador newBono = new RBonoCreador(arrayBonos.size()+1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.FAMILIAR, LocalDate.now().plusYears(1));
 								arrayBonos.add(newBono);
 							System.out.println("");
 						}
@@ -579,6 +583,10 @@ public class GestorReservas {
 									System.out.println("Introduzca el numero de participantes (adultos)");
 									int adultos= Integer.parseInt(scan_.nextLine());
 									System.out.println("");
+									while(adultos <= 0) {
+										System.out.println("Introduzca el numero de participantes (adultos)");
+										adultos= Integer.parseInt(scan_.nextLine());
+									}
 									int participantes=ninos+adultos;
 									ArrayList<Pista> lpista = GestorPistas_.pistasLibres(scan_, participantes, Dificultad.FAMILIAR);			
 									if(lpista.size() > 0) {
@@ -744,23 +752,30 @@ public class GestorReservas {
 
 	public void eliminarReserva(Scanner scan_){
 		System.out.println("Introduzca su nombre de usuario");
-		String usuario = scan_.nextLine();
+			String usuario = scan_.nextLine();
 		System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
-		LocalDate fecha = LocalDate.parse(scan_.nextLine());
+			LocalDate fecha = LocalDate.parse(scan_.nextLine());
 		System.out.println("Introduzca la pista de la reserva");
-		String pista = scan_.nextLine();
+			String pista = scan_.nextLine();
 		System.out.println("Introduzca la duracion de la reserva");
-		int duracion = Integer.parseInt(scan_.nextLine());
+			int duracion = Integer.parseInt(scan_.nextLine());
 		System.out.println("");
 		for(int i=0 ; i< arrayReservaIndividual.size(); i++){
-			if (arrayReservaIndividual.get(i).getUsuario() == usuario &&
-				arrayReservaIndividual.get(i).getFecha() == fecha &&
-				arrayReservaIndividual.get(i).getDur() == duracion &&
-				arrayReservaIndividual.get(i).getPista() == pista
-			){
+			if (arrayReservaIndividual.get(i).getUsuario().equals(usuario) &&
+					arrayReservaIndividual.get(i).getFecha().isEqual(fecha) &&
+					arrayReservaIndividual.get(i).getDur() == duracion &&
+					arrayReservaIndividual.get(i).getPista().equals(pista) &&
+					arrayReservaIndividual.get(i).getFecha().isBefore(LocalDate.now().minusDays(1))){
 				arrayReservaIndividual.remove(i);
+				System.out.println("Reserva eliminada con exito");
+				System.out.println("-------------------------------------");
+				System.out.println("");
+				return;
 			}
 		}
+		System.out.println("Error. La reserva no se puede eliminar");
+		System.out.println("-------------------------------------");
+		System.out.println("");
 	}
 
 	/**
@@ -770,37 +785,74 @@ public class GestorReservas {
 
 	public void modificarReserva(Scanner scan_){
 		System.out.println("Introduzca su nombre de usuario");
-		String usuario = scan_.nextLine();
+			String usuario = scan_.nextLine();
 		System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
-		LocalDate fecha = LocalDate.parse(scan_.nextLine());
+			LocalDate fecha = LocalDate.parse(scan_.nextLine());
+		System.out.println("Introduzca la pista de la reserva");
+			String pista = scan_.nextLine();
+		System.out.println("Introduzca la duracion de la reserva");
+			int duracion = Integer.parseInt(scan_.nextLine());
+		System.out.println("");
 		for(int i=0 ; i< arrayReservaIndividual.size(); i++){
-			if (arrayReservaIndividual.get(i).getUsuario() == usuario && arrayReservaIndividual.get(i).getFecha().isEqual(fecha)){
-				System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
-				LocalDate nuevafecha = LocalDate.parse(scan_.nextLine());
-				System.out.println("Introduzca la pista de la reserva");
-				String nuevapista = scan_.nextLine();
-				System.out.println("");
-				int nuevaduracion = Integer.parseInt(scan_.nextLine());
-				System.out.println("");
-				int nuevoprecio=0;
-				switch(nuevaduracion) {
-				case 60:
-					nuevoprecio = 20;
+			if (arrayReservaIndividual.get(i).getUsuario().equals(usuario) &&
+					arrayReservaIndividual.get(i).getFecha().isEqual(fecha) &&
+					arrayReservaIndividual.get(i).getDur() == duracion &&
+					arrayReservaIndividual.get(i).getPista().equals(pista) &&
+					arrayReservaIndividual.get(i).getFecha().isBefore(LocalDate.now().minusDays(1))){
+				int opcion = 1;
+				while (opcion != 0) {
+					System.out.println("0: Terminar modificacion.\n"
+					+ "1: Cambiar Fecha.\n"
+					+ "2: Cambiar Duracion.\n"
+					+ "Introduzca una opcion:"); 
+					
+					opcion = Integer.parseInt(scan_.nextLine());
+					switch (opcion) {
+					case 0: 
+						System.out.println("Reserva modificada con exito");
+						System.out.println("-------------------------------------");
+						System.out.println("");
+						return;
+
+					case 1:
+						System.out.println("Introduzca la nueva fecha de reserva");
+							LocalDate nfecha = LocalDate.parse(scan_.nextLine());
+						System.out.println("");
+						arrayReservaIndividual.get(i).setFecha(nfecha);
+		
+						break;
+							
+					case 2:
+						System.out.println("Introduzca la nueva duracion de reserva");
+						int nduracion = Integer.parseInt(scan_.nextLine());				
+					System.out.println("");
+					arrayReservaIndividual.get(i).setDur(nduracion);
+					switch(nduracion) {
+					case 60:
+						arrayReservaIndividual.get(i).setPrecio(20);
+						break;
+					case 90:
+						arrayReservaIndividual.get(i).setPrecio(30);
+						break;
+					case 120:
+						arrayReservaIndividual.get(i).setPrecio(40);
+						break;
+					}
+					
 					break;
-				case 90:
-					nuevoprecio = 30;
-					break;
-				case 120:
-					nuevoprecio = 40;
-					break;
+
+					default:
+						System.out.println("Opcion no reconocida");
+						System.out.println("");
+						break;
+					}
 				}
-				arrayReservaIndividual.get(i).setFecha(nuevafecha);
-				arrayReservaIndividual.get(i).setDur(nuevaduracion);
-				arrayReservaIndividual.get(i).setPista(nuevapista);
-				arrayReservaIndividual.get(i).setPrecio(nuevoprecio);
 			}
 		}
-}
+		System.out.println("Error. La reserva no se puede modificar");
+		System.out.println("-------------------------------------");
+		System.out.println("");
+	}
 }
 
 
