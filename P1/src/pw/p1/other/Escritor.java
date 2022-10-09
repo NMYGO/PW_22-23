@@ -5,13 +5,8 @@ import pw.p1.classes.*;
 
 /**
  * Clase que gestiona la escritura en los ficheros
- * 
- * @author David Olmo Cejudo
- * @author Francisco Moreno Cano
- * @author Ángel Quintero Montes
- * @author Diego Tabas Costa
- *
- */
+ * @author 
+ * */
 
 public class Escritor {
 	
@@ -29,6 +24,7 @@ public class Escritor {
 	    BufferedWriter writerK_ = new BufferedWriter(new FileWriter(new File("Karts.txt")));
 	    BufferedWriter writerRI_ = new BufferedWriter(new FileWriter(new File("ReservasIndividuales.txt")));
 	    BufferedWriter writerRB_ = new BufferedWriter(new FileWriter(new File("ReservasBonos.txt")));
+	    BufferedWriter writerFP_ = new BufferedWriter(new FileWriter(new File("properties.txt")));
 	    
 	    for (int i = 0; i < GestorUsuarios_.arrayUsuarios.size(); i++) {
 	    	writerU_.write(GestorUsuarios_.arrayUsuarios.get(i).toString());
@@ -71,5 +67,14 @@ public class Escritor {
 			writerRBRes_.close();
 		}	
 		
+		writerFP_.write("usuarios=Usuarios.txt");
+		writerFP_.write("karts=Karts.txt");
+		writerFP_.write("pistas=Pistas.txt");
+		writerFP_.write("reservasBonos= ReservasBonos.txt");
+		writerFP_.write("reservasIndividuales=ReservasIndividuales.txt");
+		
+		writerFP_.close();
+
+
 	}
 }
