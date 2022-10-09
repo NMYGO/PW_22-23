@@ -1,6 +1,5 @@
 package pw.p1.other;
 
-import java.util.ArrayList;
 import pw.p1.classes.*;
 import pw.p1.classes.Kart.Estado;
 import java.util.Scanner;
@@ -31,11 +30,13 @@ public class MainMiscelanea {
         System.out.println("--------------------------------------------");
         System.out.println("9. Hacer Reserva individual");
         System.out.println("10. Hacer Reserva con bono");
+        System.out.println("11. Listar Reservas futuras individuales");
+        System.out.println("12. Listar Reservas futuras con bono");
+        System.out.println("13. Consultar Reserva especifica");
         System.out.println("--------------------------------------------");
-        System.out.println("11. Listar Karts disponibles");
-        System.out.println("12. PLACEHOLDER");
-        System.out.println("13. PLACEHOLDER");
-        System.out.println("14. PLACEHOLDER");
+        System.out.println("14. Listar Karts");
+        System.out.println("15. PLACEHOLDER");
+        System.out.println("16. PLACEHOLDER");
         System.out.println("--------------------------------------------");
         System.out.println("0. Salir");
         System.out.println("");
@@ -119,11 +120,19 @@ public class MainMiscelanea {
 	}
 	
 	public static void listarKartsDisponibles (GestorPistas GestorPistas_) {
+		int nodisponible = 0;
 		for(int i = 0; i < GestorPistas_.arrayKarts.size(); i++) {
 			if(GestorPistas_.arrayKarts.get(i).getEstado() == Estado.DISPONIBLE) {
 				System.out.println(GestorPistas_.arrayKarts.get(i).toString());
+			}else if(GestorPistas_.arrayKarts.get(i).getEstado() == Estado.RESERVADO){
+				System.out.println(GestorPistas_.arrayKarts.get(i).toString());
+			}else {
+				System.out.println(GestorPistas_.arrayKarts.get(i).toString());
 			}
 		}
+		if(GestorPistas_.arrayKarts.size() == nodisponible) {
+			System.out.println("No hay karts disponibles");
+			System.out.println("");
+		}
 	}
-	
 }

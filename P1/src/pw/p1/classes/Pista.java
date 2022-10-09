@@ -20,7 +20,7 @@ public class Pista {
 	private boolean estado;	//TRUE -> RESERVADO - FALSE -> DISPONIBLE
 	private Dificultad dificultad;
 	private int maxkarts;
-	private ArrayList<Kart> lkart;
+	public ArrayList<Kart> lkart;
 	
 	/* Constructores */
 	

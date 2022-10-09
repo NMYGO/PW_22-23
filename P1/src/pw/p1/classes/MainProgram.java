@@ -96,16 +96,16 @@ public class MainProgram{
         	                	MainMiscelanea.reservaBono(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
         	                    break;
         	                case 11:
-        	                	MainMiscelanea.listarKartsDisponibles(GestorPistas_);
+        	                	GestorReservas_.consultarReservasFuturasIndividuales(scan_);
         	                    break;
         	                case 12:
-        	
+        	                	GestorReservas_.consultarReservasFuturasBono(scan_);
         	                    break;
         	                case 13:
-        	
+        	                	GestorReservas_.consultarReservaEspecifica(GestorPistas_, GestorReservas_, scan_);
         	                    break;
         	                case 14:
-        	
+        	                	MainMiscelanea.listarKartsDisponibles(GestorPistas_);
         	                    break;
         	            }
         	        }
@@ -115,7 +115,7 @@ public class MainProgram{
 				System.out.println("");
             }
         }
-        MainMiscelanea.restaurar(GestorPistas_);
+        //MainMiscelanea.restaurar(GestorPistas_);
         Escritor.escritor(GestorPistas_, GestorUsuarios_, GestorReservas_);
         scan_.close();
     }

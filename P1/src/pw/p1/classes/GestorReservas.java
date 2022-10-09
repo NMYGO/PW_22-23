@@ -280,23 +280,24 @@ public class GestorReservas {
 				if ((GestorUsuarios_.arrayUsuarios.get(i).getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
 					if(arrayBonos.size() == 0) {
 						System.out.println("No existe ningun bono. Creando nuevo bono...");
-						RBonoCreador newBono = new RBonoCreador(1, 1, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.INFANTIL);
+						RBonoCreador newBono = new RBonoCreador(1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.INFANTIL);
 						arrayBonos.add(newBono);
 					}
 					boolean encontrado = false;
 					for (int k = 0; k < arrayBonos.size(); k++) {						
 						for (int e = 0; e < arrayBonos.size(); e++) {
-							if(GestorUsuarios_.arrayUsuarios.get(i).getNombre().equals(arrayBonos.get(e).getUsuario())) {
+							if(GestorUsuarios_.arrayUsuarios.get(i).getNombre().equals(arrayBonos.get(e).getbUsuario())) {
 								encontrado = true;
 								break;
 							}
 						}
 						if(!encontrado) {
 							System.out.println("No hay un bono asociado a este usuario. Creando nuevo bono...");
-								RBonoCreador newBono = new RBonoCreador(arrayBonos.size()+1, 1, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.INFANTIL);
+								RBonoCreador newBono = new RBonoCreador(arrayBonos.size()+1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.INFANTIL);
 								arrayBonos.add(newBono);
 							System.out.println("");
 						}
+						if(arrayBonos.get(k).getbUsuario().equals(GestorUsuarios_.arrayUsuarios.get(i).getNombre())) {
 							if (arrayBonos.get(k).arrayReservas.size() < 5) {
 								if(arrayBonos.get(k).getTipo() == Tipo.INFANTIL) {
 									System.out.println("Introduzca el numero de participantes (niños)");
@@ -365,6 +366,7 @@ public class GestorReservas {
 								System.out.println("");
 								return false;
 							}
+						}
 					}
 				} else {
 					System.out.println("Error. Las reservas se realizan solo por adultos");
@@ -385,23 +387,24 @@ public class GestorReservas {
 				if ((GestorUsuarios_.arrayUsuarios.get(i).getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
 					if(arrayBonos.size() == 0) {
 						System.out.println("No existe ningun bono. Creando nuevo bono...");
-						RBonoCreador newBono = new RBonoCreador(1, 1, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.ADULTO);
+						RBonoCreador newBono = new RBonoCreador(1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.ADULTO);
 						arrayBonos.add(newBono);
 					}
 					boolean encontrado = false;
 					for (int k = 0; k < arrayBonos.size(); k++) {						
 						for (int e = 0; e < arrayBonos.size(); e++) {
-							if(GestorUsuarios_.arrayUsuarios.get(i).getNombre().equals(arrayBonos.get(e).getUsuario())) {
+							if(GestorUsuarios_.arrayUsuarios.get(i).getNombre().equals(arrayBonos.get(e).getbUsuario())) {
 								encontrado = true;
 								break;
 							}
 						}
 						if(!encontrado) {
 							System.out.println("No hay un bono asociado a este usuario. Creando nuevo bono...");
-								RBonoCreador newBono = new RBonoCreador(arrayBonos.size()+1, 1, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.ADULTO);
+								RBonoCreador newBono = new RBonoCreador(arrayBonos.size()+1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.ADULTO);
 								arrayBonos.add(newBono);
 							System.out.println("");
 						}
+						if(arrayBonos.get(k).getbUsuario().equals(GestorUsuarios_.arrayUsuarios.get(i).getNombre())) {
 							if (arrayBonos.get(k).arrayReservas.size() < 5) {
 								if(arrayBonos.get(k).getTipo() == Tipo.ADULTO) {
 									System.out.println("Introduzca el numero de participantes (adultos)");
@@ -431,18 +434,18 @@ public class GestorReservas {
 										}
 										float precio = 0;
 										int descuento = 5;
-										System.out.println("Introduzca la duración de la reserva (30/60/90 minutos)");
+										System.out.println("Introduzca la duración de la reserva (60/90/120 minutos)");
 											int duracion = Integer.parseInt(scan_.nextLine());
 										System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
 											LocalDate fecha = LocalDate.parse(scan_.nextLine());
 											switch(duracion) {
-											case 30:
+											case 60:
 												precio = 20;
 												break;
-											case 60:
+											case 90:
 												precio = 30;
 												break;
-											case 90:
+											case 120:
 												precio = 40;
 												break;
 											}
@@ -470,6 +473,7 @@ public class GestorReservas {
 								System.out.println("");
 								return false;
 							}
+						}
 					}
 				} else {
 					System.out.println("Error. Las reservas se realizan solo por adultos");
@@ -490,23 +494,24 @@ public class GestorReservas {
 				if ((GestorUsuarios_.arrayUsuarios.get(i).getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
 					if(arrayBonos.size() == 0) {
 						System.out.println("No existe ningun bono. Creando nuevo bono...");
-						RBonoCreador newBono = new RBonoCreador(1, 1, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.FAMILIAR);
+						RBonoCreador newBono = new RBonoCreador(1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.FAMILIAR);
 						arrayBonos.add(newBono);
 					}
 					boolean encontrado = false;
 					for (int k = 0; k< arrayBonos.size(); k++) {
 						for (int e = 0; e < arrayBonos.size(); e++) {
-							if(GestorUsuarios_.arrayUsuarios.get(i).getNombre().equals(arrayBonos.get(e).getUsuario())) {
+							if(GestorUsuarios_.arrayUsuarios.get(i).getNombre().equals(arrayBonos.get(e).getbUsuario())) {
 								encontrado = true;
 								break;
 							}
 						}
 						if(!encontrado) {
 							System.out.println("No hay un bono asociado a este usuario. Creando nuevo bono...");
-								RBonoCreador newBono = new RBonoCreador(arrayBonos.size()+1, 1, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.FAMILIAR);
+								RBonoCreador newBono = new RBonoCreador(arrayBonos.size()+1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.FAMILIAR);
 								arrayBonos.add(newBono);
 							System.out.println("");
 						}
+						if(arrayBonos.get(k).getbUsuario().equals(GestorUsuarios_.arrayUsuarios.get(i).getNombre())) {
 							if (arrayBonos.get(k).arrayReservas.size() < 5) {
 								if(arrayBonos.get(k).getTipo() == Tipo.FAMILIAR) {
 									System.out.println("Introduzca el numero de participantes (niños)");
@@ -540,18 +545,18 @@ public class GestorReservas {
 										}
 										float precio = 0;
 										int descuento = 5;
-										System.out.println("Introduzca la duración de la reserva (30/60/90 minutos)");
+										System.out.println("Introduzca la duración de la reserva (60/90/120 minutos)");
 											int duracion = Integer.parseInt(scan_.nextLine());
 										System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
 											LocalDate fecha = LocalDate.parse(scan_.nextLine());
 											switch(duracion) {
-											case 30:
+											case 60:
 												precio = 20;
 												break;
-											case 60:
+											case 90:
 												precio = 30;
 												break;
-											case 90:
+											case 120:
 												precio = 40;
 												break;
 											}
@@ -579,6 +584,7 @@ public class GestorReservas {
 								System.out.println("");
 								return false;
 							}
+						}
 					}
 				} else {
 					System.out.println("Error. Las reservas se realizan solo por adultos");
@@ -590,36 +596,76 @@ public class GestorReservas {
 		return true;
 	}
 	
+	public void consultarReservasFuturasIndividuales(Scanner scan_){
+		System.out.println("Introduzca su nombre de usuario");
+		String usuario = scan_.nextLine();
+		System.out.println("");
+		for(int i = 0; i < arrayReservaIndividual.size(); i++) {
+				if(arrayReservaIndividual.get(i).getUsuario().equals(usuario) && arrayReservaIndividual.get(i).getFecha().isAfter(LocalDate.now())) {
+					System.out.println(arrayReservaIndividual.get(i).toString());
+				}
+		}
+	}
+	
 	/**
 	 * @return
 	 */
-	public int consultarReservasFuturas(){
-
-		int aux = 0;
-		for(int i=0; i < arrayReservaIndividual.size() ; i++){
-			if( arrayReservaIndividual.get(i).getFecha().isBefore(LocalDate.now())){
-				aux++;
-			}
+	public void consultarReservasFuturasBono(Scanner scan_){
+		System.out.println("Introduzca su nombre de usuario");
+		String usuario = scan_.nextLine();
+		System.out.println("");
+		for(int i = 0; i < arrayBonos.size(); i++) {
+				if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
+					System.out.println(arrayBonos.get(i).toString());
+					for(int j = 0; j < arrayBonos.get(i).getArrayReservas().size(); j++) {
+						if(arrayBonos.get(i).getArrayReservas().get(j).getFecha().isAfter(LocalDate.now())) {
+							System.out.println(arrayBonos.get(i).getArrayReservas().get(j).toString());
+						}
+					}
+				}
 		}
-		return aux;
 	}
 
 	/**
 	 * @param nombrepista
 	 * @param fechareserva
 	 */
-	public void consultarReservaConcreta(String nombrepista, LocalDate fechareserva){
-
-		for(int i=0; i < arrayReservaIndividual.size() ; i++){
-			if(arrayReservaIndividual.get(i).getFecha().isEqual(fechareserva) && arrayReservaIndividual.get(i).getPista() == nombrepista){
-				System.out.println(arrayReservaIndividual.get(i).getUsuario());
-				System.out.println(arrayReservaIndividual.get(i).getFecha());
-				System.out.println(arrayReservaIndividual.get(i).getDur());
-				System.out.println(arrayReservaIndividual.get(i).getPista());
-				System.out.println(arrayReservaIndividual.get(i).getPrecio());
-				System.out.println(arrayReservaIndividual.get(i).getDesc());
-			}
-		}
+	public void consultarReservaEspecifica(GestorPistas GestorPistas_, GestorReservas GestorReservas_, Scanner scan_){
+		System.out.println("Introduzca su nombre de usuario");
+			String usuario = scan_.nextLine();
+		System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
+			LocalDate fecha = LocalDate.parse(scan_.nextLine());
+		System.out.println("Introduzca la pista de la reserva");
+			String pista = scan_.nextLine();
+			System.out.println("");
+		System.out.println("0. Consultar reserva individual");
+        System.out.println("1. Consultar reserva bono");
+        	System.out.println("");
+        System.out.println("Elija una opcion escribiendo su numero");
+        int option_= Integer.parseInt(scan_.nextLine());
+        if(option_ == 0) {
+        	for(int i=0; i < arrayReservaIndividual.size() ; i++){
+        		if(arrayReservaIndividual.get(i).getUsuario().equals(usuario)) {
+	        		if(arrayReservaIndividual.get(i).getFecha().isEqual(fecha) && arrayReservaIndividual.get(i).getPista().equals(pista)){
+	    				System.out.println(arrayReservaIndividual.get(i).toString());
+	    			}
+        		}
+        	}
+        }else if(option_ == 1) {
+        	for(int i = 0; i < arrayBonos.size(); i++){
+        		if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
+	        		for(int j = 0; j < arrayBonos.size(); j++){
+		        		if(arrayBonos.get(i).getArrayReservas().get(j).getFecha().isEqual(fecha) && arrayBonos.get(i).getArrayReservas().get(j).getPista().equals(pista)){
+		        			System.out.println(arrayBonos.get(i).toString());
+		        			System.out.println(arrayBonos.get(i).getArrayReservas().get(j).toString());
+		    			}
+	        		}
+        		}
+        	}
+        }else {
+        	System.out.println("Opcion no reconocida");
+			System.out.println("");
+        }
 	}
 
 	/**

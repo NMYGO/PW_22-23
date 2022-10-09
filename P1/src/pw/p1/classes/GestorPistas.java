@@ -3,8 +3,6 @@ package pw.p1.classes;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import pw.p1.classes.Kart.Estado;
-
 /**
  * Clase que Gestiona las pistas
  * @author 

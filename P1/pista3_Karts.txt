@@ -1,0 +1,3 @@
+Kart [id=3, tipo=true, estado=RESERVADO]
+Kart [id=4, tipo=true, estado=RESERVADO]
+Kart [id=9, tipo=true, estado=RESERVADO]

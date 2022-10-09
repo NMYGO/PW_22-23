@@ -48,30 +48,45 @@ public class RBonoCreador extends ReservaCreador {
 	public int getId() {
 		return id;
 	}
-	public void setId(int ID) {
-		this.id=ID;
+	
+	public void setId(int id) {
+		this.id = id;
 	}
+	
 	public int getSesion() {
 		return sesion;
 	}
-	public void setSesion(int ses) {
-		this.sesion=ses;
+	
+	public void setSesion(int sesion) {
+		this.sesion = sesion;
 	}
-	public String getUsuario() {
+	
+	public String getbUsuario() {
 		return bUsuario;
 	}
-	public void setUsuario(String user) {
-		this.bUsuario=user;
+	
+	public void setbUsuario(String bUsuario) {
+		this.bUsuario = bUsuario;
 	}
+	
 	public Tipo getTipo() {
 		return tipo;
 	}
-	public void setTipo(Tipo type) {
-		this.tipo=type;
+	
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
+	}
+	
+	public ArrayList<Reserva> getArrayReservas() {
+		return arrayReservas;
+	}
+
+	public void setArrayReservas(ArrayList<Reserva> arrayReservas) {
+		this.arrayReservas = arrayReservas;
 	}
 	
 	/* Otros metodos */
-	
+
 	@Override
 	public String toString() {
 		return "Bono [id=" + id + ", sesion=" + sesion + ", bUser=" + bUsuario + ", tipo=" + tipo + "]\n";

@@ -1,2 +1,2 @@
-Bono [id=1, sesion=6, bUser=Antonio, tipo=INFANTIL]
-Bono [id=2, sesion=1, bUser=Manuel, tipo=FAMILIAR]
+Bono [id=1, sesion=2, bUser=Antonio, tipo=INFANTIL]
+Bono [id=2, sesion=3, bUser=Manuel, tipo=FAMILIAR]
