@@ -676,14 +676,21 @@ public class GestorReservas {
 	 * @param precio
 	 * @param descuento
 	 */
-	public void eliminarReserva(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento){
+	public void eliminarReserva(Scanner scan_){
+		System.out.println("Introduzca su nombre de usuario");
+		String usuario = scan_.nextLine();
+		System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
+		LocalDate fecha = LocalDate.parse(scan_.nextLine());
+		System.out.println("Introduzca la pista de la reserva");
+		String pista = scan_.nextLine();
+		System.out.println("");
+		int duracion = Integer.parseInt(scan_.nextLine());
+		System.out.println("");
 		for(int i=0 ; i< arrayReservaIndividual.size(); i++){
 			if (arrayReservaIndividual.get(i).getUsuario() == usuario &&
 				arrayReservaIndividual.get(i).getFecha() == fecha &&
 				arrayReservaIndividual.get(i).getDur() == duracion &&
-				arrayReservaIndividual.get(i).getPista() == pista &&
-				arrayReservaIndividual.get(i).getPrecio() == precio &&
-				arrayReservaIndividual.get(i).getDesc() == descuento
+				arrayReservaIndividual.get(i).getPista() == pista
 			){
 				arrayReservaIndividual.remove(i);
 			}
@@ -699,14 +706,36 @@ public class GestorReservas {
 	 * @param nuevoprecio
 	 * @param nuevodescuento
 	 */
-	public void modificarReserva(String usuario, LocalDate fecha, LocalDate nuevafecha, int nuevaduracion, String nuevapista, float nuevoprecio, int nuevodescuento){
+	public void modificarReserva(Scanner scan_){
+		System.out.println("Introduzca su nombre de usuario");
+		String usuario = scan_.nextLine();
+		System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
+		LocalDate fecha = LocalDate.parse(scan_.nextLine());
 		for(int i=0 ; i< arrayReservaIndividual.size(); i++){
 			if (arrayReservaIndividual.get(i).getUsuario() == usuario && arrayReservaIndividual.get(i).getFecha().isEqual(fecha)){
+				System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
+				LocalDate nuevafecha = LocalDate.parse(scan_.nextLine());
+				System.out.println("Introduzca la pista de la reserva");
+				String nuevapista = scan_.nextLine();
+				System.out.println("");
+				int nuevaduracion = Integer.parseInt(scan_.nextLine());
+				System.out.println("");
+				int nuevoprecio=0;
+				switch(nuevaduracion) {
+				case 60:
+					nuevoprecio = 20;
+					break;
+				case 90:
+					nuevoprecio = 30;
+					break;
+				case 120:
+					nuevoprecio = 40;
+					break;
+				}
 				arrayReservaIndividual.get(i).setFecha(nuevafecha);
 				arrayReservaIndividual.get(i).setDur(nuevaduracion);
 				arrayReservaIndividual.get(i).setPista(nuevapista);
 				arrayReservaIndividual.get(i).setPrecio(nuevoprecio);
-				arrayReservaIndividual.get(i).setDesc(nuevodescuento);
 			}
 		}
 }

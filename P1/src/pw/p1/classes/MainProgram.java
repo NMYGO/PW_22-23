@@ -107,6 +107,12 @@ public class MainProgram{
         	                case 14:
         	                	MainMiscelanea.listarKartsDisponibles(GestorPistas_);
         	                    break;
+        	                case 15:
+        	                	GestorReservas_.modificarReserva(scan_);
+        	                	break;
+        	                case 16:
+        	                	GestorReservas_.eliminarReserva(scan_);
+        	                	break;
         	            }
         	        }
             	}

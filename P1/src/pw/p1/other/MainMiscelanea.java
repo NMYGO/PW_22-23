@@ -35,8 +35,8 @@ public class MainMiscelanea {
         System.out.println("13. Consultar Reserva especifica");
         System.out.println("--------------------------------------------");
         System.out.println("14. Listar Karts");
-        System.out.println("15. PLACEHOLDER");
-        System.out.println("16. PLACEHOLDER");
+        System.out.println("15. Modificar Reserva");
+        System.out.println("16. Eliminar Reserva");
         System.out.println("--------------------------------------------");
         System.out.println("0. Salir");
         System.out.println("");
