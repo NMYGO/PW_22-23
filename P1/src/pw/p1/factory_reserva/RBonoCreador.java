@@ -3,11 +3,16 @@ package pw.p1.factory_reserva;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-
 /**
+ * 
  * La factoria concreta que realiza la reserva bono
- * */
-
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ */
 public class RBonoCreador extends ReservaCreador {
 	
 	public enum Tipo {
@@ -30,11 +35,12 @@ public class RBonoCreador extends ReservaCreador {
 	public RBonoCreador() {}
 	
 	/**
-	 * Constructor parametrizado
-	 * @param id Identificador del kart
-	 * @param tipo Tipo de kart
-	 * @param estado Estado del kart
-	 * */
+	 * Contructor parametrizado
+	 * @param id
+	 * @param sesion
+	 * @param bUsuario
+	 * @param tipo
+	 */
 	
 	public RBonoCreador(Integer id, Integer sesion, String bUsuario, Tipo tipo) {
 		this.id = id;

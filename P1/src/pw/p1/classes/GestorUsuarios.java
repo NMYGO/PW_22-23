@@ -5,9 +5,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Clase que Gestiona los usuarios
- * @author 
- * */
+ * 
+ * Clase que gestiona a los usuarios
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ */
 
 public class GestorUsuarios {
 	
@@ -17,7 +23,8 @@ public class GestorUsuarios {
 	
 	/**
 	 * Constructor por defecto
-	 **/	
+	 **/
+	
 	public GestorUsuarios(){}
 	
 	/**
@@ -130,9 +137,7 @@ public class GestorUsuarios {
 	
 	/**
 	 * Funcion para listar los usuarios existentes
-	 * @param
-	 * @return void  
-	 * */
+	 */
 	
 	public void listarUsuarios() {
 		for (int i = 0; i < arrayUsuarios.size(); i++) {

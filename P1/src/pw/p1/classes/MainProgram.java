@@ -1,13 +1,25 @@
 package pw.p1.classes;
-
 import java.util.ArrayList;
 /**
  * Un programa main para implementar 
+
  * las funcionalidades de las clases
  * */
+
 import java.util.Scanner;
 import pw.p1.other.*;
 import java.io.*;
+
+/**
+ * 
+ * Un programa main para implementar las funcionalidades de las clases
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ */
 
 public class MainProgram{
 
@@ -50,68 +62,84 @@ public class MainProgram{
         	                case 0:
         	                    exit_=true;
         	                    break;
+        	                    
         	                case 1:
         	                    GestorPistas_.crearPista(scan_);
         	                    break;
+        	                    
         	                case 2:
-        	                    GestorPistas_.crearKart(scan_);
+        	                	GestorPistas_.listaPistasMantenimiento();
         	                    break;
+        	                    
         	                case 3:
+	        	                System.out.println("Introduzca el numero de participantes");
+	    						int participantes= Integer.parseInt(scan_.nextLine());
+	    						System.out.println("");
+	    						System.out.println("Introduzca la dificultad de pista");
+	    						Pista.Dificultad dificultad = Pista.Dificultad.valueOf(scan_.nextLine());
+	    						System.out.println("");
+	    							
+	    	                	ArrayList<Pista> arraypistaslibres = GestorPistas_.pistasLibres(scan_, participantes, dificultad);
+	    	                	for (int i = 0;i< arraypistaslibres.size() ; i++) {
+	    	            				System.out.println(arraypistaslibres.get(i).toString());
+	    	            		}
+	    	                	break;
+    	                	
+        	                case 4:
+        	                	GestorUsuarios_.registrarUsuario(scan_);
+        	                    break;
+        	                    
+        	                case 5:
+        	                	GestorUsuarios_.ModificarUsuario(scan_);
+        	                	break;
+        	                	
+        	                case 6:
+        	                	GestorUsuarios_.listarUsuarios();
+        	                    
+        	                    break;
+        	                case 7: 
+        	                	MainMiscelanea.reservaIndividual(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
+        	                    break;
+        	                    
+        	                case 8:
+        	                	MainMiscelanea.reservaBono(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
+        	                    break;
+        	                    
+        	                case 9:
+        	                	GestorReservas_.modificarReserva(scan_);
+        	                    break;
+        	                    
+        	                case 10:
+        	                	GestorReservas_.eliminarReserva(scan_);
+        	                	break;
+        	                	
+        	                case 11:
+        	                	GestorReservas_.consultarReservasFuturasIndividuales(scan_);
+        	                    break;
+        	                    
+        	                case 12:
+        	                	GestorReservas_.consultarReservasFuturasBono(scan_);
+        	                    break;
+        	                    
+        	                case 13:
+        	                	GestorReservas_.consultarReservaEspecifica(GestorPistas_, GestorReservas_, scan_);
+        	                    break;
+        	                    
+        	                case 14:
+        	                	GestorPistas_.crearKart(scan_);
+        	                    break;
+        	                    
+        	                case 15:
+        	                	MainMiscelanea.listarKartsDisponibles(GestorPistas_);
+        	                	break;
+        	                	
+        	                case 16:
+        	                	System.out.println("");
         	                	System.out.println("Introduzca el identificador de kart");
         	        				Integer id = Integer.parseInt(scan_.nextLine());							
         	        			System.out.println("Introduzca el nombre de pista");
         	        				String nombre = scan_.nextLine();
         	                    GestorPistas_.asociarKartPista(id, nombre);
-        	                    break;
-        	                case 4:
-        	                    GestorPistas_.listaPistasMantenimiento();
-        	                    break;
-        	                case 5:
-        	                	System.out.println("Introduzca el numero de participantes");
-        							int participantes= Integer.parseInt(scan_.nextLine());
-        							System.out.println("");
-        						System.out.println("Introduzca la dificultad de pista");
-        							Pista.Dificultad dificultad = Pista.Dificultad.valueOf(scan_.nextLine());
-        							System.out.println("");
-        							
-        	                	ArrayList<Pista> arraypistaslibres = GestorPistas_.pistasLibres(scan_, participantes, dificultad);
-        	                	for (int i = 0;i< arraypistaslibres.size() ; i++) {
-        	            				System.out.println(arraypistaslibres.get(i).toString());
-        	            		}
-        	                	System.out.println("");
-        	                	break;
-        	                case 6:
-        	                    GestorUsuarios_.registrarUsuario(scan_);
-        	                    break;
-        	                case 7:       	                	
-        	                    GestorUsuarios_.ModificarUsuario(scan_);
-        	                    break;
-        	                case 8:
-        	                    GestorUsuarios_.listarUsuarios();
-        	                    break;
-        	                case 9:
-        	                    MainMiscelanea.reservaIndividual(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
-        	                    break;
-        	                case 10:
-        	                	MainMiscelanea.reservaBono(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
-        	                    break;
-        	                case 11:
-        	                	GestorReservas_.consultarReservasFuturasIndividuales(scan_);
-        	                    break;
-        	                case 12:
-        	                	GestorReservas_.consultarReservasFuturasBono(scan_);
-        	                    break;
-        	                case 13:
-        	                	GestorReservas_.consultarReservaEspecifica(GestorPistas_, GestorReservas_, scan_);
-        	                    break;
-        	                case 14:
-        	                	MainMiscelanea.listarKartsDisponibles(GestorPistas_);
-        	                    break;
-        	                case 15:
-        	                	GestorReservas_.modificarReserva(scan_);
-        	                	break;
-        	                case 16:
-        	                	GestorReservas_.eliminarReserva(scan_);
         	                	break;
         	            }
         	        }

@@ -1,8 +1,15 @@
 package pw.p1.classes;
 
 /**
- * Clase Kart
- * */
+ * 
+ * Clase que gestiona las reservas
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ */
 
 public class Kart {
 		
@@ -63,7 +70,9 @@ public class Kart {
 	}
 	
 	/* Otros metodos */
-
+	/**
+	 * Funcion para convertir los parámetros del kart a un string
+	 */
 	@Override
 	public String toString() {
 		return "Kart [id=" + id + ", tipo=" + tipo + ", estado=" + estado + "]\n";

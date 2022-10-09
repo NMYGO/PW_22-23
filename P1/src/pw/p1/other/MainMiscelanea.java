@@ -6,8 +6,13 @@ import java.util.Scanner;
 
 /**
  * Clase que gestiona distintas funcionalidades del main
- * @author 
- * */
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ */
 
 public class MainMiscelanea {
 	
@@ -18,25 +23,26 @@ public class MainMiscelanea {
 	 */
 	
 	public static void menu () {
+		System.out.println("-------------------PISTAS-------------------");
 		System.out.println("1. Crear Pista");
-        System.out.println("2. Crear Kart");
-        System.out.println("3. Asociar Karts a Pistas");
-        System.out.println("4. Listar Pistas en mantenimiento");
-        System.out.println("5. Listar pistas libres");
-        System.out.println("--------------------------------------------");
-        System.out.println("6. Registrar Usuario");
-        System.out.println("7. Modificar Usuario");
-        System.out.println("8. Listar Usuarios");
-        System.out.println("--------------------------------------------");
-        System.out.println("9. Hacer Reserva individual");
-        System.out.println("10. Hacer Reserva con bono");
+        System.out.println("2. Listar Pistas en mantenimiento");
+        System.out.println("3. Listar pistas libres");
+        System.out.println("------------------USUARIOS------------------");
+        System.out.println("4. Registrar Usuario");
+        System.out.println("5. Modificar Usuario");
+        System.out.println("6. Listar Usuarios");
+        System.out.println("-------------------RESERTVAS----------------");
+        System.out.println("7. Hacer Reserva individual");
+        System.out.println("8. Hacer Reserva con bono");
+        System.out.println("9. Modificar Reserva");
+        System.out.println("10. Eliminar Reserva");
         System.out.println("11. Listar Reservas futuras individuales");
         System.out.println("12. Listar Reservas futuras con bono");
         System.out.println("13. Consultar Reserva especifica");
-        System.out.println("--------------------------------------------");
-        System.out.println("14. Listar Karts");
-        System.out.println("15. Modificar Reserva");
-        System.out.println("16. Eliminar Reserva");
+        System.out.println("---------------------KARTS------------------");
+        System.out.println("14. Crear Kart");
+        System.out.println("15. Listar Karts");
+        System.out.println("16. Asociar Karts a Pistas");
         System.out.println("--------------------------------------------");
         System.out.println("0. Salir");
         System.out.println("");
@@ -81,6 +87,14 @@ public class MainMiscelanea {
 		}
 	}
 	
+	/**
+	 * Menu para elegir entre los tipos de reserva individual
+	 * @param GestorReservas_
+	 * @param GestorPistas_
+	 * @param GestorUsuarios_
+	 * @param scan_
+	 */
+	
 	public static void reservaIndividual (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("0. Reserva individual infantil");
         System.out.println("1. Reserva individual familiar");
@@ -100,6 +114,14 @@ public class MainMiscelanea {
         }
 	}
 	
+	/**
+	 * Menu para elegir que tipo de reserba de bono se va a hacer
+	 * @param GestorReservas_
+	 * @param GestorPistas_
+	 * @param GestorUsuarios_
+	 * @param scan_
+	 */
+	
 	public static void reservaBono (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("0. Reserva bono infantil");
         System.out.println("1. Reserva bono familiar");
@@ -118,6 +140,11 @@ public class MainMiscelanea {
 			System.out.println("");
         }
 	}
+	
+	/**
+	 * Lista por pantalla todos los kars que esten disponibles
+	 * @param GestorPistas_
+	 */
 	
 	public static void listarKartsDisponibles (GestorPistas GestorPistas_) {
 		int nodisponible = 0;

@@ -5,8 +5,13 @@ import pw.p1.classes.*;
 
 /**
  * Clase que gestiona la escritura en los ficheros
- * @author 
- * */
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ */
 
 public class Escritor {
 	

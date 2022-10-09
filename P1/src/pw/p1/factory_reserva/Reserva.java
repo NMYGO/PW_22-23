@@ -3,6 +3,17 @@ package pw.p1.factory_reserva;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * 
+ * Clase común para todas las reservas individuales y de bonos
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ */
+
 public abstract class Reserva {
 	
 	/* Atributos */

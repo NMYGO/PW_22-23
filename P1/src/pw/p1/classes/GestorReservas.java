@@ -7,6 +7,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * 
+ * Clase que gestiona las reservas
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ */
+
 public class GestorReservas {
 
 	/* Atributos */
@@ -20,8 +31,14 @@ public class GestorReservas {
 	public GestorReservas(){}
 	
 	/**
-	 * Realiza una reserva individual
-	 **/
+	 * Realiza las reservas individuales infantiles
+	 * @param GestorReservas_
+	 * @param GestorPistas_
+	 * @param GestorUsuarios_
+	 * @param nParticipantes
+	 * @param scan_
+	 * @return true si la reserva se ha realizado, false si no
+	 */
 	
 	public boolean ReservaIndividualInfantil(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, int nParticipantes, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
@@ -97,7 +114,15 @@ public class GestorReservas {
 		return true;
 	}
 	
-	
+	/**
+	 * Realiza las reservas individuales adultas
+	 * @param GestorReservas_
+	 * @param GestorPistas_
+	 * @param GestorUsuarios_
+	 * @param nParticipantes
+	 * @param scan_
+	 * @return
+	 */
 	
 	public boolean ReservaIndividualAdulto(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, int nParticipantes, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
@@ -173,7 +198,15 @@ public class GestorReservas {
 		return true;
 	}
 	
-	
+	/**
+	 * Realiza las reservas individuales familiares
+	 * @param GestorReservas_
+	 * @param GestorPistas_
+	 * @param GestorUsuarios_
+	 * @param nParticipantes
+	 * @param scan_
+	 * @return
+	 */
 	
 	public boolean ReservaIndividualFamiliar(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, int nParticipantes, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
@@ -270,6 +303,14 @@ public class GestorReservas {
 	}
 	
 	
+	/**
+	 * Realiza las reservas de bono infantiles
+	 * @param GestorReservas_
+	 * @param GestorPistas_
+	 * @param GestorUsuarios_
+	 * @param scan_
+	 * @return
+	 */
 	
 	public boolean ReservaBonoInfantil(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
@@ -378,6 +419,15 @@ public class GestorReservas {
 		return true;
 	}
 	
+	/**
+	 * Realiza las reservas de bono adultas
+	 * @param GestorReservas_
+	 * @param GestorPistas_
+	 * @param GestorUsuarios_
+	 * @param scan_
+	 * @return
+	 */
+	
 	public boolean ReservaBonoAdulto(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
@@ -484,6 +534,15 @@ public class GestorReservas {
 		}
 		return true;
 	}
+	
+	/**
+	 * Realiza las reservas de bono familiares
+	 * @param GestorReservas_
+	 * @param GestorPistas_
+	 * @param GestorUsuarios_
+	 * @param scan_
+	 * @return
+	 */
 	
 	public boolean ReservaBonoFamiliar(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
@@ -596,6 +655,11 @@ public class GestorReservas {
 		return true;
 	}
 	
+	/**
+	 * Muestra todas las reservas individuales futuras por pantalla
+	 * @param scan_
+	 */
+	
 	public void consultarReservasFuturasIndividuales(Scanner scan_){
 		System.out.println("Introduzca su nombre de usuario");
 		String usuario = scan_.nextLine();
@@ -608,8 +672,10 @@ public class GestorReservas {
 	}
 	
 	/**
-	 * @return
+	 * Muestra todas las reservas de bonos futuras por pantalla
+	 * @param scan_
 	 */
+
 	public void consultarReservasFuturasBono(Scanner scan_){
 		System.out.println("Introduzca su nombre de usuario");
 		String usuario = scan_.nextLine();
@@ -627,9 +693,12 @@ public class GestorReservas {
 	}
 
 	/**
-	 * @param nombrepista
-	 * @param fechareserva
+	 * Muestra las reservas de un día y una pista específicas
+	 * @param GestorPistas_
+	 * @param GestorReservas_
+	 * @param scan_
 	 */
+	
 	public void consultarReservaEspecifica(GestorPistas GestorPistas_, GestorReservas GestorReservas_, Scanner scan_){
 		System.out.println("Introduzca su nombre de usuario");
 			String usuario = scan_.nextLine();
@@ -669,13 +738,10 @@ public class GestorReservas {
 	}
 
 	/**
-	 * @param usuario
-	 * @param fecha
-	 * @param duracion
-	 * @param pista
-	 * @param precio
-	 * @param descuento
+	 * Elimina la reserva selecionada
+	 * @param scan_
 	 */
+
 	public void eliminarReserva(Scanner scan_){
 		System.out.println("Introduzca su nombre de usuario");
 		String usuario = scan_.nextLine();
@@ -683,7 +749,7 @@ public class GestorReservas {
 		LocalDate fecha = LocalDate.parse(scan_.nextLine());
 		System.out.println("Introduzca la pista de la reserva");
 		String pista = scan_.nextLine();
-		System.out.println("");
+		System.out.println("Introduzca la duracion de la reserva");
 		int duracion = Integer.parseInt(scan_.nextLine());
 		System.out.println("");
 		for(int i=0 ; i< arrayReservaIndividual.size(); i++){
@@ -698,14 +764,10 @@ public class GestorReservas {
 	}
 
 	/**
-	 * @param usuario
-	 * @param fecha
-	 * @param nuevafecha
-	 * @param nuevaduracion
-	 * @param nuevapista
-	 * @param nuevoprecio
-	 * @param nuevodescuento
+	 * Modifica la reserva seleccionada
+	 * @param scan_
 	 */
+
 	public void modificarReserva(Scanner scan_){
 		System.out.println("Introduzca su nombre de usuario");
 		String usuario = scan_.nextLine();

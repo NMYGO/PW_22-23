@@ -5,8 +5,15 @@ import java.util.ArrayList;
 import pw.p1.classes.Kart.Estado;
 
 /**
- * Clase Pista
- * */
+ * 
+ * Clase pistas
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ */
 
 public class Pista {
 		
@@ -88,13 +95,21 @@ public class Pista {
 	}
 	
 	/* Otros metodos */
-
+	/**
+	 * Pasa los parámetros del objeto pista a un string
+	 */
 	@Override
 	public String toString() {
 		return "Pista [nombre=" + nombre + ", estado=" + estado + ", "
 				+ "dificultad=" + dificultad + ", maxkarts=" + maxkarts 
 				+ "]\n";
 	}
+	
+	/**
+	 * Función para encontrar los karts disponibles
+	 * @param arrayKarts
+	 * @return Devuelve una lista de los karts disponibles
+	 */
 	
 	public ArrayList<Kart> consultarKartsDisponibles(ArrayList<Kart> arrayKarts) {
 		ArrayList<Kart> dkart = new ArrayList<Kart>();
@@ -106,6 +121,13 @@ public class Pista {
 		return dkart;
 	}
 
+	/**
+	 * Función que asocia karts a las pistas dependiendo de la dificultad de ambos
+	 * @param kart
+	 * @param pista
+	 * @return
+	 */
+	
 	public boolean asociarKartAPista(Kart kart, Pista pista) {
 		if(pista.getMaxkarts() == pista.lkart.size()) {
 			return false;

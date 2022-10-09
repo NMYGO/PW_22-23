@@ -3,8 +3,15 @@ package pw.p1.factory_reserva;
 import java.time.LocalDate;
 
 /**
- * La factoria abstracta para crear una reserva
- * */
+ * 
+ *  La factoria abstracta para crear una reserva
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ */
 
 public abstract class ReservaCreador {
 	

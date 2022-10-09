@@ -7,8 +7,13 @@ import pw.p1.factory_reserva.*;
 
 /**
  * Clase que gestiona la lectura de los ficheros
- * @author 
- * */
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ */
 
 public class Lector {
 	

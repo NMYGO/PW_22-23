@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Clase que Gestiona las pistas
- * @author 
- * */
+ * 
+ * Clase que gestiona las pistas
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ */
 
 public class GestorPistas{
 
@@ -116,9 +122,7 @@ public class GestorPistas{
 	}
 
 	/**
-	 * Funcion que lista por pantalla el nombre de las pistas en mantenimiento
-	 * @param
-	 * @return void
+	 * Función que lista por pantalla el nombre de las pistas en mantenimiento
 	 */
 	
 	public void listaPistasMantenimiento(){
@@ -129,12 +133,14 @@ public class GestorPistas{
 		}
 	}
 
+	
 	/**
 	 * Funcion que devuelve un array de las pistas libres con un minimo numero de karts
-	 * @param scan_ Scanner para leer por teclado
-	 * @return Devuelve un ArrayList de pistas libres
+	 * @param scan_
+	 * @param kartnum número de karts de la pista
+	 * @param dificultad dificultad de la pista (INFANTIL, FAMILIAR, ADULTA)
+	 * @return Devuelve array de pistas libres
 	 */
-	
 	public ArrayList<Pista> pistasLibres(Scanner scan_, Integer kartnum, Pista.Dificultad dificultad){							
 
 		ArrayList<Pista> arraypistaslibres_ = new ArrayList<Pista>();

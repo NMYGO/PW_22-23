@@ -3,8 +3,15 @@ package pw.p1.factory_reserva;
 import java.time.LocalDate;
 
 /**
+ * 
  * La factoria concreta que realiza la reserva individual
- * */
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ */
 
 public class RIndividualCreador extends ReservaCreador{
 	

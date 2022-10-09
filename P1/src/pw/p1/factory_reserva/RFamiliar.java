@@ -2,6 +2,17 @@ package pw.p1.factory_reserva;
 
 import java.time.LocalDate;
 
+/**
+ * 
+ * Clase de las reservas de tipo familiar
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ */
+
 public class RFamiliar extends Reserva{
 	
 	/* Atributos */

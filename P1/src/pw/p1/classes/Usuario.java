@@ -4,8 +4,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
+ * 
  * Clase Usuario
- * */
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ */
 
 public class Usuario {
 	
@@ -83,6 +90,9 @@ public class Usuario {
 	}
 	
 	/* Otros metodos */
+	/**
+	 * Pasa los atributos del objeto usuario a un string
+	 */
 
 	@Override
 	public String toString() {
@@ -90,6 +100,10 @@ public class Usuario {
 				+ ", nacimiento=" + nacimiento + ", inscripcion=" + inscripcion 
 				+ ", correo=" + correo + "]\n";
 	}
+	
+	/**
+	 * Calcula la antiguedad del usuario
+	 */
 	
 	public void calcularAntiguedad() {
 		DateTimeFormatter formateador = DateTimeFormatter.ofPattern("uuuu");
