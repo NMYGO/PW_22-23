@@ -1,0 +1,11 @@
+usuarios=Usuarios.txt
+pistas=Pistas.txt
+pista1=pista1_Karts.txt
+pista2=pista2_Karts.txt
+pista3=pista3_Karts.txt
+pista4=pista4_Karts.txt
+karts=Karts.txt
+reservasIndividuales=ReservasIndividuales.txt
+reservasBonos= ReservasBonos.txt
+antonio_bono=Antonio_ReservasBonosRes.txt
+manuel_bono=Manuel_ReservasBonosRes.txt

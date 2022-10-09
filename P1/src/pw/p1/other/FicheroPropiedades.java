@@ -1,13 +1,9 @@
 package pw.p1.other;
 
-import java.io.*;
 import java.util.Properties;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 
+import java.io.*;
+import java.util.*;
 import pw.p1.classes.*;
 
 /**
@@ -17,23 +13,46 @@ import pw.p1.classes.*;
 public class FicheroPropiedades {
 
 	
-	public String ficheros(String filename) {
+	public static void propiedades(GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, GestorReservas GestorReservas_) {
 		Properties prop = new Properties();
-		String rutaFichero = new String();
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(new File("properties.txt")));
-			prop.load(reader);
 			
-			rutaFichero = prop.getProperty(filename);			
-
-		} catch (FileNotFoundException e) {
+			BufferedReader reader = new BufferedReader(new FileReader(new File("Propiedades.txt")));
+			prop.load(reader);		
+			ArrayList<String> k_pistas = new ArrayList<String>(), r_reservasBonos = new ArrayList<String>();
 			
+			String usuarios = prop.getProperty("usuarios");			
+			String pistas = prop.getProperty("pistas");	
+			for (int i = 0; i < GestorPistas_.arrayPistas.size(); i++) {
+				k_pistas.add(prop.getProperty(GestorPistas_.arrayPistas.get(i).getNombre().toLowerCase()));
+			}
+			String karts = prop.getProperty("karts");	
+			String reservasIndividuales = prop.getProperty("reservasIndividuales");	
+			String reservasBonos = prop.getProperty("reservasBonos");	
+			for (int i = 0; i < GestorReservas_.arrayBonos.size(); i++) {
+				r_reservasBonos.add(prop.getProperty((GestorReservas_.arrayBonos.get(i).getbUsuario() + "_bono").toLowerCase()));
+			}	
+			
+			System.out.println("PROPIEDADES--------------------------------------");
+			System.out.println(usuarios);
+			System.out.println(pistas);
+			for (int i = 0; i < k_pistas.size(); i++) {
+				System.out.println(k_pistas.get(i));
+			}
+			System.out.println(karts);
+			System.out.println(reservasIndividuales);
+			System.out.println(reservasBonos);
+			for (int i = 0; i < r_reservasBonos.size(); i++) {
+				System.out.println(r_reservasBonos.get(i));
+			}
+			System.out.println("-------------------------------------------------");
+			
+		} catch (FileNotFoundException e) {			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return rutaFichero;
-		}
+
+	}
 
 }

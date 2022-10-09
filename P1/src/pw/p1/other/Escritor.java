@@ -24,7 +24,7 @@ public class Escritor {
 	    BufferedWriter writerK_ = new BufferedWriter(new FileWriter(new File("Karts.txt")));
 	    BufferedWriter writerRI_ = new BufferedWriter(new FileWriter(new File("ReservasIndividuales.txt")));
 	    BufferedWriter writerRB_ = new BufferedWriter(new FileWriter(new File("ReservasBonos.txt")));
-	    BufferedWriter writerFP_ = new BufferedWriter(new FileWriter(new File("properties.txt")));
+	    BufferedWriter writerFP_ = new BufferedWriter(new FileWriter(new File("Propiedades.txt")));
 	    
 	    for (int i = 0; i < GestorUsuarios_.arrayUsuarios.size(); i++) {
 	    	writerU_.write(GestorUsuarios_.arrayUsuarios.get(i).toString());
@@ -67,12 +67,17 @@ public class Escritor {
 			writerRBRes_.close();
 		}	
 		
-		writerFP_.write("usuarios=Usuarios.txt");
-		writerFP_.write("karts=Karts.txt");
-		writerFP_.write("pistas=Pistas.txt");
-		writerFP_.write("reservasBonos= ReservasBonos.txt");
-		writerFP_.write("reservasIndividuales=ReservasIndividuales.txt");
-		
+		writerFP_.write("usuarios=Usuarios.txt\n");
+		writerFP_.write("pistas=Pistas.txt\n");
+		for (int i = 0; i < GestorPistas_.arrayPistas.size(); i++) {
+			writerFP_.write(GestorPistas_.arrayPistas.get(i).getNombre().toLowerCase() +"=" + GestorPistas_.arrayPistas.get(i).getNombre() +"_Karts.txt\n");
+		}
+		writerFP_.write("karts=Karts.txt\n");
+		writerFP_.write("reservasIndividuales=ReservasIndividuales.txt\n");
+		writerFP_.write("reservasBonos= ReservasBonos.txt\n");
+		for (int i = 0; i < GestorReservas_.arrayBonos.size(); i++) {
+			writerFP_.write((GestorReservas_.arrayBonos.get(i).getbUsuario() + "_bono").toLowerCase() +"=" + GestorReservas_.arrayBonos.get(i).getbUsuario() + "_ReservasBonosRes.txt\n");
+		}		
 		writerFP_.close();
 
 
