@@ -53,94 +53,130 @@ public class MainProgram{
                 	System.out.println("");
                 	exit_ = false;
         	        while(!exit_){      	                  	        	
-        	        	MainMiscelanea.menu();
+        	        	MainMiscelanea.menuPrincipal();
         	            System.out.println("Elija una opcion escribiendo su numero");
         	            option_= Integer.parseInt(scan_.nextLine());
         	            System.out.println("");
         	            
-        	            switch(option_){
-        	                case 0:
+        	            switch(option_) {
+        	            	case 0:
         	                    exit_=true;
         	                    break;
         	                    
-        	                case 1:
-        	                    GestorPistas_.crearPista(scan_);
-        	                    break;
-        	                    
-        	                case 2:
-        	                	GestorPistas_.listaPistasMantenimiento();
-        	                    break;
-        	                    
-        	                case 3:
-	        	                System.out.println("Introduzca el numero de participantes");
-	    						int participantes= Integer.parseInt(scan_.nextLine());
-	    						System.out.println("");
-	    						System.out.println("Introduzca la dificultad de pista");
-	    						Pista.Dificultad dificultad = Pista.Dificultad.valueOf(scan_.nextLine());
-	    						System.out.println("");
-	    							
-	    	                	ArrayList<Pista> arraypistaslibres = GestorPistas_.pistasLibres(scan_, participantes, dificultad);
-	    	                	for (int i = 0;i< arraypistaslibres.size() ; i++) {
-	    	            				System.out.println(arraypistaslibres.get(i).toString());
-	    	            		}
-	    	                	break;
-    	                	
-        	                case 4:
-        	                	GestorUsuarios_.registrarUsuario(scan_);
-        	                    break;
-        	                    
-        	                case 5:
-        	                	GestorUsuarios_.ModificarUsuario(scan_);
-        	                	break;
-        	                	
-        	                case 6:
-        	                	GestorUsuarios_.listarUsuarios();
-        	                    
-        	                    break;
-        	                case 7: 
-        	                	MainMiscelanea.reservaIndividual(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
-        	                    break;
-        	                    
-        	                case 8:
-        	                	MainMiscelanea.reservaBono(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
-        	                    break;
-        	                    
-        	                case 9:
-        	                	GestorReservas_.modificarReserva(scan_);
-        	                    break;
-        	                    
-        	                case 10:
-        	                	GestorReservas_.eliminarReserva(scan_);
-        	                	break;
-        	                	
-        	                case 11:
-        	                	GestorReservas_.consultarReservasFuturasIndividuales(scan_);
-        	                    break;
-        	                    
-        	                case 12:
-        	                	GestorReservas_.consultarReservasFuturasBono(scan_);
-        	                    break;
-        	                    
-        	                case 13:
-        	                	GestorReservas_.consultarReservaEspecifica(GestorPistas_, GestorReservas_, scan_);
-        	                    break;
-        	                    
-        	                case 14:
-        	                	GestorPistas_.crearKart(scan_);
-        	                    break;
-        	                    
-        	                case 15:
-        	                	MainMiscelanea.listarKartsDisponibles(GestorPistas_);
-        	                	break;
-        	                	
-        	                case 16:
-        	                	System.out.println("");
-        	                	System.out.println("Introduzca el identificador de kart");
-        	        				Integer id = Integer.parseInt(scan_.nextLine());							
-        	        			System.out.println("Introduzca el nombre de pista");
-        	        				String nombre = scan_.nextLine();
-        	                    GestorPistas_.asociarKartPista(id, nombre);
-        	                	break;
+        	            	case 1: 
+        	            		MainMiscelanea.menuPistas();
+                	            System.out.println("Elija una opcion escribiendo su numero");
+                	            option_= Integer.parseInt(scan_.nextLine());
+                	            System.out.println("");
+        	            		
+	        	            	switch(option_){
+		 
+		        	                case 1:
+		        	                    GestorPistas_.crearPista(scan_);
+		        	                    break;
+		        	                    
+		        	                case 2:
+		        	                	GestorPistas_.listaPistasMantenimiento();
+		        	                    break;
+		        	                    
+		        	                case 3:
+			        	                System.out.println("Introduzca el numero de participantes");
+			    						int participantes= Integer.parseInt(scan_.nextLine());
+			    						System.out.println("");
+			    						System.out.println("Introduzca la dificultad de pista");
+			    						Dificultad dificultad = Dificultad.valueOf(scan_.nextLine());
+			    						System.out.println("");
+			    							
+			    	                	ArrayList<Pista> arraypistaslibres = GestorPistas_.pistasLibres(scan_, participantes, dificultad);
+			    	                	for (int i = 0;i< arraypistaslibres.size() ; i++) {
+			    	            				System.out.println(arraypistaslibres.get(i).toString());
+			    	            		}
+			    	                	break;
+			    	               	}
+			    	               	break;
+			    	                
+		        	        case 2:
+		        	        	MainMiscelanea.menuUsuarios();
+                	            System.out.println("Elija una opcion escribiendo su numero");
+                	            option_= Integer.parseInt(scan_.nextLine());
+                	            System.out.println("");
+                	            switch(option_){	
+		        	                case 1:
+		        	                	GestorUsuarios_.registrarUsuario(scan_);
+		        	                    break;
+		        	                    
+		        	                case 2:
+		        	                	GestorUsuarios_.ModificarUsuario(scan_);
+		        	                	break;
+		        	                	
+		        	                case 3:
+		        	                	GestorUsuarios_.listarUsuarios();
+		        	                    
+		        	                    break;
+                	            }
+	        	                break;
+		        	        case 3: 
+		        	        	MainMiscelanea.menuReservas();
+                	            System.out.println("Elija una opcion escribiendo su numero");
+                	            option_= Integer.parseInt(scan_.nextLine());
+                	            System.out.println("");
+                	            switch(option_){	
+                	            
+		        	                case 1: 
+		        	                	MainMiscelanea.reservaIndividual(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
+		        	                    break;
+		        	                    
+		        	                case 2:
+		        	                	MainMiscelanea.reservaBono(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
+		        	                    break;
+		        	                    
+		        	                case 3:
+		        	                	GestorReservas_.modificarReserva(scan_);
+		        	                    break;
+		        	                    
+		        	                case 4:
+		        	                	GestorReservas_.eliminarReserva(scan_);
+		        	                	break;
+		        	                	
+		        	                case 5:
+		        	                	GestorReservas_.consultarReservasFuturasIndividuales(scan_);
+		        	                    break;
+		        	                    
+		        	                case 6:
+		        	                	GestorReservas_.consultarReservasFuturasBono(scan_);
+		        	                    break;
+		        	                    
+		        	                case 7:
+		        	                	GestorReservas_.consultarReservaEspecifica(GestorPistas_, GestorReservas_, scan_);
+		        	                    break;
+		        	                    
+        	            }
+        	            break;
+		        	        case 4:
+		        	        	MainMiscelanea.menuKarts();
+                	            System.out.println("Elija una opcion escribiendo su numero");
+                	            option_= Integer.parseInt(scan_.nextLine());
+                	            System.out.println("");
+                	            switch(option_){	
+                	           
+		        	                case 1:
+		        	                	GestorPistas_.crearKart(scan_);
+		        	                    break;
+		        	                    
+		        	                case 2:
+		        	                	MainMiscelanea.listarKartsDisponibles(GestorPistas_);
+		        	                	break;
+		        	                	
+		        	                case 3:
+		        	                	System.out.println("");
+		        	                	System.out.println("Introduzca el identificador de kart");
+		        	        				Integer id = Integer.parseInt(scan_.nextLine());							
+		        	        			System.out.println("Introduzca el nombre de pista");
+		        	        				String nombre = scan_.nextLine();
+		        	                    GestorPistas_.asociarKartPista(id, nombre);
+		        	                	break;
+                	            }
+                	            break;
         	            }
         	        }
             	}

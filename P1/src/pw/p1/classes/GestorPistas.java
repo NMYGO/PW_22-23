@@ -38,7 +38,7 @@ public class GestorPistas{
 		System.out.println("Introduzca el estado de pista");
 			Boolean estado = Boolean.parseBoolean(scan_.nextLine());
 		System.out.println("Introduzca la dificultad de pista");
-			Pista.Dificultad dificultad = Pista.Dificultad.valueOf(scan_.nextLine());
+			Dificultad dificultad = Dificultad.valueOf(scan_.nextLine());
 		System.out.println("Introduzca el numero maximo de karts de pista");
 			Integer maxkarts = Integer.parseInt(scan_.nextLine());
 			
@@ -71,7 +71,7 @@ public class GestorPistas{
 		System.out.println("Introduzca el tipo de kart");
 			Boolean tipo = Boolean.parseBoolean(scan_.nextLine());
 		System.out.println("Introduzca el estado de kart");
-			Kart.Estado estado = Kart.Estado.valueOf(scan_.nextLine());
+			Estado estado = Estado.valueOf(scan_.nextLine());
 		
 		for (int i = 0;i < arrayKarts.size() ; i++) {
 			if (id == (arrayKarts.get(i)).getId()) {
@@ -141,7 +141,7 @@ public class GestorPistas{
 	 * @param dificultad dificultad de la pista (INFANTIL, FAMILIAR, ADULTA)
 	 * @return Devuelve array de pistas libres
 	 */
-	public ArrayList<Pista> pistasLibres(Scanner scan_, Integer kartnum, Pista.Dificultad dificultad){							
+	public ArrayList<Pista> pistasLibres(Scanner scan_, Integer kartnum, Dificultad dificultad){							
 
 		ArrayList<Pista> arraypistaslibres_ = new ArrayList<Pista>();
 		ArrayList<Kart> listakarts = new ArrayList<Kart>();

@@ -57,7 +57,7 @@ public class Lector {
 		    	String sestado = line.substring(line.indexOf("o=") + 2, line.indexOf(", dificultad"));
 		    		Boolean estado = Boolean.parseBoolean(sestado);
 		    	String sdificultad = line.substring(line.indexOf("d=") + 2, line.indexOf(", maxkarts"));
-		    		Pista.Dificultad dificultad = Pista.Dificultad.valueOf(sdificultad);
+		    		Dificultad dificultad = Dificultad.valueOf(sdificultad);
 		    	String smaxkarts = line.substring(line.indexOf("s=") + 2, line.indexOf("]"));
 		    		int maxkarts = Integer.parseInt(smaxkarts);
 		    	Pista newPista = new Pista(nombre, estado, dificultad, maxkarts); 
@@ -82,7 +82,7 @@ public class Lector {
 			    	String stipo = line.substring(line.indexOf("o=") + 2, line.indexOf(", estado"));
 			    		Boolean tipo = Boolean.parseBoolean(stipo);
 			    	String sestado = line.substring(line.indexOf("do=") + 3, line.indexOf("]"));
-			    		Kart.Estado estado = Kart.Estado.valueOf(sestado);
+			    		Estado estado = Estado.valueOf(sestado);
 			    	Kart newKart = new Kart(id, tipo, estado); 
 			    	GestorPistas_.arrayPistas.get(i).lkart.add(newKart);
 				}
@@ -105,7 +105,7 @@ public class Lector {
 		    	String stipo = line.substring(line.indexOf("o=") + 2, line.indexOf(", estado"));
 		    		Boolean tipo = Boolean.parseBoolean(stipo);
 		    	String sestado = line.substring(line.indexOf("do=") + 3, line.indexOf("]"));
-		    		Kart.Estado estado = Kart.Estado.valueOf(sestado);
+		    		Estado estado = Estado.valueOf(sestado);
 		    	Kart newKart = new Kart(id, tipo, estado); 
 		    	GestorPistas_.arrayKarts.add(newKart);
 			}

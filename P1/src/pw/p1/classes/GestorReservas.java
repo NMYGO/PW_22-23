@@ -1,5 +1,5 @@
 package pw.p1.classes;
-import pw.p1.classes.Pista.Dificultad;
+import pw.p1.classes.Dificultad;
 import pw.p1.factory_reserva.RBonoCreador.Tipo;
 import pw.p1.factory_reserva.*;
 

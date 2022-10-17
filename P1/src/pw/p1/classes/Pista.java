@@ -2,7 +2,7 @@ package pw.p1.classes;
 
 import java.util.ArrayList;
 
-import pw.p1.classes.Kart.Estado;
+import pw.p1.classes.Estado;
 
 /**
  * 
@@ -111,7 +111,7 @@ public class Pista {
 	public ArrayList<Kart> consultarKartsDisponibles(ArrayList<Kart> arrayKarts) {
 		ArrayList<Kart> dkart = new ArrayList<Kart>();
 		for(int i = 0; i < arrayKarts.size(); i++) {
-			if((arrayKarts.get(i)).getEstado() == Kart.Estado.DISPONIBLE) {
+			if((arrayKarts.get(i)).getEstado() == Estado.DISPONIBLE) {
 				dkart.add(arrayKarts.get(i));
 			}
 		}

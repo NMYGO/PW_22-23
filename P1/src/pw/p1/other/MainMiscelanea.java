@@ -1,7 +1,7 @@
 package pw.p1.other;
 
 import pw.p1.classes.*;
-import pw.p1.classes.Kart.Estado;
+import pw.p1.classes.Estado;
 import java.util.Scanner;
 
 /**
@@ -17,34 +17,86 @@ import java.util.Scanner;
 public class MainMiscelanea {
 	
 	/**
-	 * Funcion que imprime el menu de opciones del main
+	 * Funcion que imprime el menu principal de opciones del main
 	 * @param 
 	 * @return void
 	 */
 	
-	public static void menu () {
-		System.out.println("-------------------PISTAS-------------------");
+	public static void menuPrincipal () {
+		System.out.println("1. MENU DE PISTAS.");
+        System.out.println("2. MENU DE USUARIOS.");
+        System.out.println("3. MENU DE RESERVAS.");
+        System.out.println("4. MENU DE KARTS.");
+        System.out.println("--------------------------------------------");
+        System.out.println("0. Salir");
+        System.out.println("");
+	}
+	
+	/**
+	 * Funcion que imprime el menu de pistas del main
+	 * @param 
+	 * @return void
+	 */
+	
+	public static void menuPistas () {
+		System.out.println("-------------------MENU DE PISTAS-------------------");
 		System.out.println("1. Crear Pista");
         System.out.println("2. Listar Pistas en mantenimiento");
         System.out.println("3. Listar pistas libres");
-        System.out.println("------------------USUARIOS------------------");
-        System.out.println("4. Registrar Usuario");
-        System.out.println("5. Modificar Usuario");
-        System.out.println("6. Listar Usuarios");
-        System.out.println("-------------------RESERTVAS----------------");
-        System.out.println("7. Hacer Reserva individual");
-        System.out.println("8. Hacer Reserva con bono");
-        System.out.println("9. Modificar Reserva");
-        System.out.println("10. Eliminar Reserva");
-        System.out.println("11. Listar Reservas futuras individuales");
-        System.out.println("12. Listar Reservas futuras con bono");
-        System.out.println("13. Consultar Reserva especifica");
-        System.out.println("---------------------KARTS------------------");
-        System.out.println("14. Crear Kart");
-        System.out.println("15. Listar Karts");
-        System.out.println("16. Asociar Karts a Pistas");
         System.out.println("--------------------------------------------");
-        System.out.println("0. Salir");
+        System.out.println("0. Salir a menu principal.");
+        System.out.println("");
+	}
+	
+	/**
+	 * Funcion que imprime el menu de usuarios del main
+	 * @param 
+	 * @return void
+	 */
+	
+	public static void menuUsuarios () {
+		System.out.println("-------------------MENU DE USUARIOS-------------------");
+		System.out.println("1. Registrar Usuario");
+        System.out.println("2. Modificar Usuario");
+        System.out.println("3. Listar Usuarios");
+        System.out.println("-------------------------------------------");
+        System.out.println("0. Salir a menu principal.");
+        System.out.println("");
+	}
+	
+	/**
+	 * Funcion que imprime el menu de reservas del main
+	 * @param 
+	 * @return void
+	 */
+	
+	public static void menuReservas () {
+		System.out.println("-------------------MENU DE RESERVAS-------------------");
+		System.out.println("1. Hacer Reserva individual");
+        System.out.println("2. Hacer Reserva con bono");
+        System.out.println("3. Modificar Reserva");
+        System.out.println("4. Eliminar Reserva");
+        System.out.println("5. Listar Reservas futuras individuales");
+        System.out.println("6. Listar Reservas futuras con bono");
+        System.out.println("7. Consultar Reserva especifica");
+        System.out.println("--------------------------------------------");
+        System.out.println("0. Salir a menu principal.");
+        System.out.println("");
+	}
+	
+	/**
+	 * Funcion que imprime el menu de karts del main
+	 * @param 
+	 * @return void
+	 */
+	
+	public static void menuKarts () {
+		System.out.println("-------------------MENU DE KARTS-------------------");
+		System.out.println("1. Crear Kart");
+        System.out.println("2. Listar Karts");
+        System.out.println("3. Asociar Karts a Pistas");
+        System.out.println("--------------------------------------------");
+        System.out.println("0. Salir a menu principal.");
         System.out.println("");
 	}
 	
