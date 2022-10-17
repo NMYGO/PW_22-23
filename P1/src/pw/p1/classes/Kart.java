@@ -13,10 +13,6 @@ package pw.p1.classes;
 
 public class Kart {
 		
-	public enum Estado {
-		DISPONIBLE, RESERVADO, MANTENIMIENTO;
-	}
-	
 	/* Atributos */
 	
 	private int id;	
