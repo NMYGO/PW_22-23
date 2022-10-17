@@ -17,9 +17,6 @@ import pw.p1.classes.Kart.Estado;
 
 public class Pista {
 		
-	public enum Dificultad {
-		INFANTIL, FAMILIAR, ADULTO
-	};
 	
 	/* Atributos */
 	
