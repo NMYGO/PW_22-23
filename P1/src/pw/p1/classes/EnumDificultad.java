@@ -1,4 +1,5 @@
-	/**
+package pw.p1.classes;
+/**
  * 
  * Enum Dificultad
  * 
