@@ -1,4 +1,4 @@
-package pw.p1.classes;
+package pw.p2.data;
 
 import java.util.ArrayList;
 

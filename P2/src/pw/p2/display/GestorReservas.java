@@ -1,6 +1,7 @@
-package pw.p1.classes;
-import pw.p1.factory_reserva.*;
+package pw.p2.display;
 
+import pw.p2.data.*;
+import pw.p2.business.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -21,7 +22,7 @@ public class GestorReservas {
 	/* Atributos */
 	
 	public ArrayList<Reserva> arrayReservaIndividual = new ArrayList<Reserva>();
-	public ArrayList<RBonoCreador> arrayBonos = new ArrayList<RBonoCreador>();
+	public ArrayList<RBono> arrayBonos = new ArrayList<RBono>();
 	
 	/**
 	 * Constructor por defecto
@@ -323,7 +324,7 @@ public class GestorReservas {
 				if ((GestorUsuarios_.arrayUsuarios.get(i).getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
 					if(arrayBonos.size() == 0) {
 						System.out.println("No existe ningun bono. Creando nuevo bono...");
-						RBonoCreador newBono = new RBonoCreador(1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), RBonoCreador.Tipo.INFANTIL, LocalDate.now().plusYears(1));
+						RBono newBono = new RBono(1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.INFANTIL, LocalDate.now().plusYears(1));
 						arrayBonos.add(newBono);
 					}
 					boolean encontrado = false;
@@ -336,13 +337,13 @@ public class GestorReservas {
 						}
 						if(!encontrado) {
 							System.out.println("No hay un bono asociado a este usuario. Creando nuevo bono...");
-								RBonoCreador newBono = new RBonoCreador(arrayBonos.size()+1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), RBonoCreador.Tipo.INFANTIL, LocalDate.now().plusYears(1));
+							RBono newBono = new RBono(arrayBonos.size()+1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.INFANTIL, LocalDate.now().plusYears(1));
 								arrayBonos.add(newBono);
 							System.out.println("");
 						}
 						if(arrayBonos.get(k).getbUsuario().equals(GestorUsuarios_.arrayUsuarios.get(i).getNombre())) {
 							if (arrayBonos.get(k).arrayReservas.size() < 5) {
-								if(arrayBonos.get(k).getTipo() == RBonoCreador.Tipo.INFANTIL) {
+								if(arrayBonos.get(k).getTipo() == Tipo.INFANTIL) {
 									System.out.println("Introduzca el numero de participantes (niños)");
 									int participantes= Integer.parseInt(scan_.nextLine());
 									System.out.println("");
@@ -439,7 +440,7 @@ public class GestorReservas {
 				if ((GestorUsuarios_.arrayUsuarios.get(i).getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
 					if(arrayBonos.size() == 0) {
 						System.out.println("No existe ningun bono. Creando nuevo bono...");
-						RBonoCreador newBono = new RBonoCreador(1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), RBonoCreador.Tipo.ADULTO, LocalDate.now().plusYears(1));
+						RBono newBono = new RBono(1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.ADULTO, LocalDate.now().plusYears(1));
 						arrayBonos.add(newBono);
 					}
 					boolean encontrado = false;
@@ -452,13 +453,13 @@ public class GestorReservas {
 						}
 						if(!encontrado) {
 							System.out.println("No hay un bono asociado a este usuario. Creando nuevo bono...");
-								RBonoCreador newBono = new RBonoCreador(arrayBonos.size()+1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), RBonoCreador.Tipo.ADULTO, LocalDate.now().plusYears(1));
+							RBono newBono = new RBono(arrayBonos.size()+1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.ADULTO, LocalDate.now().plusYears(1));
 								arrayBonos.add(newBono);
 							System.out.println("");
 						}
 						if(arrayBonos.get(k).getbUsuario().equals(GestorUsuarios_.arrayUsuarios.get(i).getNombre())) {
 							if (arrayBonos.get(k).arrayReservas.size() < 5) {
-								if(arrayBonos.get(k).getTipo() == RBonoCreador.Tipo.ADULTO) {
+								if(arrayBonos.get(k).getTipo() == Tipo.ADULTO) {
 									System.out.println("Introduzca el numero de participantes (adultos)");
 									int participantes= Integer.parseInt(scan_.nextLine());
 									System.out.println("");
@@ -555,7 +556,7 @@ public class GestorReservas {
 				if ((GestorUsuarios_.arrayUsuarios.get(i).getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
 					if(arrayBonos.size() == 0) {
 						System.out.println("No existe ningun bono. Creando nuevo bono...");
-						RBonoCreador newBono = new RBonoCreador(1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), RBonoCreador.Tipo.FAMILIAR, LocalDate.now().plusYears(1));
+						RBono newBono = new RBono(1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.FAMILIAR, LocalDate.now().plusYears(1));
 						arrayBonos.add(newBono);
 					}
 					boolean encontrado = false;
@@ -568,13 +569,13 @@ public class GestorReservas {
 						}
 						if(!encontrado) {
 							System.out.println("No hay un bono asociado a este usuario. Creando nuevo bono...");
-								RBonoCreador newBono = new RBonoCreador(arrayBonos.size()+1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), RBonoCreador.Tipo.FAMILIAR, LocalDate.now().plusYears(1));
+							RBono newBono = new RBono(arrayBonos.size()+1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.FAMILIAR, LocalDate.now().plusYears(1));
 								arrayBonos.add(newBono);
 							System.out.println("");
 						}
 						if(arrayBonos.get(k).getbUsuario().equals(GestorUsuarios_.arrayUsuarios.get(i).getNombre())) {
 							if (arrayBonos.get(k).arrayReservas.size() < 5) {
-								if(arrayBonos.get(k).getTipo() == RBonoCreador.Tipo.FAMILIAR) {
+								if(arrayBonos.get(k).getTipo() == Tipo.FAMILIAR) {
 									System.out.println("Introduzca el numero de participantes (niños)");
 									int ninos= Integer.parseInt(scan_.nextLine());
 									System.out.println("");
