@@ -1,5 +1,6 @@
 package pw.p2.display;
 
+import pw.p2.business.*;
 import pw.p2.data.Estado;
 import java.util.Scanner;
 
@@ -124,7 +125,7 @@ public class MainMiscelanea {
 	 * @return void
 	 */
 	
-	public static void restaurar (GestorPistas GestorPistas_) {
+	public static void restaurar(GestorPistas GestorPistas_) {
 		for (int i = 0; i < GestorPistas_.arrayKarts.size(); i++) {
 			if (GestorPistas_.arrayKarts.get(i).getEstado() == Estado.RESERVADO) {
 				GestorPistas_.arrayKarts.get(i).setEstado(Estado.DISPONIBLE);
@@ -190,27 +191,5 @@ public class MainMiscelanea {
         	System.out.println("Opcion no reconocida");
 			System.out.println("");
         }
-	}
-	
-	/**
-	 * Lista por pantalla todos los kars que esten disponibles
-	 * @param GestorPistas_
-	 */
-	
-	public static void listarKartsDisponibles (GestorPistas GestorPistas_) {
-		int nodisponible = 0;
-		for(int i = 0; i < GestorPistas_.arrayKarts.size(); i++) {
-			if(GestorPistas_.arrayKarts.get(i).getEstado() == Estado.DISPONIBLE) {
-				System.out.println(GestorPistas_.arrayKarts.get(i).toString());
-			}else if(GestorPistas_.arrayKarts.get(i).getEstado() == Estado.RESERVADO){
-				System.out.println(GestorPistas_.arrayKarts.get(i).toString());
-			}else {
-				System.out.println(GestorPistas_.arrayKarts.get(i).toString());
-			}
-		}
-		if(GestorPistas_.arrayKarts.size() == nodisponible) {
-			System.out.println("No hay karts disponibles");
-			System.out.println("");
-		}
 	}
 }

@@ -1,7 +1,6 @@
-package pw.p2.display;
+package pw.p2.business;
 
 import pw.p2.data.*;
-import pw.p2.business.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -39,7 +38,7 @@ public class GestorReservas {
 	 * @return true si la reserva se ha realizado, false si no
 	 */
 	
-	public boolean ReservaIndividualInfantil(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, int nParticipantes, Scanner scan_) {
+	public boolean ReservaIndividualInfantil (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Integer nParticipantes, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
@@ -49,7 +48,7 @@ public class GestorReservas {
 					System.out.println("Introduzca el numero de participantes (niños)");
 						int participantes= Integer.parseInt(scan_.nextLine());
 						System.out.println("");
-					ArrayList<Pista> lpista = GestorPistas_.pistasLibres(scan_, participantes, Dificultad.INFANTIL);			
+					ArrayList<Pista> lpista = GestorPistas_.pistasLibres(participantes, Dificultad.INFANTIL);			
 					if(lpista.size() > 0) {
 						System.out.println("Pistas libres:");
 						for (int j = 0; j < lpista.size(); j++) {
@@ -123,7 +122,7 @@ public class GestorReservas {
 	 * @return
 	 */
 	
-	public boolean ReservaIndividualAdulto(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, int nParticipantes, Scanner scan_) {
+	public boolean ReservaIndividualAdulto (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Integer nParticipantes, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
@@ -133,7 +132,7 @@ public class GestorReservas {
 					System.out.println("Introduzca el numero de participantes (adultos)");
 					int participantes= Integer.parseInt(scan_.nextLine());
 					System.out.println("");
-					ArrayList<Pista> lpista = GestorPistas_.pistasLibres(scan_, participantes, Dificultad.ADULTO);			
+					ArrayList<Pista> lpista = GestorPistas_.pistasLibres(participantes, Dificultad.ADULTO);			
 					if(lpista.size() > 0) {
 						System.out.println("Pistas libres:");
 						for (int j = 0; j < lpista.size(); j++) {
@@ -207,7 +206,7 @@ public class GestorReservas {
 	 * @return
 	 */
 	
-	public boolean ReservaIndividualFamiliar(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, int nParticipantes, Scanner scan_) {
+	public boolean ReservaIndividualFamiliar (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Integer nParticipantes, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
@@ -225,7 +224,7 @@ public class GestorReservas {
 						}
 						System.out.println("");
 						int participantes = participantesAdultos + participantesInfantiles;
-					ArrayList<Pista> lpista = GestorPistas_.pistasLibres(scan_, participantes, Dificultad.FAMILIAR);			
+					ArrayList<Pista> lpista = GestorPistas_.pistasLibres(participantes, Dificultad.FAMILIAR);			
 					for (int j = 0; j < lpista.size(); j++) {
 						ArrayList<Kart> lkart = new ArrayList<Kart>();
 						lkart = lpista.get(j).getLkart();
@@ -315,7 +314,7 @@ public class GestorReservas {
 	 * @return
 	 */
 	
-	public boolean ReservaBonoInfantil(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
+	public boolean ReservaBonoInfantil (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
@@ -347,7 +346,7 @@ public class GestorReservas {
 									System.out.println("Introduzca el numero de participantes (niños)");
 									int participantes= Integer.parseInt(scan_.nextLine());
 									System.out.println("");
-									ArrayList<Pista> lpista = GestorPistas_.pistasLibres(scan_, participantes, Dificultad.INFANTIL);			
+									ArrayList<Pista> lpista = GestorPistas_.pistasLibres(participantes, Dificultad.INFANTIL);			
 									if(lpista.size() > 0) {
 										System.out.println("Pistas libres:");
 										for (int j = 0; j < lpista.size(); j++) {
@@ -431,7 +430,7 @@ public class GestorReservas {
 	 * @return
 	 */
 	
-	public boolean ReservaBonoAdulto(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
+	public boolean ReservaBonoAdulto (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
@@ -463,7 +462,7 @@ public class GestorReservas {
 									System.out.println("Introduzca el numero de participantes (adultos)");
 									int participantes= Integer.parseInt(scan_.nextLine());
 									System.out.println("");
-									ArrayList<Pista> lpista = GestorPistas_.pistasLibres(scan_, participantes, Dificultad.ADULTO);			
+									ArrayList<Pista> lpista = GestorPistas_.pistasLibres(participantes, Dificultad.ADULTO);			
 									if(lpista.size() > 0) {
 										System.out.println("Pistas libres:");
 										for (int j = 0; j < lpista.size(); j++) {
@@ -547,7 +546,7 @@ public class GestorReservas {
 	 * @return
 	 */
 	
-	public boolean ReservaBonoFamiliar(GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
+	public boolean ReservaBonoFamiliar (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
@@ -587,7 +586,7 @@ public class GestorReservas {
 										adultos= Integer.parseInt(scan_.nextLine());
 									}
 									int participantes=ninos+adultos;
-									ArrayList<Pista> lpista = GestorPistas_.pistasLibres(scan_, participantes, Dificultad.FAMILIAR);			
+									ArrayList<Pista> lpista = GestorPistas_.pistasLibres(participantes, Dificultad.FAMILIAR);			
 									if(lpista.size() > 0) {
 										System.out.println("Pistas libres:");
 										for (int j = 0; j < lpista.size(); j++) {
@@ -667,10 +666,7 @@ public class GestorReservas {
 	 * @param scan_
 	 */
 	
-	public void consultarReservasFuturasIndividuales(Scanner scan_){
-		System.out.println("Introduzca su nombre de usuario");
-		String usuario = scan_.nextLine();
-		System.out.println("");
+	public void consultarReservasFuturasIndividuales (String usuario){		
 		for(int i = 0; i < arrayReservaIndividual.size(); i++) {
 				if(arrayReservaIndividual.get(i).getUsuario().equals(usuario) && arrayReservaIndividual.get(i).getFecha().isAfter(LocalDate.now())) {
 					System.out.println(arrayReservaIndividual.get(i).toString());
@@ -683,10 +679,7 @@ public class GestorReservas {
 	 * @param scan_
 	 */
 
-	public void consultarReservasFuturasBono(Scanner scan_){
-		System.out.println("Introduzca su nombre de usuario");
-		String usuario = scan_.nextLine();
-		System.out.println("");
+	public void consultarReservasFuturasBono (String usuario){		
 		for(int i = 0; i < arrayBonos.size(); i++) {
 				if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
 					System.out.println(arrayBonos.get(i).toString());
@@ -706,14 +699,7 @@ public class GestorReservas {
 	 * @param scan_
 	 */
 	
-	public void consultarReservaEspecifica(GestorPistas GestorPistas_, GestorReservas GestorReservas_, Scanner scan_){
-		System.out.println("Introduzca su nombre de usuario");
-			String usuario = scan_.nextLine();
-		System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
-			LocalDate fecha = LocalDate.parse(scan_.nextLine());
-		System.out.println("Introduzca la pista de la reserva");
-			String pista = scan_.nextLine();
-			System.out.println("");
+	public void consultarReservaEspecifica (GestorPistas GestorPistas_, GestorReservas GestorReservas_, String usuario, LocalDate fecha, String pista, Scanner scan_){		
 		System.out.println("0. Consultar reserva individual");
         System.out.println("1. Consultar reserva bono");
         	System.out.println("");
@@ -749,16 +735,7 @@ public class GestorReservas {
 	 * @param scan_
 	 */
 
-	public void eliminarReserva(Scanner scan_){
-		System.out.println("Introduzca su nombre de usuario");
-			String usuario = scan_.nextLine();
-		System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
-			LocalDate fecha = LocalDate.parse(scan_.nextLine());
-		System.out.println("Introduzca la pista de la reserva");
-			String pista = scan_.nextLine();
-		System.out.println("Introduzca la duracion de la reserva");
-			int duracion = Integer.parseInt(scan_.nextLine());
-		System.out.println("");
+	public void eliminarReserva (String usuario, LocalDate fecha, String pista, Integer duracion){		
 		for(int i=0 ; i< arrayReservaIndividual.size(); i++){
 			if (arrayReservaIndividual.get(i).getUsuario().equals(usuario) &&
 					arrayReservaIndividual.get(i).getFecha().isEqual(fecha) &&
@@ -782,16 +759,7 @@ public class GestorReservas {
 	 * @param scan_
 	 */
 
-	public void modificarReserva(Scanner scan_){
-		System.out.println("Introduzca su nombre de usuario");
-			String usuario = scan_.nextLine();
-		System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
-			LocalDate fecha = LocalDate.parse(scan_.nextLine());
-		System.out.println("Introduzca la pista de la reserva");
-			String pista = scan_.nextLine();
-		System.out.println("Introduzca la duracion de la reserva");
-			int duracion = Integer.parseInt(scan_.nextLine());
-		System.out.println("");
+	public void modificarReserva (String usuario, LocalDate fecha, String pista, Integer duracion, Scanner scan_){		
 		for(int i=0 ; i< arrayReservaIndividual.size(); i++){
 			if (arrayReservaIndividual.get(i).getUsuario().equals(usuario) &&
 					arrayReservaIndividual.get(i).getFecha().isEqual(fecha) &&
@@ -806,7 +774,7 @@ public class GestorReservas {
 					+ "Introduzca una opcion:"); 
 					
 					opcion = Integer.parseInt(scan_.nextLine());
-					switch (opcion) {
+					switch (opcion) {					
 					case 0: 
 						System.out.println("Reserva modificada con exito");
 						System.out.println("-------------------------------------");
@@ -816,7 +784,7 @@ public class GestorReservas {
 					case 1:
 						System.out.println("Introduzca la nueva fecha de reserva");
 							LocalDate nfecha = LocalDate.parse(scan_.nextLine());
-						System.out.println("");
+							System.out.println("");
 						arrayReservaIndividual.get(i).setFecha(nfecha);
 		
 						break;
@@ -824,18 +792,18 @@ public class GestorReservas {
 					case 2:
 						System.out.println("Introduzca la nueva duracion de reserva");
 						int nduracion = Integer.parseInt(scan_.nextLine());				
-					System.out.println("");
+						System.out.println("");
 					arrayReservaIndividual.get(i).setDur(nduracion);
 					switch(nduracion) {
-					case 60:
-						arrayReservaIndividual.get(i).setPrecio(20);
-						break;
-					case 90:
-						arrayReservaIndividual.get(i).setPrecio(30);
-						break;
-					case 120:
-						arrayReservaIndividual.get(i).setPrecio(40);
-						break;
+						case 60:
+							arrayReservaIndividual.get(i).setPrecio(20);
+							break;
+						case 90:
+							arrayReservaIndividual.get(i).setPrecio(30);
+							break;
+						case 120:
+							arrayReservaIndividual.get(i).setPrecio(40);
+							break;
 					}
 					
 					break;

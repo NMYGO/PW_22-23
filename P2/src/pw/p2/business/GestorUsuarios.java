@@ -1,4 +1,4 @@
-package pw.p2.display;
+package pw.p2.business;
 
 import pw.p2.data.Usuario;
 import java.time.LocalDate;
@@ -24,8 +24,7 @@ public class GestorUsuarios {
 	
 	/**
 	 * Constructor por defecto
-	 **/
-	
+	 **/	
 	public GestorUsuarios(){}
 	
 	/**
@@ -34,16 +33,7 @@ public class GestorUsuarios {
 	 * @return Devuelve un booleano 
 	 * */
 
-	public Boolean registrarUsuario(Scanner scan_) {
-		System.out.println("Introduzca el nombre de usuario");
-			String nombre = scan_.nextLine();
-		System.out.println("Introduzca los apellidos de usuario");        			
-			String apellidos = scan_.nextLine();
-		System.out.println("Introduzca la fecha de nacimiento de usuario (yyyy-mm-dd)");
-			LocalDate nacimiento = LocalDate.parse(scan_.nextLine());
-		System.out.println("Introduzca el correo de usuario");
-			String correo = scan_.nextLine();
-			
+	public Boolean registrarUsuario (String nombre, String apellidos, LocalDate nacimiento, String correo) {					
 		for (int i = 0; i < arrayUsuarios.size(); i++) {
 			if (arrayUsuarios.get(i).getCorreo().equals(correo)) {
 				System.out.println("Error. Ese usuario ya existe");
@@ -52,6 +42,7 @@ public class GestorUsuarios {
 				return false;
 			}
 		}
+		
 		Usuario newUsuario = new Usuario(nombre, apellidos, nacimiento, correo);
 		arrayUsuarios.add(newUsuario);
 		System.out.println("Usuario creado con exito");
@@ -66,10 +57,10 @@ public class GestorUsuarios {
 	 * @return Devuelve un booleano  
 	 * */
 
-	public Boolean ModificarUsuario(Scanner scan_) {
+	public Boolean ModificarUsuario (Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
-		String correo = scan_.nextLine();
-		System.out.println("");
+			String correo = scan_.nextLine();
+			System.out.println("");
 		for (int i = 0; i < arrayUsuarios.size(); i++) {
 			if (arrayUsuarios.get(i).getCorreo().equals(correo)) {
 
@@ -82,8 +73,8 @@ public class GestorUsuarios {
 					+ "4: Cambiar direccion de Correo.\n"
 					+ "Introduzca una opcion:"); 
 					
-					opcion = Integer.parseInt(scan_.nextLine());
-					System.out.println("");
+						opcion = Integer.parseInt(scan_.nextLine());
+						System.out.println("");
 					switch (opcion) {
 					case 0: 
 						System.out.println("Usuario modificado con exito");
@@ -130,6 +121,7 @@ public class GestorUsuarios {
 				return true;
 			}
 		}
+		
 		System.out.println("Error. Ese usuario no existe");
 		System.out.println("-------------------------------------");
 		System.out.println("");
@@ -140,7 +132,7 @@ public class GestorUsuarios {
 	 * Funcion para listar los usuarios existentes
 	 */
 	
-	public void listarUsuarios() {
+	public void listarUsuarios () {
 		for (int i = 0; i < arrayUsuarios.size(); i++) {
 			System.out.println(arrayUsuarios.get(i).toString());
 		}

@@ -1,10 +1,13 @@
 package pw.p2.display;
 
+import pw.p2.business.*;
 import pw.p2.data.Dificultad;
+import pw.p2.data.Estado;
 import pw.p2.data.Pista;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
+import java.time.LocalDate;
 
 
 /**
@@ -26,7 +29,13 @@ public class MainProgram{
         int option_;
         GestorPistas GestorPistas_ = new GestorPistas();
         GestorUsuarios GestorUsuarios_ = new GestorUsuarios();
-        GestorReservas GestorReservas_ = new GestorReservas();        
+        GestorReservas GestorReservas_ = new GestorReservas();
+        Integer maxkarts, participantes, id, duracion;
+        String nombre, apellidos, correo, usuario, pista;
+		Boolean estado, tipo;
+		Dificultad dificultad;
+		Estado estados;
+		LocalDate fecha, nacimiento;
         	//Lector.lector(GestorPistas_, GestorUsuarios_, GestorReservas_);
         
         while(!exit_){
@@ -36,10 +45,18 @@ public class MainProgram{
             System.out.println("1. Loguearse como usuario");
             	System.out.println("");
             System.out.println("Elija una opcion escribiendo su numero");
-            option_= Integer.parseInt(scan_.nextLine());
-            System.out.println("");
+            	option_= Integer.parseInt(scan_.nextLine());
+            	System.out.println("");
             if(option_ == 0) {  	
-	            GestorUsuarios_.registrarUsuario(scan_);	            
+            	System.out.println("Introduzca el nombre de usuario");
+					nombre = scan_.nextLine();
+				System.out.println("Introduzca los apellidos de usuario");        			
+					apellidos = scan_.nextLine();
+				System.out.println("Introduzca la fecha de nacimiento de usuario (yyyy-mm-dd)");
+					nacimiento = LocalDate.parse(scan_.nextLine());
+				System.out.println("Introduzca el correo de usuario");
+					correo = scan_.nextLine();
+				GestorUsuarios_.registrarUsuario(nombre, apellidos, nacimiento, correo);	            
             }else if(option_ == 1) {           
         		if(!MainMiscelanea.login(GestorUsuarios_, scan_)) {
         			System.out.println("	Debe registrarse antes de iniciar sesion");
@@ -49,11 +66,12 @@ public class MainProgram{
                 	System.out.println("¡¡BIENVENIDO!!");
                 	System.out.println("");
                 	exit_ = false;
+                	
         	        while(!exit_){      	                  	        	
         	        	MainMiscelanea.menuPrincipal();
         	            System.out.println("Elija una opcion escribiendo su numero");
-        	            option_= Integer.parseInt(scan_.nextLine());
-        	            System.out.println("");
+        	            	option_= Integer.parseInt(scan_.nextLine());
+        	            	System.out.println("");
         	            
         	            switch(option_) {
         	            	case 0:
@@ -63,13 +81,24 @@ public class MainProgram{
         	            	case 1: 
         	            		MainMiscelanea.menuPistas();
                 	            System.out.println("Elija una opcion escribiendo su numero");
-                	            option_= Integer.parseInt(scan_.nextLine());
-                	            System.out.println("");
+                	            	option_= Integer.parseInt(scan_.nextLine());
+                	            	System.out.println("");        	            		
         	            		
-	        	            	switch(option_){
-		 
+	        	            	switch(option_){		 
 		        	                case 1:
-		        	                    GestorPistas_.crearPista(scan_);
+		        	                	System.out.println("Introduzca el nombre de pista");
+		        	        				nombre = scan_.nextLine();
+		        	        				System.out.println("");
+		        	        			System.out.println("Introduzca el estado de pista");
+		        	        				estado = Boolean.parseBoolean(scan_.nextLine());
+		        	        				System.out.println("");
+		        	        			System.out.println("Introduzca la dificultad de pista");
+		        	        				dificultad = Dificultad.valueOf(scan_.nextLine());
+		        	        				System.out.println("");
+		        	        			System.out.println("Introduzca el numero maximo de karts de pista");
+		        	        				maxkarts = Integer.parseInt(scan_.nextLine());
+		        	        				System.out.println("");
+		        	                    GestorPistas_.crearPista(nombre, estado, dificultad, maxkarts);
 		        	                    break;
 		        	                    
 		        	                case 2:
@@ -78,28 +107,37 @@ public class MainProgram{
 		        	                    
 		        	                case 3:
 			        	                System.out.println("Introduzca el numero de participantes");
-			    						int participantes= Integer.parseInt(scan_.nextLine());
-			    						System.out.println("");
+			    							participantes= Integer.parseInt(scan_.nextLine());
+			    							System.out.println("");
 			    						System.out.println("Introduzca la dificultad de pista");
-			    						Dificultad dificultad = Dificultad.valueOf(scan_.nextLine());
-			    						System.out.println("");
+			    							dificultad = Dificultad.valueOf(scan_.nextLine());
+			    							System.out.println("");
 			    							
-			    	                	ArrayList<Pista> arraypistaslibres = GestorPistas_.pistasLibres(scan_, participantes, dificultad);
+			    	                	ArrayList<Pista> arraypistaslibres = GestorPistas_.pistasLibres(participantes, dificultad);
 			    	                	for (int i = 0;i< arraypistaslibres.size() ; i++) {
-			    	            				System.out.println(arraypistaslibres.get(i).toString());
+		    	            				System.out.println(arraypistaslibres.get(i).toString());
 			    	            		}
 			    	                	break;
-			    	               	}
-			    	               	break;
+			    	            }
+		    	               	break;
 			    	                
 		        	        case 2:
 		        	        	MainMiscelanea.menuUsuarios();
                 	            System.out.println("Elija una opcion escribiendo su numero");
-                	            option_= Integer.parseInt(scan_.nextLine());
-                	            System.out.println("");
+                	            	option_= Integer.parseInt(scan_.nextLine());
+                	            	System.out.println("");
+                	            
                 	            switch(option_){	
 		        	                case 1:
-		        	                	GestorUsuarios_.registrarUsuario(scan_);
+		        	                	System.out.println("Introduzca el nombre de usuario");
+		        	        				nombre = scan_.nextLine();
+		        	        			System.out.println("Introduzca los apellidos de usuario");        			
+		        	        				apellidos = scan_.nextLine();
+		        	        			System.out.println("Introduzca la fecha de nacimiento de usuario (yyyy-mm-dd)");
+		        	        				nacimiento = LocalDate.parse(scan_.nextLine());
+		        	        			System.out.println("Introduzca el correo de usuario");
+		        	        				correo = scan_.nextLine();
+		        	                	GestorUsuarios_.registrarUsuario(nombre, apellidos, nacimiento, correo);
 		        	                    break;
 		        	                    
 		        	                case 2:
@@ -107,18 +145,18 @@ public class MainProgram{
 		        	                	break;
 		        	                	
 		        	                case 3:
-		        	                	GestorUsuarios_.listarUsuarios();
-		        	                    
+		        	                	GestorUsuarios_.listarUsuarios();		        	                    
 		        	                    break;
                 	            }
 	        	                break;
+	        	                
 		        	        case 3: 
 		        	        	MainMiscelanea.menuReservas();
                 	            System.out.println("Elija una opcion escribiendo su numero");
-                	            option_= Integer.parseInt(scan_.nextLine());
-                	            System.out.println("");
-                	            switch(option_){	
+                	            	option_= Integer.parseInt(scan_.nextLine());
+                	            	System.out.println("");
                 	            
+                	            switch(option_){	               	            
 		        	                case 1: 
 		        	                	MainMiscelanea.reservaIndividual(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
 		        	                    break;
@@ -128,27 +166,58 @@ public class MainProgram{
 		        	                    break;
 		        	                    
 		        	                case 3:
-		        	                	GestorReservas_.modificarReserva(scan_);
+		        	                	System.out.println("Introduzca su nombre de usuario");
+		        	        				usuario = scan_.nextLine();
+		        	        			System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
+		        	        				fecha = LocalDate.parse(scan_.nextLine());
+		        	        			System.out.println("Introduzca la pista de la reserva");
+		        	        				pista = scan_.nextLine();
+		        	        			System.out.println("Introduzca la duracion de la reserva");
+		        	        				duracion = Integer.parseInt(scan_.nextLine());
+		        	        			System.out.println("");
+		        	                	GestorReservas_.modificarReserva(usuario, fecha, pista, duracion, scan_);
 		        	                    break;
 		        	                    
 		        	                case 4:
-		        	                	GestorReservas_.eliminarReserva(scan_);
+		        	                	System.out.println("Introduzca su nombre de usuario");
+		        	        				usuario = scan_.nextLine();
+		        	        			System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
+		        	        				fecha = LocalDate.parse(scan_.nextLine());
+		        	        			System.out.println("Introduzca la pista de la reserva");
+		        	        				pista = scan_.nextLine();
+		        	        			System.out.println("Introduzca la duracion de la reserva");
+		        	        				duracion = Integer.parseInt(scan_.nextLine());
+		        	        			System.out.println("");
+		        	                	GestorReservas_.eliminarReserva(usuario, fecha, pista, duracion);
 		        	                	break;
 		        	                	
 		        	                case 5:
-		        	                	GestorReservas_.consultarReservasFuturasIndividuales(scan_);
+		        	                	System.out.println("Introduzca su nombre de usuario");
+		        	            			usuario = scan_.nextLine();
+		        	            			System.out.println("");
+		        	                	GestorReservas_.consultarReservasFuturasIndividuales(usuario);
 		        	                    break;
 		        	                    
 		        	                case 6:
-		        	                	GestorReservas_.consultarReservasFuturasBono(scan_);
+		        	                	System.out.println("Introduzca su nombre de usuario");
+		        	            			usuario = scan_.nextLine();
+		        	            			System.out.println("");
+		        	                	GestorReservas_.consultarReservasFuturasBono(usuario);
 		        	                    break;
 		        	                    
 		        	                case 7:
-		        	                	GestorReservas_.consultarReservaEspecifica(GestorPistas_, GestorReservas_, scan_);
-		        	                    break;
-		        	                    
-        	            }
-        	            break;
+		        	                	System.out.println("Introduzca su nombre de usuario");
+		        	        				usuario = scan_.nextLine();
+		        	        			System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
+		        	        				fecha = LocalDate.parse(scan_.nextLine());
+		        	        			System.out.println("Introduzca la pista de la reserva");
+		        	        				pista = scan_.nextLine();
+		        	        			System.out.println("");
+		        	                	GestorReservas_.consultarReservaEspecifica(GestorPistas_, GestorReservas_, usuario, fecha, pista, scan_);
+		        	                    break;		        	                    
+                	            }
+                	            break;
+                	            
 		        	        case 4:
 		        	        	MainMiscelanea.menuKarts();
                 	            System.out.println("Elija una opcion escribiendo su numero");
@@ -157,19 +226,25 @@ public class MainProgram{
                 	            switch(option_){	
                 	           
 		        	                case 1:
-		        	                	GestorPistas_.crearKart(scan_);
+		        	                	System.out.println("Introduzca el identificador de kart");
+		        	        				id = Integer.parseInt(scan_.nextLine());							
+		        	        			System.out.println("Introduzca el tipo de kart");
+		        	        				tipo = Boolean.parseBoolean(scan_.nextLine());
+		        	        			System.out.println("Introduzca el estado de kart");
+		        	        				estados = Estado.valueOf(scan_.nextLine());
+		        	                	GestorPistas_.crearKart(id, tipo, estados);
 		        	                    break;
 		        	                    
 		        	                case 2:
-		        	                	MainMiscelanea.listarKartsDisponibles(GestorPistas_);
+		        	                	GestorPistas_.listarKartsDisponibles();
 		        	                	break;
 		        	                	
 		        	                case 3:
 		        	                	System.out.println("");
 		        	                	System.out.println("Introduzca el identificador de kart");
-		        	        				Integer id = Integer.parseInt(scan_.nextLine());							
+		        	        				id = Integer.parseInt(scan_.nextLine());							
 		        	        			System.out.println("Introduzca el nombre de pista");
-		        	        				String nombre = scan_.nextLine();
+		        	        				nombre = scan_.nextLine();
 		        	                    GestorPistas_.asociarKartPista(id, nombre);
 		        	                	break;
                 	            }
@@ -177,7 +252,7 @@ public class MainProgram{
         	            }
         	        }
             	}
-            }  else {
+            }else {
             	System.out.println("Opcion no reconocida");
 				System.out.println("");
             }
