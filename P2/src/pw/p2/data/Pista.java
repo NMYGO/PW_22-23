@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * 
- * Clase pistas
+ * Clase Pista
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano

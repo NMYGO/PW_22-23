@@ -1,8 +1,10 @@
-package pw.p2.data;
+package pw.p2.business;
+
+import pw.p2.data.Estado;
 
 /**
  * 
- * Clase Kart
+ * DTO Kart
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano
@@ -11,20 +13,20 @@ package pw.p2.data;
  *
  */
 
-public class Kart {
-		
+public class DTOKart {
+	
 	/* Atributos */
 	
 	private int id;	
 	private boolean tipo; //TRUE -> NIÑO - FALSE -> ADULTO	
 	private Estado estado;
-
+	
 	/* Constructores */
 	
 	/**
 	 * Constructor por defecto
 	 * */
-	public Kart() {}
+	public DTOKart() {}
 	
 	/**
 	 * Constructor parametrizado
@@ -33,7 +35,7 @@ public class Kart {
 	 * @param estado Estado del kart
 	 * */
 	
-	public Kart(Integer id, Boolean tipo, Estado estado) {
+	public DTOKart(Integer id, Boolean tipo, Estado estado) {
 		this.id = id;
 		this.tipo = tipo;
 		this.estado = estado;
@@ -44,23 +46,23 @@ public class Kart {
 	public int getId() {
 		return id;
 	}
-
+	
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
 	public boolean isTipo() {
 		return tipo;
 	}
-
+	
 	public void setTipo(boolean tipo) {
 		this.tipo = tipo;
 	}
-
+	
 	public Estado getEstado() {
 		return estado;
 	}
-
+	
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
