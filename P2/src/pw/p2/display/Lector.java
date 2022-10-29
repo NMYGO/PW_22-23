@@ -33,33 +33,18 @@ public class Lector {
 	    DAOUsuario usuarioTabla = new DAOUsuario();
 		ArrayList<DTOUsuario> usuarios = usuarioTabla.solicitarUsuarios();
 		for (int i = 0; i < usuarios.size(); i++) {
-			System.out.println(usuarios.get(i).toString());
+			//System.out.println(usuarios.get(i).toString());
 			Usuario newUsuario = new Usuario(usuarios.get(i).getNombre(), usuarios.get(i).getApellidos(), usuarios.get(i).getNacimiento(), usuarios.get(i).getCorreo()); 
 			GestorUsuarios_.arrayUsuarios.add(newUsuario);
 		}
 	    
-	    File Pfile = new File("Pistas.txt");
-	    if(Pfile.isFile()) {
-	    	BufferedReader readerP_ = new BufferedReader(new FileReader(new File("Pistas.txt")));
-		    while((line = readerP_.readLine()) != null) {
-		    	String nombre = line.substring(line.indexOf("e=") + 2, line.indexOf(", estado"));
-		    	String sestado = line.substring(line.indexOf("o=") + 2, line.indexOf(", dificultad"));
-		    		Boolean estado = Boolean.parseBoolean(sestado);
-		    	String sdificultad = line.substring(line.indexOf("d=") + 2, line.indexOf(", maxkarts"));
-		    		Dificultad dificultad = Dificultad.valueOf(sdificultad);
-		    	String smaxkarts = line.substring(line.indexOf("s=") + 2, line.indexOf("]"));
-		    		int maxkarts = Integer.parseInt(smaxkarts);
-		    	Pista newPista = new Pista(nombre, estado, dificultad, maxkarts); 
-		    	GestorPistas_.arrayPistas.add(newPista);
-			}
-		    readerP_.close();
-	    }else {
-	    	if(Pfile.createNewFile()) {
-	    		System.out.println("--------------------------------------------------------------------------");
-	    		System.out.println("Se ha creado el fichero Pistas.txt porque no existia");
-	    		System.out.println("--------------------------------------------------------------------------");
-	    	}
-	    }
+		DAOPista pistaTabla = new DAOPista();
+		ArrayList<DTOPista> pistas = pistaTabla.solicitarPistas();
+		for (int i = 0; i < pistas.size(); i++) {
+			//System.out.println(pistas.get(i).toString());
+			Pista newPista = new Pista(pistas.get(i).getNombre(), pistas.get(i).isEstado(), pistas.get(i).getDificultad(), pistas.get(i).getMaxkarts()); 
+			GestorPistas_.arrayPistas.add(newPista);
+		}
 	    
 	    for (int i = 0; i < GestorPistas_.arrayPistas.size(); i++) {
 		    File PKartsfile = new File(GestorPistas_.arrayPistas.get(i).getNombre() +"_Karts.txt");

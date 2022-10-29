@@ -22,7 +22,7 @@ import java.time.LocalDate;
 public class DAOUsuario {
 	
 	public ArrayList<DTOUsuario> solicitarUsuarios() {
-		ArrayList<DTOUsuario> listOfUsuarios = new ArrayList<DTOUsuario>();
+		ArrayList<DTOUsuario> usuarios = new ArrayList<DTOUsuario>();
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
@@ -35,7 +35,7 @@ public class DAOUsuario {
 				String nombre = rs.getString("nombre");
 				String apellidos = rs.getString("apellidos");
 				LocalDate nacimiento = LocalDate.parse(rs.getString("fechaNacimiento"));
-				listOfUsuarios.add(new DTOUsuario(nombre, apellidos, nacimiento, correo));
+				usuarios.add(new DTOUsuario(nombre, apellidos, nacimiento, correo));
 			}
 
 			if (stmt != null){ 
@@ -46,7 +46,7 @@ public class DAOUsuario {
 			System.err.println(e);
 			e.printStackTrace();
 		}
-		return listOfUsuarios;
+		return usuarios;
 	}
 	
 	public ArrayList<DTOUsuario> solicitarUsuariosPorCorreo(String correo) {

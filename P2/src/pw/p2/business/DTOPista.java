@@ -1,19 +1,12 @@
-package pw.p2.data;
+package pw.p2.business;
 
+import pw.p2.data.Pista;
+import pw.p2.data.Kart;
+import pw.p2.data.Dificultad;
+import pw.p2.data.Estado;
 import java.util.ArrayList;
 
-/**
- * 
- * Clase Pista
- * 
- * @author David Olmo Cejudo
- * @author Francisco Moreno Cano
- * @author Ángel Quintero Montes
- * @author Diego Tabas Costa
- *
- */
-
-public class Pista {	
+public class DTOPista {
 	
 	/* Atributos */
 	
@@ -28,7 +21,7 @@ public class Pista {
 	/**
 	 * Constructor por defecto
 	 * */
-	public Pista() {}
+	public DTOPista() {}
 	
 	/**
 	 * Constructor parametrizado
@@ -38,7 +31,7 @@ public class Pista {
 	 * @param maxkarts Maximos karts de la pista
 	 * */
 	
-	public Pista(String nombre, Boolean estado, Dificultad dificultad, Integer maxkarts) {
+	public DTOPista(String nombre, Boolean estado, Dificultad dificultad, Integer maxkarts) {
 		this.nombre = nombre;
 		this.estado = estado;
 		this.dificultad = dificultad;
