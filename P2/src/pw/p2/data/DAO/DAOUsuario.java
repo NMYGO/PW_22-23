@@ -20,7 +20,36 @@ import java.time.LocalDate;
  */
 
 public class DAOUsuario {
-	public ArrayList<DTOUsuario> requestUsuariosByCorreo(String correo) {
+	
+	public ArrayList<DTOUsuario> solicitarUsuarios() {
+		ArrayList<DTOUsuario> listOfUsuarios = new ArrayList<DTOUsuario>();
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query = "select * from usuario";
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+
+			while (rs.next()) {
+				String correo = rs.getString("correoUsuario");
+				String nombre = rs.getString("nombre");
+				String apellidos = rs.getString("apellidos");
+				LocalDate nacimiento = LocalDate.parse(rs.getString("fechaNacimiento"));
+				listOfUsuarios.add(new DTOUsuario(nombre, apellidos, nacimiento, correo));
+			}
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return listOfUsuarios;
+	}
+	
+	public ArrayList<DTOUsuario> solicitarUsuariosPorCorreo(String correo) {
 		ArrayList<DTOUsuario> listOfUsuarios = new ArrayList<DTOUsuario>();
 		try {
 			DBConnection dbConnection = new DBConnection();
