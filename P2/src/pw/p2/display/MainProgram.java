@@ -138,6 +138,7 @@ public class MainProgram{
 		        	        			System.out.println("Introduzca el correo de usuario");
 		        	        				correo = scan_.nextLine();
 		        	                	GestorUsuarios_.registrarUsuario(nombre, apellidos, nacimiento, correo);
+		        	                	GestorUsuarios_.requestUsuariosByCorreo(correo);//
 		        	                    break;
 		        	                    
 		        	                case 2:

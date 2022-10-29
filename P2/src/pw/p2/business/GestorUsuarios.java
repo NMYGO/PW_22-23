@@ -137,4 +137,8 @@ public class GestorUsuarios {
 			System.out.println(arrayUsuarios.get(i).toString());
 		}
 	}
+	
+	public void requestUsuariosByCorreo(String correo) {
+		
+	}
 }

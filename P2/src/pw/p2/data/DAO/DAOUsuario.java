@@ -1,11 +1,11 @@
 package pw.p2.data.DAO;
 
-import pw.p2.business.DTOKart;
-import pw.p2.data.Estado;
+import pw.p2.business.DTOUsuario;
 import pw.p2.data.common.DBConnection;
 import java.sql.*;
 import com.mysql.jdbc.ResultSet;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 
 /**
@@ -19,23 +19,21 @@ import java.util.ArrayList;
  *
  */
 
-public class DAOKart {
-	public ArrayList<DTOKart> requestKartsById(int id) {
-		ArrayList<DTOKart> listOfUsers = new ArrayList<DTOKart>();
+public class DAOUsuario {
+	public ArrayList<DTOUsuario> requestUsuariosByCorreo(String correo) {
+		ArrayList<DTOUsuario> listOfUsuarios = new ArrayList<DTOUsuario>();
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			// Important: This query is hard-coded here for illustrative purposes only
-			String query = "select last, first from User where age = " + id;
-			
-			// Important: We can replace this direct invocation to CRUD operations in DBConnection
+			String query = "select last, first from Usuario where correo = " + correo;
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
 			while (rs.next()) {
-				Boolean tipo = rs.getBoolean(0);
-				Estado estado = Estado.valueOf(rs.getString("VALOR"));
-				listOfUsers.add(new DTOKart());
+				String nombre = rs.getString("nombre");
+				String apellidos = rs.getString("apelllidos");
+				LocalDate nacimiento = LocalDate.parse(rs.getString("fechaNacimiento"));
+				listOfUsuarios.add(new DTOUsuario(nombre, apellidos, nacimiento, correo));
 			}
 
 			if (stmt != null){ 
@@ -46,6 +44,6 @@ public class DAOKart {
 			System.err.println(e);
 			e.printStackTrace();
 		}
-		return listOfUsers;
+		return listOfUsuarios;
 	}
 }
