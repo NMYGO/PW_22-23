@@ -1,4 +1,4 @@
-package pw.p1.factory_reserva;
+package pw.p2.business;
 
 import java.time.LocalDate;
 
