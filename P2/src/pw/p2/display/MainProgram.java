@@ -165,7 +165,7 @@ public class MainProgram{
 		        	                    break;
 		        	                    
 		        	                case 3:
-		        	                	System.out.println("Introduzca su nombre de usuario");
+		        	                	System.out.println("Introduzca su correo de usuario");
 		        	        				usuario = scan_.nextLine();
 		        	        			System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
 		        	        				fecha = LocalDate.parse(scan_.nextLine());
@@ -178,7 +178,7 @@ public class MainProgram{
 		        	                    break;
 		        	                    
 		        	                case 4:
-		        	                	System.out.println("Introduzca su nombre de usuario");
+		        	                	System.out.println("Introduzca su correo de usuario");
 		        	        				usuario = scan_.nextLine();
 		        	        			System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
 		        	        				fecha = LocalDate.parse(scan_.nextLine());
@@ -191,21 +191,21 @@ public class MainProgram{
 		        	                	break;
 		        	                	
 		        	                case 5:
-		        	                	System.out.println("Introduzca su nombre de usuario");
+		        	                	System.out.println("Introduzca su correo de usuario");
 		        	            			usuario = scan_.nextLine();
 		        	            			System.out.println("");
 		        	                	GestorReservas_.consultarReservasFuturasIndividuales(usuario);
 		        	                    break;
 		        	                    
 		        	                case 6:
-		        	                	System.out.println("Introduzca su nombre de usuario");
+		        	                	System.out.println("Introduzca su correo de usuario");
 		        	            			usuario = scan_.nextLine();
 		        	            			System.out.println("");
 		        	                	GestorReservas_.consultarReservasFuturasBono(usuario);
 		        	                    break;
 		        	                    
 		        	                case 7:
-		        	                	System.out.println("Introduzca su nombre de usuario");
+		        	                	System.out.println("Introduzca su correo de usuario");
 		        	        				usuario = scan_.nextLine();
 		        	        			System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
 		        	        				fecha = LocalDate.parse(scan_.nextLine());

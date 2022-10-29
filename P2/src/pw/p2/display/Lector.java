@@ -28,7 +28,6 @@ public class Lector {
 	 */
 	
 	public static void lector(GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, GestorReservas GestorReservas_) throws IOException{
-		String line;
 		
 	    DAOUsuario usuarioTabla = new DAOUsuario();
 		ArrayList<DTOUsuario> usuarios = usuarioTabla.solicitarUsuarios();
@@ -38,6 +37,14 @@ public class Lector {
 			GestorUsuarios_.arrayUsuarios.add(newUsuario);
 		}
 	    
+		DAOKart kartTabla = new DAOKart();
+		ArrayList<DTOKart> karts = kartTabla.solicitarKarts();
+		for (int i = 0; i < karts.size(); i++) {
+			//System.out.println(karts.get(i).toString());
+			Kart newKart = new Kart(karts.get(i).getId(), karts.get(i).isTipo(), karts.get(i).getEstado()); 
+			GestorPistas_.arrayKarts.add(newKart);
+		}
+			
 		DAOPista pistaTabla = new DAOPista();
 		ArrayList<DTOPista> pistas = pistaTabla.solicitarPistas();
 		for (int i = 0; i < pistas.size(); i++) {
@@ -47,93 +54,33 @@ public class Lector {
 		}
 	    
 	    for (int i = 0; i < GestorPistas_.arrayPistas.size(); i++) {
-		    File PKartsfile = new File(GestorPistas_.arrayPistas.get(i).getNombre() +"_Karts.txt");
-		    if(PKartsfile.isFile()) {
-		    	BufferedReader readerPKarts_ = new BufferedReader(new FileReader(new File(GestorPistas_.arrayPistas.get(i).getNombre() + "_Karts.txt")));
-			    while((line = readerPKarts_.readLine()) != null) {
-			    	String sid = line.substring(line.indexOf("d=") + 2, line.indexOf(", tipo"));
-						int id = Integer.parseInt(sid);
-			    	String stipo = line.substring(line.indexOf("o=") + 2, line.indexOf(", estado"));
-			    		Boolean tipo = Boolean.parseBoolean(stipo);
-			    	String sestado = line.substring(line.indexOf("do=") + 3, line.indexOf("]"));
-			    		Estado estado = Estado.valueOf(sestado);
-			    	Kart newKart = new Kart(id, tipo, estado); 
-			    	GestorPistas_.arrayPistas.get(i).lkart.add(newKart);
-				}
-			    readerPKarts_.close();
-		    }else {
-		    	if(PKartsfile.createNewFile()) {
-		    		System.out.println("--------------------------------------------------------------------------");
-		    		System.out.println("Se ha creado el fichero " + GestorPistas_.arrayPistas.get(i).getNombre() + "_Karts.txt porque no existia");
-		    		System.out.println("--------------------------------------------------------------------------");
-		    	}
-		    }
+	    	//System.out.println(GestorPistas_.arrayPistas.get(i).toString());
+	    	ArrayList<DTOKart> kartsPista = kartTabla.solicitarKartsPista(GestorPistas_.arrayPistas.get(i).getNombre());
+	    	for(int j = 0; j < kartsPista.size(); j++) {
+	    		//System.out.println(kartsPista.get(j).toString());
+	    		Kart kart = new Kart(kartsPista.get(j).getId(), kartsPista.get(j).isTipo(), kartsPista.get(j).getEstado());
+	    		GestorPistas_.arrayPistas.get(i).lkart.add(kart);
+	    	}	    	
 	    }
 	    
-	    File Kfile = new File("Karts.txt");
-	    if(Kfile.isFile()) {
-	    	BufferedReader readerK_ = new BufferedReader(new FileReader(new File("Karts.txt")));
-		    while((line = readerK_.readLine()) != null) {
-		    	String sid = line.substring(line.indexOf("d=") + 2, line.indexOf(", tipo"));
-					int id = Integer.parseInt(sid);
-		    	String stipo = line.substring(line.indexOf("o=") + 2, line.indexOf(", estado"));
-		    		Boolean tipo = Boolean.parseBoolean(stipo);
-		    	String sestado = line.substring(line.indexOf("do=") + 3, line.indexOf("]"));
-		    		Estado estado = Estado.valueOf(sestado);
-		    	Kart newKart = new Kart(id, tipo, estado); 
-		    	GestorPistas_.arrayKarts.add(newKart);
-			}
-		    readerK_.close();
-	    }else {
-	    	if(Kfile.createNewFile()) {
-	    		System.out.println("--------------------------------------------------------------------------");
-	    		System.out.println("Se ha creado el fichero Karts.txt porque no existia");
-	    		System.out.println("--------------------------------------------------------------------------");
-	    	}
-	    }
-	    
-	    File RIfile = new File("ReservasIndividuales.txt");
-	    if(RIfile.isFile()) {
-	    	BufferedReader readerRI_ = new BufferedReader(new FileReader(new File("ReservasIndividuales.txt")));
-		    while((line = readerRI_.readLine()) != null) {
-		    	String usuario = line.substring(line.indexOf("o=") + 2, line.indexOf(", fecha"));
-		    	String sfecha = line.substring(line.indexOf("a=") + 2, line.indexOf(", duracion"));
-		    		LocalDate fecha = LocalDate.parse(sfecha);
-		    	String sduracion = line.substring(line.indexOf("n=") + 2, line.indexOf(", pista"));
-		    		int duracion = Integer.parseInt(sduracion);
-		    	String pista = line.substring(line.indexOf("ta=") + 3, line.indexOf(", precio"));
-		    	String sprecio = line.substring(line.indexOf("cio=") + 4, line.indexOf(", descuento"));
-		    		float precio = Float.parseFloat(sprecio);
-		    	String sdescuento = line.substring(line.indexOf("to=") + 3, line.indexOf(", participantes"));
-		    		int descuento = Integer.parseInt(sdescuento);
-		    	String sparticipantesninios = line.substring(line.indexOf("ños=") + 4, line.indexOf(", participantes adultos"));
-		    		int participantesninios = Integer.parseInt(sparticipantesninios);
-		    	String sparticipantesadultos = line.substring(line.indexOf("tos=") + 4, line.indexOf("]"));
-		    	int participantesadultos = Integer.parseInt(sparticipantesadultos);
-	    		RIndividualCreador individualCreador = new RIndividualCreador();
-	    		if(line.contains("-> Reserva Infantil")) {
-	    			RInfantil newReserva = individualCreador.creaRInf(usuario, fecha, duracion, pista, precio, descuento, participantesninios); 
-	    			GestorReservas_.arrayReservaIndividual.add(newReserva);
-	    		}else if(line.contains("-> Reserva Familiar")) {
-	    			RFamiliar newReserva = individualCreador.creaRFam(usuario, fecha, duracion, pista, precio, descuento, participantesninios, participantesadultos); 
-	    			GestorReservas_.arrayReservaIndividual.add(newReserva);
-	    		}else if(line.contains("-> Reserva Adulto")){
-	    			RAdulto newReserva = individualCreador.creaRAdu(usuario, fecha, duracion, pista, precio, descuento, participantesadultos); 
-	    			GestorReservas_.arrayReservaIndividual.add(newReserva);
-	    		}else {
-	    			System.out.println("Error. Fallo en el lector de reserva individual");
-	    		}
-			}
-		    readerRI_.close();
-	    }else {
-	    	if(RIfile.createNewFile()) {
-	    		System.out.println("--------------------------------------------------------------------------");
-	    		System.out.println("Se ha creado el fichero ReservasIndividuales.txt porque no existia");
-	    		System.out.println("--------------------------------------------------------------------------");
-	    	}
-	    }
+	    DAOReserva reservaTabla = new DAOReserva();
+	    RIndividualCreador individualCreador = new RIndividualCreador();
+		ArrayList<DTOReserva> reservas = reservaTabla.solicitarReservas();
+		for (int i = 0; i < reservas.size(); i++) {
+			System.out.println(reservas.get(i).toString());
+			if(reservas.get(i).getTipo() == Tipo.INFANTIL) {				
+				RInfantil newReserva = individualCreador.creaRInf(reservas.get(i).getCorreo(), reservas.get(i).getFecha(), reservas.get(i).getDur(), reservas.get(i).getPista(), reservas.get(i).getPrecio(), reservas.get(i).getDesc(), reservas.get(i).getNiños());				
+				GestorReservas_.arrayReservaIndividual.add(newReserva);
+			}else if(reservas.get(i).getTipo() == Tipo.FAMILIAR) {
+				RFamiliar newReserva = individualCreador.creaRFam(reservas.get(i).getCorreo(), reservas.get(i).getFecha(), reservas.get(i).getDur(), reservas.get(i).getPista(), reservas.get(i).getPrecio(), reservas.get(i).getDesc(), reservas.get(i).getNiños(), reservas.get(i).getAdultos());
+				GestorReservas_.arrayReservaIndividual.add(newReserva);
+			}else if(reservas.get(i).getTipo() == Tipo.ADULTO) {
+				RAdulto newReserva = individualCreador.creaRAdu(reservas.get(i).getCorreo(), reservas.get(i).getFecha(), reservas.get(i).getDur(), reservas.get(i).getPista(), reservas.get(i).getPrecio(), reservas.get(i).getDesc(), reservas.get(i).getAdultos());				
+				GestorReservas_.arrayReservaIndividual.add(newReserva);
+			}			
+		}
 
-	    File RBfile = new File("ReservasBonos.txt");
+	    /**File RBfile = new File("ReservasBonos.txt");
 	    if(RBfile.isFile()) {
 	    	BufferedReader readerRB_ = new BufferedReader(new FileReader(new File("ReservasBonos.txt")));
 		    while((line = readerRB_.readLine()) != null) {
@@ -199,7 +146,7 @@ public class Lector {
 		    		System.out.println("--------------------------------------------------------------------------");
 		    	}
 		    }
-	    }
+	    }**/
 	    
 	}
 }

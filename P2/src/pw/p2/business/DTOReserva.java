@@ -1,5 +1,6 @@
 package pw.p2.business;
 
+import pw.p2.data.Tipo;
 import java.time.LocalDate;
 
 /**
@@ -13,11 +14,11 @@ import java.time.LocalDate;
  *
  */
 
-public abstract class Reserva {
+public class DTOReserva {
 	
 	/* Atributos */
 	
-	protected String usuario;
+	protected String correo;
 	protected LocalDate fecha;
 	protected int duracion;
 	protected String pista;
@@ -27,14 +28,14 @@ public abstract class Reserva {
 	protected int idBono;
 	protected int adultos;
 	protected int niños;
-	protected int dificultad;
+	protected Tipo tipo;
 	
 	/* Constructores */
 	
 	/**
 	 * Constructor por defecto
 	 * */
-	public Reserva() {}
+	public DTOReserva() {}
 	
 	/**
 	 * Constructor parametrizado
@@ -46,8 +47,8 @@ public abstract class Reserva {
 	 * @param descuento Descuento de la reserva
 	 * */
 	
-	public Reserva(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento, int idReserva, int idBono, int adultos, int niños, int dificultad) {
-		this.usuario = usuario;
+	public DTOReserva(String correo, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer idReserva, Integer idBono, Integer adultos, Integer niños, Tipo tipo) {
+		this.correo = correo;
 		this.fecha = fecha;
 		this.duracion = duracion;
 		this.pista = pista;
@@ -57,16 +58,16 @@ public abstract class Reserva {
 		this.idBono = idBono; 
 		this.adultos = adultos; 
 		this.niños = niños; 
-		this.dificultad = dificultad;
+		this.tipo = tipo;
 	}
 	
 	/* Getters y setters */
 	
-	public String getUsuario() {
-		return usuario;
+	public String getCorreo() {
+		return correo;
 	}
-	public void setUsuario(String user) {
-		this.usuario=user;
+	public void setcorreo(String correo) {
+		this.correo=correo;
 	}
 	
 	public LocalDate getFecha() {
@@ -79,7 +80,7 @@ public abstract class Reserva {
 	public int getDur() {
 		return duracion;
 	}
-	public void setDur(int duracion) {
+	public void setDur(Integer duracion) {
 		this.duracion = duracion;
 	}
 	
@@ -93,52 +94,58 @@ public abstract class Reserva {
 	public float getPrecio() {
 		return precio;
 	}
-	public void setPrecio(float precio) {
+	public void setPrecio(Float precio) {
 		this.precio = precio;
 	}
 	
 	public int getDesc() {
 		return descuento;
 	}
-	public void setDesc(int descuento) {
+	public void setDesc(Integer descuento) {
 		this.descuento = descuento;
 	}
 	public int getIdReserva() {
 		return idReserva;
 	}
-	public void setIdReserva(int idReserva) {
-		this.idREserva = idReserva;
+	public void setIdReserva(Integer idReserva) {
+		this.idReserva = idReserva;
 	}
 	public int getIdBono() {
 		return idBono;
 	}
-	public void setIdBono(int idBono) {
+	public void setIdBono(Integer idBono) {
 		this.idBono = idBono;
 	}
 	public int getAdultos() {
 		return adultos;
 	}
-	public void setAdultos(int adultos) {
+	public void setAdultos(Integer adultos) {
 		this.adultos = adultos;
 	}
 	public int getNiños() {
 		return niños;
 	}
-	public void setNiños(int niños) {
+	public void setNiños(Integer niños) {
 		this.niños = niños;
 	}
-	public int getDificultad() {
-		return dificultad;
+	public Tipo getTipo() {
+		return tipo;
 	}
-	public void setDificultad(int dificultad) {
-		this.dificultad = dificultad;
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
 	}
 	
 	/* Otros metodos */
 	
+	/**
+	 * Pasa los parámetros del objeto reserva a un string
+	 */
+	
 	@Override
 	public String toString() {
-		return "Reserva [usuario=" + usuario + ", fecha=" + fecha + ", duracion=" + duracion + ", pista=" + pista
-				+ ", precio=" + precio + ", descuento=" + descuento;
+		return "DTOReserva [correo=" + correo + ", fecha=" + fecha + ", duracion=" + duracion + ", pista=" + pista
+				+ ", precio=" + precio + ", descuento=" + descuento + ", idReserva=" + idReserva + ", idBono=" + idBono
+				+ ", adultos=" + adultos + ", niños=" + niños + ", tipo=" + tipo + "]";
 	}
+
 }

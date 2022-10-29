@@ -10,11 +10,11 @@ public class DTOPista {
 	
 	/* Atributos */
 	
-	private String nombre;	
-	private boolean estado;	//TRUE -> RESERVADO - FALSE -> DISPONIBLE
-	private Dificultad dificultad;
-	private int maxkarts;
-	public ArrayList<Kart> lkart;
+	protected String nombre;	
+	protected boolean estado;	//TRUE -> RESERVADO - FALSE -> DISPONIBLE
+	protected Dificultad dificultad;
+	protected int maxkarts;
+	protected ArrayList<Kart> lkart;
 	
 	/* Constructores */
 	
@@ -53,7 +53,7 @@ public class DTOPista {
 		return estado;
 	}
 
-	public void setEstado(boolean estado) {
+	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
 
@@ -82,9 +82,11 @@ public class DTOPista {
 	}
 	
 	/* Otros metodos */
+	
 	/**
 	 * Pasa los parámetros del objeto pista a un string
 	 */
+	
 	@Override
 	public String toString() {
 		return "Pista [nombre=" + nombre + ", estado=" + estado + ", "

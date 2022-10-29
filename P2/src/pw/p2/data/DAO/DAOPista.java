@@ -8,6 +8,7 @@ import com.mysql.jdbc.ResultSet;
 import java.util.ArrayList;
 
 public class DAOPista {
+	
 	public ArrayList<DTOPista> solicitarPistas() {
 		ArrayList<DTOPista> pistas = new ArrayList<DTOPista>();
 		try {
@@ -35,4 +36,5 @@ public class DAOPista {
 		}
 		return pistas;
 	}
+	
 }

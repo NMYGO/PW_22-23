@@ -7,11 +7,11 @@ public class DTOUsuario {
 	
 	/* Atributos */
 	
-	private String nombre;
-	private String apellidos;
-	private LocalDate nacimiento;
-	private LocalDate inscripcion;
-	private String correo;
+	protected String nombre;
+	protected String apellidos;
+	protected LocalDate nacimiento;
+	protected LocalDate inscripcion;
+	protected String correo;
 	
 	/* Constructores */
 	

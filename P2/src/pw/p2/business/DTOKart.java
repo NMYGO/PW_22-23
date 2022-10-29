@@ -17,9 +17,9 @@ public class DTOKart {
 	
 	/* Atributos */
 	
-	private int id;	
-	private boolean tipo; //TRUE -> NIÑO - FALSE -> ADULTO	
-	private Estado estado;
+	protected int id;	
+	protected boolean tipo; //TRUE -> NIÑO - FALSE -> ADULTO	
+	protected Estado estado;
 	
 	/* Constructores */
 	
