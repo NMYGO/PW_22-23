@@ -256,8 +256,8 @@ public class MainProgram{
 				System.out.println("");
             }
         }
-        	//Escritor.escritor(GestorPistas_, GestorUsuarios_, GestorReservas_);
-        FicheroPropiedades.propiedades(GestorPistas_, GestorUsuarios_, GestorReservas_);
+        	Escritor.escritor(GestorPistas_, GestorUsuarios_, GestorReservas_);
+        //FicheroPropiedades.propiedades(GestorPistas_, GestorUsuarios_, GestorReservas_);
         scan_.close();
     }
 

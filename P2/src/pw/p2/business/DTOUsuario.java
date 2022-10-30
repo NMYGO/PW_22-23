@@ -28,11 +28,11 @@ public class DTOUsuario {
 	 * @param correo Correo unico del usuario
 	 * */
 	
-	public DTOUsuario(String nombre, String apellidos, LocalDate nacimiento, String correo) {
+	public DTOUsuario(String nombre, String apellidos, LocalDate nacimiento, LocalDate inscripcion, String correo) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.nacimiento = nacimiento;
-		this.inscripcion = LocalDate.now();
+		this.inscripcion = inscripcion;
 		this.correo = correo;
 	}
 	
@@ -101,4 +101,5 @@ public class DTOUsuario {
 		int antiguedad = Integer.parseInt(ahora) - Integer.parseInt(sInscripcion);
 			System.out.println("Nº de años registrado: " + antiguedad);
 	}
+	
 }

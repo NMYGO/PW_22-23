@@ -47,6 +47,14 @@ public class Usuario {
 		this.correo = correo;
 	}
 	
+	public Usuario(String nombre, String apellidos, LocalDate nacimiento, LocalDate inscripcion, String correo) {
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.nacimiento = nacimiento;
+		this.inscripcion = inscripcion;
+		this.correo = correo;
+	}
+	
 	/* Getters y setters */
 
 	public String getNombre() {

@@ -1,11 +1,9 @@
 package pw.p2.display;
 
 import pw.p2.data.*;
-import pw.p2.business.*;
 import pw.p2.data.DAO.*;
+import pw.p2.business.*;
 import java.util.ArrayList;
-import java.time.LocalDate;
-import java.io.*;
 
 /**
  * Clase que gestiona la lectura de los ficheros
@@ -27,13 +25,13 @@ public class Lector {
 	 * @return void
 	 */
 	
-	public static void lector(GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, GestorReservas GestorReservas_) throws IOException{
+	public static void lector(GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, GestorReservas GestorReservas_){
 		
 	    DAOUsuario usuarioTabla = new DAOUsuario();
 		ArrayList<DTOUsuario> usuarios = usuarioTabla.solicitarUsuarios();
 		for (int i = 0; i < usuarios.size(); i++) {
 			//System.out.println(usuarios.get(i).toString());
-			Usuario newUsuario = new Usuario(usuarios.get(i).getNombre(), usuarios.get(i).getApellidos(), usuarios.get(i).getNacimiento(), usuarios.get(i).getCorreo()); 
+			Usuario newUsuario = new Usuario(usuarios.get(i).getNombre(), usuarios.get(i).getApellidos(), usuarios.get(i).getNacimiento(), usuarios.get(i).getInscripcion(), usuarios.get(i).getCorreo()); 
 			GestorUsuarios_.arrayUsuarios.add(newUsuario);
 		}
 	    
@@ -67,7 +65,7 @@ public class Lector {
 	    RIndividualCreador individualCreador = new RIndividualCreador();
 		ArrayList<DTOReserva> reservas = reservaTabla.solicitarReservas();
 		for (int i = 0; i < reservas.size(); i++) {
-			System.out.println(reservas.get(i).toString());
+			//System.out.println(reservas.get(i).toString());
 			if(reservas.get(i).getTipo() == Tipo.INFANTIL) {				
 				RInfantil newReserva = individualCreador.creaRInf(reservas.get(i).getCorreo(), reservas.get(i).getFecha(), reservas.get(i).getDur(), reservas.get(i).getPista(), reservas.get(i).getPrecio(), reservas.get(i).getDesc(), reservas.get(i).getNiños());				
 				GestorReservas_.arrayReservaIndividual.add(newReserva);

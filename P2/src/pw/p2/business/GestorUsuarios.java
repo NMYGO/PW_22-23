@@ -1,7 +1,6 @@
 package pw.p2.business;
 
 import pw.p2.data.Usuario;
-import pw.p2.data.DAO.DAOUsuario;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -138,12 +137,4 @@ public class GestorUsuarios {
 			System.out.println(arrayUsuarios.get(i).toString());
 		}
 	}
-	
-	/**public void requestUsuariosByCorreo(String correo) {
-		DAOUsuario usuarioPorCorreo = new DAOUsuario();
-		ArrayList<DTOUsuario> usuarios = usuarioPorCorreo.solicitarUsuariosPorCorreo(correo);
-		for (int i = 0; i < usuarios.size(); i++) {
-			System.out.println(usuarios.get(i).toString());
-		}
-	}**/
 }
