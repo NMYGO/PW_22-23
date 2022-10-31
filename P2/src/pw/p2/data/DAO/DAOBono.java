@@ -21,11 +21,11 @@ public class DAOBono {
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
 			while (rs.next()) {
-				int id = rs.getInt("id");
+				int id = rs.getInt("idBono");
 				int sesion = rs.getInt("sesion");
-				String bUsuario = rs.getString("bUsuario");
+				LocalDate fcaducidad = LocalDate.parse(rs.getString("fechaCaducidad"));
+				String bUsuario = rs.getString("correoUsuario");
 				Tipo tipo = Tipo.valueOf(rs.getString("tipo"));
-				LocalDate fcaducidad = LocalDate.parse(rs.getString("fcaducidad"));
 				bonos.add(new DTOBono(id,sesion,bUsuario,tipo,fcaducidad));
 			}
 
