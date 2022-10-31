@@ -1,6 +1,8 @@
 package pw.p2.business;
 
 import pw.p2.data.Usuario;
+import pw.p2.data.DAO.DAOUsuario;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -33,18 +35,11 @@ public class GestorUsuarios {
 	 * @return Devuelve un booleano 
 	 * */
 
-	public Boolean registrarUsuario (String nombre, String apellidos, LocalDate nacimiento, String correo) {					
-		for (int i = 0; i < arrayUsuarios.size(); i++) {
-			if (arrayUsuarios.get(i).getCorreo().equals(correo)) {
-				System.out.println("Error. Ese usuario ya existe");
-				System.out.println("-------------------------------------");
-				System.out.println("");
-				return false;
-			}
-		}
+	public Boolean registrarUsuario (String nombre, String apellidos, LocalDate nacimiento, String correo) {	
+		DAOUsuario usuarioTabla = new DAOUsuario();
+		DTOUsuario usuario = new DTOUsuario(nombre, apellidos, nacimiento, correo);
 		
-		Usuario newUsuario = new Usuario(nombre, apellidos, nacimiento, correo);
-		arrayUsuarios.add(newUsuario);
+		usuarioTabla.escribirUsuarioInsert(usuario);
 		System.out.println("Usuario creado con exito");
 		System.out.println("-------------------------------------");
 		System.out.println("");
@@ -61,71 +56,59 @@ public class GestorUsuarios {
 		System.out.println("Introduzca su correo de usuario");
 			String correo = scan_.nextLine();
 			System.out.println("");
-		for (int i = 0; i < arrayUsuarios.size(); i++) {
-			if (arrayUsuarios.get(i).getCorreo().equals(correo)) {
+			
+			DAOUsuario usuarioTabla = new DAOUsuario();
+			DTOUsuario usuario = usuarioTabla.solicitarUsuario(correo);
 
-				int opcion = 1;
-				while (opcion != 0) {
-					System.out.println("0: Terminar modificacion.\n"
-					+ "1: Cambiar Nombre.\n"
-					+ "2: Cambiar Apellidos.\n"
-					+ "3: Cambiar fecha de nacimiento.\n"
-					+ "4: Cambiar direccion de Correo.\n"
-					+ "Introduzca una opcion:"); 
+			int opcion = 1;
+			while (opcion != 0) {
+				System.out.println("0: Terminar modificacion.\n"
+				+ "1: Cambiar Nombre.\n"
+				+ "2: Cambiar Apellidos.\n"
+				+ "3: Cambiar fecha de nacimiento.\n"
+				+ "4: Cambiar direccion de Correo.\n"
+				+ "Introduzca una opcion:"); 
+				
+					opcion = Integer.parseInt(scan_.nextLine());
+					System.out.println("");
+				switch (opcion) {
+				case 0: 
+					usuarioTabla.escribirUsuarioUpdate(usuario);
+					System.out.println("Usuario modificado con exito");
+					System.out.println("-------------------------------------");
+					System.out.println("");
 					
-						opcion = Integer.parseInt(scan_.nextLine());
-						System.out.println("");
-					switch (opcion) {
-					case 0: 
-						System.out.println("Usuario modificado con exito");
-						System.out.println("-------------------------------------");
-						System.out.println("");
+					break;
+				case 1:
+					System.out.println("Introduzca el nuevo nombre de usuario");
+					String nuevoNombre = scan_.nextLine();
+					System.out.println("");
+					usuario.setNombre(nuevoNombre);
+
+					break;
 						
-						break;
-					case 1:
-						System.out.println("Introduzca el nuevo nombre de usuario");
-						String nuevoNombre = scan_.nextLine();
-						System.out.println("");
-						arrayUsuarios.get(i).setNombre(nuevoNombre);
-	
-						break;
-							
-					case 2:
-						System.out.println("Introduzca los nuevos apellidos de usuario");
-						String nuevoApellidos = scan_.nextLine();
-						System.out.println("");
-						arrayUsuarios.get(i).setApellidos(nuevoApellidos);
-	
-						break;
-					case 3:
-						System.out.println("Introduzca la nueva fecha de nacimiento de usuario");
-						LocalDate nuevaFechaNacimiento = LocalDate.parse(scan_.nextLine());					
-						System.out.println("");
-						arrayUsuarios.get(i).setNacimiento(nuevaFechaNacimiento);
-						
-						break;
-						
-					case 4:
-						System.out.println("Introduzca la nueva direccion de correo de usuario");
-						String nuevoCorreo = scan_.nextLine();
-						System.out.println("");
-						arrayUsuarios.get(i).setCorreo(nuevoCorreo);
-	
-						break;
-					default:
-						System.out.println("Opcion no reconocida");
-						System.out.println("");
-						break;
-					}
+				case 2:
+					System.out.println("Introduzca los nuevos apellidos de usuario");
+					String nuevoApellidos = scan_.nextLine();
+					System.out.println("");
+					usuario.setApellidos(nuevoApellidos);
+
+					break;
+				case 3:
+					System.out.println("Introduzca la nueva fecha de nacimiento de usuario");
+					LocalDate nuevaFechaNacimiento = LocalDate.parse(scan_.nextLine());					
+					System.out.println("");
+					usuario.setNacimiento(nuevaFechaNacimiento);
+					
+					break;
+				default:
+					System.out.println("Opcion no reconocida");
+					System.out.println("");
+					break;
 				}
-				return true;
 			}
-		}
-		
-		System.out.println("Error. Ese usuario no existe");
-		System.out.println("-------------------------------------");
-		System.out.println("");
-		return false; //NO SE HA ENCONTRADO EL USUARIO
+			
+			return true;
 	}
 	
 	/**
@@ -133,8 +116,10 @@ public class GestorUsuarios {
 	 */
 	
 	public void listarUsuarios () {
-		for (int i = 0; i < arrayUsuarios.size(); i++) {
-			System.out.println(arrayUsuarios.get(i).toString());
+		DAOUsuario usuarioTabla = new DAOUsuario();
+		ArrayList<DTOUsuario> usuarios = usuarioTabla.solicitarUsuarios();
+		for (int i = 0; i < usuarios.size(); i++) {
+			System.out.println(usuarios.get(i).toString());
 		}
 	}
 }

@@ -34,7 +34,7 @@ public class MainProgram{
 		Dificultad dificultad;
 		Estado estados;
 		LocalDate fecha, nacimiento;
-        	Lector.lector(GestorPistas_, GestorUsuarios_, GestorReservas_);
+        	//Lector.lector(GestorPistas_, GestorUsuarios_, GestorReservas_);
         
         while(!exit_){
         	System.out.println("PROGRAMA MAIN");
@@ -256,7 +256,7 @@ public class MainProgram{
 				System.out.println("");
             }
         }
-        	Escritor.escritor(GestorPistas_, GestorUsuarios_, GestorReservas_);
+        	//Escritor.escritor(GestorPistas_, GestorUsuarios_, GestorReservas_);
         //FicheroPropiedades.propiedades(GestorPistas_, GestorUsuarios_, GestorReservas_);
         scan_.close();
     }

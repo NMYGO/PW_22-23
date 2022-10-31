@@ -22,7 +22,7 @@ public class Escritor {
 	 */
 	
 	public static void escritor(GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, GestorReservas GestorReservas_){	
-		DAOUsuario usuarioEscritor = new DAOUsuario();
+		/**DAOUsuario usuarioEscritor = new DAOUsuario();
 		DAOKart kartEscritor = new DAOKart();
 		DAOPista pistaEscritor = new DAOPista();
 		DAOReserva reservaEscritor = new DAOReserva();
@@ -37,7 +37,7 @@ public class Escritor {
 		    	}
 	    	}
 	    	if(encontrado) {
-		    	if(usuarioEscritor.escribirUsuariosUpdate(GestorUsuarios_.arrayUsuarios.get(i)) == -1){
+		    	if(usuarioEscritor.escribirUsuarioUpdate(GestorUsuarios_.arrayUsuarios.get(i)) == -1){
 		    		System.err.println("Error en la escritura de usuario");
 		    	}
 	    	}else if(!encontrado) {
@@ -45,7 +45,7 @@ public class Escritor {
 		    		System.err.println("Error en la escritura de usuario");
 		    	}
 	    	}
-		}	
+		}	**/
 		
 	}
 	

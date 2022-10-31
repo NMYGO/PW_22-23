@@ -1,7 +1,6 @@
 package pw.p2.data.DAO;
 
 import pw.p2.business.DTOUsuario;
-import pw.p2.data.Usuario;
 import pw.p2.data.common.DBConnection;
 import java.sql.*;
 import com.mysql.jdbc.ResultSet;
@@ -51,7 +50,35 @@ public class DAOUsuario {
 		return usuarios;
 	}
 	
-	public int escribirUsuariosUpdate(Usuario usuario) {
+	public DTOUsuario solicitarUsuario(String correo) {
+		DTOUsuario usuario = new DTOUsuario();
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query = "select * from usuario where correoUsuario = " + "'" + correo + "'";
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+
+			while (rs.next()) {
+				String nombre = rs.getString("nombre");
+				String apellidos = rs.getString("apellidos");
+				LocalDate inscripcion = LocalDate.parse(rs.getString("fechaInscripcion"));
+				LocalDate nacimiento = LocalDate.parse(rs.getString("fechaNacimiento"));
+				usuario = new DTOUsuario(nombre, apellidos, nacimiento, inscripcion, correo);
+			}
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return usuario;
+	}
+	
+	public int escribirUsuarioUpdate(DTOUsuario usuario) {
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -72,7 +99,7 @@ public class DAOUsuario {
 		return status;
 	}
 	
-	public int escribirUsuariosInsert(Usuario usuario) {
+	public int escribirUsuarioInsert(DTOUsuario usuario) {
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();

@@ -2,6 +2,8 @@ package pw.p2.display;
 
 import pw.p2.business.*;
 import pw.p2.data.Estado;
+import pw.p2.data.DAO.DAOUsuario;
+
 import java.util.Scanner;
 
 /**
@@ -111,12 +113,12 @@ public class MainMiscelanea {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		
-		for (int i = 0; i < GestorUsuarios_.arrayUsuarios.size(); i++) {
-			if (GestorUsuarios_.arrayUsuarios.get(i).getCorreo().equals(correo)) {
-				return true;
-			}
+		DAOUsuario usuarioTabla = new DAOUsuario();
+		if(usuarioTabla.solicitarUsuario(correo).getCorreo() == null) {
+			return false;
 		}
-		return false;
+
+		return true;
 	}
 	
 	/**

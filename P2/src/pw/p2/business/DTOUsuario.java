@@ -1,7 +1,6 @@
 package pw.p2.business;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class DTOUsuario {
 	
@@ -27,6 +26,14 @@ public class DTOUsuario {
 	 * @param nacimiento Nacimiento del usuario
 	 * @param correo Correo unico del usuario
 	 * */
+	
+	public DTOUsuario(String nombre, String apellidos, LocalDate nacimiento, String correo) {
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.nacimiento = nacimiento;
+		this.inscripcion = LocalDate.now();
+		this.correo = correo;
+	}
 	
 	public DTOUsuario(String nombre, String apellidos, LocalDate nacimiento, LocalDate inscripcion, String correo) {
 		this.nombre = nombre;
