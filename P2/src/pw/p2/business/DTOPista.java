@@ -94,45 +94,4 @@ public class DTOPista {
 				+ "]\n";
 	}
 	
-	/**
-	 * Función para encontrar los karts disponibles
-	 * @param arrayKarts
-	 * @return Devuelve una lista de los karts disponibles
-	 */
-	
-	public ArrayList<Kart> consultarKartsDisponibles(ArrayList<Kart> arrayKarts) {
-		ArrayList<Kart> dkart = new ArrayList<Kart>();
-		for(int i = 0; i < arrayKarts.size(); i++) {
-			if((arrayKarts.get(i)).getEstado() == Estado.DISPONIBLE) {
-				dkart.add(arrayKarts.get(i));
-			}
-		}
-		return dkart;
-	}
-
-	/**
-	 * Función que asocia karts a las pistas dependiendo de la dificultad de ambos
-	 * @param kart
-	 * @param pista
-	 * @return
-	 */
-	
-	public boolean asociarKartAPista(Kart kart, Pista pista) {
-		if(pista.getMaxkarts() == pista.lkart.size()) {
-			return false;
-		}
-		if(pista.getDificultad() == Dificultad.INFANTIL && kart.isTipo()) {
-			kart.setEstado(Estado.RESERVADO);
-			pista.lkart.add(kart);
-		}else if(pista.getDificultad() == Dificultad.ADULTO && !kart.isTipo()) {
-			kart.setEstado(Estado.RESERVADO);
-			pista.lkart.add(kart);
-		}else if(pista.getDificultad() == Dificultad.FAMILIAR) {
-			kart.setEstado(Estado.RESERVADO);
-			pista.lkart.add(kart);
-		}else {
-			return false;
-		}
-		return true;
-	}
 }

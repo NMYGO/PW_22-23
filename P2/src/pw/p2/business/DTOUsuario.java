@@ -90,16 +90,4 @@ public class DTOUsuario {
 				+ ", correo=" + correo + "]\n";
 	}
 	
-	/**
-	 * Calcula la antiguedad del usuario
-	 */
-	
-	public void calcularAntiguedad() {
-		DateTimeFormatter formateador = DateTimeFormatter.ofPattern("uuuu");
-		String ahora = (LocalDate.now()).format(formateador);
-		String sInscripcion = inscripcion.format(formateador);
-		int antiguedad = Integer.parseInt(ahora) - Integer.parseInt(sInscripcion);
-			System.out.println("Nº de años registrado: " + antiguedad);
-	}
-	
 }
