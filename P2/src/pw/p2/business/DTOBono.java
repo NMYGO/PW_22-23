@@ -1,14 +1,13 @@
 package pw.p2.business;
 
+import pw.p2.data.Reserva;
+import pw.p2.data.Tipo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import pw.p2.data.RBono;
-import pw.p2.data.Reserva;
-import pw.p2.data.Tipo;
-
 public class DTOBono {
-/* Atributos */
+	
+	/* Atributos */
 	
 	private int id;
 	private int sesion;

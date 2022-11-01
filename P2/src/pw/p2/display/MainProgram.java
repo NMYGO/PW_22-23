@@ -2,6 +2,8 @@ package pw.p2.display;
 
 import pw.p2.business.*;
 import pw.p2.data.*;
+import pw.p2.data.DAO.DAOPista;
+
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -57,7 +59,7 @@ public class MainProgram{
 				GestorUsuarios_.registrarUsuario(nombre, apellidos, nacimiento, correo);	            
             }else if(option_ == 1) {           
         		if(!MainMiscelanea.login(GestorUsuarios_, scan_)) {
-        			System.out.println("	Debe registrarse antes de iniciar sesion");
+        			System.out.println("Debe registrarse antes de iniciar sesion");
         			System.out.println("");
         		}else {
                 	System.out.println("");
@@ -111,9 +113,10 @@ public class MainProgram{
 			    							dificultad = Dificultad.valueOf(scan_.nextLine());
 			    							System.out.println("");
 			    							
-			    	                	ArrayList<Pista> arraypistaslibres = GestorPistas_.pistasLibres(participantes, dificultad);
-			    	                	for (int i = 0;i< arraypistaslibres.size() ; i++) {
-		    	            				System.out.println(arraypistaslibres.get(i).toString());
+			    							DAOPista pistaTabla = new DAOPista();
+			    							ArrayList <DTOPista> pistas = pistaTabla.solicitarPistasLibres(false, dificultad);
+			    	                	for (int i = 0;i< pistas.size() ; i++) {
+		    	            				System.out.println(pistas.get(i).toString());
 			    	            		}
 			    	                	break;
 			    	            }
@@ -231,7 +234,7 @@ public class MainProgram{
 		        	        				tipo = Boolean.parseBoolean(scan_.nextLine());
 		        	        			System.out.println("Introduzca el estado de kart");
 		        	        				estados = Estado.valueOf(scan_.nextLine());
-		        	                	GestorPistas_.crearKart(id, tipo, estados);
+		        	                	GestorPistas_.crearKart(id, tipo, estados, "");
 		        	                    break;
 		        	                    
 		        	                case 2:

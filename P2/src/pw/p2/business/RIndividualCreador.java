@@ -1,9 +1,8 @@
 package pw.p2.business;
 
-import pw.p2.data.RInfantil;
-import pw.p2.data.RFamiliar;
-import pw.p2.data.RAdulto;
 import java.time.LocalDate;
+
+import pw.p2.data.Dificultad;
 
 /**
  * 
@@ -23,8 +22,8 @@ public class RIndividualCreador extends ReservaCreador{
 	 **/
 	
 	@Override
-	public RInfantil creaRInf(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento, int ninos) {
-		RInfantil reserva = new RInfantil(usuario, fecha, duracion, pista, precio, descuento, ninos);
+	public DTORInfantil creaRInf(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer ninos, Dificultad tipo) {
+		DTORInfantil reserva = new DTORInfantil(usuario, fecha, duracion, pista, precio, descuento, ninos, tipo);
 		return reserva;
 	}
 	
@@ -33,8 +32,8 @@ public class RIndividualCreador extends ReservaCreador{
 	 **/
 	
 	@Override
-	public RFamiliar creaRFam(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento, int ninos, int adultos) {
-		RFamiliar reserva = new RFamiliar(usuario, fecha, duracion, pista, precio, descuento, ninos, adultos);
+	public DTORFamiliar creaRFam(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Integer ninos, Dificultad tipo) {
+		DTORFamiliar reserva = new DTORFamiliar(usuario, fecha, duracion, pista, precio, descuento, adultos, ninos, tipo);
 		return reserva;
 	}
 	
@@ -43,8 +42,8 @@ public class RIndividualCreador extends ReservaCreador{
 	 **/
 	
 	@Override
-	public RAdulto creaRAdu(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento, int adultos) {
-		RAdulto reserva = new RAdulto(usuario, fecha, duracion, pista, precio, descuento, adultos);
+	public DTORAdulto creaRAdu(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Dificultad tipo) {
+		DTORAdulto reserva = new DTORAdulto(usuario, fecha, duracion, pista, precio, descuento, adultos, tipo);
 		return reserva;
 	}
 }

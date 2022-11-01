@@ -1,5 +1,6 @@
 package pw.p2.data;
 
+import pw.p2.business.DTOKart;
 import java.util.ArrayList;
 
 /**
@@ -21,7 +22,7 @@ public class Pista {
 	private boolean estado;	//TRUE -> RESERVADO - FALSE -> DISPONIBLE
 	private Dificultad dificultad;
 	private int maxkarts;
-	public ArrayList<Kart> lkart;
+	public ArrayList<DTOKart> lkart;
 	
 	/* Constructores */
 	
@@ -43,7 +44,7 @@ public class Pista {
 		this.estado = estado;
 		this.dificultad = dificultad;
 		this.maxkarts = maxkarts;
-		this.lkart = new ArrayList<Kart>();
+		this.lkart = new ArrayList<DTOKart>();
 	}
 	
 	/* Getters y setters */
@@ -80,11 +81,11 @@ public class Pista {
 		this.maxkarts = maxkarts;
 	}
 
-	public ArrayList<Kart> getLkart() {
+	public ArrayList<DTOKart> getLkart() {
 		return lkart;
 	}
 
-	public void setLkart(ArrayList<Kart> lkart) {
+	public void setLkart(ArrayList<DTOKart> lkart) {
 		this.lkart = lkart;
 	}
 	
@@ -105,8 +106,8 @@ public class Pista {
 	 * @return Devuelve una lista de los karts disponibles
 	 */
 	
-	public ArrayList<Kart> consultarKartsDisponibles(ArrayList<Kart> arrayKarts) {
-		ArrayList<Kart> dkart = new ArrayList<Kart>();
+	public ArrayList<DTOKart> consultarKartsDisponibles(ArrayList<DTOKart> arrayKarts) {
+		ArrayList<DTOKart> dkart = new ArrayList<DTOKart>();
 		for(int i = 0; i < arrayKarts.size(); i++) {
 			if((arrayKarts.get(i)).getEstado() == Estado.DISPONIBLE) {
 				dkart.add(arrayKarts.get(i));
@@ -122,7 +123,7 @@ public class Pista {
 	 * @return
 	 */
 	
-	public boolean asociarKartAPista(Kart kart, Pista pista) {
+	public boolean asociarKartAPista(DTOKart kart, Pista pista) {
 		if(pista.getMaxkarts() == pista.lkart.size()) {
 			return false;
 		}

@@ -1,5 +1,8 @@
-package pw.p2.data;
+package pw.p2.business;
 import java.time.LocalDate;
+
+import pw.p2.data.Dificultad;
+import pw.p2.data.Reserva;
 
 /**
  * 
@@ -12,18 +15,19 @@ import java.time.LocalDate;
  *
  */
 
-public class RAdulto extends Reserva{
+public class DTORAdulto extends Reserva{
 	
 	/* Atributos */
 	
-	int adultos;
+	private int adultos;
+	private Dificultad tipo;
 	
 	/* Constructores */
 	
 	/**
 	 * Constructor por defecto
 	 * */
-	public RAdulto() {}
+	public DTORAdulto() {}
 	
 	/**
 	 * Constructor parametrizado
@@ -36,9 +40,10 @@ public class RAdulto extends Reserva{
 	 * @param adultos número de participantes
 	 */
 	
-	public RAdulto(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento, int adultos) {
+	public DTORAdulto(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Dificultad tipo) {
 		super(usuario, fecha, duracion, pista, precio, descuento);
 		this.adultos = adultos;
+		this.tipo = tipo;
 	}
 	
 	/* Getters y setters */
@@ -49,9 +54,16 @@ public class RAdulto extends Reserva{
 	public void setParticipantes(int adultos) {
 		this.adultos = adultos;
 	}
+	public Dificultad getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Dificultad tipo) {
+		this.tipo = tipo;
+	}
 	
 	/* Otros metodos */
-	
+
 	public String toString() {
 		String info = super.toString();
 			info +=  ", participantes niños=0, participantes adultos=" + adultos + "] -> Reserva Adulto\n";

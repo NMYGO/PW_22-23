@@ -1,9 +1,8 @@
 package pw.p2.business;
 
-import pw.p2.data.RInfantil;
-import pw.p2.data.RFamiliar;
-import pw.p2.data.RAdulto;
 import java.time.LocalDate;
+
+import pw.p2.data.Dificultad;
 
 /**
  * 
@@ -24,17 +23,17 @@ public abstract class ReservaCreador {
 	 * Crea una reserva infantil
 	 *  */
 	
-	public abstract RInfantil creaRInf(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento, int ninos);
+	public abstract DTORInfantil creaRInf(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer ninos, Dificultad tipo);
 	
 	/** 
 	 * Crea una reserva familiar
 	 *  */
 	
-	public abstract RFamiliar creaRFam(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento, int ninos, int adultos);
+	public abstract DTORFamiliar creaRFam(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Integer ninos, Dificultad tipo);
 	
 	/** 
 	 * Crea una reserva adulta
 	 *  */
 	
-	public abstract RAdulto creaRAdu(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento, int adultos);
+	public abstract DTORAdulto creaRAdu(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Dificultad tipo);
 }

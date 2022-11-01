@@ -1,6 +1,9 @@
-package pw.p2.data;
+package pw.p2.business;
 
 import java.time.LocalDate;
+
+import pw.p2.data.Dificultad;
+import pw.p2.data.Reserva;
 
 /**
  * 
@@ -13,19 +16,19 @@ import java.time.LocalDate;
  *
  */
 
-public class RFamiliar extends Reserva{
+public class DTORFamiliar extends Reserva{
 	
 	/* Atributos */
 	
 	protected int ninos;
 	protected int adultos;
-	
+	protected Dificultad tipo;
 	/* Constructores */
 	
 	/**
 	 * Constructor por defecto
 	 * */
-	public RFamiliar() {}
+	public DTORFamiliar() {}
 	
 	/**
 	 * Constructor parametrizado
@@ -33,10 +36,11 @@ public class RFamiliar extends Reserva{
 	 * @param adultos Participantes adultos de la reserva familiar
 	 * */
 	
-	public RFamiliar(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento, int ninos, int adultos) {
+	public DTORFamiliar(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Integer ninos, Dificultad tipo) {
 		super(usuario, fecha, duracion, pista, precio, descuento);
 		this.ninos = ninos;
 		this.adultos = adultos;
+		this.tipo = tipo;
 	}
 	
 	/* Getters y setters */
@@ -54,9 +58,16 @@ public class RFamiliar extends Reserva{
 	public void setadultos(int adultos) {
 		this.adultos = adultos;
 	}
+	public Dificultad getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Dificultad tipo) {
+		this.tipo = tipo;
+	}
 	
 	/* Otros metodos */
-	
+
 	public String toString() {
 		String info = super.toString();
 			info += ", participantes niños=" + ninos + ", participantes adultos=" + adultos + "] -> Reserva Familiar\n";

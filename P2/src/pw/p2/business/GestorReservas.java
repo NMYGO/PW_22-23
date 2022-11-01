@@ -1,6 +1,9 @@
 package pw.p2.business;
 
 import pw.p2.data.*;
+import pw.p2.data.DAO.DAOPista;
+import pw.p2.data.DAO.DAOReserva;
+import pw.p2.data.DAO.DAOUsuario;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -38,17 +41,20 @@ public class GestorReservas {
 	 * @return true si la reserva se ha realizado, false si no
 	 */
 	
-	public boolean ReservaIndividualInfantil (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Integer nParticipantes, Scanner scan_) {
+	public boolean ReservaIndividualInfantil (GestorReservas GestorReservas_, GestorPistas GestorPistas_, Integer nParticipantes, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
-		for (int i = 0; i < GestorUsuarios_.arrayUsuarios.size(); i++) {
-			if (GestorUsuarios_.arrayUsuarios.get(i).getCorreo().equals(correo)) {
-				if ((GestorUsuarios_.arrayUsuarios.get(i).getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
+		
+		DAOUsuario usuarioTabla = new DAOUsuario();
+		DAOPista pistaTabla = new DAOPista();
+		DTOUsuario usuario = usuarioTabla.solicitarUsuario(correo);
+		ArrayList<DTOPista> lpista = pistaTabla.solicitarPistasLibres(false, Dificultad.INFANTIL);
+		
+				if ((usuario.getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
 					System.out.println("Introduzca el numero de participantes (niños)");
 						int participantes= Integer.parseInt(scan_.nextLine());
-						System.out.println("");
-					ArrayList<Pista> lpista = GestorPistas_.pistasLibres(participantes, Dificultad.INFANTIL);			
+						System.out.println("");		
 					if(lpista.size() > 0) {
 						System.out.println("Pistas libres:");
 						for (int j = 0; j < lpista.size(); j++) {
@@ -87,13 +93,18 @@ public class GestorReservas {
 								precio = 40;
 								break;
 							}	
-						if(GestorUsuarios_.arrayUsuarios.get(i).getInscripcion().isBefore(LocalDate.now().minusYears(2))) {
+						if(usuario.getInscripcion().isBefore(LocalDate.now().minusYears(2))) {
 							descuento = 10;
 						}
 						
 						RIndividualCreador individualCreador = new RIndividualCreador();
-						RInfantil newReserva = individualCreador.creaRInf(GestorUsuarios_.arrayUsuarios.get(i).getNombre(), fecha, duracion, pista, precio, descuento, participantes);
-						arrayReservaIndividual.add(newReserva);
+						DTORInfantil newReserva = individualCreador.creaRInf(usuario.getCorreo(), fecha, duracion, pista, precio, descuento, participantes, Dificultad.INFANTIL);
+						DAOReserva reservaTabla = new DAOReserva();
+						if(reservaTabla.escribirReservaInfantilInsert(newReserva) == 0) {
+							System.out.println("Error. Reserva no creada");
+							System.out.println("");
+							return false;
+						}
 						System.out.println("Reserva creada con exito");
 						System.out.println("-------------------------------------");
 						System.out.println("");
@@ -107,8 +118,6 @@ public class GestorReservas {
 					System.out.println("");
 					return false;
 				}
-			}
-		}
 		return true;
 	}
 	
@@ -122,17 +131,21 @@ public class GestorReservas {
 	 * @return
 	 */
 	
-	public boolean ReservaIndividualAdulto (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Integer nParticipantes, Scanner scan_) {
+	public boolean ReservaIndividualAdulto (GestorReservas GestorReservas_, GestorPistas GestorPistas_, Integer nParticipantes, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
-		for (int i = 0; i < GestorUsuarios_.arrayUsuarios.size(); i++) {
-			if (GestorUsuarios_.arrayUsuarios.get(i).getCorreo().equals(correo)) {
-				if ((GestorUsuarios_.arrayUsuarios.get(i).getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
+		
+		DAOUsuario usuarioTabla = new DAOUsuario();
+		DAOPista pistaTabla = new DAOPista();
+		DTOUsuario usuario = usuarioTabla.solicitarUsuario(correo);
+		ArrayList<DTOPista> lpista = pistaTabla.solicitarPistasLibres(false, Dificultad.ADULTO);
+		
+			if (usuario.getCorreo().equals(correo)) {
+				if ((usuario.getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
 					System.out.println("Introduzca el numero de participantes (adultos)");
 					int participantes= Integer.parseInt(scan_.nextLine());
-					System.out.println("");
-					ArrayList<Pista> lpista = GestorPistas_.pistasLibres(participantes, Dificultad.ADULTO);			
+					System.out.println("");	
 					if(lpista.size() > 0) {
 						System.out.println("Pistas libres:");
 						for (int j = 0; j < lpista.size(); j++) {
@@ -171,13 +184,18 @@ public class GestorReservas {
 								precio = 40;
 								break;
 							}	
-						if(GestorUsuarios_.arrayUsuarios.get(i).getInscripcion().isBefore(LocalDate.now().minusYears(2))) {
+						if(usuario.getInscripcion().isBefore(LocalDate.now().minusYears(2))) {
 							descuento = 10;
 						}
 						
 						RIndividualCreador individualCreador = new RIndividualCreador();
-						RAdulto newReserva = individualCreador.creaRAdu(GestorUsuarios_.arrayUsuarios.get(i).getNombre(), fecha, duracion, pista, precio, descuento, participantes);
-						arrayReservaIndividual.add(newReserva);
+						DTORAdulto newReserva = individualCreador.creaRAdu(usuario.getCorreo(), fecha, duracion, pista, precio, descuento, participantes, Dificultad.ADULTO);
+						DAOReserva reservaTabla = new DAOReserva();
+						if(reservaTabla.escribirReservaAdultoInsert(newReserva) == 0) {
+							System.out.println("Error. Reserva no creada");
+							System.out.println("");
+							return false;
+						}
 						System.out.println("Reserva creada con exito");
 						System.out.println("-------------------------------------");
 						System.out.println("");
@@ -192,7 +210,6 @@ public class GestorReservas {
 					return false;
 				}
 			}
-		}
 		return true;
 	}
 	
@@ -206,13 +223,18 @@ public class GestorReservas {
 	 * @return
 	 */
 	
-	public boolean ReservaIndividualFamiliar (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Integer nParticipantes, Scanner scan_) {
+	public boolean ReservaIndividualFamiliar (GestorReservas GestorReservas_, GestorPistas GestorPistas_, Integer nParticipantes, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
-		for (int i = 0; i < GestorUsuarios_.arrayUsuarios.size(); i++) {
-			if (GestorUsuarios_.arrayUsuarios.get(i).getCorreo().equals(correo)) {
-				if ((GestorUsuarios_.arrayUsuarios.get(i).getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
+		
+		DAOUsuario usuarioTabla = new DAOUsuario();
+		DAOPista pistaTabla = new DAOPista();
+		DTOUsuario usuario = usuarioTabla.solicitarUsuario(correo);
+		ArrayList<DTOPista> lpista = pistaTabla.solicitarPistasLibres(false, Dificultad.FAMILIAR);
+		
+			if (usuario.getCorreo().equals(correo)) {
+				if ((usuario.getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
 					System.out.println("Introduzca el numero de participantes (niños)");
 						int participantesInfantiles= Integer.parseInt(scan_.nextLine());
 						System.out.println("");
@@ -223,10 +245,8 @@ public class GestorReservas {
 							participantesAdultos= Integer.parseInt(scan_.nextLine());
 						}
 						System.out.println("");
-						int participantes = participantesAdultos + participantesInfantiles;
-					ArrayList<Pista> lpista = GestorPistas_.pistasLibres(participantes, Dificultad.FAMILIAR);			
 					for (int j = 0; j < lpista.size(); j++) {
-						ArrayList<Kart> lkart = new ArrayList<Kart>();
+						ArrayList<DTOKart> lkart = new ArrayList<DTOKart>();
 						lkart = lpista.get(j).getLkart();
 						int nKartInfantil = 0;
 						int nKartAdulto = 0;
@@ -244,7 +264,7 @@ public class GestorReservas {
 					if(lpista.size() > 0) {
 						System.out.println("Pistas libres:");
 						for (int j = 0; j < lpista.size(); j++) {
-							System.out.println(lpista.get(j).toString());
+								System.out.println(lpista.get(j).toString());
 						}
 						System.out.println("");
 						System.out.println("Escoja una pista mediante su nombre");
@@ -279,13 +299,18 @@ public class GestorReservas {
 								precio = 40;
 								break;
 							}	
-						if(GestorUsuarios_.arrayUsuarios.get(i).getInscripcion().isBefore(LocalDate.now().minusYears(2))) {
+						if(usuario.getInscripcion().isBefore(LocalDate.now().minusYears(2))) {
 							descuento = 10;
 						}
 						
 						RIndividualCreador individualCreador = new RIndividualCreador();
-						RFamiliar newReserva = individualCreador.creaRFam(GestorUsuarios_.arrayUsuarios.get(i).getNombre(), fecha, duracion, pista, precio, descuento, participantesInfantiles, participantesAdultos);
-						arrayReservaIndividual.add(newReserva);
+						DTORFamiliar newReserva = individualCreador.creaRFam(usuario.getCorreo(), fecha, duracion, pista, precio, descuento, participantesInfantiles, participantesAdultos, Dificultad.FAMILIAR);
+						DAOReserva reservaTabla = new DAOReserva();
+						if(reservaTabla.escribirReservaFamiliarInsert(newReserva) == 0) {
+							System.out.println("Error. Reserva no creada");
+							System.out.println("");
+							return false;
+						}
 						System.out.println("Reserva creada con exito");
 						System.out.println("-------------------------------------");
 						System.out.println("");
@@ -300,7 +325,6 @@ public class GestorReservas {
 					return false;
 				}
 			}
-		}
 		return true;
 	}
 	
@@ -314,7 +338,7 @@ public class GestorReservas {
 	 * @return
 	 */
 	
-	public boolean ReservaBonoInfantil (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
+	/**public boolean ReservaBonoInfantil (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
@@ -387,7 +411,7 @@ public class GestorReservas {
 											}
 										
 										RBonoCreador BonoCreador = new RBonoCreador();
-										RInfantil newReserva = BonoCreador.creaRInf(GestorUsuarios_.arrayUsuarios.get(i).getNombre(), fecha, duracion, pista, precio, descuento, participantes);
+										DTORInfantil newReserva = BonoCreador.creaRInf(GestorUsuarios_.arrayUsuarios.get(i).getNombre(), fecha, duracion, pista, precio, descuento, participantes);
 										arrayBonos.get(k).arrayReservas.add(newReserva);
 										int sesion = arrayBonos.get(k).getSesion();
 										arrayBonos.get(k).setSesion(sesion + 1);
@@ -419,7 +443,7 @@ public class GestorReservas {
 			}
 		}
 		return true;
-	}
+	}**/
 	
 	/**
 	 * Realiza las reservas de bono adultas
@@ -430,7 +454,7 @@ public class GestorReservas {
 	 * @return
 	 */
 	
-	public boolean ReservaBonoAdulto (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
+	/**public boolean ReservaBonoAdulto (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
@@ -503,7 +527,7 @@ public class GestorReservas {
 											}
 										
 										RBonoCreador BonoCreador = new RBonoCreador();
-										RAdulto newReserva = BonoCreador.creaRAdu(GestorUsuarios_.arrayUsuarios.get(i).getNombre(), fecha, duracion, pista, precio, descuento, participantes);
+										DTORAdulto newReserva = BonoCreador.creaRAdu(GestorUsuarios_.arrayUsuarios.get(i).getNombre(), fecha, duracion, pista, precio, descuento, participantes);
 										arrayBonos.get(k).arrayReservas.add(newReserva);
 										int sesion = arrayBonos.get(k).getSesion();
 										arrayBonos.get(k).setSesion(sesion + 1);
@@ -535,7 +559,7 @@ public class GestorReservas {
 			}
 		}
 		return true;
-	}
+	}**/
 	
 	/**
 	 * Realiza las reservas de bono familiares
@@ -546,7 +570,7 @@ public class GestorReservas {
 	 * @return
 	 */
 	
-	public boolean ReservaBonoFamiliar (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
+	/**public boolean ReservaBonoFamiliar (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
@@ -627,7 +651,7 @@ public class GestorReservas {
 											}
 										
 										RBonoCreador BonoCreador = new RBonoCreador();
-										RFamiliar newReserva = BonoCreador.creaRFam(GestorUsuarios_.arrayUsuarios.get(i).getNombre(), fecha, duracion, pista, precio, descuento, ninos, adultos);
+										DTORFamiliar newReserva = BonoCreador.creaRFam(GestorUsuarios_.arrayUsuarios.get(i).getNombre(), fecha, duracion, pista, precio, descuento, ninos, adultos);
 										arrayBonos.get(k).arrayReservas.add(newReserva);
 										int sesion = arrayBonos.get(k).getSesion();
 										arrayBonos.get(k).setSesion(sesion + 1);
@@ -659,18 +683,32 @@ public class GestorReservas {
 			}
 		}
 		return true;
-	}
+	}**/
 	
 	/**
 	 * Muestra todas las reservas individuales futuras por pantalla
 	 * @param scan_
 	 */
 	
-	public void consultarReservasFuturasIndividuales (String usuario){		
-		for(int i = 0; i < arrayReservaIndividual.size(); i++) {
-				if(arrayReservaIndividual.get(i).getUsuario().equals(usuario) && arrayReservaIndividual.get(i).getFecha().isAfter(LocalDate.now())) {
-					System.out.println(arrayReservaIndividual.get(i).toString());
+	public void consultarReservasFuturasIndividuales (String usuario){
+		DAOReserva reservaTabla = new DAOReserva();
+		ArrayList<DTORInfantil> reservasInfantiles = reservaTabla.solicitarReservasInfantiles();
+		ArrayList<DTORAdulto> reservasAdultos = reservaTabla.solicitarReservasAdultos();
+		ArrayList<DTORFamiliar> reservasFamiliares = reservaTabla.solicitarReservasFamiliares();
+		for(int i = 0; i < reservasInfantiles.size(); i++) {
+				if(reservasInfantiles.get(i).getUsuario().equals(usuario) && reservasInfantiles.get(i).getFecha().isAfter(LocalDate.now())) {
+					System.out.println(reservasInfantiles.get(i).toString());
 				}
+		}
+		for(int i = 0; i < reservasAdultos.size(); i++) {
+			if(reservasAdultos.get(i).getUsuario().equals(usuario) && reservasAdultos.get(i).getFecha().isAfter(LocalDate.now())) {
+				System.out.println(reservasAdultos.get(i).toString());
+			}
+		}
+		for(int i = 0; i < reservasFamiliares.size(); i++) {
+			if(reservasFamiliares.get(i).getUsuario().equals(usuario) && reservasFamiliares.get(i).getFecha().isAfter(LocalDate.now())) {
+				System.out.println(reservasFamiliares.get(i).toString());
+			}
 		}
 	}
 	
@@ -679,7 +717,7 @@ public class GestorReservas {
 	 * @param scan_
 	 */
 
-	public void consultarReservasFuturasBono (String usuario){		
+	public void consultarReservasFuturasBono (String usuario){
 		for(int i = 0; i < arrayBonos.size(); i++) {
 				if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
 					System.out.println(arrayBonos.get(i).toString());
@@ -706,10 +744,28 @@ public class GestorReservas {
         System.out.println("Elija una opcion escribiendo su numero");
         int option_= Integer.parseInt(scan_.nextLine());
         if(option_ == 0) {
-        	for(int i=0; i < arrayReservaIndividual.size() ; i++){
-        		if(arrayReservaIndividual.get(i).getUsuario().equals(usuario)) {
-	        		if(arrayReservaIndividual.get(i).getFecha().isEqual(fecha) && arrayReservaIndividual.get(i).getPista().equals(pista)){
-	    				System.out.println(arrayReservaIndividual.get(i).toString());
+        	DAOReserva reservaTabla = new DAOReserva();
+    		ArrayList<DTORInfantil> reservasInfantiles = reservaTabla.solicitarReservasInfantiles();
+    		ArrayList<DTORAdulto> reservasAdultos = reservaTabla.solicitarReservasAdultos();
+    		ArrayList<DTORFamiliar> reservasFamiliares = reservaTabla.solicitarReservasFamiliares();
+        	for(int i=0; i < reservasInfantiles.size() ; i++){
+        		if(reservasInfantiles.get(i).getUsuario().equals(usuario)) {
+	        		if(reservasInfantiles.get(i).getFecha().isEqual(fecha) && reservasInfantiles.get(i).getPista().equals(pista)){
+	    				System.out.println(reservasInfantiles.get(i).toString());
+	    			}
+        		}
+        	}
+        	for(int i=0; i < reservasAdultos.size() ; i++){
+        		if(reservasAdultos.get(i).getUsuario().equals(usuario)) {
+	        		if(reservasAdultos.get(i).getFecha().isEqual(fecha) && reservasAdultos.get(i).getPista().equals(pista)){
+	    				System.out.println(reservasAdultos.get(i).toString());
+	    			}
+        		}
+        	}
+        	for(int i=0; i < reservasFamiliares.size() ; i++){
+        		if(reservasFamiliares.get(i).getUsuario().equals(usuario)) {
+	        		if(reservasFamiliares.get(i).getFecha().isEqual(fecha) && reservasFamiliares.get(i).getPista().equals(pista)){
+	    				System.out.println(reservasFamiliares.get(i).toString());
 	    			}
         		}
         	}

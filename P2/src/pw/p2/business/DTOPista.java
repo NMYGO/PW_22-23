@@ -1,9 +1,6 @@
 package pw.p2.business;
 
-import pw.p2.data.Pista;
-import pw.p2.data.Kart;
 import pw.p2.data.Dificultad;
-import pw.p2.data.Estado;
 import java.util.ArrayList;
 
 public class DTOPista {
@@ -14,7 +11,7 @@ public class DTOPista {
 	protected boolean estado;	//TRUE -> RESERVADO - FALSE -> DISPONIBLE
 	protected Dificultad dificultad;
 	protected int maxkarts;
-	protected ArrayList<Kart> lkart;
+	protected ArrayList<DTOKart> lkart;
 	
 	/* Constructores */
 	
@@ -36,7 +33,7 @@ public class DTOPista {
 		this.estado = estado;
 		this.dificultad = dificultad;
 		this.maxkarts = maxkarts;
-		this.lkart = new ArrayList<Kart>();
+		this.lkart = new ArrayList<DTOKart>();
 	}
 	
 	/* Getters y setters */
@@ -73,11 +70,11 @@ public class DTOPista {
 		this.maxkarts = maxkarts;
 	}
 
-	public ArrayList<Kart> getLkart() {
+	public ArrayList<DTOKart> getLkart() {
 		return lkart;
 	}
 
-	public void setLkart(ArrayList<Kart> lkart) {
+	public void setLkart(ArrayList<DTOKart> lkart) {
 		this.lkart = lkart;
 	}
 	

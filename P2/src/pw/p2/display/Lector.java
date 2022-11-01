@@ -27,7 +27,7 @@ public class Lector {
 	
 	public static void lector(GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, GestorReservas GestorReservas_){
 		
-	    DAOUsuario usuarioTabla = new DAOUsuario();
+	    /**DAOUsuario usuarioTabla = new DAOUsuario();
 		ArrayList<DTOUsuario> usuarios = usuarioTabla.solicitarUsuarios();
 		for (int i = 0; i < usuarios.size(); i++) {
 			//System.out.println(usuarios.get(i).toString());
@@ -67,13 +67,13 @@ public class Lector {
 		for (int i = 0; i < reservas.size(); i++) {
 			//System.out.println(reservas.get(i).toString());
 			if(reservas.get(i).getTipo() == Tipo.INFANTIL) {				
-				RInfantil newReserva = individualCreador.creaRInf(reservas.get(i).getCorreo(), reservas.get(i).getFecha(), reservas.get(i).getDur(), reservas.get(i).getPista(), reservas.get(i).getPrecio(), reservas.get(i).getDesc(), reservas.get(i).getNiños());				
+				DTORInfantil newReserva = individualCreador.creaRInf(reservas.get(i).getCorreo(), reservas.get(i).getFecha(), reservas.get(i).getDur(), reservas.get(i).getPista(), reservas.get(i).getPrecio(), reservas.get(i).getDesc(), reservas.get(i).getNiños());				
 				GestorReservas_.arrayReservaIndividual.add(newReserva);
 			}else if(reservas.get(i).getTipo() == Tipo.FAMILIAR) {
-				RFamiliar newReserva = individualCreador.creaRFam(reservas.get(i).getCorreo(), reservas.get(i).getFecha(), reservas.get(i).getDur(), reservas.get(i).getPista(), reservas.get(i).getPrecio(), reservas.get(i).getDesc(), reservas.get(i).getNiños(), reservas.get(i).getAdultos());
+				DTORFamiliar newReserva = individualCreador.creaRFam(reservas.get(i).getCorreo(), reservas.get(i).getFecha(), reservas.get(i).getDur(), reservas.get(i).getPista(), reservas.get(i).getPrecio(), reservas.get(i).getDesc(), reservas.get(i).getNiños(), reservas.get(i).getAdultos());
 				GestorReservas_.arrayReservaIndividual.add(newReserva);
 			}else if(reservas.get(i).getTipo() == Tipo.ADULTO) {
-				RAdulto newReserva = individualCreador.creaRAdu(reservas.get(i).getCorreo(), reservas.get(i).getFecha(), reservas.get(i).getDur(), reservas.get(i).getPista(), reservas.get(i).getPrecio(), reservas.get(i).getDesc(), reservas.get(i).getAdultos());				
+				DTORAdulto newReserva = individualCreador.creaRAdu(reservas.get(i).getCorreo(), reservas.get(i).getFecha(), reservas.get(i).getDur(), reservas.get(i).getPista(), reservas.get(i).getPrecio(), reservas.get(i).getDesc(), reservas.get(i).getAdultos());				
 				GestorReservas_.arrayReservaIndividual.add(newReserva);
 			}			
 		}

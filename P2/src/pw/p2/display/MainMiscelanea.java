@@ -127,7 +127,7 @@ public class MainMiscelanea {
 	 * @return void
 	 */
 	
-	public static void restaurar(GestorPistas GestorPistas_) {
+	/**public static void restaurar(GestorPistas GestorPistas_) {
 		for (int i = 0; i < GestorPistas_.arrayKarts.size(); i++) {
 			if (GestorPistas_.arrayKarts.get(i).getEstado() == Estado.RESERVADO) {
 				GestorPistas_.arrayKarts.get(i).setEstado(Estado.DISPONIBLE);
@@ -139,7 +139,7 @@ public class MainMiscelanea {
 				GestorPistas_.arrayPistas.get(i).setEstado(false);
 			}
 		}
-	}
+	}**/
 	
 	/**
 	 * Menu para elegir entre los tipos de reserva individual
@@ -157,11 +157,11 @@ public class MainMiscelanea {
         System.out.println("Elija una opcion escribiendo su numero");
         int option_= Integer.parseInt(scan_.nextLine());
         if(option_ == 0) {  	
-        	GestorReservas_.ReservaIndividualInfantil(GestorReservas_, GestorPistas_, GestorUsuarios_, option_, scan_);	            
+        	GestorReservas_.ReservaIndividualInfantil(GestorReservas_, GestorPistas_, option_, scan_);	            
         }else if(option_ == 1) {
-        	GestorReservas_.ReservaIndividualFamiliar(GestorReservas_, GestorPistas_, GestorUsuarios_, option_, scan_);
+        	GestorReservas_.ReservaIndividualFamiliar(GestorReservas_, GestorPistas_, option_, scan_);
         }else if(option_ == 2) {
-        	GestorReservas_.ReservaIndividualAdulto(GestorReservas_, GestorPistas_, GestorUsuarios_, option_, scan_);
+        	GestorReservas_.ReservaIndividualAdulto(GestorReservas_, GestorPistas_, option_, scan_);
         }else {
         	System.out.println("Opcion no reconocida");
 			System.out.println("");
@@ -183,7 +183,7 @@ public class MainMiscelanea {
         	System.out.println("");
         System.out.println("Elija una opcion escribiendo su numero");
         int option_= Integer.parseInt(scan_.nextLine());
-        if(option_ == 0) {  	
+        /**if(option_ == 0) {  	
         	GestorReservas_.ReservaBonoInfantil(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);	            
         }else if(option_ == 1) {
         	GestorReservas_.ReservaBonoFamiliar(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
@@ -192,6 +192,6 @@ public class MainMiscelanea {
         }else {
         	System.out.println("Opcion no reconocida");
 			System.out.println("");
-        }
+        }**/
 	}
 }

@@ -39,7 +39,12 @@ public class GestorUsuarios {
 		DAOUsuario usuarioTabla = new DAOUsuario();
 		DTOUsuario usuario = new DTOUsuario(nombre, apellidos, nacimiento, correo);
 		
-		usuarioTabla.escribirUsuarioInsert(usuario);
+		if(usuarioTabla.escribirUsuarioInsert(usuario) == 0) {
+			System.out.println("Error. Usuario no registrado");
+			System.out.println("-------------------------------------");
+			System.out.println("");
+			return false;
+		}
 		System.out.println("Usuario creado con exito");
 		System.out.println("-------------------------------------");
 		System.out.println("");
@@ -73,7 +78,12 @@ public class GestorUsuarios {
 					System.out.println("");
 				switch (opcion) {
 				case 0: 
-					usuarioTabla.escribirUsuarioUpdate(usuario);
+					if(usuarioTabla.escribirUsuarioUpdate(usuario) == 0) {
+						System.out.println("Error. Usuario no modificado");
+						System.out.println("-------------------------------------");
+						System.out.println("");
+						return false;
+					}					
 					System.out.println("Usuario modificado con exito");
 					System.out.println("-------------------------------------");
 					System.out.println("");

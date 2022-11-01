@@ -12,6 +12,7 @@ import pw.p2.data.common.DBConnection;
 
 public class DAOBono {
 	public ArrayList<DTOBono> solicitarBonos() {
+		
 		ArrayList<DTOBono> bonos = new ArrayList<DTOBono>();
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -40,35 +41,32 @@ public class DAOBono {
 		return bonos;
 	}
 	
-	public DTOBono solicitarBono(int id) {
-		DTOBono bono;
+public DTOBono solicitarBono(Integer idBono) {
+		
+	DTOBono bono = new DTOBono();
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "select * from bono b where "+ id +"= b.idBono";
+			String query = "select * from bono where idBono = " + idBono;
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-			
+
 			while (rs.next()) {
-				int id2 = rs.getInt("idBono");
 				int sesion = rs.getInt("sesion");
 				LocalDate fcaducidad = LocalDate.parse(rs.getString("fechaCaducidad"));
 				String bUsuario = rs.getString("correoUsuario");
 				Tipo tipo = Tipo.valueOf(rs.getString("tipo"));
-				
-				bono = new DTOBono(id2,sesion,bUsuario,tipo,fcaducidad);
+				bono = new DTOBono(idBono,sesion,bUsuario,tipo,fcaducidad);
 			}
 
-			if (stmt != null)
+			if (stmt != null){ 
 				stmt.close(); 
-
-			dbConnection.closeConnection();
-			
-		} catch (Exception e){
-				System.err.println(e);
-				e.printStackTrace();
 			}
-		
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
 		return bono;
 	}
 	

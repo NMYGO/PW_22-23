@@ -1,7 +1,8 @@
 package pw.p2.business;
 
 import pw.p2.data.Pista;
-import pw.p2.data.Kart;
+import pw.p2.data.DAO.DAOPista;
+import pw.p2.data.DAO.DAOKart;
 import pw.p2.data.Dificultad;
 import pw.p2.data.Estado;
 import java.util.ArrayList;
@@ -22,7 +23,6 @@ public class GestorPistas{
 	/* Atributos */
 
 	public ArrayList<Pista> arrayPistas = new ArrayList<Pista>();
-	public ArrayList<Kart> arrayKarts = new ArrayList<Kart>();
 
 	/**
 	 * Constructor por defecto
@@ -36,17 +36,15 @@ public class GestorPistas{
 	 */
 	
 	public boolean crearPista (String nombre, Boolean estado, Dificultad dificultad, Integer maxkarts) {		
-		for (int i = 0;i < arrayPistas.size() ; i++) {
-			if (arrayPistas.get(i).getNombre().equals(nombre)) {
-				System.out.println("Error. Esa pista ya existe");
-				System.out.println("-------------------------------------");
-				System.out.println("");
-				return false;
-			}
-		}
+		DAOPista pistaTabla = new DAOPista();
+		DTOPista pista = new DTOPista(nombre, estado, dificultad, maxkarts);
 		
-		Pista newPista = new Pista(nombre, estado, dificultad, maxkarts);
-		arrayPistas.add(newPista);
+		if(pistaTabla.escribirPistaInsert(pista) == 0) {
+			System.out.println("Error. Pista no creada");
+			System.out.println("-------------------------------------");
+			System.out.println("");
+			return false;
+		}		
 		System.out.println("Pista creada con exito");
 		System.out.println("-------------------------------------");
 		System.out.println("");
@@ -59,18 +57,15 @@ public class GestorPistas{
 	 * @return Devuelve un booleano 
 	 */
 	
-	public boolean crearKart (Integer id, Boolean tipo, Estado estados) {				
-		for (int i = 0;i < arrayKarts.size() ; i++) {
-			if (id == (arrayKarts.get(i)).getId()) {
-				System.out.println("Error. Ese kart ya existe");
-				System.out.println("-------------------------------------");
-				System.out.println("");
-				return false;
-			}
-		}
-		
-		Kart newKarts = new Kart(id, tipo, estados);
-		arrayKarts.add(newKarts);	
+	public boolean crearKart (Integer id, Boolean tipo, Estado estado, String nombrePista) {				
+		DAOKart kartTabla = new DAOKart();
+		DTOKart kart = new DTOKart(id, tipo, estado, nombrePista);
+		if (kartTabla.escribirKartInsert(kart) == 0) {
+			System.out.println("Error. Ese kart ya existe");
+			System.out.println("-------------------------------------");
+			System.out.println("");
+			return false;
+		}	
 		System.out.println("Kart creado con exito");
 		System.out.println("-------------------------------------");
 		System.out.println("");
@@ -85,34 +80,30 @@ public class GestorPistas{
 	 */
 	
 	public boolean asociarKartPista (Integer idkart, String nombrepista) {
-		//Seleccionar pista
-		int asociados=//Contar karts asociados a esa pista;
-		if(asociados<pista.maxkarts) {
-			//seleccionar kart
-			
-			//asociar kart
-		}
-				/*if(!arrayPistas.get(i).isEstado()) {
-					ArrayList<Kart> listakarts = arrayPistas.get(i).consultarKartsDisponibles(arrayKarts);
-					for (int j = 0;j< listakarts.size() ; j++) {
-						if (idkart == (listakarts.get(j).getId())) {
-							if(arrayPistas.get(i).asociarKartAPista(listakarts.get(j), arrayPistas.get(i))) {	*/						
-								System.out.println("Kart asociado con exito");
-								System.out.println("-------------------------------------");
-								System.out.println("");
-								return true;
-							}
-						}
-					}					
+		DAOKart kartTabla = new DAOKart();
+		DAOPista pistaTabla = new DAOPista();
+		DTOKart kart = kartTabla.solicitarKart(idkart);
+		ArrayList <DTOPista> pistas = pistaTabla.solicitarPistas();
+		
+		for (int i = 0;i< pistas.size() ; i++) {
+			if (pistas.get(i).getNombre().equals(nombrepista)) {
+				if(!pistas.get(i).isEstado()) {
+					if(kart.getEstado() == Estado.DISPONIBLE) {
+						//asociar
+						if (kartTabla.escribirKartUpdate(kart) == 0) {
+							System.out.println("Error. Kart no asociado");
+							System.out.println("-------------------------------------");
+							System.out.println("");
+							return false;
+						}						
+					}
 				}
 			}
 		}
-		
-		System.out.println("Error. No se ha podido asociar el kart a la pista");
-		System.out.println("-------------------------------------");
-		System.out.println("");
-		return true;
-		
+			System.out.println("Kart asociado con exito");
+			System.out.println("-------------------------------------");
+			System.out.println("");
+			return true;
 	}
 
 	/**
@@ -120,9 +111,12 @@ public class GestorPistas{
 	 */
 	
 	public void listaPistasMantenimiento () {
-		for (int i = 0;i< arrayPistas.size() ; i++) {
-			if (arrayPistas.get(i).isEstado()) {
-				System.out.println(arrayPistas.get(i).toString());
+		DAOPista pistaTabla = new DAOPista();
+		ArrayList <DTOPista> pistas = pistaTabla.solicitarPistas();
+		
+		for (int i = 0;i< pistas.size() ; i++) {
+			if (pistas.get(i).isEstado()) {
+				System.out.println(pistas.get(i).toString());
 			}
 		}
 	}
@@ -135,17 +129,11 @@ public class GestorPistas{
 	 * @return Devuelve array de pistas libres
 	 */
 	
-	public ArrayList<Pista> pistasLibres (Integer kartnum, Dificultad dificultad) {							
-		ArrayList<Pista> arraypistaslibres_ = new ArrayList<Pista>();
-		ArrayList<Kart> listakarts = new ArrayList<Kart>();
+	public ArrayList<DTOPista> pistasLibres (Integer kartnum, Dificultad dificultad) {							
+		DAOPista pistaTabla = new DAOPista();
+		ArrayList <DTOPista> pistas = pistaTabla.solicitarPistasLibres(false, dificultad);
 		
-		for (int i = 0; i< arrayPistas.size() ; i++) {
-			listakarts = arrayPistas.get(i).getLkart();
-			if ((kartnum <= listakarts.size()) && (dificultad == arrayPistas.get(i).getDificultad()) && (!arrayPistas.get(i).isEstado())) {
-				arraypistaslibres_.add(arrayPistas.get(i));
-			}
-		}
-		return arraypistaslibres_;
+		return pistas;
 	}
 	
 	/**
@@ -154,19 +142,16 @@ public class GestorPistas{
 	 */
 	
 	public void listarKartsDisponibles () {
-		int nodisponible = 0;
-		for(int i = 0; i < arrayKarts.size(); i++) {
-			if(arrayKarts.get(i).getEstado() == Estado.DISPONIBLE) {
-				System.out.println(arrayKarts.get(i).toString());
-			}else if(arrayKarts.get(i).getEstado() == Estado.RESERVADO){
-				System.out.println(arrayKarts.get(i).toString());
+		DAOKart kartTabla = new DAOKart();
+		ArrayList <DTOKart> karts = kartTabla.solicitarKarts();
+		for(int i = 0; i < karts.size(); i++) {
+			if(karts.get(i).getEstado() == Estado.DISPONIBLE) {
+				System.out.println(karts.get(i).toString());
+			}else if(karts.get(i).getEstado() == Estado.RESERVADO){
+				System.out.println(karts.get(i).toString());
 			}else {
-				System.out.println(arrayKarts.get(i).toString());
+				System.out.println(karts.get(i).toString());
 			}
-		}
-		if(arrayKarts.size() == nodisponible) {
-			System.out.println("No hay karts disponibles");
-			System.out.println("");
 		}
 	}
 }
