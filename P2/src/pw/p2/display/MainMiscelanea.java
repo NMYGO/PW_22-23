@@ -2,8 +2,10 @@ package pw.p2.display;
 
 import pw.p2.business.*;
 import pw.p2.data.Estado;
+import pw.p2.data.DAO.DAOKart;
+import pw.p2.data.DAO.DAOPista;
 import pw.p2.data.DAO.DAOUsuario;
-
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -127,19 +129,24 @@ public class MainMiscelanea {
 	 * @return void
 	 */
 	
-	/**public static void restaurar(GestorPistas GestorPistas_) {
-		for (int i = 0; i < GestorPistas_.arrayKarts.size(); i++) {
-			if (GestorPistas_.arrayKarts.get(i).getEstado() == Estado.RESERVADO) {
-				GestorPistas_.arrayKarts.get(i).setEstado(Estado.DISPONIBLE);
+	public static void restaurar(GestorPistas GestorPistas_) {
+		DAOKart kartTabla = new DAOKart();
+		DAOPista pistaTabla = new DAOPista();
+		ArrayList <DTOKart> karts = kartTabla.solicitarKarts();
+		ArrayList <DTOPista> pistas = pistaTabla.solicitarPistas();
+		
+		for (int i = 0; i < karts.size(); i++) {
+			if (karts.get(i).getEstado() == Estado.RESERVADO) {
+				karts.get(i).setEstado(Estado.DISPONIBLE);
 			}
 		}
 		
-		for (int i = 0; i < GestorPistas_.arrayPistas.size(); i++) {
-			if (GestorPistas_.arrayPistas.get(i).isEstado()) {
-				GestorPistas_.arrayPistas.get(i).setEstado(false);
+		for (int i = 0; i < pistas.size(); i++) {
+			if (pistas.get(i).isEstado()) {
+				pistas.get(i).setEstado(false);
 			}
 		}
-	}**/
+	}
 	
 	/**
 	 * Menu para elegir entre los tipos de reserva individual
@@ -182,8 +189,8 @@ public class MainMiscelanea {
         System.out.println("2. Reserva bono adulto");
         	System.out.println("");
         System.out.println("Elija una opcion escribiendo su numero");
-        int option_= Integer.parseInt(scan_.nextLine());
-        /**if(option_ == 0) {  	
+        /**int option_= Integer.parseInt(scan_.nextLine());
+        if(option_ == 0) {  	
         	GestorReservas_.ReservaBonoInfantil(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);	            
         }else if(option_ == 1) {
         	GestorReservas_.ReservaBonoFamiliar(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);

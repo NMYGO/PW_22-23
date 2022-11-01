@@ -36,7 +36,6 @@ public class MainProgram{
 		Dificultad dificultad;
 		Estado estados;
 		LocalDate fecha, nacimiento;
-        	//Lector.lector(GestorPistas_, GestorUsuarios_, GestorReservas_);
         
         while(!exit_){
         	System.out.println("PROGRAMA MAIN");
@@ -107,14 +106,14 @@ public class MainProgram{
 		        	                    
 		        	                case 3:
 			        	                System.out.println("Introduzca el numero de participantes");
-			    							participantes= Integer.parseInt(scan_.nextLine());
+			    							participantes = Integer.parseInt(scan_.nextLine());
 			    							System.out.println("");
 			    						System.out.println("Introduzca la dificultad de pista");
 			    							dificultad = Dificultad.valueOf(scan_.nextLine());
 			    							System.out.println("");
 			    							
 			    							DAOPista pistaTabla = new DAOPista();
-			    							ArrayList <DTOPista> pistas = pistaTabla.solicitarPistasLibres(false, dificultad);
+			    							ArrayList <DTOPista> pistas = pistaTabla.solicitarPistasLibres(false, participantes, dificultad);
 			    	                	for (int i = 0;i< pistas.size() ; i++) {
 		    	            				System.out.println(pistas.get(i).toString());
 			    	            		}
@@ -139,7 +138,6 @@ public class MainProgram{
 		        	        			System.out.println("Introduzca el correo de usuario");
 		        	        				correo = scan_.nextLine();
 		        	                	GestorUsuarios_.registrarUsuario(nombre, apellidos, nacimiento, correo);
-		        	                	//GestorUsuarios_.requestUsuariosByCorreo(correo);//
 		        	                    break;
 		        	                    
 		        	                case 2:
@@ -259,7 +257,6 @@ public class MainProgram{
 				System.out.println("");
             }
         }
-        	//Escritor.escritor(GestorPistas_, GestorUsuarios_, GestorReservas_);
         //FicheroPropiedades.propiedades(GestorPistas_, GestorUsuarios_, GestorReservas_);
         scan_.close();
     }

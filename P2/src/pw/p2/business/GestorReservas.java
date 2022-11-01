@@ -41,7 +41,7 @@ public class GestorReservas {
 	 * @return true si la reserva se ha realizado, false si no
 	 */
 	
-	public boolean ReservaIndividualInfantil (GestorReservas GestorReservas_, GestorPistas GestorPistas_, Integer nParticipantes, Scanner scan_) {
+	public boolean ReservaIndividualInfantil (GestorReservas GestorReservas_, GestorPistas GestorPistas_, Integer nparticipantes, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
@@ -49,7 +49,7 @@ public class GestorReservas {
 		DAOUsuario usuarioTabla = new DAOUsuario();
 		DAOPista pistaTabla = new DAOPista();
 		DTOUsuario usuario = usuarioTabla.solicitarUsuario(correo);
-		ArrayList<DTOPista> lpista = pistaTabla.solicitarPistasLibres(false, Dificultad.INFANTIL);
+		ArrayList<DTOPista> lpista = pistaTabla.solicitarPistasLibres(false, nparticipantes, Dificultad.INFANTIL);
 		
 				if ((usuario.getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
 					System.out.println("Introduzca el numero de participantes (niños)");
@@ -139,7 +139,7 @@ public class GestorReservas {
 		DAOUsuario usuarioTabla = new DAOUsuario();
 		DAOPista pistaTabla = new DAOPista();
 		DTOUsuario usuario = usuarioTabla.solicitarUsuario(correo);
-		ArrayList<DTOPista> lpista = pistaTabla.solicitarPistasLibres(false, Dificultad.ADULTO);
+		ArrayList<DTOPista> lpista = pistaTabla.solicitarPistasLibres(false, nParticipantes, Dificultad.ADULTO);
 		
 			if (usuario.getCorreo().equals(correo)) {
 				if ((usuario.getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
@@ -231,7 +231,7 @@ public class GestorReservas {
 		DAOUsuario usuarioTabla = new DAOUsuario();
 		DAOPista pistaTabla = new DAOPista();
 		DTOUsuario usuario = usuarioTabla.solicitarUsuario(correo);
-		ArrayList<DTOPista> lpista = pistaTabla.solicitarPistasLibres(false, Dificultad.FAMILIAR);
+		ArrayList<DTOPista> lpista = pistaTabla.solicitarPistasLibres(false, nParticipantes, Dificultad.FAMILIAR);
 		
 			if (usuario.getCorreo().equals(correo)) {
 				if ((usuario.getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {

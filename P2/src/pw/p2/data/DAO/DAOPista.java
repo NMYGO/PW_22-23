@@ -1,5 +1,6 @@
 package pw.p2.data.DAO;
 
+import pw.p2.business.DTOKart;
 import pw.p2.business.DTOPista;
 import pw.p2.data.Dificultad;
 import pw.p2.data.common.DBConnection;
@@ -37,7 +38,9 @@ public class DAOPista {
 		return pistas;
 	}
 	
-	public ArrayList<DTOPista> solicitarPistasLibres(Boolean estado, Dificultad dificultad) {
+	public ArrayList<DTOPista> solicitarPistasLibres(Boolean estado, Integer participantes, Dificultad dificultad) {
+		DAOKart kartTabla = new DAOKart();
+		ArrayList <DTOKart> kartsPista = new ArrayList<DTOKart>();
 		ArrayList<DTOPista> pistas = new ArrayList<DTOPista>();
 		int iestado = estado ? 1 : 0;
 		try {
@@ -50,7 +53,10 @@ public class DAOPista {
 			while (rs.next()) {
 				String nombre = rs.getString("nombrePista");
 				Integer maxkarts = rs.getInt("maxKarts");
-				pistas.add(new DTOPista(nombre, estado, dificultad, maxkarts));
+				kartsPista = kartTabla.solicitarKartsPista(nombre);
+				if(maxkarts >= kartsPista.size() + participantes) {
+						pistas.add(new DTOPista(nombre, estado, dificultad, maxkarts));
+				}
 			}
 
 			if (stmt != null){ 

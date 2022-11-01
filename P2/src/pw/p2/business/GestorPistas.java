@@ -1,6 +1,6 @@
 package pw.p2.business;
 
-import pw.p2.data.Pista;
+import pw.p2.data.DTOPistaFuncionalidades;
 import pw.p2.data.DAO.DAOPista;
 import pw.p2.data.DAO.DAOKart;
 import pw.p2.data.Dificultad;
@@ -22,7 +22,7 @@ public class GestorPistas{
 
 	/* Atributos */
 
-	public ArrayList<Pista> arrayPistas = new ArrayList<Pista>();
+	public ArrayList<DTOPistaFuncionalidades> arrayPistas = new ArrayList<DTOPistaFuncionalidades>();
 
 	/**
 	 * Constructor por defecto
@@ -89,21 +89,33 @@ public class GestorPistas{
 			if (pistas.get(i).getNombre().equals(nombrepista)) {
 				if(!pistas.get(i).isEstado()) {
 					if(kart.getEstado() == Estado.DISPONIBLE) {
-						//asociar
-						if (kartTabla.escribirKartUpdate(kart) == 0) {
-							System.out.println("Error. Kart no asociado");
-							System.out.println("-------------------------------------");
-							System.out.println("");
-							return false;
-						}						
+						DTOPistaFuncionalidades pistaF = new DTOPistaFuncionalidades();
+						kart = pistaF.asociarKartAPista(kart, pistas.get(i));
+						if(kart != null) {
+							pistas.get(i).lkart.add(kart);
+							if (!(kartTabla.escribirKartUpdate(kart) == 0)) {
+								System.out.println("Kart asociado con exito");
+								System.out.println("-------------------------------------");
+								System.out.println("");
+								return true;
+							}else {
+								System.out.println("escribir");
+							}
+						}else {
+							System.out.println("kart null");
+						}
+					}else {
+						System.out.println("kart.DISPONIBLE");
 					}
+				}else {
+					System.out.println("!isEstadoPista");
 				}
 			}
 		}
-			System.out.println("Kart asociado con exito");
-			System.out.println("-------------------------------------");
-			System.out.println("");
-			return true;
+		System.out.println("Error. Kart no asociado");
+		System.out.println("-------------------------------------");
+		System.out.println("");
+		return false;
 	}
 
 	/**
@@ -129,9 +141,9 @@ public class GestorPistas{
 	 * @return Devuelve array de pistas libres
 	 */
 	
-	public ArrayList<DTOPista> pistasLibres (Integer kartnum, Dificultad dificultad) {							
+	public ArrayList<DTOPista> pistasLibres (Integer participantes, Dificultad dificultad) {							
 		DAOPista pistaTabla = new DAOPista();
-		ArrayList <DTOPista> pistas = pistaTabla.solicitarPistasLibres(false, dificultad);
+		ArrayList <DTOPista> pistas = pistaTabla.solicitarPistasLibres(false, participantes, dificultad);
 		
 		return pistas;
 	}

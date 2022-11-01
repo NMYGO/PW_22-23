@@ -14,7 +14,7 @@ public class FicheroPropiedades {
 
 	
 	public static void propiedades(GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, GestorReservas GestorReservas_) {
-		Properties prop = new Properties();
+		/**Properties prop = new Properties();
 		try {
 			
 			BufferedReader reader = new BufferedReader(new FileReader(new File("Propiedades.txt")));
@@ -51,7 +51,7 @@ public class FicheroPropiedades {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}**/
 
 	}
 
