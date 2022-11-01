@@ -85,13 +85,18 @@ public class GestorPistas{
 	 */
 	
 	public boolean asociarKartPista (Integer idkart, String nombrepista) {
-		for (int i = 0;i< arrayPistas.size() ; i++) {
-			if (arrayPistas.get(i).getNombre().equals(nombrepista)) {
-				if(!arrayPistas.get(i).isEstado()) {
+		//Seleccionar pista
+		int asociados=//Contar karts asociados a esa pista;
+		if(asociados<pista.maxkarts) {
+			//seleccionar kart
+			
+			//asociar kart
+		}
+				/*if(!arrayPistas.get(i).isEstado()) {
 					ArrayList<Kart> listakarts = arrayPistas.get(i).consultarKartsDisponibles(arrayKarts);
 					for (int j = 0;j< listakarts.size() ; j++) {
 						if (idkart == (listakarts.get(j).getId())) {
-							if(arrayPistas.get(i).asociarKartAPista(listakarts.get(j), arrayPistas.get(i))) {							
+							if(arrayPistas.get(i).asociarKartAPista(listakarts.get(j), arrayPistas.get(i))) {	*/						
 								System.out.println("Kart asociado con exito");
 								System.out.println("-------------------------------------");
 								System.out.println("");

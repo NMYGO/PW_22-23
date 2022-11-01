@@ -39,4 +39,38 @@ public class DAOBono {
 		}
 		return bonos;
 	}
+	
+	public DTOBono solicitarBono(int id) {
+		DTOBono bono;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query = "select * from bono b where "+ id +"= b.idBono";
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			while (rs.next()) {
+				int id2 = rs.getInt("idBono");
+				int sesion = rs.getInt("sesion");
+				LocalDate fcaducidad = LocalDate.parse(rs.getString("fechaCaducidad"));
+				String bUsuario = rs.getString("correoUsuario");
+				Tipo tipo = Tipo.valueOf(rs.getString("tipo"));
+				
+				bono = new DTOBono(id2,sesion,bUsuario,tipo,fcaducidad);
+			}
+
+			if (stmt != null)
+				stmt.close(); 
+
+			dbConnection.closeConnection();
+			
+		} catch (Exception e){
+				System.err.println(e);
+				e.printStackTrace();
+			}
+		
+		return bono;
+	}
+	
+	
 }

@@ -20,6 +20,7 @@ public class DTOKart {
 	protected int id;	
 	protected boolean tipo; //TRUE -> NIÑO - FALSE -> ADULTO	
 	protected Estado estado;
+	protected String nombrePista;
 	
 	/* Constructores */
 	
@@ -35,10 +36,11 @@ public class DTOKart {
 	 * @param estado Estado del kart
 	 * */
 	
-	public DTOKart(Integer id, Boolean tipo, Estado estado) {
+	public DTOKart(Integer id, Boolean tipo, Estado estado, String pista) {
 		this.id = id;
 		this.tipo = tipo;
 		this.estado = estado;
+		this.nombrePista = pista;
 	}
 	
 	/* Getters y setters */
@@ -65,6 +67,14 @@ public class DTOKart {
 	
 	public void setEstado(Estado estado) {
 		this.estado = estado;
+	}
+	
+	public String getNombrePista() {
+		return nombrePista;
+	}
+	
+	public void setNombrePista(String pista) {
+		this.nombrePista=pista;
 	}
 	
 	/* Otros metodos */
