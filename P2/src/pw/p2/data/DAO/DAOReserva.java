@@ -44,7 +44,7 @@ public class DAOReserva {
 		return reservas;
 	}
 	
-	public DTORInfantil solicitarReservaInfantil() {
+	/*public DTORInfantil solicitarReservaInfantil() {
 		DTORInfantil reserva = new DTORInfantil();
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -74,7 +74,7 @@ public class DAOReserva {
 			e.printStackTrace();
 		}
 		return reserva;
-	}
+	}*/
 	
 	public int escribirReservaInfantilUpdate(DTORInfantil reserva) {
 		int status = 0;
@@ -158,7 +158,7 @@ public class DAOReserva {
 		return reservas;
 	}
 	
-	public DTORAdulto solicitarReservaAdulto() {
+	/*public DTORAdulto solicitarReservaAdulto() {
 		DTORAdulto reserva = new DTORAdulto();
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -188,7 +188,7 @@ public class DAOReserva {
 			e.printStackTrace();
 		}
 		return reserva;
-	}
+	}*/
 	
 	public int escribirReservaAdultoUpdate(DTORAdulto reserva) {
 		int status = 0;
@@ -273,7 +273,7 @@ public class DAOReserva {
 		return reservas;
 	}
 	
-	public DTORFamiliar solicitarReservaFamiliar() {
+	/*public DTORFamiliar solicitarReservaFamiliar() {
 		DTORFamiliar reserva = new DTORFamiliar();
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -304,7 +304,7 @@ public class DAOReserva {
 			e.printStackTrace();
 		}
 		return reserva;
-	}
+	}*/
 	
 	public int escribirReservaFamiliarUpdate(DTORFamiliar reserva) {
 		int status = 0;

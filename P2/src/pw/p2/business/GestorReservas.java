@@ -4,6 +4,7 @@ import pw.p2.data.*;
 import pw.p2.data.DAO.DAOPista;
 import pw.p2.data.DAO.DAOReserva;
 import pw.p2.data.DAO.DAOUsuario;
+import pw.p2.data.DAO.DAOBono;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -333,39 +334,47 @@ public class GestorReservas {
 	 * @return
 	 */
 	
-	/**public boolean ReservaBonoInfantil (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
+	public boolean ReservaBonoInfantil (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
+		
+		int idBono;
+		DAOBono bonoTabla = new DAOBono();
+		DAOUsuario usuarioTabla = new DAOUsuario();
+		DAOPista pistaTabla = new DAOPista();
+		DTOUsuario usuario = usuarioTabla.solicitarUsuario(correo);		
+		ArrayList<DTOBono> bonos = bonoTabla.solicitarBonos();
+		
 		for (int i = 0; i < GestorUsuarios_.arrayUsuarios.size(); i++) {
-			if (GestorUsuarios_.arrayUsuarios.get(i).getCorreo().equals(correo)) {
+			if (GestorUsuarios_.arrayUsuarios.get(i).getCorreo().equals(usuario.getCorreo())) {
 				if ((GestorUsuarios_.arrayUsuarios.get(i).getNacimiento()).isBefore(LocalDate.now().minusYears(18))) {
-					if(arrayBonos.size() == 0) {
+					if(bonos.size() == 0) {
 						System.out.println("No existe ningun bono. Creando nuevo bono...");
-						RBono newBono = new RBono(1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.INFANTIL, LocalDate.now().plusYears(1));
-						arrayBonos.add(newBono);
+						DTOBono newBono = new DTOBono(0, usuario.getCorreo(), Dificultad.INFANTIL, LocalDate.now().plusYears(1));
+						bonos.add(newBono);
 					}
 					boolean encontrado = false;
-					for (int k = 0; k < arrayBonos.size(); k++) {						
-						for (int e = 0; e < arrayBonos.size(); e++) {
-							if(GestorUsuarios_.arrayUsuarios.get(i).getNombre().equals(arrayBonos.get(e).getbUsuario())) {
+					for (int k = 0; k < bonos.size(); k++) {						
+						for (int e = 0; e < bonos.size(); e++) {
+							if(usuario.getCorreo().equals(bonos.get(e).getbUsuario())) {
 								encontrado = true;
 								break;
 							}
 						}
 						if(!encontrado) {
 							System.out.println("No hay un bono asociado a este usuario. Creando nuevo bono...");
-							RBono newBono = new RBono(arrayBonos.size()+1, 0, GestorUsuarios_.arrayUsuarios.get(i).getNombre(), Tipo.INFANTIL, LocalDate.now().plusYears(1));
-								arrayBonos.add(newBono);
+							DTOBono newBono = new DTOBono(0, usuario.getCorreo(), Dificultad.INFANTIL, LocalDate.now().plusYears(1));
+							bonos.add(newBono);
 							System.out.println("");
 						}
-						if(arrayBonos.get(k).getbUsuario().equals(GestorUsuarios_.arrayUsuarios.get(i).getNombre())) {
-							if (arrayBonos.get(k).arrayReservas.size() < 5) {
-								if(arrayBonos.get(k).getTipo() == Tipo.INFANTIL) {
+						if(bonos.get(k).getbUsuario().equals(usuario.getCorreo())) {
+							if (bonos.get(k).getSesion() < 5) {
+								if(bonos.get(k).getTipo() == Dificultad.INFANTIL) {
 									System.out.println("Introduzca el numero de participantes (niños)");
 									int participantes= Integer.parseInt(scan_.nextLine());
 									System.out.println("");
-									ArrayList<Pista> lpista = GestorPistas_.pistasLibres(participantes, Dificultad.INFANTIL);			
+									ArrayList<DTOPista> lpista = pistaTabla.solicitarPistasLibres(false, participantes, Dificultad.INFANTIL);			
 									if(lpista.size() > 0) {
 										System.out.println("Pistas libres:");
 										for (int j = 0; j < lpista.size(); j++) {
@@ -406,10 +415,13 @@ public class GestorReservas {
 											}
 										
 										RBonoCreador BonoCreador = new RBonoCreador();
-										DTORInfantil newReserva = BonoCreador.creaRInf(GestorUsuarios_.arrayUsuarios.get(i).getNombre(), fecha, duracion, pista, precio, descuento, participantes);
-										arrayBonos.get(k).arrayReservas.add(newReserva);
-										int sesion = arrayBonos.get(k).getSesion();
-										arrayBonos.get(k).setSesion(sesion + 1);
+										DTORInfantil newReserva = BonoCreador.creaRInf(usuario.getCorreo(), fecha, duracion, pista, precio, descuento, participantes, Dificultad.INFANTIL);
+										idBono = bonoTabla.solicitarBono(usuario.getCorreo(), Dificultad.INFANTIL);
+										if(bonoTabla.escribirReservaInfantilInsert(newReserva, idBono) == 0) {
+											System.out.println("Error. Reserva no creada");
+											System.out.println("");
+											return false;
+										}
 										System.out.println("Reserva creada con exito");
 										System.out.println("-------------------------------------");
 										System.out.println("");
@@ -438,7 +450,7 @@ public class GestorReservas {
 			}
 		}
 		return true;
-	}**/
+	}
 	
 	/**
 	 * Realiza las reservas de bono adultas

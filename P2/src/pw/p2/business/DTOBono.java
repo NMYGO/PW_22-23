@@ -1,18 +1,18 @@
 package pw.p2.business;
 
 import pw.p2.data.Reserva;
-import pw.p2.data.Tipo;
+import pw.p2.data.Dificultad;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class DTOBono {
+public class DTOBono{
 	
 	/* Atributos */
 	
 	private int id;
 	private int sesion;
 	private String bUsuario;
-	private Tipo tipo;
+	private Dificultad tipo;
 	private LocalDate fcaducidad;
 	public ArrayList<Reserva> arrayReservas = new ArrayList<Reserva>();
 	
@@ -32,8 +32,7 @@ public class DTOBono {
 	 * @param fecha_de_caducidad
 	 */
 	
-	public DTOBono(Integer id, Integer sesion, String bUsuario, Tipo tipo, LocalDate fcaducidad) {
-		this.id = id;
+	public DTOBono(Integer sesion, String bUsuario, Dificultad tipo, LocalDate fcaducidad) {
 		this.sesion = sesion;
 		this.bUsuario = bUsuario;
 		this.tipo = tipo;
@@ -66,11 +65,11 @@ public class DTOBono {
 		this.bUsuario = bUsuario;
 	}
 	
-	public Tipo getTipo() {
+	public Dificultad getTipo() {
 		return tipo;
 	}
 	
-	public void setTipo(Tipo tipo) {
+	public void setTipo(Dificultad tipo) {
 		this.tipo = tipo;
 	}
 	

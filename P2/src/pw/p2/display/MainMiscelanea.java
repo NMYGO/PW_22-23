@@ -190,17 +190,18 @@ public class MainMiscelanea {
         System.out.println("2. Reserva bono adulto");
         	System.out.println("");
         System.out.println("Elija una opcion escribiendo su numero");
-        /**int option_= Integer.parseInt(scan_.nextLine());
-        if(option_ == 0) {  	
+        int option_= Integer.parseInt(scan_.nextLine());
+        if(option_ == 0) {
+        	
         	GestorReservas_.ReservaBonoInfantil(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);	            
         }else if(option_ == 1) {
-        	GestorReservas_.ReservaBonoFamiliar(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
+        	//GestorReservas_.ReservaBonoFamiliar(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
         }else if(option_ == 2) {
-        	GestorReservas_.ReservaBonoAdulto(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
+        	//GestorReservas_.ReservaBonoAdulto(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
         }else {
         	System.out.println("Opcion no reconocida");
 			System.out.println("");
-        }**/
+        }
 	}
 	
 	public static void modificarReservaIndividual (GestorReservas GestorReservas_, String usuario, LocalDate fecha, String pista, Integer duracion, Scanner scan_) {
