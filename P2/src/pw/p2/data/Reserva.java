@@ -17,6 +17,7 @@ public abstract class Reserva {
 	
 	/* Atributos */
 	
+	protected int idReserva;
 	protected String usuario;
 	protected LocalDate fecha;
 	protected int duracion;
@@ -52,6 +53,13 @@ public abstract class Reserva {
 	
 	/* Getters y setters */
 	
+	public int getIdReserva() {
+		return idReserva;
+	}
+
+	public void setIdReserva(int idReserva) {
+		this.idReserva = idReserva;
+	}
 	public String getUsuario() {
 		return usuario;
 	}

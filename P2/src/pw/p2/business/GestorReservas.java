@@ -20,11 +20,6 @@ import java.util.Scanner;
  */
 
 public class GestorReservas {
-
-	/* Atributos */
-	
-	public ArrayList<Reserva> arrayReservaIndividual = new ArrayList<Reserva>();
-	public ArrayList<RBono> arrayBonos = new ArrayList<RBono>();
 	
 	/**
 	 * Constructor por defecto
@@ -717,7 +712,7 @@ public class GestorReservas {
 	 * @param scan_
 	 */
 
-	public void consultarReservasFuturasBono (String usuario){
+	/**public void consultarReservasFuturasBono (String usuario){
 		for(int i = 0; i < arrayBonos.size(); i++) {
 				if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
 					System.out.println(arrayBonos.get(i).toString());
@@ -728,7 +723,7 @@ public class GestorReservas {
 					}
 				}
 		}
-	}
+	}**/
 
 	/**
 	 * Muestra las reservas de un día y una pista específicas
@@ -770,7 +765,7 @@ public class GestorReservas {
         		}
         	}
         }else if(option_ == 1) {
-        	for(int i = 0; i < arrayBonos.size(); i++){
+        	/**for(int i = 0; i < arrayBonos.size(); i++){
         		if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
 	        		for(int j = 0; j < arrayBonos.size(); j++){
 		        		if(arrayBonos.get(i).getArrayReservas().get(j).getFecha().isEqual(fecha) && arrayBonos.get(i).getArrayReservas().get(j).getPista().equals(pista)){
@@ -779,7 +774,7 @@ public class GestorReservas {
 		    			}
 	        		}
         		}
-        	}
+        	}**/
         }else {
         	System.out.println("Opcion no reconocida");
 			System.out.println("");
@@ -791,20 +786,48 @@ public class GestorReservas {
 	 * @param scan_
 	 */
 
-	public void eliminarReserva (String usuario, LocalDate fecha, String pista, Integer duracion){		
-		for(int i=0 ; i< arrayReservaIndividual.size(); i++){
-			if (arrayReservaIndividual.get(i).getUsuario().equals(usuario) &&
-					arrayReservaIndividual.get(i).getFecha().isEqual(fecha) &&
-					arrayReservaIndividual.get(i).getDur() == duracion &&
-					arrayReservaIndividual.get(i).getPista().equals(pista) &&
-					arrayReservaIndividual.get(i).getFecha().isBefore(LocalDate.now().minusDays(1))){
-				arrayReservaIndividual.remove(i);
-				System.out.println("Reserva eliminada con exito");
-				System.out.println("-------------------------------------");
-				System.out.println("");
-				return;
-			}
-		}
+	public void eliminarReserva (String usuario, LocalDate fecha, String pista, Integer duracion){
+		DAOReserva reservaTabla = new DAOReserva();
+		ArrayList<DTORInfantil> reservasInfantiles = reservaTabla.solicitarReservasInfantiles();
+		ArrayList<DTORAdulto> reservasAdultos = reservaTabla.solicitarReservasAdultos();
+		ArrayList<DTORFamiliar> reservasFamiliares = reservaTabla.solicitarReservasFamiliares();
+		for(int i=0; i < reservasInfantiles.size() ; i++){
+    		if(reservasInfantiles.get(i).getUsuario().equals(usuario)) {
+        		if(reservasInfantiles.get(i).getFecha().isEqual(fecha) && reservasInfantiles.get(i).getPista().equals(pista)){
+    				if(!(reservaTabla.deleteReservaInfantil(reservasInfantiles.get(i)) == 0)) {
+    					System.out.println("Reserva eliminada con exito");
+        				System.out.println("-------------------------------------");
+        				System.out.println("");
+        				return;
+    				}        			
+    			}
+    		}
+    	}
+    	for(int i=0; i < reservasAdultos.size() ; i++){
+    		if(reservasAdultos.get(i).getUsuario().equals(usuario)) {
+        		if(reservasAdultos.get(i).getFecha().isEqual(fecha) && reservasAdultos.get(i).getPista().equals(pista)){
+        			if(!(reservaTabla.deleteReservaAdulto(reservasAdultos.get(i)) == 0)) {
+    					System.out.println("Reserva eliminada con exito");
+        				System.out.println("-------------------------------------");
+        				System.out.println("");
+        				return;
+    				} 
+    			}
+    		}
+    	}
+    	for(int i=0; i < reservasFamiliares.size() ; i++){
+    		if(reservasFamiliares.get(i).getUsuario().equals(usuario)) {
+        		if(reservasFamiliares.get(i).getFecha().isEqual(fecha) && reservasFamiliares.get(i).getPista().equals(pista)){
+        			if(!(reservaTabla.deleteReservaFamiliar(reservasFamiliares.get(i)) == 0)) {
+    					System.out.println("Reserva eliminada con exito");
+        				System.out.println("-------------------------------------");
+        				System.out.println("");
+        				return;
+    				} 
+    			}
+    		}
+    	}				
+
 		System.out.println("Error. La reserva no se puede eliminar");
 		System.out.println("-------------------------------------");
 		System.out.println("");
@@ -815,13 +838,13 @@ public class GestorReservas {
 	 * @param scan_
 	 */
 
-	public void modificarReserva (String usuario, LocalDate fecha, String pista, Integer duracion, Scanner scan_){		
-		for(int i=0 ; i< arrayReservaIndividual.size(); i++){
-			if (arrayReservaIndividual.get(i).getUsuario().equals(usuario) &&
-					arrayReservaIndividual.get(i).getFecha().isEqual(fecha) &&
-					arrayReservaIndividual.get(i).getDur() == duracion &&
-					arrayReservaIndividual.get(i).getPista().equals(pista) &&
-					arrayReservaIndividual.get(i).getFecha().isBefore(LocalDate.now().minusDays(1))){
+	public void modificarReservaInfantil (String usuario, LocalDate fecha, String pista, Integer duracion, Scanner scan_){	
+		DAOReserva reservaTabla = new DAOReserva();
+		ArrayList<DTORInfantil> reservasInfantiles = reservaTabla.solicitarReservasInfantiles();
+		for(int i=0 ; i< reservasInfantiles.size(); i++) {
+			if (reservasInfantiles.get(i).getUsuario().equals(usuario) && reservasInfantiles.get(i).getFecha().isEqual(fecha) &&
+				reservasInfantiles.get(i).getDur() == duracion && reservasInfantiles.get(i).getPista().equals(pista) &&
+				reservasInfantiles.get(i).getFecha().isBefore(LocalDate.now().minusDays(1))) {
 				int opcion = 1;
 				while (opcion != 0) {
 					System.out.println("0: Terminar modificacion.\n"
@@ -841,7 +864,13 @@ public class GestorReservas {
 						System.out.println("Introduzca la nueva fecha de reserva");
 							LocalDate nfecha = LocalDate.parse(scan_.nextLine());
 							System.out.println("");
-						arrayReservaIndividual.get(i).setFecha(nfecha);
+							reservasInfantiles.get(i).setFecha(nfecha);
+							if(reservaTabla.escribirReservaInfantilUpdate(reservasInfantiles.get(i)) == 0) {
+								System.out.println("Error. La reserva no se puede modificar");
+								System.out.println("-------------------------------------");
+								System.out.println("");
+								return;
+							}
 		
 						break;
 							
@@ -849,18 +878,139 @@ public class GestorReservas {
 						System.out.println("Introduzca la nueva duracion de reserva");
 						int nduracion = Integer.parseInt(scan_.nextLine());				
 						System.out.println("");
-					arrayReservaIndividual.get(i).setDur(nduracion);
-					switch(nduracion) {
-						case 60:
-							arrayReservaIndividual.get(i).setPrecio(20);
-							break;
-						case 90:
-							arrayReservaIndividual.get(i).setPrecio(30);
-							break;
-						case 120:
-							arrayReservaIndividual.get(i).setPrecio(40);
-							break;
+						reservasInfantiles.get(i).setDur(nduracion);
+						if(reservaTabla.escribirReservaInfantilUpdate(reservasInfantiles.get(i)) == 0) {
+							System.out.println("Error. La reserva no se puede modificar");
+							System.out.println("-------------------------------------");
+							System.out.println("");
+							return;
+						}
+					
+					break;
+
+					default:
+						System.out.println("Opcion no reconocida");
+						System.out.println("");
+						break;
 					}
+				}
+			}
+		}
+		System.out.println("Error. La reserva no se puede modificar");
+		System.out.println("-------------------------------------");
+		System.out.println("");
+	}
+	
+	public void modificarReservaAdulto (String usuario, LocalDate fecha, String pista, Integer duracion, Scanner scan_){	
+		DAOReserva reservaTabla = new DAOReserva();
+		ArrayList<DTORAdulto> reservasAdultos = reservaTabla.solicitarReservasAdultos();
+		for(int i=0 ; i< reservasAdultos.size(); i++) {
+			if (reservasAdultos.get(i).getUsuario().equals(usuario) && reservasAdultos.get(i).getFecha().isEqual(fecha) &&
+					reservasAdultos.get(i).getDur() == duracion && reservasAdultos.get(i).getPista().equals(pista) &&
+					reservasAdultos.get(i).getFecha().isBefore(LocalDate.now().minusDays(1))) {
+				int opcion = 1;
+				while (opcion != 0) {
+					System.out.println("0: Terminar modificacion.\n"
+					+ "1: Cambiar Fecha.\n"
+					+ "2: Cambiar Duracion.\n"
+					+ "Introduzca una opcion:"); 
+					
+					opcion = Integer.parseInt(scan_.nextLine());
+					switch (opcion) {					
+					case 0: 
+						System.out.println("Reserva modificada con exito");
+						System.out.println("-------------------------------------");
+						System.out.println("");
+						return;
+
+					case 1:
+						System.out.println("Introduzca la nueva fecha de reserva");
+							LocalDate nfecha = LocalDate.parse(scan_.nextLine());
+							System.out.println("");
+							reservasAdultos.get(i).setFecha(nfecha);
+							if(reservaTabla.escribirReservaAdultoUpdate(reservasAdultos.get(i)) == 0) {
+								System.out.println("Error. La reserva no se puede modificar");
+								System.out.println("-------------------------------------");
+								System.out.println("");
+								return;
+							}
+		
+						break;
+							
+					case 2:
+						System.out.println("Introduzca la nueva duracion de reserva");
+						int nduracion = Integer.parseInt(scan_.nextLine());				
+						System.out.println("");
+						reservasAdultos.get(i).setDur(nduracion);
+						if(reservaTabla.escribirReservaAdultoUpdate(reservasAdultos.get(i)) == 0) {
+							System.out.println("Error. La reserva no se puede modificar");
+							System.out.println("-------------------------------------");
+							System.out.println("");
+							return;
+						}
+					
+					break;
+
+					default:
+						System.out.println("Opcion no reconocida");
+						System.out.println("");
+						break;
+					}
+				}
+			}
+		}
+		System.out.println("Error. La reserva no se puede modificar");
+		System.out.println("-------------------------------------");
+		System.out.println("");
+	}
+	
+	public void modificarReservaFamiliar (String usuario, LocalDate fecha, String pista, Integer duracion, Scanner scan_){	
+		DAOReserva reservaTabla = new DAOReserva();
+		ArrayList<DTORFamiliar> reservasFamiliares = reservaTabla.solicitarReservasFamiliares();
+		for(int i=0 ; i< reservasFamiliares.size(); i++) {
+			if (reservasFamiliares.get(i).getUsuario().equals(usuario) && reservasFamiliares.get(i).getFecha().isEqual(fecha) &&
+				reservasFamiliares.get(i).getDur() == duracion && reservasFamiliares.get(i).getPista().equals(pista) &&
+					reservasFamiliares.get(i).getFecha().isBefore(LocalDate.now().minusDays(1))) {
+				int opcion = 1;
+				while (opcion != 0) {
+					System.out.println("0: Terminar modificacion.\n"
+					+ "1: Cambiar Fecha.\n"
+					+ "2: Cambiar Duracion.\n"
+					+ "Introduzca una opcion:"); 
+					
+					opcion = Integer.parseInt(scan_.nextLine());
+					switch (opcion) {					
+					case 0: 
+						System.out.println("Reserva modificada con exito");
+						System.out.println("-------------------------------------");
+						System.out.println("");
+						return;
+
+					case 1:
+						System.out.println("Introduzca la nueva fecha de reserva");
+							LocalDate nfecha = LocalDate.parse(scan_.nextLine());
+							System.out.println("");
+							reservasFamiliares.get(i).setFecha(nfecha);
+							if(reservaTabla.escribirReservaFamiliarUpdate(reservasFamiliares.get(i)) == 0) {
+								System.out.println("Error. La reserva no se puede modificar");
+								System.out.println("-------------------------------------");
+								System.out.println("");
+								return;
+							}
+		
+						break;
+							
+					case 2:
+						System.out.println("Introduzca la nueva duracion de reserva");
+						int nduracion = Integer.parseInt(scan_.nextLine());				
+						System.out.println("");
+						reservasFamiliares.get(i).setDur(nduracion);
+						if(reservaTabla.escribirReservaFamiliarUpdate(reservasFamiliares.get(i)) == 0) {
+							System.out.println("Error. La reserva no se puede modificar");
+							System.out.println("-------------------------------------");
+							System.out.println("");
+							return;
+						}
 					
 					break;
 

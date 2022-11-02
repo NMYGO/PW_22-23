@@ -355,4 +355,58 @@ public class DAOReserva {
 		}
 		return status;
 	}
+	
+	public int deleteReservaInfantil(DTORInfantil reserva){
+		int status=0;
+		try{
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		PreparedStatement ps = connection.prepareStatement("delete from reserva where correoUsuario=? and fecha=? and nombrePista=? and duracion=?");
+		ps.setString(1, reserva.getUsuario());
+		ps.setString(2, reserva.getFecha().toString());
+		ps.setString(3, reserva.getPista());
+		ps.setInt(4, reserva.getDur());
+		status = ps.executeUpdate();
+		} catch(Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return status;
+	}
+	
+	public int deleteReservaAdulto(DTORAdulto reserva){
+		int status=0;
+		try{
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		PreparedStatement ps = connection.prepareStatement("delete from reserva where correoUsuario=? and fecha=? and nombrePista=? and duracion=?");
+		ps.setString(1, reserva.getUsuario());
+		ps.setString(2, reserva.getFecha().toString());
+		ps.setString(3, reserva.getPista());
+		ps.setInt(4, reserva.getDur());
+		status = ps.executeUpdate();
+		} catch(Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return status;
+	}
+	
+	public int deleteReservaFamiliar(DTORFamiliar reserva){
+		int status=0;
+		try{
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		PreparedStatement ps = connection.prepareStatement("delete from reserva where correoUsuario=? and fecha=? and nombrePista=? and duracion=?");
+		ps.setString(1, reserva.getUsuario());
+		ps.setString(2, reserva.getFecha().toString());
+		ps.setString(3, reserva.getPista());
+		ps.setInt(4, reserva.getDur());
+		status = ps.executeUpdate();
+		} catch(Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return status;
+	}
 }

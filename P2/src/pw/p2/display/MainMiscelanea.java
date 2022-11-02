@@ -6,6 +6,7 @@ import pw.p2.data.DAO.DAOKart;
 import pw.p2.data.DAO.DAOPista;
 import pw.p2.data.DAO.DAOUsuario;
 import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
@@ -156,7 +157,7 @@ public class MainMiscelanea {
 	 * @param scan_
 	 */
 	
-	public static void reservaIndividual (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
+	public static void crearReservaIndividual (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("0. Reserva individual infantil");
         System.out.println("1. Reserva individual familiar");
         System.out.println("2. Reserva individual adulto");
@@ -183,7 +184,7 @@ public class MainMiscelanea {
 	 * @param scan_
 	 */
 	
-	public static void reservaBono (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
+	public static void crearReservaBono (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
 		System.out.println("0. Reserva bono infantil");
         System.out.println("1. Reserva bono familiar");
         System.out.println("2. Reserva bono adulto");
@@ -200,5 +201,24 @@ public class MainMiscelanea {
         	System.out.println("Opcion no reconocida");
 			System.out.println("");
         }**/
+	}
+	
+	public static void modificarReservaIndividual (GestorReservas GestorReservas_, String usuario, LocalDate fecha, String pista, Integer duracion, Scanner scan_) {
+		System.out.println("0. Reserva individual infantil");
+        System.out.println("1. Reserva individual familiar");
+        System.out.println("2. Reserva individual adulto");
+        	System.out.println("");
+        System.out.println("Elija una opcion escribiendo su numero");
+        int option_= Integer.parseInt(scan_.nextLine());
+        if(option_ == 0) {  	
+        	GestorReservas_.modificarReservaInfantil(usuario, fecha, pista, duracion, scan_);	            
+        }else if(option_ == 1) {
+        	GestorReservas_.modificarReservaFamiliar(usuario, fecha, pista, duracion, scan_);
+        }else if(option_ == 2) {
+        	GestorReservas_.modificarReservaAdulto(usuario, fecha, pista, duracion, scan_);
+        }else {
+        	System.out.println("Opcion no reconocida");
+			System.out.println("");
+        }
 	}
 }

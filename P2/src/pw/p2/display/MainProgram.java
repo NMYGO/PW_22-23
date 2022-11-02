@@ -158,11 +158,11 @@ public class MainProgram{
                 	            
                 	            switch(option_){	               	            
 		        	                case 1: 
-		        	                	MainMiscelanea.reservaIndividual(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
+		        	                	MainMiscelanea.crearReservaIndividual(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
 		        	                    break;
 		        	                    
 		        	                case 2:
-		        	                	MainMiscelanea.reservaBono(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
+		        	                	MainMiscelanea.crearReservaBono(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
 		        	                    break;
 		        	                    
 		        	                case 3:
@@ -175,7 +175,7 @@ public class MainProgram{
 		        	        			System.out.println("Introduzca la duracion de la reserva");
 		        	        				duracion = Integer.parseInt(scan_.nextLine());
 		        	        			System.out.println("");
-		        	                	GestorReservas_.modificarReserva(usuario, fecha, pista, duracion, scan_);
+		        	        			MainMiscelanea.modificarReservaIndividual(GestorReservas_, usuario, fecha, pista, duracion, scan_);
 		        	                    break;
 		        	                    
 		        	                case 4:
@@ -202,7 +202,7 @@ public class MainProgram{
 		        	                	System.out.println("Introduzca su correo de usuario");
 		        	            			usuario = scan_.nextLine();
 		        	            			System.out.println("");
-		        	                	GestorReservas_.consultarReservasFuturasBono(usuario);
+		        	                	//GestorReservas_.consultarReservasFuturasBono(usuario);
 		        	                    break;
 		        	                    
 		        	                case 7:
