@@ -9,7 +9,7 @@ public class DTOBono{
 	
 	/* Atributos */
 	
-	private int id;
+	private int idBono;
 	private int sesion;
 	private String bUsuario;
 	private Dificultad tipo;
@@ -32,6 +32,13 @@ public class DTOBono{
 	 * @param fecha_de_caducidad
 	 */
 	
+	public DTOBono(Integer sesion, String bUsuario, Dificultad tipo) {
+		this.sesion = sesion;
+		this.bUsuario = bUsuario;
+		this.tipo = tipo;
+		this.fcaducidad = LocalDate.now().plusYears(1);
+	}
+	
 	public DTOBono(Integer sesion, String bUsuario, Dificultad tipo, LocalDate fcaducidad) {
 		this.sesion = sesion;
 		this.bUsuario = bUsuario;
@@ -42,11 +49,11 @@ public class DTOBono{
 	/* Getters y setters */
 	
 	public int getId() {
-		return id;
+		return idBono;
 	}
 	
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int idBono) {
+		this.idBono = idBono;
 	}
 	
 	public int getSesion() {
@@ -93,7 +100,7 @@ public class DTOBono{
 
 	@Override
 	public String toString() {
-		return "Bono [id=" + id + ", sesion=" + sesion + ", bUser=" + bUsuario + ", tipo=" + tipo + ", fecha de caducidad=" + fcaducidad + "]\n";
+		return "Bono [id=" + idBono + ", sesion=" + sesion + ", bUser=" + bUsuario + ", tipo=" + tipo + ", fecha de caducidad=" + fcaducidad + "]\n";
 	}
 	
 }
