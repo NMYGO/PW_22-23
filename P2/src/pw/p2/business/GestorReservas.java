@@ -759,7 +759,9 @@ public class GestorReservas {
 	 * @param scan_
 	 */
 
-	/**public void consultarReservasFuturasBono (String usuario){
+	public void consultarReservasFuturasBono (String usuario){
+		DAOBono bonoTabla = new DAOBono();
+		ArrayList<DTOBono> arrayBonos = bonoTabla.solicitarBonos();
 		for(int i = 0; i < arrayBonos.size(); i++) {
 				if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
 					System.out.println(arrayBonos.get(i).toString());
@@ -770,7 +772,7 @@ public class GestorReservas {
 					}
 				}
 		}
-	}**/
+	}
 
 	/**
 	 * Muestra las reservas de un día y una pista específicas
@@ -812,7 +814,9 @@ public class GestorReservas {
         		}
         	}
         }else if(option_ == 1) {
-        	/**for(int i = 0; i < arrayBonos.size(); i++){
+        	DAOBono bonoTabla = new DAOBono();
+    		ArrayList<DTOBono> arrayBonos = bonoTabla.solicitarBonos();
+        	for(int i = 0; i < arrayBonos.size(); i++){
         		if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
 	        		for(int j = 0; j < arrayBonos.size(); j++){
 		        		if(arrayBonos.get(i).getArrayReservas().get(j).getFecha().isEqual(fecha) && arrayBonos.get(i).getArrayReservas().get(j).getPista().equals(pista)){
@@ -821,7 +825,7 @@ public class GestorReservas {
 		    			}
 	        		}
         		}
-        	}**/
+        	}
         }else {
         	System.out.println("Opcion no reconocida");
 			System.out.println("");
