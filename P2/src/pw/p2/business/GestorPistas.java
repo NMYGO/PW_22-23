@@ -16,24 +16,20 @@ import java.util.ArrayList;
  * @author Ángel Quintero Montes
  * @author Diego Tabas Costa
  *
- */
+ **/
 
 public class GestorPistas{
 
-	/* Atributos */
-
-	public ArrayList<DTOPistaFuncionalidades> arrayPistas = new ArrayList<DTOPistaFuncionalidades>();
-
 	/**
 	 * Constructor por defecto
-	 */
+	 **/
 	public GestorPistas(){}
 
 	/**
 	 * Funcion que crea una pista y la añade al arrayPistas
 	 * @param scan_ Scanner para leer por teclado
 	 * @return Devuelve un booleano 
-	 */
+	 **/
 	
 	public boolean crearPista (String nombre, Boolean estado, Dificultad dificultad, Integer maxkarts) {		
 		DAOPista pistaTabla = new DAOPista();
@@ -55,11 +51,12 @@ public class GestorPistas{
 	 * Funcion que crea un kart y lo añade al arrayPistas
 	 * @param scan_ Scanner para leer por teclado
 	 * @return Devuelve un booleano 
-	 */
+	 **/
 	
 	public boolean crearKart (Integer id, Boolean tipo, Estado estado, String nombrePista) {				
 		DAOKart kartTabla = new DAOKart();
 		DTOKart kart = new DTOKart(id, tipo, estado, nombrePista);
+		
 		if (kartTabla.escribirKartInsert(kart) == 0) {
 			System.out.println("Error. Ese kart ya existe");
 			System.out.println("-------------------------------------");
@@ -77,7 +74,7 @@ public class GestorPistas{
 	 * @param idkart Identificador del kart a asociar
 	 * @param nombrepista Nombre de la pista a la que asociamos los karts
 	 * @return Devuelve un booleano
-	 */
+	 **/
 	
 	public boolean asociarKartPista (Integer idkart, String nombrepista) {
 		DAOKart kartTabla = new DAOKart();
@@ -92,23 +89,14 @@ public class GestorPistas{
 						DTOPistaFuncionalidades pistaF = new DTOPistaFuncionalidades();
 						kart = pistaF.asociarKartAPista(kart, pistas.get(i));
 						if(kart != null) {
-							pistas.get(i).lkart.add(kart);
 							if (!(kartTabla.escribirKartUpdate(kart) == 0)) {
 								System.out.println("Kart asociado con exito");
 								System.out.println("-------------------------------------");
 								System.out.println("");
 								return true;
-							}else {
-								System.out.println("escribir");
 							}
-						}else {
-							System.out.println("kart null");
 						}
-					}else {
-						System.out.println("kart.DISPONIBLE");
 					}
-				}else {
-					System.out.println("!isEstadoPista");
 				}
 			}
 		}
@@ -120,7 +108,7 @@ public class GestorPistas{
 
 	/**
 	 * Función que lista por pantalla el nombre de las pistas en mantenimiento
-	 */
+	 **/
 	
 	public void listaPistasMantenimiento () {
 		DAOPista pistaTabla = new DAOPista();
@@ -139,19 +127,18 @@ public class GestorPistas{
 	 * @param kartnum número de karts de la pista
 	 * @param dificultad dificultad de la pista (INFANTIL, FAMILIAR, ADULTA)
 	 * @return Devuelve array de pistas libres
-	 */
+	 **/
 	
 	public ArrayList<DTOPista> pistasLibres (Integer participantes, Dificultad dificultad) {							
 		DAOPista pistaTabla = new DAOPista();
-		ArrayList <DTOPista> pistas = pistaTabla.solicitarPistasLibres(false, participantes, dificultad);
 		
+		ArrayList <DTOPista> pistas = pistaTabla.solicitarPistasLibres(false, participantes, dificultad);		
 		return pistas;
 	}
 	
 	/**
-	 * Lista por pantalla todos los kars que esten disponibles
-	 * @param GestorPistas_
-	 */
+	 * Lista por pantalla todos los karts que esten disponibles
+	 **/
 	
 	public void listarKartsDisponibles () {
 		DAOKart kartTabla = new DAOKart();

@@ -6,27 +6,27 @@ import pw.p2.data.Reserva;
 
 /**
  * 
- * Clase de reservas de tipo adulto
+ * DTO de reservas de tipo adulto
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano
  * @author Ángel Quintero Montes
  * @author Diego Tabas Costa
  *
- */
+ **/
 
 public class DTORAdulto extends Reserva{
 	
 	/* Atributos */
 	
-	private int adultos;
+	private Integer adultos;
 	private Dificultad tipo;
 	
 	/* Constructores */
 	
 	/**
 	 * Constructor por defecto
-	 * */
+	 **/
 	public DTORAdulto() {}
 	
 	/**
@@ -38,7 +38,7 @@ public class DTORAdulto extends Reserva{
 	 * @param precio precio de la reserva
 	 * @param descuento si es necesario descuento aplicado al precio
 	 * @param adultos número de participantes
-	 */
+	 **/
 	
 	public DTORAdulto(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Dificultad tipo) {
 		super(usuario, fecha, duracion, pista, precio, descuento);
@@ -63,7 +63,11 @@ public class DTORAdulto extends Reserva{
 	}
 	
 	/* Otros metodos */
-
+	
+	/**
+	 * Funcion toString 
+	 **/
+	
 	public String toString() {
 		String info = super.toString();
 			info +=  ", participantes niños=0, participantes adultos=" + adultos + "] -> Reserva Adulto\n";

@@ -2,6 +2,17 @@ package pw.p2.business;
 
 import java.time.LocalDate;
 
+/**
+ * 
+ * DTO usuario
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ **/
+
 public class DTOUsuario {
 	
 	/* Atributos */
@@ -16,7 +27,7 @@ public class DTOUsuario {
 	
 	/**
 	 * Constructor por defecto
-	 * */
+	 **/
 	public DTOUsuario() {}
 	
 	/**
@@ -25,7 +36,7 @@ public class DTOUsuario {
 	 * @param apellidos Apellidos del usuario
 	 * @param nacimiento Nacimiento del usuario
 	 * @param correo Correo unico del usuario
-	 * */
+	 **/
 	
 	public DTOUsuario(String nombre, String apellidos, LocalDate nacimiento, String correo) {
 		this.nombre = nombre;
@@ -86,15 +97,15 @@ public class DTOUsuario {
 	}
 	
 	/* Otros metodos */
+	
 	/**
-	 * Pasa los atributos del objeto usuario a un string
-	 */
-
+	 * Funcion toString 
+	 **/
+	
 	@Override
 	public String toString() {
 		return "Usuario [nombre=" + nombre + ", apellidos=" + apellidos 
 				+ ", nacimiento=" + nacimiento + ", inscripcion=" + inscripcion 
 				+ ", correo=" + correo + "]\n";
-	}
-	
+	}	
 }

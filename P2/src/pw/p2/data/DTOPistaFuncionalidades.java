@@ -24,7 +24,7 @@ public class DTOPistaFuncionalidades {
 	 * @return Devuelve una lista de los karts disponibles
 	 */
 	
-	/**public ArrayList<DTOKart> consultarKartsDisponibles(ArrayList<DTOKart> arrayKarts) {
+	public ArrayList<DTOKart> consultarKartsDisponibles(ArrayList<DTOKart> arrayKarts) {
 		ArrayList<DTOKart> dkart = new ArrayList<DTOKart>();
 		for(int i = 0; i < arrayKarts.size(); i++) {
 			if((arrayKarts.get(i)).getEstado() == Estado.DISPONIBLE) {
@@ -32,7 +32,7 @@ public class DTOPistaFuncionalidades {
 			}
 		}
 		return dkart;
-	}**/
+	}
 
 	/**
 	 * Función que asocia karts a las pistas dependiendo de la dificultad de ambos

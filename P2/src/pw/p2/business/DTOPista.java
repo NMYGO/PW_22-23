@@ -1,23 +1,32 @@
 package pw.p2.business;
 
 import pw.p2.data.Dificultad;
-import java.util.ArrayList;
+
+/**
+ * 
+ * DTO pista
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ **/
 
 public class DTOPista {
 	
 	/* Atributos */
 	
 	protected String nombre;	
-	protected boolean estado;	//TRUE -> RESERVADO - FALSE -> DISPONIBLE
+	protected Boolean estado;	//TRUE -> RESERVADO - FALSE -> DISPONIBLE
 	protected Dificultad dificultad;
-	protected int maxkarts;
-	protected ArrayList<DTOKart> lkart;
+	protected Integer maxkarts;
 	
 	/* Constructores */
 	
 	/**
 	 * Constructor por defecto
-	 * */
+	 **/
 	public DTOPista() {}
 	
 	/**
@@ -26,14 +35,13 @@ public class DTOPista {
 	 * @param estado Estado de la pista
 	 * @param dificultad Dificultad de la pista
 	 * @param maxkarts Maximos karts de la pista
-	 * */
+	 **/
 	
 	public DTOPista(String nombre, Boolean estado, Dificultad dificultad, Integer maxkarts) {
 		this.nombre = nombre;
 		this.estado = estado;
 		this.dificultad = dificultad;
 		this.maxkarts = maxkarts;
-		this.lkart = new ArrayList<DTOKart>();
 	}
 	
 	/* Getters y setters */
@@ -69,20 +77,12 @@ public class DTOPista {
 	public void setMaxkarts(int maxkarts) {
 		this.maxkarts = maxkarts;
 	}
-
-	public ArrayList<DTOKart> getLkart() {
-		return lkart;
-	}
-
-	public void setLkart(ArrayList<DTOKart> lkart) {
-		this.lkart = lkart;
-	}
 	
 	/* Otros metodos */
 	
 	/**
-	 * Pasa los parámetros del objeto pista a un string
-	 */
+	 * Funcion toString 
+	 **/
 	
 	@Override
 	public String toString() {
@@ -90,5 +90,4 @@ public class DTOPista {
 				+ "dificultad=" + dificultad + ", maxkarts=" + maxkarts 
 				+ "]\n";
 	}
-	
 }

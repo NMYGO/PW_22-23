@@ -202,7 +202,7 @@ public class MainProgram{
 		        	                	System.out.println("Introduzca su correo de usuario");
 		        	            			usuario = scan_.nextLine();
 		        	            			System.out.println("");
-		        	                	//GestorReservas_.consultarReservasFuturasBono(usuario);
+		        	                	GestorReservas_.consultarReservasFuturasBono(usuario);
 		        	                    break;
 		        	                    
 		        	                case 7:

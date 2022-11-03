@@ -165,11 +165,11 @@ public class MainMiscelanea {
         System.out.println("Elija una opcion escribiendo su numero");
         int option_= Integer.parseInt(scan_.nextLine());
         if(option_ == 0) {  	
-        	GestorReservas_.ReservaIndividualInfantil(GestorReservas_, GestorPistas_, option_, scan_);	            
+        	GestorReservas_.ReservaIndividualInfantil(scan_);	            
         }else if(option_ == 1) {
-        	GestorReservas_.ReservaIndividualFamiliar(GestorReservas_, GestorPistas_, option_, scan_);
+        	GestorReservas_.ReservaIndividualFamiliar(scan_);
         }else if(option_ == 2) {
-        	GestorReservas_.ReservaIndividualAdulto(GestorReservas_, GestorPistas_, option_, scan_);
+        	GestorReservas_.ReservaIndividualAdulto(scan_);
         }else {
         	System.out.println("Opcion no reconocida");
 			System.out.println("");
@@ -195,9 +195,9 @@ public class MainMiscelanea {
         	
         	GestorReservas_.ReservaBonoInfantil(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);	            
         }else if(option_ == 1) {
-        	//GestorReservas_.ReservaBonoFamiliar(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
+        	GestorReservas_.ReservaBonoFamiliar(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
         }else if(option_ == 2) {
-        	//GestorReservas_.ReservaBonoAdulto(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
+        	GestorReservas_.ReservaBonoAdulto(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
         }else {
         	System.out.println("Opcion no reconocida");
 			System.out.println("");

@@ -11,14 +11,14 @@ import pw.p2.data.Estado;
  * @author Ángel Quintero Montes
  * @author Diego Tabas Costa
  *
- */
+ **/
 
 public class DTOKart {
 	
 	/* Atributos */
 	
-	protected int id;	
-	protected boolean tipo; //TRUE -> NIÑO - FALSE -> ADULTO	
+	protected Integer id;	
+	protected Boolean tipo; //TRUE -> NIÑO - FALSE -> ADULTO	
 	protected Estado estado;
 	protected String nombrePista;
 	
@@ -26,7 +26,7 @@ public class DTOKart {
 	
 	/**
 	 * Constructor por defecto
-	 * */
+	 **/
 	public DTOKart() {}
 	
 	/**
@@ -34,7 +34,7 @@ public class DTOKart {
 	 * @param id Identificador del kart
 	 * @param tipo Tipo de kart
 	 * @param estado Estado del kart
-	 * */
+	 **/
 	
 	public DTOKart(Integer id, Boolean tipo, Estado estado, String pista) {
 		this.id = id;
@@ -78,9 +78,11 @@ public class DTOKart {
 	}
 	
 	/* Otros metodos */
+	
 	/**
-	 * Funcion para convertir los parámetros del kart a un string
-	 */
+	 * Funcion toString 
+	 **/
+	
 	@Override
 	public String toString() {
 		return "Kart [id=" + id + ", tipo=" + tipo + ", estado=" + estado + "]\n";

@@ -7,33 +7,33 @@ import pw.p2.data.Dificultad;
 
 /**
  * 
- * Clase de las reservas de tipo infantil
+ * DTO de las reservas de tipo infantil
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano
  * @author Ángel Quintero Montes
  * @author Diego Tabas Costa
  *
- */
+ **/
 
 public class DTORInfantil extends Reserva{
 	
 	/* Atributos */
 	
-	private int ninos;
+	private Integer ninos;
 	private Dificultad tipo;
 	
 	/* Constructores */
 	
 	/**
 	 * Constructor por defecto
-	 * */
+	 **/
 	public DTORInfantil() {}
 	
 	/**
 	 * Constructor parametrizado
 	 * @param ninos Participantes niños de la reserva infantil
-	 * */
+	 **/
 	
 	public DTORInfantil(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer ninos, Dificultad tipo) {
 		super(usuario, fecha, duracion, pista, precio, descuento);
@@ -57,7 +57,11 @@ public class DTORInfantil extends Reserva{
 	}
 	
 	/* Otros metodos */
-
+	
+	/**
+	 * Funcion toString 
+	 **/
+	
 	public String toString() {
 		String info = super.toString();
 			info += ", participantes niños=" + ninos+ ", participantes adultos=0] -> Reserva Infantil\n";

@@ -5,22 +5,33 @@ import pw.p2.data.Dificultad;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * 
+ * DTO de bonos
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ **/
+
 public class DTOBono{
 	
 	/* Atributos */
 	
-	private int idBono;
-	private int sesion;
-	private String bUsuario;
-	private Dificultad tipo;
-	private LocalDate fcaducidad;
-	public ArrayList<Reserva> arrayReservas = new ArrayList<Reserva>();
+	protected Integer idBono;
+	protected Integer sesion;
+	protected String bUsuario;
+	protected Dificultad tipo;
+	protected LocalDate fcaducidad;
+	public ArrayList<Reserva> arrayReservas = new ArrayList<Reserva>();//ELIMINAR
 	
 	/* Constructores */
 	
 	/**
 	 * Constructor por defecto
-	 * */
+	 **/
 	public DTOBono() {}
 	
 	/**
@@ -29,8 +40,7 @@ public class DTOBono{
 	 * @param sesion
 	 * @param bUsuario
 	 * @param tipo
-	 * @param fecha_de_caducidad
-	 */
+	 **/
 	
 	public DTOBono(Integer sesion, String bUsuario, Dificultad tipo) {
 		this.sesion = sesion;
@@ -38,6 +48,15 @@ public class DTOBono{
 		this.tipo = tipo;
 		this.fcaducidad = LocalDate.now().plusYears(1);
 	}
+	
+	/**
+	 * Contructor parametrizado
+	 * @param id
+	 * @param sesion
+	 * @param bUsuario
+	 * @param tipo
+	 * @param fecha_de_caducidad
+	 **/
 	
 	public DTOBono(Integer sesion, String bUsuario, Dificultad tipo, LocalDate fcaducidad) {
 		this.sesion = sesion;
@@ -97,10 +116,13 @@ public class DTOBono{
 	}
 	
 	/* Otros metodos */
-
+	
+	/**
+	 * Funcion toString 
+	 **/
+	
 	@Override
 	public String toString() {
 		return "Bono [id=" + idBono + ", sesion=" + sesion + ", bUser=" + bUsuario + ", tipo=" + tipo + ", fecha de caducidad=" + fcaducidad + "]\n";
 	}
-	
 }

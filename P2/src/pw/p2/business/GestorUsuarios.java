@@ -1,8 +1,6 @@
 package pw.p2.business;
 
-import pw.p2.data.Usuario;
 import pw.p2.data.DAO.DAOUsuario;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -19,10 +17,6 @@ import java.util.Scanner;
  */
 
 public class GestorUsuarios {
-	
-	/* Atributos */
-	
-	public ArrayList<Usuario> arrayUsuarios = new ArrayList<Usuario>();
 	
 	/**
 	 * Constructor por defecto

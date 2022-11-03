@@ -7,34 +7,34 @@ import pw.p2.data.Reserva;
 
 /**
  * 
- * Clase de las reservas de tipo familiar
+ * DTO de las reservas de tipo familiar
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano
  * @author Ángel Quintero Montes
  * @author Diego Tabas Costa
  *
- */
+ **/
 
 public class DTORFamiliar extends Reserva{
 	
 	/* Atributos */
 	
-	protected int ninos;
-	protected int adultos;
+	protected Integer ninos;
+	protected Integer adultos;
 	protected Dificultad tipo;
 	/* Constructores */
 	
 	/**
 	 * Constructor por defecto
-	 * */
+	 **/
 	public DTORFamiliar() {}
 	
 	/**
 	 * Constructor parametrizado
 	 * @param ninos Participantes niños de la reserva familiar
 	 * @param adultos Participantes adultos de la reserva familiar
-	 * */
+	 **/
 	
 	public DTORFamiliar(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Integer ninos, Dificultad tipo) {
 		super(usuario, fecha, duracion, pista, precio, descuento);
@@ -67,7 +67,11 @@ public class DTORFamiliar extends Reserva{
 	}
 	
 	/* Otros metodos */
-
+	
+	/**
+	 * Funcion toString 
+	 **/
+	
 	public String toString() {
 		String info = super.toString();
 			info += ", participantes niños=" + ninos + ", participantes adultos=" + adultos + "] -> Reserva Familiar\n";
