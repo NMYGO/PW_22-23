@@ -9,9 +9,9 @@ consultaKartID=select * from kart where idKart =  + id
 consultaKartPista=select * from kart where nombrePista like " + "'" + nombrePista + 
 updateKart=update kart set tipo=?,estado=?,nombrePista=? where idKart=?
 insertKart=insert into kart (idKart,tipo,estado,nombrePista) values(?,?,?,?)
-consultarPista=select * from pista
-consultarPistaEstadoDificultad=select * from pista where estado = iestado and dificultad =' dificultad.toString() '
-consultarPistaNombre=select * from pista where nombrePista = ' nombre '
+consultaPista=select * from pista
+consultaPistaEstadoDificultad=select * from pista where estado = iestado and dificultad =' dificultad.toString() '
+consultaPistaNombre=select * from pista where nombrePista = ' nombre '
 updatePista=update pista set estado=?,dificultad=?,maxKarts=? where nombrePista=?
 insertPista=insert into pista (nombrePista,estado,dificultad,maxKarts) values(?,?,?,?)
 consultaReservaInfantil=select * from reserva where dificultad = 'INFANTIL'
