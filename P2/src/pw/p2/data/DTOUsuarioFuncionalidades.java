@@ -5,20 +5,22 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * 
- * Clase Usuario
+ * Clase que resuelve las funcionalidades del DTOUsuario
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano
  * @author Ángel Quintero Montes
  * @author Diego Tabas Costa
  *
- */
+ **/
 
 public class DTOUsuarioFuncionalidades {
 	
 	/**
 	 * Calcula la antiguedad del usuario
-	 */
+	 * @param inscripcion LocalDate con la fecha de inscripcion del usuario
+	 * @return
+	 **/
 	
 	public void calcularAntiguedad(LocalDate inscripcion) {
 		DateTimeFormatter formateador = DateTimeFormatter.ofPattern("uuuu");
@@ -28,4 +30,3 @@ public class DTOUsuarioFuncionalidades {
 			System.out.println("Nº de años registrado: " + antiguedad);
 	}
 }
-

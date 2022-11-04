@@ -247,7 +247,7 @@ public class DAOReserva {
 			ps.setString(5, reserva.getFecha().toString());
 			ps.setString(6, reserva.getPista());
 			ps.setString(7, reserva.getTipo().toString());
-			ps.setInt(7, reserva.getadultos());
+			ps.setInt(8, reserva.getadultos());
 			ps.setInt(9, reserva.getNinos());
 			status = ps.executeUpdate();
 
@@ -312,6 +312,4 @@ public class DAOReserva {
 		}
 		return status;
 	}
-}
-
-	public 
+} 

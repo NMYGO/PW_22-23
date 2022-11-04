@@ -7,22 +7,22 @@ import java.util.ArrayList;
 
 /**
  * 
- * Clase Pista
+ * Clase que resuelve las funcionalidades del DTOPista
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano
  * @author Ángel Quintero Montes
  * @author Diego Tabas Costa
  *
- */
+ **/
 
 public class DTOPistaFuncionalidades {	
 	
 	/**
 	 * Función para encontrar los karts disponibles
-	 * @param arrayKarts
+	 * @param arrayKarts ArrayList<DTOKart> con todos los karts existentes
 	 * @return Devuelve una lista de los karts disponibles
-	 */
+	 **/
 	
 	public ArrayList<DTOKart> consultarKartsDisponibles(ArrayList<DTOKart> arrayKarts) {
 		ArrayList<DTOKart> dkart = new ArrayList<DTOKart>();
@@ -36,10 +36,10 @@ public class DTOPistaFuncionalidades {
 
 	/**
 	 * Función que asocia karts a las pistas dependiendo de la dificultad de ambos
-	 * @param kart
-	 * @param pista
-	 * @return
-	 */
+	 * @param kart DTOKart con el kart que se quiere asociar
+	 * @param pista DTOPista con la pista que se quiere asociar
+	 * @return Devuelve el kart asociado
+	 **/
 	
 	public DTOKart asociarKartAPista(DTOKart kart, DTOPista pista) {
 		DAOKart kartTabla = new DAOKart();

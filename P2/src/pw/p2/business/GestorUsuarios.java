@@ -14,7 +14,7 @@ import java.util.Scanner;
  * @author Ángel Quintero Montes
  * @author Diego Tabas Costa
  *
- */
+ **/
 
 public class GestorUsuarios {
 	
@@ -25,9 +25,12 @@ public class GestorUsuarios {
 	
 	/**
 	 * Funcion que registra un usuario comprobando que no exista antes
-	 * @param scan_ Scanner para leer por teclado
+	 * @param nombre String con el nombre de usuario
+	 * @param apellidos String con los apellidos de usuario
+	 * @param nacimiento LocalDate con la fecha de nacimiento de usuario
+	 * @param correo String con el correo de usuario
 	 * @return Devuelve un booleano 
-	 * */
+	 **/
 
 	public Boolean registrarUsuario (String nombre, String apellidos, LocalDate nacimiento, String correo) {	
 		DAOUsuario usuarioTabla = new DAOUsuario();
@@ -49,75 +52,74 @@ public class GestorUsuarios {
 	 * Funcion para modificar un usuario existente
 	 * @param scan_ Scanner para leer por teclado
 	 * @return Devuelve un booleano  
-	 * */
+	 **/
 
 	public Boolean ModificarUsuario (Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
-			String correo = scan_.nextLine();
-			System.out.println("");
-			
-			DAOUsuario usuarioTabla = new DAOUsuario();
-			DTOUsuario usuario = usuarioTabla.solicitarUsuario(correo);
+		String correo = scan_.nextLine();
+		System.out.println("");
+		
+		DAOUsuario usuarioTabla = new DAOUsuario();
+		DTOUsuario usuario = usuarioTabla.solicitarUsuario(correo);
 
-			int opcion = 1;
-			while (opcion != 0) {
-				System.out.println("0: Terminar modificacion.\n"
-				+ "1: Cambiar Nombre.\n"
-				+ "2: Cambiar Apellidos.\n"
-				+ "3: Cambiar fecha de nacimiento.\n"
-				+ "4: Cambiar direccion de Correo.\n"
-				+ "Introduzca una opcion:"); 
-				
-					opcion = Integer.parseInt(scan_.nextLine());
-					System.out.println("");
-				switch (opcion) {
-				case 0: 
-					if(usuarioTabla.escribirUsuarioUpdate(usuario) == 0) {
-						System.out.println("Error. Usuario no modificado");
-						System.out.println("-------------------------------------");
-						System.out.println("");
-						return false;
-					}					
-					System.out.println("Usuario modificado con exito");
+		int opcion = 1;
+		while (opcion != 0) {
+			System.out.println("0: Terminar modificacion.\n"
+			+ "1: Cambiar Nombre.\n"
+			+ "2: Cambiar Apellidos.\n"
+			+ "3: Cambiar fecha de nacimiento.\n"
+			+ "Introduzca una opcion:"); 
+			
+			opcion = Integer.parseInt(scan_.nextLine());
+			System.out.println("");
+			switch (opcion) {
+			case 0: 
+				if(usuarioTabla.escribirUsuarioUpdate(usuario) == 0) {
+					System.out.println("Error. Usuario no modificado");
 					System.out.println("-------------------------------------");
 					System.out.println("");
-					
-					break;
-				case 1:
-					System.out.println("Introduzca el nuevo nombre de usuario");
-					String nuevoNombre = scan_.nextLine();
-					System.out.println("");
-					usuario.setNombre(nuevoNombre);
+					return false;
+				}					
+				System.out.println("Usuario modificado con exito");
+				System.out.println("-------------------------------------");
+				System.out.println("");
+				
+				break;
+			case 1:
+				System.out.println("Introduzca el nuevo nombre de usuario");
+				String nuevoNombre = scan_.nextLine();
+				System.out.println("");
+				usuario.setNombre(nuevoNombre);
 
-					break;
-						
-				case 2:
-					System.out.println("Introduzca los nuevos apellidos de usuario");
-					String nuevoApellidos = scan_.nextLine();
-					System.out.println("");
-					usuario.setApellidos(nuevoApellidos);
-
-					break;
-				case 3:
-					System.out.println("Introduzca la nueva fecha de nacimiento de usuario");
-					LocalDate nuevaFechaNacimiento = LocalDate.parse(scan_.nextLine());					
-					System.out.println("");
-					usuario.setNacimiento(nuevaFechaNacimiento);
+				break;
 					
-					break;
-				default:
-					System.out.println("Opcion no reconocida");
-					System.out.println("");
-					break;
-				}
+			case 2:
+				System.out.println("Introduzca los nuevos apellidos de usuario");
+				String nuevoApellidos = scan_.nextLine();
+				System.out.println("");
+				usuario.setApellidos(nuevoApellidos);
+
+				break;
+			case 3:
+				System.out.println("Introduzca la nueva fecha de nacimiento de usuario");
+				LocalDate nuevaFechaNacimiento = LocalDate.parse(scan_.nextLine());					
+				System.out.println("");
+				usuario.setNacimiento(nuevaFechaNacimiento);
+				
+				break;
+			default:
+				System.out.println("Opcion no reconocida");
+				System.out.println("");
+				break;
 			}
-			
-			return true;
+		}		
+		return true;
 	}
 	
 	/**
 	 * Funcion para listar los usuarios existentes
-	 */
+	 * @return
+	 **/
 	
 	public void listarUsuarios () {
 		DAOUsuario usuarioTabla = new DAOUsuario();

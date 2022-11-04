@@ -11,7 +11,7 @@ import java.time.LocalDate;
  * @author Ángel Quintero Montes
  * @author Diego Tabas Costa
  *
- */
+ **/
 
 public abstract class Reserva {
 	
@@ -29,7 +29,7 @@ public abstract class Reserva {
 	
 	/**
 	 * Constructor por defecto
-	 * */
+	 **/
 	public Reserva() {}
 	
 	/**
@@ -40,7 +40,7 @@ public abstract class Reserva {
 	 * @param pista Pista de la reserva
 	 * @param precio Precio de la reserva
 	 * @param descuento Descuento de la reserva
-	 * */
+	 **/
 	
 	public Reserva(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento) {
 		this.usuario = usuario;
@@ -102,6 +102,10 @@ public abstract class Reserva {
 	}
 	
 	/* Otros metodos */
+	
+	/**
+	 * Funcion toString 
+	 **/
 	
 	@Override
 	public String toString() {

@@ -19,6 +19,15 @@ public class RIndividualCreador extends ReservaCreador{
 	
 	/**
 	 * Crea una reserva individual infantil
+	 * @param usuario String con el nombre de usuario
+	 * @param fecha LocalDate con la fecha de reserva
+	 * @param duracion Integer con la duracion de la reserva
+	 * @param pista String con el nombre de pista
+	 * @param precio Float con el precio de la reserva
+	 * @param descuento Integer con el descuento aplicado a la reserva
+	 * @param ninos Integer con el numero de participantes niños de la reserva
+	 * @param tipo Enum Dificultad con el tipo de reserva
+	 * @return Devuelve la reserva infantil realizada
 	 **/
 	
 	@Override
@@ -29,6 +38,16 @@ public class RIndividualCreador extends ReservaCreador{
 	
 	/**
 	 * Crea una reserva individual familiar
+	 * @param usuario String con el nombre de usuario
+	 * @param fecha LocalDate con la fecha de reserva
+	 * @param duracion Integer con la duracion de la reserva
+	 * @param pista String con el nombre de pista
+	 * @param precio Float con el precio de la reserva
+	 * @param descuento Integer con el descuento aplicado a la reserva
+	 * @param adultos Integer con el numero de participantes adultos de la reserva
+	 * @param ninos Integer con el numero de participantes niños de la reserva
+	 * @param tipo Enum Dificultad con el tipo de reserva
+	 * @return Devuelve la reserva familiar realizada
 	 **/
 	
 	@Override
@@ -39,6 +58,15 @@ public class RIndividualCreador extends ReservaCreador{
 	
 	/**
 	 * Crea una reserva individual adulta
+	 * @param usuario String con el nombre de usuario
+	 * @param fecha LocalDate con la fecha de reserva
+	 * @param duracion Integer con la duracion de la reserva
+	 * @param pista String con el nombre de pista
+	 * @param precio Float con el precio de la reserva
+	 * @param descuento Integer con el descuento aplicado a la reserva
+	 * @param adultos Integer con el numero de participantes adultos de la reserva
+	 * @param tipo Enum Dificultad con el tipo de reserva
+	 * @return Devuelve la reserva adulto realizada
 	 **/
 	
 	@Override

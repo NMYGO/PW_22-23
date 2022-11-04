@@ -9,7 +9,7 @@ package pw.p2.data;
  * @author Ángel Quintero Montes
  * @author Diego Tabas Costa
  *
- */
+ **/
 
 public enum Estado {
 	DISPONIBLE, RESERVADO, MANTENIMIENTO;

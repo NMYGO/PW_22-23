@@ -29,12 +29,8 @@ public class GestorReservas {
 	
 	/**
 	 * Realiza las reservas individuales infantiles
-	 * @param GestorReservas_
-	 * @param GestorPistas_
-	 * @param GestorUsuarios_
-	 * @param nParticipantes
-	 * @param scan_
-	 * @return true si la reserva se ha realizado, false si no
+	 * @param scan_ Scanner para leer por teclado
+	 * @return Devuelve true si la reserva se ha realizado, false si no se ha realizado
 	 **/
 	
 	public boolean ReservaIndividualInfantil (Scanner scan_) {
@@ -119,12 +115,8 @@ public class GestorReservas {
 	
 	/**
 	 * Realiza las reservas individuales adultas
-	 * @param GestorReservas_
-	 * @param GestorPistas_
-	 * @param GestorUsuarios_
-	 * @param nParticipantes
-	 * @param scan_
-	 * @return
+	 * @param scan_ Scanner para leer por teclado
+	 * @return Devuelve true si la reserva se ha realizado, false si no se ha realizado
 	 **/
 	
 	public boolean ReservaIndividualAdulto (Scanner scan_) {
@@ -211,12 +203,8 @@ public class GestorReservas {
 	
 	/**
 	 * Realiza las reservas individuales familiares
-	 * @param GestorReservas_
-	 * @param GestorPistas_
-	 * @param GestorUsuarios_
-	 * @param nParticipantes
-	 * @param scan_
-	 * @return
+	 * @param scan_ Scanner para leer por teclado
+	 * @return Devuelve true si la reserva se ha realizado, false si no se ha realizado
 	 **/
 	
 	public boolean ReservaIndividualFamiliar (Scanner scan_) {
@@ -311,14 +299,11 @@ public class GestorReservas {
 	
 	/**
 	 * Realiza las reservas de bono infantiles
-	 * @param GestorReservas_
-	 * @param GestorPistas_
-	 * @param GestorUsuarios_
-	 * @param scan_
-	 * @return
+	 * @param scan_ Scanner para leer por teclado
+	 * @return Devuelve true si la reserva se ha realizado, false si no se ha realizado
 	 **/
 	
-	public boolean ReservaBonoInfantil (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
+	public boolean ReservaBonoInfantil (Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
@@ -443,14 +428,11 @@ public class GestorReservas {
 	
 	/**
 	 * Realiza las reservas de bono adultas
-	 * @param GestorReservas_
-	 * @param GestorPistas_
-	 * @param GestorUsuarios_
-	 * @param scan_
-	 * @return
+	 * @param scan_ Scanner para leer por teclado
+	 * @return Devuelve true si la reserva se ha realizado, false si no se ha realizado
 	 **/
 	
-	public boolean ReservaBonoAdulto (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
+	public boolean ReservaBonoAdulto (Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
@@ -575,14 +557,11 @@ public class GestorReservas {
 	
 	/**
 	 * Realiza las reservas de bono familiares
-	 * @param GestorReservas_
-	 * @param GestorPistas_
-	 * @param GestorUsuarios_
-	 * @param scan_
-	 * @return
+	 * @param scan_ Scanner para leer por teclado
+	 * @return Devuelve true si la reserva se ha realizado, false si no se ha realizado
 	 **/
 	
-	public boolean ReservaBonoFamiliar (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
+	public boolean ReservaBonoFamiliar (Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		System.out.println("");
@@ -713,7 +692,8 @@ public class GestorReservas {
 	
 	/**
 	 * Muestra todas las reservas individuales futuras por pantalla
-	 * @param scan_
+	 * @param usuario String con el nombre de usuario
+	 * @return
 	 **/
 	
 	public void consultarReservasFuturasIndividuales (String usuario){
@@ -741,10 +721,11 @@ public class GestorReservas {
 	
 	/**
 	 * Muestra todas las reservas de bonos futuras por pantalla
-	 * @param scan_
+	 * @param scan_ String con el nombre de usuario
+	 * @return
 	 **/
 
-	public void consultarReservasFuturasBono (int bonoid){
+	public void consultarReservasFuturasBono (String usuario){ //he puesto string usuario para quitar el fallo de compilacion, antes habia un idBono -> MORE
 		//del DAOreserva hacer un select * from reserva where idbono=bonoid;
 		/*for array
 		 * mostrar reservas
@@ -754,25 +735,27 @@ public class GestorReservas {
 		ArrayList<DTOBono> arrayBonos = bonoTabla.solicitarBonos();
 		
 		for(int i = 0; i < arrayBonos.size(); i++) {
-				if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
-					System.out.println(arrayBonos.get(i).toString());
-					for(int j = 0; j < arrayBonos.get(i).getArrayReservas().size(); j++) {
-						if(arrayBonos.get(i).getArrayReservas().get(j).getFecha().isAfter(LocalDate.now())) {
-							System.out.println(arrayBonos.get(i).getArrayReservas().get(j).toString());
-						}
+			if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
+				System.out.println(arrayBonos.get(i).toString());
+				for(int j = 0; j < arrayBonos.get(i).getArrayReservas().size(); j++) {
+					if(arrayBonos.get(i).getArrayReservas().get(j).getFecha().isAfter(LocalDate.now())) {
+						System.out.println(arrayBonos.get(i).getArrayReservas().get(j).toString());
 					}
 				}
+			}
 		}
 	}
 
 	/**
 	 * Muestra las reservas de un día y una pista específicas
-	 * @param GestorPistas_
-	 * @param GestorReservas_
-	 * @param scan_
+	 * @param usuario String con el nombre de usuario
+	 * @param fecha LocalDate con la fecha de reserva
+	 * @param pista String con el nombre de pista
+	 * @param scan_ Scanner para leer por teclado
+	 * @return
 	 **/
 	
-	public void consultarReservaEspecifica (GestorPistas GestorPistas_, GestorReservas GestorReservas_, String usuario, LocalDate fecha, String pista, Scanner scan_){		
+	public void consultarReservaEspecifica (String usuario, LocalDate fecha, String pista, Scanner scan_){		
 		System.out.println("0. Consultar reserva individual");
         System.out.println("1. Consultar reserva bono");
     	System.out.println("");
@@ -827,7 +810,11 @@ public class GestorReservas {
 
 	/**
 	 * Elimina la reserva selecionada
-	 * @param scan_
+	 * @param usuario String con el nombre de usuario
+	 * @param fecha LocalDate con la fecha de reserva
+	 * @param pista String con el nombre de pista
+	 * @param duracion Integer con la duracion de la reserva
+	 * @return
 	 **/
 
 	public void eliminarReserva (String usuario, LocalDate fecha, String pista, Integer duracion){
@@ -878,8 +865,13 @@ public class GestorReservas {
 	}
 
 	/**
-	 * Modifica la reserva seleccionada
-	 * @param scan_
+	 * Modifica la reserva seleccionada (infantil)
+	 * @param usuario String con el nombre de usuario
+	 * @param fecha LocalDate con la fecha de reserva
+	 * @param pista String con el nombre de pista
+	 * @param duracion Integer con la duracion de la reserva
+	 * @param scan_ Scanner para leer por teclado
+	 * @return
 	 **/
 
 	public void modificarReservaInfantil (String usuario, LocalDate fecha, String pista, Integer duracion, Scanner scan_){	
@@ -946,6 +938,16 @@ public class GestorReservas {
 		System.out.println("");
 	}
 	
+	/**
+	 * Modifica la reserva seleccionada (adulto)
+	 * @param usuario String con el nombre de usuario
+	 * @param fecha LocalDate con la fecha de reserva
+	 * @param pista String con el nombre de pista
+	 * @param duracion Integer con la duracion de la reserva
+	 * @param scan_ Scanner para leer por teclado
+	 * @return
+	 **/
+	
 	public void modificarReservaAdulto (String usuario, LocalDate fecha, String pista, Integer duracion, Scanner scan_){	
 		DAOReserva reservaTabla = new DAOReserva();
 		ArrayList<DTORAdulto> reservasAdultos = reservaTabla.solicitarReservasAdultos();
@@ -1009,6 +1011,16 @@ public class GestorReservas {
 		System.out.println("-------------------------------------");
 		System.out.println("");
 	}
+	
+	/**
+	 * Modifica la reserva seleccionada (familiar)
+	 * @param usuario String con el nombre de usuario
+	 * @param fecha LocalDate con la fecha de reserva
+	 * @param pista String con el nombre de pista
+	 * @param duracion Integer con la duracion de la reserva
+	 * @param scan_ Scanner para leer por teclado
+	 * @return
+	 **/
 	
 	public void modificarReservaFamiliar (String usuario, LocalDate fecha, String pista, Integer duracion, Scanner scan_){	
 		DAOReserva reservaTabla = new DAOReserva();
@@ -1074,5 +1086,3 @@ public class GestorReservas {
 		System.out.println("");
 	}
 }
-
-

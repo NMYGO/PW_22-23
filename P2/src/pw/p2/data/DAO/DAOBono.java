@@ -11,8 +11,20 @@ import com.mysql.jdbc.ResultSet;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
-	public class DAOBono {
-		public ArrayList<DTOBono> solicitarBonos() {	
+/**
+ * 
+ * DAO de bonos
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ **/
+
+public class DAOBono {
+	
+	public ArrayList<DTOBono> solicitarBonos() {	
 		ArrayList<DTOBono> bonos = new ArrayList<DTOBono>();
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -20,7 +32,7 @@ import java.time.LocalDate;
 			String query = "select * from bono";
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-
+	
 			while (rs.next()) {
 				int sesion = rs.getInt("sesion");
 				LocalDate fcaducidad = LocalDate.parse(rs.getString("fechaCaducidad"));
@@ -28,7 +40,7 @@ import java.time.LocalDate;
 				Dificultad tipo = Dificultad.valueOf(rs.getString("tipo"));
 				bonos.add(new DTOBono(sesion,bUsuario,tipo,fcaducidad));
 			}
-
+	
 			if (stmt != null){ 
 				stmt.close(); 
 			}
@@ -39,7 +51,7 @@ import java.time.LocalDate;
 		}
 		return bonos;
 	}
-	
+
 	public DTOBono solicitarBono(String usuario, Dificultad tipo) {		
 		DTOBono bono = new DTOBono();
 		try {
@@ -48,7 +60,7 @@ import java.time.LocalDate;
 			String query = "select * from bono where correoUsuario = '" + usuario + "' and tipo = '" + tipo.toString() + "'";
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-
+	
 			while (rs.next()) {
 				Integer idBono  = rs.getInt("idBono");
 				Integer sesion = rs.getInt("sesion");
@@ -56,7 +68,7 @@ import java.time.LocalDate;
 				bono = new DTOBono(sesion, usuario, tipo, fechaCaducidad);
 				bono.setId(idBono);
 			}
-
+	
 			if (stmt != null){ 
 				stmt.close(); 
 			}
@@ -67,7 +79,7 @@ import java.time.LocalDate;
 		}
 		return bono;
 	}
-	
+
 	public int escribirBonoUpdate(DTOBono bono) {
 		int status = 0;
 		try {
@@ -80,7 +92,7 @@ import java.time.LocalDate;
 			ps.setString(3, bono.getbUsuario());
 			ps.setString(4, bono.getTipo().toString());
 			status = ps.executeUpdate();
-
+	
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -88,7 +100,7 @@ import java.time.LocalDate;
 		}
 		return status;
 	}
-	
+
 	public int escribirBonoInsert(DTOBono bono) {
 		int status = 0;
 		try {
@@ -100,7 +112,7 @@ import java.time.LocalDate;
 			ps.setString(3, bono.getbUsuario());
 			ps.setString(4, bono.getTipo().toString());
 			status = ps.executeUpdate();
-
+	
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -108,7 +120,7 @@ import java.time.LocalDate;
 		}
 		return status;
 	}
-	
+
 	public int escribirReservaInfantilUpdate(DTORInfantil reserva, Integer idBono) {
 		int status = 0;
 		try {
@@ -126,7 +138,7 @@ import java.time.LocalDate;
 			ps.setInt(8, 0);
 			ps.setInt(9, idBono);
 			status = ps.executeUpdate();
-
+	
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -134,7 +146,7 @@ import java.time.LocalDate;
 		}
 		return status;
 	}
-	
+
 	public int escribirReservaInfantilInsert(DTORInfantil reserva, Integer idBono) {
 		int status = 0;
 		try {
@@ -152,7 +164,7 @@ import java.time.LocalDate;
 			ps.setInt(9, 0);
 			ps.setInt(10, idBono);
 			status = ps.executeUpdate();
-
+	
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -160,7 +172,7 @@ import java.time.LocalDate;
 		}
 		return status;
 	}
-	
+
 	public int escribirReservaAdultoUpdate(DTORAdulto reserva, Integer idBono) {
 		int status = 0;
 		try {
@@ -178,7 +190,7 @@ import java.time.LocalDate;
 			ps.setInt(8, 0);
 			ps.setInt(9, idBono);
 			status = ps.executeUpdate();
-
+	
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -186,7 +198,7 @@ import java.time.LocalDate;
 		}
 		return status;
 	}
-	
+
 	public int escribirReservaAdultoInsert(DTORAdulto reserva, Integer idBono) {
 		int status = 0;
 		try {
@@ -204,7 +216,7 @@ import java.time.LocalDate;
 			ps.setInt(9, 0);
 			ps.setInt(10, idBono);
 			status = ps.executeUpdate();
-
+	
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -212,7 +224,7 @@ import java.time.LocalDate;
 		}
 		return status;
 	}
-	
+
 	public int escribirReservaFamiliarUpdate(DTORFamiliar reserva, Integer idBono) {
 		int status = 0;
 		try {
@@ -230,7 +242,7 @@ import java.time.LocalDate;
 			ps.setInt(8, reserva.getNinos());
 			ps.setInt(9, idBono);
 			status = ps.executeUpdate();
-
+	
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -238,31 +250,30 @@ import java.time.LocalDate;
 		}
 		return status;
 	}
-	
+
 	public int escribirReservaFamiliarInsert(DTORFamiliar reserva, Integer idBono) {
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			PreparedStatement ps = connection.prepareStatement("insert into reserva (correoUsuario,duracion,precio,descuento,fecha,nombrePista,dificultad,adultos,ninos,idBono) values(?,?,?,?,?,?,?,?,?,?)");
-			ps.setString(1, reserva.getUsuario());
-			ps.setInt(2, reserva.getDur());
-			ps.setFloat(3, reserva.getPrecio());
-			ps.setInt(4, reserva.getDesc());
-			ps.setString(5, reserva.getFecha().toString());
-			ps.setString(6, reserva.getPista());
-			ps.setString(7, reserva.getTipo().toString());
-			ps.setInt(7, reserva.getadultos());
-			ps.setInt(9, reserva.getNinos());
-			ps.setInt(10, idBono);
-			status = ps.executeUpdate();
-
-			dbConnection.closeConnection();
+				ps.setString(1, reserva.getUsuario());
+				ps.setInt(2, reserva.getDur());
+				ps.setFloat(3, reserva.getPrecio());
+				ps.setInt(4, reserva.getDesc());
+				ps.setString(5, reserva.getFecha().toString());
+				ps.setString(6, reserva.getPista());
+				ps.setString(7, reserva.getTipo().toString());
+				ps.setInt(8, reserva.getadultos());
+				ps.setInt(9, reserva.getNinos());
+				ps.setInt(10, idBono);
+				status = ps.executeUpdate();
+	
+				dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
 			e.printStackTrace();
 		}
 		return status;
-	}
-	
+	}	
 }

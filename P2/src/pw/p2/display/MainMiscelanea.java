@@ -193,11 +193,11 @@ public class MainMiscelanea {
         int option_= Integer.parseInt(scan_.nextLine());
         if(option_ == 0) {
         	
-        	GestorReservas_.ReservaBonoInfantil(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);	            
+        	GestorReservas_.ReservaBonoInfantil(scan_);	            
         }else if(option_ == 1) {
-        	GestorReservas_.ReservaBonoFamiliar(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
+        	GestorReservas_.ReservaBonoFamiliar(scan_);
         }else if(option_ == 2) {
-        	GestorReservas_.ReservaBonoAdulto(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
+        	GestorReservas_.ReservaBonoAdulto(scan_);
         }else {
         	System.out.println("Opcion no reconocida");
 			System.out.println("");
@@ -205,9 +205,9 @@ public class MainMiscelanea {
 	}
 	
 	public static void modificarReservaIndividual (GestorReservas GestorReservas_, String usuario, LocalDate fecha, String pista, Integer duracion, Scanner scan_) {
-		System.out.println("0. Reserva individual infantil");
-        System.out.println("1. Reserva individual familiar");
-        System.out.println("2. Reserva individual adulto");
+		System.out.println("0. Modificar reserva individual infantil");
+        System.out.println("1. Modificar reserva individual familiar");
+        System.out.println("2. Modificar reserva individual adulto");
         	System.out.println("");
         System.out.println("Elija una opcion escribiendo su numero");
         int option_= Integer.parseInt(scan_.nextLine());

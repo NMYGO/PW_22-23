@@ -108,6 +108,7 @@ public class GestorPistas{
 
 	/**
 	 * Función que lista por pantalla el nombre de las pistas en mantenimiento
+	 * return
 	 **/
 	
 	public void listaPistasMantenimiento () {
@@ -123,7 +124,7 @@ public class GestorPistas{
 	
 	/**
 	 * Funcion que devuelve un array de las pistas libres con un minimo numero de karts
-	 * @param scan_
+	 * @param scan_ Scanner para leer por teclado
 	 * @param kartnum número de karts de la pista
 	 * @param dificultad dificultad de la pista (INFANTIL, FAMILIAR, ADULTA)
 	 * @return Devuelve array de pistas libres
@@ -132,12 +133,13 @@ public class GestorPistas{
 	public ArrayList<DTOPista> pistasLibres (Integer participantes, Dificultad dificultad) {							
 		DAOPista pistaTabla = new DAOPista();
 		
-		ArrayList <DTOPista> pistas = pistaTabla.solicitarPistasLibres(false, participantes, dificultad);		
+		ArrayList <DTOPista> pistas = pistaTabla.solicitarPistasLibres(false, participantes, dificultad);
 		return pistas;
 	}
 	
 	/**
 	 * Lista por pantalla todos los karts que esten disponibles
+	 * return
 	 **/
 	
 	public void listarKartsDisponibles () {

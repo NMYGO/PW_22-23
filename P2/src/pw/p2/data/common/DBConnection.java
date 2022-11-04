@@ -16,15 +16,9 @@ import java.sql.SQLException;
  */
 
 public class DBConnection {
-
 	protected Connection connection = null;
-
-	// Important: This configuration is hard-coded here for illustrative purposes only
-	
 	protected String url = "jdbc:mysql://oraclepr.uco.es:3306/i02mocaf";
-
 	protected String user = "i02mocaf";
-
 	protected String password = "pw2223";
 
 	public Connection getConnection(){
@@ -43,8 +37,6 @@ public class DBConnection {
 		}
 		return this.connection;
 	}
-
-	// We can include here other methods to encapsulate CRUD commands...
 
 	public void closeConnection() {
 		try {

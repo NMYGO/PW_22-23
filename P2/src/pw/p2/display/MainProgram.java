@@ -213,7 +213,7 @@ public class MainProgram{
 		        	        			System.out.println("Introduzca la pista de la reserva");
 		        	        				pista = scan_.nextLine();
 		        	        			System.out.println("");
-		        	                	GestorReservas_.consultarReservaEspecifica(GestorPistas_, GestorReservas_, usuario, fecha, pista, scan_);
+		        	                	GestorReservas_.consultarReservaEspecifica(usuario, fecha, pista, scan_);
 		        	                    break;		        	                    
                 	            }
                 	            break;

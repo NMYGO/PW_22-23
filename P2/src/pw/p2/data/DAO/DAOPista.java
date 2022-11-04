@@ -54,7 +54,7 @@ public class DAOPista {
 				String nombre = rs.getString("nombrePista");
 				Integer maxkarts = rs.getInt("maxKarts");
 				kartsPista = kartTabla.solicitarKartsPista(nombre);
-				if(maxkarts >= kartsPista.size() + participantes) {
+				if(maxkarts >= participantes && participantes <= kartsPista.size()) {
 						pistas.add(new DTOPista(nombre, estado, dificultad, maxkarts));
 				}
 			}
