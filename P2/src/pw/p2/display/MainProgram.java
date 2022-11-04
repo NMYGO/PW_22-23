@@ -174,8 +174,10 @@ public class MainProgram{
 		        	        				pista = scan_.nextLine();
 		        	        			System.out.println("Introduzca la duracion de la reserva");
 		        	        				duracion = Integer.parseInt(scan_.nextLine());
-		        	        			System.out.println("");
-		        	        			MainMiscelanea.modificarReservaIndividual(GestorReservas_, usuario, fecha, pista, duracion, scan_);
+		        	        			System.out.println("Introduzca la dificultad de pista");
+		    								dificultad = Dificultad.valueOf(scan_.nextLine());
+		    							System.out.println("");
+		        	        			MainMiscelanea.modificarReservaIndividual(GestorReservas_, usuario, fecha, pista, duracion, dificultad, scan_);
 		        	                    break;
 		        	                    
 		        	                case 4:
@@ -187,8 +189,10 @@ public class MainProgram{
 		        	        				pista = scan_.nextLine();
 		        	        			System.out.println("Introduzca la duracion de la reserva");
 		        	        				duracion = Integer.parseInt(scan_.nextLine());
-		        	        			System.out.println("");
-		        	                	GestorReservas_.eliminarReserva(usuario, fecha, pista, duracion);
+		        	        			System.out.println("Introduzca la dificultad de pista");
+		    								dificultad = Dificultad.valueOf(scan_.nextLine());
+		    							System.out.println("");
+		        	                	GestorReservas_.eliminarReserva(usuario, fecha, pista, dificultad, duracion);
 		        	                	break;
 		        	                	
 		        	                case 5:

@@ -5,6 +5,7 @@ import pw.p2.data.Estado;
 import pw.p2.data.DAO.DAOKart;
 import pw.p2.data.DAO.DAOPista;
 import pw.p2.data.DAO.DAOUsuario;
+import pw.p2.data.Dificultad;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -191,8 +192,7 @@ public class MainMiscelanea {
         	System.out.println("");
         System.out.println("Elija una opcion escribiendo su numero");
         int option_= Integer.parseInt(scan_.nextLine());
-        if(option_ == 0) {
-        	
+        if(option_ == 0) {	
         	GestorReservas_.ReservaBonoInfantil(scan_);	            
         }else if(option_ == 1) {
         	GestorReservas_.ReservaBonoFamiliar(scan_);
@@ -204,18 +204,12 @@ public class MainMiscelanea {
         }
 	}
 	
-	public static void modificarReservaIndividual (GestorReservas GestorReservas_, String usuario, LocalDate fecha, String pista, Integer duracion, Scanner scan_) {
-		System.out.println("0. Modificar reserva individual infantil");
-        System.out.println("1. Modificar reserva individual familiar");
-        System.out.println("2. Modificar reserva individual adulto");
-        	System.out.println("");
-        System.out.println("Elija una opcion escribiendo su numero");
-        int option_= Integer.parseInt(scan_.nextLine());
-        if(option_ == 0) {  	
+	public static void modificarReservaIndividual (GestorReservas GestorReservas_, String usuario, LocalDate fecha, String pista, Integer duracion, Dificultad tipo, Scanner scan_) {
+        if(tipo == Dificultad.INFANTIL) {  	
         	GestorReservas_.modificarReservaInfantil(usuario, fecha, pista, duracion, scan_);	            
-        }else if(option_ == 1) {
+        }else if(tipo == Dificultad.FAMILIAR) {
         	GestorReservas_.modificarReservaFamiliar(usuario, fecha, pista, duracion, scan_);
-        }else if(option_ == 2) {
+        }else if(tipo == Dificultad.ADULTO) {
         	GestorReservas_.modificarReservaAdulto(usuario, fecha, pista, duracion, scan_);
         }else {
         	System.out.println("Opcion no reconocida");

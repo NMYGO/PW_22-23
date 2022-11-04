@@ -17,7 +17,7 @@ public class DAOReserva {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "select * from reserva where dificultad = 'INFANTIL'";
+			String query = "select * from reserva where dificultad = 'INFANTIL' and idBono IS NULL";
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
@@ -29,7 +29,7 @@ public class DAOReserva {
 				Float precio = rs.getFloat("precio");
 				Integer descuento = rs.getInt("descuento");
 				Integer ninos = rs.getInt("ninos");
-				Dificultad tipo = Dificultad.valueOf(rs.getString("dificultad")); //CAMBIAR A TIPO
+				Dificultad tipo = Dificultad.valueOf(rs.getString("dificultad"));
 				reservas.add(new DTORInfantil(correo, fecha, duracion, pista, precio, descuento, ninos, tipo));
 			}
 			
@@ -44,13 +44,37 @@ public class DAOReserva {
 		return reservas;
 	}
 	
+	public int solicitarIdReserva(String usuario, LocalDate fecha, String pista, Integer duracion, Dificultad tipo) {		
+		Integer idReserva = -1;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query = "select * from reserva where correoUsuario = '" + usuario + "' and fecha = '"  + fecha.toString() + "' and nombrePista = '" + pista + "' and duracion = " + duracion + " and dificultad = '" + tipo.toString() + "'";
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+	
+			while (rs.next()) {
+				idReserva  = rs.getInt("idReserva");
+			}
+	
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return idReserva;
+	}
+	
 	public int escribirReservaInfantilUpdate(DTORInfantil reserva) {
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("update reserva set duracion=?,precio=?,descuento=?,fecha=?,nombrePista=?,dificultad=?,ninos=?,adultos=? where correoUsuario=?");
-			ps.setString(9, reserva.getUsuario());
+			PreparedStatement ps = connection.prepareStatement("update reserva set duracion=?,precio=?,descuento=?,fecha=?,nombrePista=?,dificultad=?,ninos=?,adultos=? where idReserva=?");
+			ps.setInt(9, reserva.getIdReserva());
 			ps.setInt(1, reserva.getDur());
 			ps.setFloat(2, reserva.getPrecio());
 			ps.setInt(3, reserva.getDesc());
@@ -99,7 +123,7 @@ public class DAOReserva {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "select * from reserva where dificultad = 'ADULTO'";
+			String query = "select * from reserva where dificultad = 'ADULTO' and idBono IS NULL";
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
@@ -131,8 +155,8 @@ public class DAOReserva {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("update reserva set duracion=?,precio=?,descuento=?,fecha=?,nombrePista=?,dificultad=?,adultos=?,ninos=? where correoUsuario=?");
-			ps.setString(9, reserva.getUsuario());
+			PreparedStatement ps = connection.prepareStatement("update reserva set duracion=?,precio=?,descuento=?,fecha=?,nombrePista=?,dificultad=?,adultos=?,ninos=? where idReserva=?");
+			ps.setInt(9, reserva.getIdReserva());
 			ps.setInt(1, reserva.getDur());
 			ps.setFloat(2, reserva.getPrecio());
 			ps.setInt(3, reserva.getDesc());
@@ -181,7 +205,7 @@ public class DAOReserva {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "select * from reserva where dificultad = 'FAMILIAR'";
+			String query = "select * from reserva where dificultad = 'FAMILIAR'  and idBono IS NULL";
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
@@ -214,8 +238,8 @@ public class DAOReserva {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("update reserva set duracion=?,precio=?,descuento=?,fecha=?,nombrePista=?,dificultad=?,adultos=?,ninos=? where correoUsuario=?");
-			ps.setString(9, reserva.getUsuario());
+			PreparedStatement ps = connection.prepareStatement("update reserva set duracion=?,precio=?,descuento=?,fecha=?,nombrePista=?,dificultad=?,adultos=?,ninos=? where idReserva=?");
+			ps.setInt(9, reserva.getIdReserva());
 			ps.setInt(1, reserva.getDur());
 			ps.setFloat(2, reserva.getPrecio());
 			ps.setInt(3, reserva.getDesc());
@@ -300,7 +324,7 @@ public class DAOReserva {
 		try{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		PreparedStatement ps = connection.prepareStatement("delete from reserva where correoUsuario=? and fecha=? and nombrePista=? and duracion=? and idBono=NULL");
+		PreparedStatement ps = connection.prepareStatement("delete from reserva where correoUsuario=? and fecha=? and nombrePista=? and duracion=?");
 		ps.setString(1, reserva.getUsuario());
 		ps.setString(2, reserva.getFecha().toString());
 		ps.setString(3, reserva.getPista());

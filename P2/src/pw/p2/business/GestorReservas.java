@@ -832,7 +832,7 @@ public class GestorReservas {
 	 * @return
 	 **/
 
-	public void eliminarReserva (String usuario, LocalDate fecha, String pista, Integer duracion){
+	public void eliminarReserva (String usuario, LocalDate fecha, String pista, Dificultad tipo, Integer duracion){
 		DAOReserva reservaTabla = new DAOReserva();
 		ArrayList<DTORInfantil> reservasInfantiles = reservaTabla.solicitarReservasInfantiles();
 		ArrayList<DTORAdulto> reservasAdultos = reservaTabla.solicitarReservasAdultos();
@@ -840,7 +840,7 @@ public class GestorReservas {
 		
 		for(int i=0; i < reservasInfantiles.size() ; i++){
     		if(reservasInfantiles.get(i).getUsuario().equals(usuario)) {
-        		if(reservasInfantiles.get(i).getFecha().isEqual(fecha) && reservasInfantiles.get(i).getPista().equals(pista)){
+        		if(reservasInfantiles.get(i).getFecha().isEqual(fecha) && reservasInfantiles.get(i).getPista().equals(pista) && reservasInfantiles.get(i).getTipo() == tipo){
     				if(!(reservaTabla.deleteReservaInfantil(reservasInfantiles.get(i)) == 0)) {
     					System.out.println("Reserva eliminada con exito");
         				System.out.println("-------------------------------------");
@@ -852,7 +852,7 @@ public class GestorReservas {
     	}
     	for(int i=0; i < reservasAdultos.size() ; i++){
     		if(reservasAdultos.get(i).getUsuario().equals(usuario)) {
-        		if(reservasAdultos.get(i).getFecha().isEqual(fecha) && reservasAdultos.get(i).getPista().equals(pista)){
+        		if(reservasAdultos.get(i).getFecha().isEqual(fecha) && reservasAdultos.get(i).getPista().equals(pista) && reservasAdultos.get(i).getTipo() == tipo){
         			if(!(reservaTabla.deleteReservaAdulto(reservasAdultos.get(i)) == 0)) {
     					System.out.println("Reserva eliminada con exito");
         				System.out.println("-------------------------------------");
@@ -864,7 +864,7 @@ public class GestorReservas {
     	}
     	for(int i=0; i < reservasFamiliares.size() ; i++){
     		if(reservasFamiliares.get(i).getUsuario().equals(usuario)) {
-        		if(reservasFamiliares.get(i).getFecha().isEqual(fecha) && reservasFamiliares.get(i).getPista().equals(pista)){
+        		if(reservasFamiliares.get(i).getFecha().isEqual(fecha) && reservasFamiliares.get(i).getPista().equals(pista) && reservasFamiliares.get(i).getTipo() == tipo){
         			if(!(reservaTabla.deleteReservaFamiliar(reservasFamiliares.get(i)) == 0)) {
     					System.out.println("Reserva eliminada con exito");
         				System.out.println("-------------------------------------");
@@ -896,7 +896,10 @@ public class GestorReservas {
 		for(int i=0 ; i< reservasInfantiles.size(); i++) {
 			if (reservasInfantiles.get(i).getUsuario().equals(usuario) && reservasInfantiles.get(i).getFecha().isEqual(fecha) &&
 				reservasInfantiles.get(i).getDur() == duracion && reservasInfantiles.get(i).getPista().equals(pista) &&
-				reservasInfantiles.get(i).getFecha().isBefore(LocalDate.now().minusDays(1))) {
+				reservasInfantiles.get(i).getFecha().isAfter(LocalDate.now().minusDays(1)) ) {			
+				int idReserva = reservaTabla.solicitarIdReserva(usuario, fecha, pista, duracion, Dificultad.INFANTIL);
+				reservasInfantiles.get(i).setIdReserva(idReserva);
+				
 				int opcion = 1;
 				while (opcion != 0) {
 					System.out.println("0: Terminar modificacion.\n"
@@ -907,6 +910,12 @@ public class GestorReservas {
 					opcion = Integer.parseInt(scan_.nextLine());
 					switch (opcion) {					
 					case 0: 
+						if(reservaTabla.escribirReservaInfantilUpdate(reservasInfantiles.get(i)) == 0) {
+							System.out.println("Error. La reserva no se puede modificar");
+							System.out.println("-------------------------------------");
+							System.out.println("");
+							return;
+						}
 						System.out.println("Reserva modificada con exito");
 						System.out.println("-------------------------------------");
 						System.out.println("");
@@ -917,13 +926,6 @@ public class GestorReservas {
 							LocalDate nfecha = LocalDate.parse(scan_.nextLine());
 							System.out.println("");
 							reservasInfantiles.get(i).setFecha(nfecha);
-							if(reservaTabla.escribirReservaInfantilUpdate(reservasInfantiles.get(i)) == 0) {
-								System.out.println("Error. La reserva no se puede modificar");
-								System.out.println("-------------------------------------");
-								System.out.println("");
-								return;
-							}
-		
 						break;
 							
 					case 2:
@@ -931,13 +933,6 @@ public class GestorReservas {
 						int nduracion = Integer.parseInt(scan_.nextLine());				
 						System.out.println("");
 						reservasInfantiles.get(i).setDur(nduracion);
-						if(reservaTabla.escribirReservaInfantilUpdate(reservasInfantiles.get(i)) == 0) {
-							System.out.println("Error. La reserva no se puede modificar");
-							System.out.println("-------------------------------------");
-							System.out.println("");
-							return;
-						}
-					
 					break;
 
 					default:
@@ -970,7 +965,10 @@ public class GestorReservas {
 		for(int i=0 ; i< reservasAdultos.size(); i++) {
 			if (reservasAdultos.get(i).getUsuario().equals(usuario) && reservasAdultos.get(i).getFecha().isEqual(fecha) &&
 					reservasAdultos.get(i).getDur() == duracion && reservasAdultos.get(i).getPista().equals(pista) &&
-					reservasAdultos.get(i).getFecha().isBefore(LocalDate.now().minusDays(1))) {
+					reservasAdultos.get(i).getFecha().isAfter(LocalDate.now().minusDays(1))) {
+					int idReserva = reservaTabla.solicitarIdReserva(usuario, fecha, pista, duracion, Dificultad.ADULTO);
+					reservasAdultos.get(i).setIdReserva(idReserva);
+				
 				int opcion = 1;
 				while (opcion != 0) {
 					System.out.println("0: Terminar modificacion.\n"
@@ -981,6 +979,12 @@ public class GestorReservas {
 					opcion = Integer.parseInt(scan_.nextLine());
 					switch (opcion) {					
 					case 0: 
+						if(reservaTabla.escribirReservaAdultoUpdate(reservasAdultos.get(i)) == 0) {
+							System.out.println("Error. La reserva no se puede modificar");
+							System.out.println("-------------------------------------");
+							System.out.println("");
+							return;
+						}
 						System.out.println("Reserva modificada con exito");
 						System.out.println("-------------------------------------");
 						System.out.println("");
@@ -991,13 +995,6 @@ public class GestorReservas {
 							LocalDate nfecha = LocalDate.parse(scan_.nextLine());
 							System.out.println("");
 							reservasAdultos.get(i).setFecha(nfecha);
-							if(reservaTabla.escribirReservaAdultoUpdate(reservasAdultos.get(i)) == 0) {
-								System.out.println("Error. La reserva no se puede modificar");
-								System.out.println("-------------------------------------");
-								System.out.println("");
-								return;
-							}
-		
 						break;
 							
 					case 2:
@@ -1005,13 +1002,6 @@ public class GestorReservas {
 						int nduracion = Integer.parseInt(scan_.nextLine());				
 						System.out.println("");
 						reservasAdultos.get(i).setDur(nduracion);
-						if(reservaTabla.escribirReservaAdultoUpdate(reservasAdultos.get(i)) == 0) {
-							System.out.println("Error. La reserva no se puede modificar");
-							System.out.println("-------------------------------------");
-							System.out.println("");
-							return;
-						}
-					
 					break;
 
 					default:
@@ -1044,7 +1034,10 @@ public class GestorReservas {
 		for(int i=0 ; i< reservasFamiliares.size(); i++) {
 			if (reservasFamiliares.get(i).getUsuario().equals(usuario) && reservasFamiliares.get(i).getFecha().isEqual(fecha) &&
 				reservasFamiliares.get(i).getDur() == duracion && reservasFamiliares.get(i).getPista().equals(pista) &&
-					reservasFamiliares.get(i).getFecha().isBefore(LocalDate.now().minusDays(1))) {
+					reservasFamiliares.get(i).getFecha().isAfter(LocalDate.now().minusDays(1))) {
+					int idReserva = reservaTabla.solicitarIdReserva(usuario, fecha, pista, duracion, Dificultad.FAMILIAR);
+					reservasFamiliares.get(i).setIdReserva(idReserva);
+					
 				int opcion = 1;
 				while (opcion != 0) {
 					System.out.println("0: Terminar modificacion.\n"
@@ -1055,6 +1048,12 @@ public class GestorReservas {
 					opcion = Integer.parseInt(scan_.nextLine());
 					switch (opcion) {					
 					case 0: 
+						if(reservaTabla.escribirReservaFamiliarUpdate(reservasFamiliares.get(i)) == 0) {
+							System.out.println("Error. La reserva no se puede modificar");
+							System.out.println("-------------------------------------");
+							System.out.println("");
+							return;
+						}
 						System.out.println("Reserva modificada con exito");
 						System.out.println("-------------------------------------");
 						System.out.println("");
@@ -1064,28 +1063,14 @@ public class GestorReservas {
 						System.out.println("Introduzca la nueva fecha de reserva");
 							LocalDate nfecha = LocalDate.parse(scan_.nextLine());
 							System.out.println("");
-							reservasFamiliares.get(i).setFecha(nfecha);
-							if(reservaTabla.escribirReservaFamiliarUpdate(reservasFamiliares.get(i)) == 0) {
-								System.out.println("Error. La reserva no se puede modificar");
-								System.out.println("-------------------------------------");
-								System.out.println("");
-								return;
-							}
-		
+							reservasFamiliares.get(i).setFecha(nfecha);		
 						break;
 							
 					case 2:
 						System.out.println("Introduzca la nueva duracion de reserva");
 						int nduracion = Integer.parseInt(scan_.nextLine());				
 						System.out.println("");
-						reservasFamiliares.get(i).setDur(nduracion);
-						if(reservaTabla.escribirReservaFamiliarUpdate(reservasFamiliares.get(i)) == 0) {
-							System.out.println("Error. La reserva no se puede modificar");
-							System.out.println("-------------------------------------");
-							System.out.println("");
-							return;
-						}
-					
+						reservasFamiliares.get(i).setDur(nduracion);											
 					break;
 
 					default:
