@@ -745,20 +745,16 @@ public class GestorReservas {
 	 **/
 
 	public void consultarReservasFuturasBono (int bonoid){
-		//del DAOreserva hacer un select * from reserva where idbono=bonoid;
-		/*for array
-		 * mostrar reservas
-		*/
-		
+		ArrayList<Reserva> arrayReservas = solicitarReservasBono(bonoid);
 		DAOBono bonoTabla = new DAOBono();
 		ArrayList<DTOBono> arrayBonos = bonoTabla.solicitarBonos();
 		
 		for(int i = 0; i < arrayBonos.size(); i++) {
 				if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
 					System.out.println(arrayBonos.get(i).toString());
-					for(int j = 0; j < arrayBonos.get(i).getArrayReservas().size(); j++) {
-						if(arrayBonos.get(i).getArrayReservas().get(j).getFecha().isAfter(LocalDate.now())) {
-							System.out.println(arrayBonos.get(i).getArrayReservas().get(j).toString());
+					for(int j = 0; j < arrayReservas().size(); j++) {
+						if(arrayReservas().get(j).getFecha().isAfter(LocalDate.now())) {
+							System.out.println(arrayReservas().get(j).toString());
 						}
 					}
 				}
@@ -772,7 +768,7 @@ public class GestorReservas {
 	 * @param scan_
 	 **/
 	
-	public void consultarReservaEspecifica (GestorPistas GestorPistas_, GestorReservas GestorReservas_, String usuario, LocalDate fecha, String pista, Scanner scan_){		
+	public void consultarReservaEspecifica (GestorPistas GestorPistas_, GestorReservas GestorReservas_, String usuario, LocalDate fecha, String pista, Scanner scan_, int bonoid){		
 		System.out.println("0. Consultar reserva individual");
         System.out.println("1. Consultar reserva bono");
     	System.out.println("");
@@ -809,12 +805,13 @@ public class GestorReservas {
         }else if(option_ == 1) {
         	DAOBono bonoTabla = new DAOBono();
     		ArrayList<DTOBono> arrayBonos = bonoTabla.solicitarBonos();
+    		ArrayList<Reserva> arrayReservas = solicitarReservasBono(bonoid);
         	for(int i = 0; i < arrayBonos.size(); i++){
         		if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
-	        		for(int j = 0; j < arrayBonos.size(); j++){
-		        		if(arrayBonos.get(i).getArrayReservas().get(j).getFecha().isEqual(fecha) && arrayBonos.get(i).getArrayReservas().get(j).getPista().equals(pista)){
+	        		for(int j = 0; j < arrayReservas.size(); j++){
+		        		if(arrayReservas().get(j).getFecha().isEqual(fecha) && arrayReservas().get(j).getPista().equals(pista)){
 		        			System.out.println(arrayBonos.get(i).toString());
-		        			System.out.println(arrayBonos.get(i).getArrayReservas().get(j).toString());
+		        			System.out.println(arrayReservas().get(j).toString());
 		    			}
 	        		}
         		}
