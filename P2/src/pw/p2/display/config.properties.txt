@@ -1,0 +1,4 @@
+url=jdbc:mysql://oraclepr.uco.es:3306/i02mocaf
+user =i02mocaf
+password=pw2223
+nombre=com.mysql.jdbc.Driver
