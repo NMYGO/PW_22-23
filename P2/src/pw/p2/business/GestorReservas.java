@@ -744,7 +744,12 @@ public class GestorReservas {
 	 * @param scan_
 	 **/
 
-	public void consultarReservasFuturasBono (String usuario){
+	public void consultarReservasFuturasBono (int bonoid){
+		//del DAOreserva hacer un select * from reserva where idbono=bonoid;
+		/*for array
+		 * mostrar reservas
+		*/
+		
 		DAOBono bonoTabla = new DAOBono();
 		ArrayList<DTOBono> arrayBonos = bonoTabla.solicitarBonos();
 		
