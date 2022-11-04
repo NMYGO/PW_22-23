@@ -133,7 +133,118 @@ public class DAOBono {
 		}
 		return status;
 	}
+	
+	public int deleteBono(DTOBono bono){
+		int status=0;
+		try{
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		PreparedStatement ps = connection.prepareStatement("delete from bono where idBono=?");
+		ps.setInt(1, bono.getId());
+		status = ps.executeUpdate();
+		} catch(Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return status;
+	}
+	
+	public ArrayList<DTORInfantil> solicitarReservasInfantiles(DTOBono bono) {
+		ArrayList<DTORInfantil> reservas = new ArrayList<DTORInfantil>();
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query = "select * from reserva where dificultad = 'INFANTIL' and idBono = " + bono.getId();
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			while (rs.next()) {
+				String correo = rs.getString("correoUsuario");
+				LocalDate fecha = LocalDate.parse(rs.getString("fecha"));
+				Integer duracion = rs.getInt("duracion");
+				String pista = rs.getString("nombrePista");
+				Float precio = rs.getFloat("precio");
+				Integer descuento = rs.getInt("descuento");
+				Integer ninos = rs.getInt("ninos");
+				Dificultad tipo = Dificultad.valueOf(rs.getString("dificultad"));
+				reservas.add(new DTORInfantil(correo, fecha, duracion, pista, precio, descuento, ninos, tipo));
+			}
+			
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return reservas;
+	}
+	
+	public ArrayList<DTORAdulto> solicitarReservasAdultos(DTOBono bono) {
+		ArrayList<DTORAdulto> reservas = new ArrayList<DTORAdulto>();
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query = "select * from reserva where dificultad = 'ADULTO' and idBono = " + bono.getId();
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
+			while (rs.next()) {
+				String correo = rs.getString("correoUsuario");
+				LocalDate fecha = LocalDate.parse(rs.getString("fecha"));
+				Integer duracion = rs.getInt("duracion");
+				String pista = rs.getString("nombrePista");
+				Float precio = rs.getFloat("precio");
+				Integer descuento = rs.getInt("descuento");
+				Integer adultos = rs.getInt("adultos");
+				Dificultad tipo = Dificultad.valueOf(rs.getString("dificultad"));
+				reservas.add(new DTORAdulto(correo, fecha, duracion, pista, precio, descuento, adultos, tipo));
+			}
+			
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return reservas;
+	}
+	
+	public ArrayList<DTORFamiliar> solicitarReservasFamiliares(DTOBono bono) {
+		ArrayList<DTORFamiliar> reservas = new ArrayList<DTORFamiliar>();
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query = "select * from reserva where dificultad = 'FAMILIAR' and idBono = " + bono.getId();
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+
+			while (rs.next()) {
+				String correo = rs.getString("correoUsuario");
+				LocalDate fecha = LocalDate.parse(rs.getString("fecha"));
+				Integer duracion = rs.getInt("duracion");
+				String pista = rs.getString("nombrePista");
+				Float precio = rs.getFloat("precio");
+				Integer descuento = rs.getInt("descuento");
+				Integer adultos = rs.getInt("adultos");
+				Integer ninos = rs.getInt("ninos");
+				Dificultad tipo = Dificultad.valueOf(rs.getString("dificultad"));
+				reservas.add(new DTORFamiliar(correo, fecha, duracion, pista, precio, descuento, adultos, ninos, tipo));
+			}
+			
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return reservas;
+	}
+	
 	public int escribirReservaInfantilUpdate(DTORInfantil reserva, Integer idBono) {
 		int status = 0;
 		try {
@@ -288,5 +399,5 @@ public class DAOBono {
 			e.printStackTrace();
 		}
 		return status;
-	}	
+	}
 }

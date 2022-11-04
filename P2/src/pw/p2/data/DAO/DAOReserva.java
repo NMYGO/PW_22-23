@@ -4,7 +4,6 @@ import pw.p2.business.DTORInfantil;
 import pw.p2.business.DTORAdulto;
 import pw.p2.business.DTORFamiliar;
 import pw.p2.data.Dificultad;
-import pw.p2.data.Reserva;
 import pw.p2.data.common.DBConnection;
 import java.sql.*;
 import com.mysql.jdbc.ResultSet;
@@ -301,7 +300,7 @@ public class DAOReserva {
 		try{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		PreparedStatement ps = connection.prepareStatement("delete from reserva where correoUsuario=? and fecha=? and nombrePista=? and duracion=?");
+		PreparedStatement ps = connection.prepareStatement("delete from reserva where correoUsuario=? and fecha=? and nombrePista=? and duracion=? and idBono=NULL");
 		ps.setString(1, reserva.getUsuario());
 		ps.setString(2, reserva.getFecha().toString());
 		ps.setString(3, reserva.getPista());
@@ -314,7 +313,7 @@ public class DAOReserva {
 		return status;
 	}
 
-	public ArrayList<Reserva> solicitarReservasBono(Integer bonoid) { //REVISAR EN BASE AL GESTOR RESERVAS. . . 
+	/**public ArrayList<Reserva> solicitarReservasBono(Integer bonoid) { //REVISAR EN BASE AL GESTOR RESERVAS. . . 
 		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -341,6 +340,6 @@ public class DAOReserva {
 			e.printStackTrace();
 		}
 		return reservas;
-	}
+	}**/
 	
 }

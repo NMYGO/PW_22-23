@@ -5,7 +5,6 @@ import pw.p2.data.DAO.DAOPista;
 import pw.p2.data.DAO.DAOReserva;
 import pw.p2.data.DAO.DAOUsuario;
 import pw.p2.data.DAO.DAOBono;
-import pw.p2.data.Reserva;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -722,42 +721,30 @@ public class GestorReservas {
 	
 	/**
 	 * Muestra todas las reservas de bonos futuras por pantalla
-	 * @param scan_ String con el nombre de usuario
+	 * @param usuario String con el nombre de usuario
+	 * @param tipo Enum Dificultad con el tipo de reserva
 	 * @return
 	 **/
 
-	/**public void consultarReservasFuturasBono (String usuario){ 
+	public void consultarReservasFuturasBono (String usuario, Dificultad tipo){ 
+		DAOBono reservaBono = new DAOBono();
+		DTOBono bono = reservaBono.solicitarBono(usuario, tipo);
 		
-		DAOBono bonoTabla = new DAOBono();
-		ArrayList<DTOBono> arrayBonos = bonoTabla.solicitarBonos();
-		
-		for(int i = 0; i < arrayBonos.size(); i++) {
-			if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
-				System.out.println(arrayBonos.get(i).toString());
-				for(int j = 0; j < arrayBonos.get(i).getArrayReservas().size(); j++) {
-					if(arrayBonos.get(i).getArrayReservas().get(j).getFecha().isAfter(LocalDate.now())) {
-						System.out.println(arrayBonos.get(i).getArrayReservas().get(j).toString());
-					}
-				}
+		if(tipo == Dificultad.INFANTIL) {
+			ArrayList<DTORInfantil> reservasInfantiles = reservaBono.solicitarReservasInfantiles(bono);
+			for(int i = 0; i < reservasInfantiles.size(); i++) {
+				System.out.println(reservasInfantiles.get(i).toString());
 			}
-		}
-	}*/
-	
-	public void consultarReservasFuturasBono (int bonoid){
-		DAOReserva reservaTabla = new DAOReserva();
-		ArrayList<Reserva> arrayReservas = reservaTabla.solicitarReservasBono(bonoid);
-		DAOBono bonoTabla = new DAOBono();
-		ArrayList<DTOBono> arrayBonos = bonoTabla.solicitarBonos();
-		
-		for(int i = 0; i < arrayBonos.size(); i++) {
-				if(arrayBonos.get(i).getId() == bonoid) {
-					System.out.println(arrayBonos.get(i).toString());
-					for(int j = 0; j < arrayReservas.size(); j++) {
-						if(arrayReservas.get(j).getFecha().isAfter(LocalDate.now())) {
-							System.out.println(arrayReservas.get(j).toString());
-						}
-					}
-				}
+		}else if(tipo == Dificultad.ADULTO) {
+			ArrayList<DTORAdulto> reservasAdultos = reservaBono.solicitarReservasAdultos(bono);
+			for(int i = 0; i < reservasAdultos.size(); i++) {
+				System.out.println(reservasAdultos.get(i).toString());	
+			}
+		} else if(tipo == Dificultad.FAMILIAR) {
+			ArrayList<DTORFamiliar> reservasFamiliares = reservaBono.solicitarReservasFamiliares(bono);
+			for(int i = 0; i < reservasFamiliares.size(); i++) {
+				System.out.println(reservasFamiliares.get(i).toString());
+			}
 		}
 	}
 
@@ -770,7 +757,7 @@ public class GestorReservas {
 	 * @return
 	 **/
 	
-	public void consultarReservaEspecifica (String usuario, LocalDate fecha, String pista, Scanner scan_, int bonoid){ /** **/
+	public void consultarReservaEspecifica (String usuario, LocalDate fecha, String pista, Dificultad tipo, Scanner scan_){ /** **/
 		System.out.println("0. Consultar reserva individual");
         System.out.println("1. Consultar reserva bono");
     	System.out.println("");
@@ -785,40 +772,51 @@ public class GestorReservas {
     		
         	for(int i=0; i < reservasInfantiles.size() ; i++){
         		if(reservasInfantiles.get(i).getUsuario().equals(usuario)) {
-	        		if(reservasInfantiles.get(i).getFecha().isEqual(fecha) && reservasInfantiles.get(i).getPista().equals(pista)){
+	        		if(reservasInfantiles.get(i).getFecha().isEqual(fecha) && reservasInfantiles.get(i).getPista().equals(pista) && reservasInfantiles.get(i).getTipo() == tipo){
 	    				System.out.println(reservasInfantiles.get(i).toString());
 	    			}
         		}
         	}
         	for(int i=0; i < reservasAdultos.size() ; i++){
         		if(reservasAdultos.get(i).getUsuario().equals(usuario)) {
-	        		if(reservasAdultos.get(i).getFecha().isEqual(fecha) && reservasAdultos.get(i).getPista().equals(pista)){
+	        		if(reservasAdultos.get(i).getFecha().isEqual(fecha) && reservasAdultos.get(i).getPista().equals(pista) && reservasAdultos.get(i).getTipo() == tipo){
 	    				System.out.println(reservasAdultos.get(i).toString());
 	    			}
         		}
         	}
         	for(int i=0; i < reservasFamiliares.size() ; i++){
         		if(reservasFamiliares.get(i).getUsuario().equals(usuario)) {
-	        		if(reservasFamiliares.get(i).getFecha().isEqual(fecha) && reservasFamiliares.get(i).getPista().equals(pista)){
+	        		if(reservasFamiliares.get(i).getFecha().isEqual(fecha) && reservasFamiliares.get(i).getPista().equals(pista) && reservasFamiliares.get(i).getTipo() == tipo){
 	    				System.out.println(reservasFamiliares.get(i).toString());
 	    			}
         		}
         	}
         }else if(option_ == 1) {
-        	DAOBono bonoTabla = new DAOBono();
-        	DAOReserva reservaTabla = new DAOReserva();
-    		ArrayList<DTOBono> arrayBonos = bonoTabla.solicitarBonos();
-    		ArrayList<Reserva> arrayReservas = reservaTabla.solicitarReservasBono(bonoid);
-        	for(int i = 0; i < arrayBonos.size(); i++){
-        		if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
-	        		for(int j = 0; j < arrayReservas.size(); j++){
-		        		if(arrayReservas.get(j).getFecha().isEqual(fecha) && arrayReservas.get(j).getPista().equals(pista)){
-		        			System.out.println(arrayBonos.get(i).toString());
-		        			System.out.println(arrayReservas.get(j).toString());
-		    			}
-	        		}
-        		}
-        	}
+        	DAOBono reservaBono = new DAOBono();
+    		DTOBono bono = reservaBono.solicitarBono(usuario, tipo);
+    		
+    		if(tipo == Dificultad.INFANTIL) {
+    			ArrayList<DTORInfantil> reservasInfantiles = reservaBono.solicitarReservasInfantiles(bono);
+    			for(int i = 0; i < reservasInfantiles.size(); i++) {
+    				if(reservasInfantiles.get(i).getFecha().isEqual(fecha) && reservasInfantiles.get(i).getPista().equals(pista)) {				
+    					System.out.println(reservasInfantiles.get(i).toString());
+    				}
+    			}
+    		}else if(tipo == Dificultad.ADULTO) {
+    			ArrayList<DTORAdulto> reservasAdultos = reservaBono.solicitarReservasAdultos(bono);
+    			for(int i = 0; i < reservasAdultos.size(); i++) {
+    				if(reservasAdultos.get(i).getFecha().isEqual(fecha) && reservasAdultos.get(i).getPista().equals(pista)){
+	    				System.out.println(reservasAdultos.get(i).toString());
+	    			}	
+    			}
+    		} else if(tipo == Dificultad.FAMILIAR) {
+    			ArrayList<DTORFamiliar> reservasFamiliares = reservaBono.solicitarReservasFamiliares(bono);
+    			for(int i = 0; i < reservasFamiliares.size(); i++) {
+    				if(reservasFamiliares.get(i).getFecha().isEqual(fecha) && reservasFamiliares.get(i).getPista().equals(pista)){
+	    				System.out.println(reservasFamiliares.get(i).toString());
+	    			}
+    			}
+    		}
         }else {
         	System.out.println("Opcion no reconocida");
 			System.out.println("");

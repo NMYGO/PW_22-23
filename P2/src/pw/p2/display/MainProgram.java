@@ -33,10 +33,10 @@ public class MainProgram{
         Integer maxkarts, participantes, id, duracion;
         String nombre, apellidos, correo, usuario, pista;
 		Boolean estado, tipo;
-		Dificultad dificultad;
+		Dificultad dificultad, tipoBono;
 		Estado estados;
 		LocalDate fecha, nacimiento;
-        SQLPropiedades.propiedadesConfiguracion();
+        //SQLPropiedades.propiedadesConfiguracion();
         while(!exit_){
         	System.out.println("PROGRAMA MAIN");
         	System.out.println("=====================================");
@@ -202,18 +202,26 @@ public class MainProgram{
 		        	                	System.out.println("Introduzca su correo de usuario");
 		        	            			usuario = scan_.nextLine();
 		        	            			System.out.println("");
-		        	                	//GestorReservas_.consultarReservasFuturasBono(usuario); CORREGIR LE PASA IDBONO??
+	        	            			System.out.println("Introduzca su tipo de bono");
+		        	            			tipoBono = Dificultad.valueOf(scan_.nextLine());
+	        	            			System.out.println("");	
+		        	                	GestorReservas_.consultarReservasFuturasBono(usuario, tipoBono);
 		        	                    break;
 		        	                    
 		        	                case 7:
 		        	                	System.out.println("Introduzca su correo de usuario");
 		        	        				usuario = scan_.nextLine();
+	        	        				System.out.println("");	
 		        	        			System.out.println("Introduzca la fecha de la reserva (yyyy-mm-dd)");
 		        	        				fecha = LocalDate.parse(scan_.nextLine());
+	        	        				System.out.println("");	
 		        	        			System.out.println("Introduzca la pista de la reserva");
 		        	        				pista = scan_.nextLine();
 		        	        			System.out.println("");
-		        	                	//GestorReservas_.consultarReservaEspecifica(usuario, fecha, pista, scan_); CORREGIR LE PASA UN PARAMETRO EXTRA IDBONO
+		        	        			System.out.println("Introduzca la dificultad de pista");
+	        	            				dificultad = Dificultad.valueOf(scan_.nextLine());
+	        	            			System.out.println("");	
+		        	                	GestorReservas_.consultarReservaEspecifica(usuario, fecha, pista, dificultad, scan_);
 		        	                    break;		        	                    
                 	            }
                 	            break;
