@@ -2,9 +2,11 @@ package pw.p2.data.DAO;
 
 import pw.p2.business.DTOUsuario;
 import pw.p2.data.common.DBConnection;
+import java.io.*;
 import java.sql.*;
 import com.mysql.jdbc.ResultSet;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.time.LocalDate;
 
 
@@ -22,11 +24,22 @@ import java.time.LocalDate;
 public class DAOUsuario {
 	
 	public ArrayList<DTOUsuario> solicitarUsuarios() {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaUsuario = prop.getProperty("consultaUsuario");
 		ArrayList<DTOUsuario> usuarios = new ArrayList<DTOUsuario>();
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "select * from usuario";
+			String query = consultaUsuario;
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 

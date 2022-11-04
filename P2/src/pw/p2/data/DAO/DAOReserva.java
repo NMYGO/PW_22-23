@@ -314,7 +314,7 @@ public class DAOReserva {
 		return status;
 	}
 
-	public ArrayList<Reserva> solicitarReservasBono(int bonoid) {
+	public ArrayList<Reserva> solicitarReservasBono(Integer bonoid) { //REVISAR EN BASE AL GESTOR RESERVAS. . . 
 		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -330,7 +330,7 @@ public class DAOReserva {
 				String pista = rs.getString("nombrePista");
 				Float precio = rs.getFloat("precio");
 				Integer descuento = rs.getInt("descuento");
-				reservas.add(new Reserva(correo, fecha, duracion, pista, precio, descuento));
+				//reservas.add(new Reserva(correo, fecha, duracion, pista, precio, descuento));
 			}
 			if (stmt != null){ 
 				stmt.close(); 

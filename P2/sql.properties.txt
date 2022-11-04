@@ -24,7 +24,3 @@ consultaUsuario=select * from usuario
 consultaUsuarioEspecifico=select * from usuario where correoUsuario =' correo '
 updateUsuario=update usuario set nombre=?,apellidos=?,fechaInscripcion=?,fechaNacimiento=? where correoUsuario=?
 insert=insert into usuario (correoUsuario,nombre,apellidos,fechaInscripcion,fechaNacimiento) values(?,?,?,?,?)
-
-
-
-

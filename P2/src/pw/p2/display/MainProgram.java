@@ -36,7 +36,7 @@ public class MainProgram{
 		Dificultad dificultad;
 		Estado estados;
 		LocalDate fecha, nacimiento;
-        
+        SQLPropiedades.propiedadesConfiguracion();
         while(!exit_){
         	System.out.println("PROGRAMA MAIN");
         	System.out.println("=====================================");
@@ -202,7 +202,7 @@ public class MainProgram{
 		        	                	System.out.println("Introduzca su correo de usuario");
 		        	            			usuario = scan_.nextLine();
 		        	            			System.out.println("");
-		        	                	GestorReservas_.consultarReservasFuturasBono(usuario);
+		        	                	//GestorReservas_.consultarReservasFuturasBono(usuario); CORREGIR LE PASA IDBONO??
 		        	                    break;
 		        	                    
 		        	                case 7:
@@ -213,7 +213,7 @@ public class MainProgram{
 		        	        			System.out.println("Introduzca la pista de la reserva");
 		        	        				pista = scan_.nextLine();
 		        	        			System.out.println("");
-		        	                	GestorReservas_.consultarReservaEspecifica(usuario, fecha, pista, scan_);
+		        	                	//GestorReservas_.consultarReservaEspecifica(usuario, fecha, pista, scan_); CORREGIR LE PASA UN PARAMETRO EXTRA IDBONO
 		        	                    break;		        	                    
                 	            }
                 	            break;
@@ -257,7 +257,6 @@ public class MainProgram{
 				System.out.println("");
             }
         }
-        //FicheroPropiedades.propiedades(GestorPistas_, GestorUsuarios_, GestorReservas_);
         scan_.close();
     }
 
