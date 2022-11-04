@@ -5,6 +5,7 @@ import pw.p2.data.DAO.DAOPista;
 import pw.p2.data.DAO.DAOReserva;
 import pw.p2.data.DAO.DAOUsuario;
 import pw.p2.data.DAO.DAOBono;
+import pw.p2.data.Reserva;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -725,7 +726,7 @@ public class GestorReservas {
 	 * @return
 	 **/
 
-	public void consultarReservasFuturasBono (String usuario){ /** **/
+	/**public void consultarReservasFuturasBono (String usuario){ 
 		
 		DAOBono bonoTabla = new DAOBono();
 		ArrayList<DTOBono> arrayBonos = bonoTabla.solicitarBonos();
@@ -740,26 +741,25 @@ public class GestorReservas {
 				}
 			}
 		}
-	}
+	}*/
 	
-	/**public void consultarReservasFuturasBono (int bonoid){
-		ArrayList<Reserva> arrayReservas = solicitarReservasBono(bonoid);
+	public void consultarReservasFuturasBono (int bonoid){
+		DAOReserva reservaTabla = new DAOReserva();
+		ArrayList<Reserva> arrayReservas = reservaTabla.solicitarReservasBono(bonoid);
 		DAOBono bonoTabla = new DAOBono();
 		ArrayList<DTOBono> arrayBonos = bonoTabla.solicitarBonos();
 		
 		for(int i = 0; i < arrayBonos.size(); i++) {
-				if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
+				if(arrayBonos.get(i).getId() == bonoid) {
 					System.out.println(arrayBonos.get(i).toString());
-					for(int j = 0; j < arrayReservas().size(); j++) {
-						if(arrayReservas().get(j).getFecha().isAfter(LocalDate.now())) {
-							System.out.println(arrayReservas().get(j).toString());
+					for(int j = 0; j < arrayReservas.size(); j++) {
+						if(arrayReservas.get(j).getFecha().isAfter(LocalDate.now())) {
+							System.out.println(arrayReservas.get(j).toString());
 						}
 					}
 				}
-			}
 		}
 	}
-	**/
 
 	/**
 	 * Muestra las reservas de un día y una pista específicas
@@ -770,7 +770,7 @@ public class GestorReservas {
 	 * @return
 	 **/
 	
-	public void consultarReservaEspecifica (String usuario, LocalDate fecha, String pista, Scanner scan_){ /** **/
+	public void consultarReservaEspecifica (String usuario, LocalDate fecha, String pista, Scanner scan_, int bonoid){ /** **/
 		System.out.println("0. Consultar reserva individual");
         System.out.println("1. Consultar reserva bono");
     	System.out.println("");
@@ -805,19 +805,20 @@ public class GestorReservas {
         		}
         	}
         }else if(option_ == 1) {
-        	/**DAOBono bonoTabla = new DAOBono();
+        	DAOBono bonoTabla = new DAOBono();
+        	DAOReserva reservaTabla = new DAOReserva();
     		ArrayList<DTOBono> arrayBonos = bonoTabla.solicitarBonos();
-    		ArrayList<Reserva> arrayReservas = solicitarReservasBono(bonoid);
+    		ArrayList<Reserva> arrayReservas = reservaTabla.solicitarReservasBono(bonoid);
         	for(int i = 0; i < arrayBonos.size(); i++){
         		if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
 	        		for(int j = 0; j < arrayReservas.size(); j++){
-		        		if(arrayReservas().get(j).getFecha().isEqual(fecha) && arrayReservas().get(j).getPista().equals(pista)){
+		        		if(arrayReservas.get(j).getFecha().isEqual(fecha) && arrayReservas.get(j).getPista().equals(pista)){
 		        			System.out.println(arrayBonos.get(i).toString());
-		        			System.out.println(arrayReservas().get(j).toString());
+		        			System.out.println(arrayReservas.get(j).toString());
 		    			}
 	        		}
         		}
-        	}**/
+        	}
         }else {
         	System.out.println("Opcion no reconocida");
 			System.out.println("");

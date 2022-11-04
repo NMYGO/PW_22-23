@@ -4,6 +4,7 @@ import pw.p2.business.DTORInfantil;
 import pw.p2.business.DTORAdulto;
 import pw.p2.business.DTORFamiliar;
 import pw.p2.data.Dificultad;
+import pw.p2.data.Reserva;
 import pw.p2.data.common.DBConnection;
 import java.sql.*;
 import com.mysql.jdbc.ResultSet;
@@ -313,8 +314,8 @@ public class DAOReserva {
 		return status;
 	}
 
-	/**public ArrayList<DTOReserva> solicitarReservasBono(int bonoid) {
-		ArrayList<DTOReserva> reservas = new ArrayList<Reserva>();
+	public ArrayList<Reserva> solicitarReservasBono(int bonoid) {
+		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
@@ -340,6 +341,6 @@ public class DAOReserva {
 			e.printStackTrace();
 		}
 		return reservas;
-	}**/
+	}
 	
 }
