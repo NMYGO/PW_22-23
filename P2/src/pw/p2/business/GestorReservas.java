@@ -741,6 +741,25 @@ public class GestorReservas {
 			}
 		}
 	}
+	
+	/**public void consultarReservasFuturasBono (int bonoid){
+		ArrayList<Reserva> arrayReservas = solicitarReservasBono(bonoid);
+		DAOBono bonoTabla = new DAOBono();
+		ArrayList<DTOBono> arrayBonos = bonoTabla.solicitarBonos();
+		
+		for(int i = 0; i < arrayBonos.size(); i++) {
+				if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
+					System.out.println(arrayBonos.get(i).toString());
+					for(int j = 0; j < arrayReservas().size(); j++) {
+						if(arrayReservas().get(j).getFecha().isAfter(LocalDate.now())) {
+							System.out.println(arrayReservas().get(j).toString());
+						}
+					}
+				}
+			}
+		}
+	}
+	**/
 
 	/**
 	 * Muestra las reservas de un día y una pista específicas
