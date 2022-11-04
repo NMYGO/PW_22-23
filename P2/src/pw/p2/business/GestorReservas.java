@@ -725,11 +725,7 @@ public class GestorReservas {
 	 * @return
 	 **/
 
-	public void consultarReservasFuturasBono (String usuario){ //he puesto string usuario para quitar el fallo de compilacion, antes habia un idBono -> MORE
-		//del DAOreserva hacer un select * from reserva where idbono=bonoid;
-		/*for array
-		 * mostrar reservas
-		*/
+	public void consultarReservasFuturasBono (String usuario){ /** **/
 		
 		DAOBono bonoTabla = new DAOBono();
 		ArrayList<DTOBono> arrayBonos = bonoTabla.solicitarBonos();
@@ -755,7 +751,7 @@ public class GestorReservas {
 	 * @return
 	 **/
 	
-	public void consultarReservaEspecifica (String usuario, LocalDate fecha, String pista, Scanner scan_){		
+	public void consultarReservaEspecifica (String usuario, LocalDate fecha, String pista, Scanner scan_){ /** **/
 		System.out.println("0. Consultar reserva individual");
         System.out.println("1. Consultar reserva bono");
     	System.out.println("");
@@ -790,18 +786,19 @@ public class GestorReservas {
         		}
         	}
         }else if(option_ == 1) {
-        	DAOBono bonoTabla = new DAOBono();
+        	/**DAOBono bonoTabla = new DAOBono();
     		ArrayList<DTOBono> arrayBonos = bonoTabla.solicitarBonos();
+    		ArrayList<Reserva> arrayReservas = solicitarReservasBono(bonoid);
         	for(int i = 0; i < arrayBonos.size(); i++){
         		if(arrayBonos.get(i).getbUsuario().equals(usuario)) {
-	        		for(int j = 0; j < arrayBonos.size(); j++){
-		        		if(arrayBonos.get(i).getArrayReservas().get(j).getFecha().isEqual(fecha) && arrayBonos.get(i).getArrayReservas().get(j).getPista().equals(pista)){
+	        		for(int j = 0; j < arrayReservas.size(); j++){
+		        		if(arrayReservas().get(j).getFecha().isEqual(fecha) && arrayReservas().get(j).getPista().equals(pista)){
 		        			System.out.println(arrayBonos.get(i).toString());
-		        			System.out.println(arrayBonos.get(i).getArrayReservas().get(j).toString());
+		        			System.out.println(arrayReservas().get(j).toString());
 		    			}
 	        		}
         		}
-        	}
+        	}**/
         }else {
         	System.out.println("Opcion no reconocida");
 			System.out.println("");
