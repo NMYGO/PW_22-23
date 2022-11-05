@@ -79,9 +79,11 @@ public class DAOUsuario {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = consultaUsuarioEspecifico;
-			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			//String query = consultaUsuarioEspecifico;
+			//Statement stmt = connection.createStatement();
+			PreparedStatement ps = connection.prepareStatement(consultaUsuarioEspecifico);
+			ps.setString(1, usuario.getCorreo());
+			ResultSet rs = (ResultSet) ps.executeQuery();
 
 			while (rs.next()) {
 				String nombre = rs.getString("nombre");
@@ -91,8 +93,8 @@ public class DAOUsuario {
 				usuario = new DTOUsuario(nombre, apellidos, nacimiento, inscripcion, correo);
 			}
 
-			if (stmt != null){ 
-				stmt.close(); 
+			if (ps != null){ 
+				ps.close(); 
 			}
 			dbConnection.closeConnection();
 		} catch (Exception e){
