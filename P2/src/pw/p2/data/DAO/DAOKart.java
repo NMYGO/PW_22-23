@@ -3,18 +3,36 @@ package pw.p2.data.DAO;
 import pw.p2.business.DTOKart;
 import pw.p2.data.Estado;
 import pw.p2.data.common.DBConnection;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 import com.mysql.jdbc.ResultSet;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class DAOKart {
 	
 	public ArrayList<DTOKart> solicitarKarts() {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaKart = prop.getProperty("consultaKart");
 		ArrayList<DTOKart> karts = new ArrayList<DTOKart>();
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "select * from kart";
+			String query = consultaKart;
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
@@ -38,11 +56,22 @@ public class DAOKart {
 	}
 	
 	public DTOKart solicitarKart(Integer id) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaKartID = prop.getProperty("consultaKartID");
 		DTOKart kart = new DTOKart();
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "select * from kart where idKart = " + id;
+			String query = consultaKartID + id;
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
@@ -65,13 +94,26 @@ public class DAOKart {
 	}
 	
 	public ArrayList<DTOKart> solicitarKartsPista(String nombrePista) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaKartPista = prop.getProperty("consultaKartPista");
 		ArrayList<DTOKart> kartsPista = new ArrayList<DTOKart>();
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "select * from kart where nombrePista like " + "'" + nombrePista + "'";
-			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			PreparedStatement ps = connection.prepareStatement(consultaKartPista);
+			ps.setString(1, nombrePista);
+			ResultSet rs = (ResultSet) ps.executeQuery();
+			//String query = consultaKartPista;
+			//Statement stmt = connection.createStatement();
 
 			while (rs.next()) {
 				Integer id = rs.getInt("idKart");
@@ -81,8 +123,8 @@ public class DAOKart {
 				kartsPista.add(new DTOKart(id, tipo, estado, pista));
 			}
 
-			if (stmt != null){ 
-				stmt.close(); 
+			if (ps != null){ 
+				ps.close(); 
 			}
 			dbConnection.closeConnection();
 		} catch (Exception e){
@@ -93,11 +135,22 @@ public class DAOKart {
 	}
 	
 	public int escribirKartUpdate(DTOKart kart) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String updateKart = prop.getProperty("updateKart");
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("update kart set tipo=?,estado=?,nombrePista=? where idKart=?");
+			PreparedStatement ps = connection.prepareStatement(updateKart);
 			ps.setInt(4, kart.getId());
 			ps.setBoolean(1, kart.isTipo());
 			ps.setString(2, kart.getEstado().toString());
@@ -113,11 +166,22 @@ public class DAOKart {
 	}
 	
 	public int escribirKartInsert (DTOKart kart) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String insertKart = prop.getProperty("insertKart");
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("insert into kart (idKart,tipo,estado,nombrePista) values(?,?,?,?)");
+			PreparedStatement ps = connection.prepareStatement(insertKart);
 			ps.setInt(1, kart.getId());
 			ps.setBoolean(2, kart.isTipo());
 			ps.setString(3, kart.getEstado().toString());

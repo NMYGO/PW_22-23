@@ -5,19 +5,37 @@ import pw.p2.business.DTORAdulto;
 import pw.p2.business.DTORFamiliar;
 import pw.p2.data.Dificultad;
 import pw.p2.data.common.DBConnection;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 import com.mysql.jdbc.ResultSet;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.time.LocalDate;
 
 public class DAOReserva {
 	
 	public ArrayList<DTORInfantil> solicitarReservasInfantiles() {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaReservaInfantil = prop.getProperty("consultaReservaInfantil");
 		ArrayList<DTORInfantil> reservas = new ArrayList<DTORInfantil>();
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "select * from reserva where dificultad = 'INFANTIL' and idBono IS NULL";
+			String query = consultaReservaInfantil;
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
@@ -44,21 +62,39 @@ public class DAOReserva {
 		return reservas;
 	}
 	
-	public int solicitarIdReserva(String usuario, LocalDate fecha, String pista, Integer duracion, Dificultad tipo) {		
+	public int solicitarIdReserva(String usuario, LocalDate fecha, String pista, Integer duracion, Dificultad tipo) {	
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaReservaId = prop.getProperty("consultaReservaId");
 		Integer idReserva = -1;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "select * from reserva where correoUsuario = '" + usuario + "' and fecha = '"  + fecha.toString() + "' and nombrePista = '" + pista + "' and duracion = " + duracion + " and dificultad = '" + tipo.toString() + "'";
-			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			//String query =  consultaReservaId;
+			//Statement stmt = connection.createStatement();
+			PreparedStatement ps = connection.prepareStatement(consultaReservaId);
+			ps.setString(1, usuario);
+			ps.setString(2, fecha.toString());
+			ps.setString(3, pista);
+			ps.setInt(4, duracion);
+			ps.setString(5, tipo.toString());
+			
+			ResultSet rs = (ResultSet) ps.executeQuery();
 	
 			while (rs.next()) {
 				idReserva  = rs.getInt("idReserva");
 			}
 	
-			if (stmt != null){ 
-				stmt.close(); 
+			if (ps != null){ 
+				ps.close(); 
 			}
 			dbConnection.closeConnection();
 		} catch (Exception e){
@@ -69,11 +105,22 @@ public class DAOReserva {
 	}
 	
 	public int escribirReservaInfantilUpdate(DTORInfantil reserva) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String updateReserva = prop.getProperty("updateReserva");
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("update reserva set duracion=?,precio=?,descuento=?,fecha=?,nombrePista=?,dificultad=?,ninos=?,adultos=? where idReserva=?");
+			PreparedStatement ps = connection.prepareStatement(updateReserva);
 			ps.setInt(9, reserva.getIdReserva());
 			ps.setInt(1, reserva.getDur());
 			ps.setFloat(2, reserva.getPrecio());
@@ -94,11 +141,22 @@ public class DAOReserva {
 	}
 	
 	public int escribirReservaInfantilInsert(DTORInfantil reserva) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String insertReserva = prop.getProperty("insertReserva");
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("insert into reserva (correoUsuario,duracion,precio,descuento,fecha,nombrePista,dificultad,ninos,adultos) values(?,?,?,?,?,?,?,?,?)");
+			PreparedStatement ps = connection.prepareStatement(insertReserva);
 			ps.setString(1, reserva.getUsuario());
 			ps.setInt(2, reserva.getDur());
 			ps.setFloat(3, reserva.getPrecio());
@@ -119,11 +177,22 @@ public class DAOReserva {
 	}
 	
 	public ArrayList<DTORAdulto> solicitarReservasAdultos() {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaReservaAdulto = prop.getProperty("consultaReservaAdulto");
 		ArrayList<DTORAdulto> reservas = new ArrayList<DTORAdulto>();
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "select * from reserva where dificultad = 'ADULTO' and idBono IS NULL";
+			String query = consultaReservaAdulto;
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
@@ -151,11 +220,22 @@ public class DAOReserva {
 	}
 	
 	public int escribirReservaAdultoUpdate(DTORAdulto reserva) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String updateReserva = prop.getProperty("updateReserva");
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("update reserva set duracion=?,precio=?,descuento=?,fecha=?,nombrePista=?,dificultad=?,adultos=?,ninos=? where idReserva=?");
+			PreparedStatement ps = connection.prepareStatement(updateReserva);
 			ps.setInt(9, reserva.getIdReserva());
 			ps.setInt(1, reserva.getDur());
 			ps.setFloat(2, reserva.getPrecio());
@@ -176,11 +256,22 @@ public class DAOReserva {
 	}
 	
 	public int escribirReservaAdultoInsert(DTORAdulto reserva) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String insertReserva = prop.getProperty("insertReserva");
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("insert into reserva (correoUsuario,duracion,precio,descuento,fecha,nombrePista,dificultad,adultos,ninos) values(?,?,?,?,?,?,?,?,?)");
+			PreparedStatement ps = connection.prepareStatement(insertReserva);
 			ps.setString(1, reserva.getUsuario());
 			ps.setInt(2, reserva.getDur());
 			ps.setFloat(3, reserva.getPrecio());
@@ -201,11 +292,22 @@ public class DAOReserva {
 	}
 	
 	public ArrayList<DTORFamiliar> solicitarReservasFamiliares() {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaReservaFamiliar = prop.getProperty("consultaReservaFamiliar");
 		ArrayList<DTORFamiliar> reservas = new ArrayList<DTORFamiliar>();
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "select * from reserva where dificultad = 'FAMILIAR'  and idBono IS NULL";
+			String query = consultaReservaFamiliar;
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
@@ -234,11 +336,22 @@ public class DAOReserva {
 	}
 	
 	public int escribirReservaFamiliarUpdate(DTORFamiliar reserva) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String updateReserva = prop.getProperty("updateReserva");
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("update reserva set duracion=?,precio=?,descuento=?,fecha=?,nombrePista=?,dificultad=?,adultos=?,ninos=? where idReserva=?");
+			PreparedStatement ps = connection.prepareStatement(updateReserva);
 			ps.setInt(9, reserva.getIdReserva());
 			ps.setInt(1, reserva.getDur());
 			ps.setFloat(2, reserva.getPrecio());
@@ -259,11 +372,22 @@ public class DAOReserva {
 	}
 	
 	public int escribirReservaFamiliarInsert(DTORFamiliar reserva) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String insertReserva = prop.getProperty("insertReserva");
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("insert into reserva (correoUsuario,duracion,precio,descuento,fecha,nombrePista,dificultad,adultos,ninos) values(?,?,?,?,?,?,?,?,?)");
+			PreparedStatement ps = connection.prepareStatement(insertReserva);
 			ps.setString(1, reserva.getUsuario());
 			ps.setInt(2, reserva.getDur());
 			ps.setFloat(3, reserva.getPrecio());
@@ -284,11 +408,22 @@ public class DAOReserva {
 	}
 	
 	public int deleteReservaInfantil(DTORInfantil reserva){
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String deleteReserva = prop.getProperty("deleteReserva");
 		int status=0;
 		try{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		PreparedStatement ps = connection.prepareStatement("delete from reserva where correoUsuario=? and fecha=? and nombrePista=? and duracion=?");
+		PreparedStatement ps = connection.prepareStatement(deleteReserva);
 		ps.setString(1, reserva.getUsuario());
 		ps.setString(2, reserva.getFecha().toString());
 		ps.setString(3, reserva.getPista());
@@ -302,11 +437,22 @@ public class DAOReserva {
 	}
 	
 	public int deleteReservaAdulto(DTORAdulto reserva){
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String deleteReserva = prop.getProperty("deleteReserva");
 		int status=0;
 		try{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		PreparedStatement ps = connection.prepareStatement("delete from reserva where correoUsuario=? and fecha=? and nombrePista=? and duracion=?");
+		PreparedStatement ps = connection.prepareStatement(deleteReserva);
 		ps.setString(1, reserva.getUsuario());
 		ps.setString(2, reserva.getFecha().toString());
 		ps.setString(3, reserva.getPista());
@@ -320,11 +466,22 @@ public class DAOReserva {
 	}
 	
 	public int deleteReservaFamiliar(DTORFamiliar reserva){
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String deleteReserva = prop.getProperty("deleteReserva");
 		int status=0;
 		try{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		PreparedStatement ps = connection.prepareStatement("delete from reserva where correoUsuario=? and fecha=? and nombrePista=? and duracion=?");
+		PreparedStatement ps = connection.prepareStatement(deleteReserva);
 		ps.setString(1, reserva.getUsuario());
 		ps.setString(2, reserva.getFecha().toString());
 		ps.setString(3, reserva.getPista());
