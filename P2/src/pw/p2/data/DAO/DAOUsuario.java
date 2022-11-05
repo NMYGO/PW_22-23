@@ -64,11 +64,22 @@ public class DAOUsuario {
 	}
 	
 	public DTOUsuario solicitarUsuario(String correo) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaUsuarioEspecifico = prop.getProperty("consultaUsuarioEspecifico");
 		DTOUsuario usuario = new DTOUsuario();
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "select * from usuario where correoUsuario = " + "'" + correo + "'";
+			String query = consultaUsuarioEspecifico;
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
@@ -92,11 +103,22 @@ public class DAOUsuario {
 	}
 	
 	public int escribirUsuarioUpdate(DTOUsuario usuario) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String updateUsuario = prop.getProperty("updateUsuario");
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("update usuario set nombre=?,apellidos=?,fechaInscripcion=?,fechaNacimiento=? where correoUsuario=?");
+			PreparedStatement ps = connection.prepareStatement(updateUsuario);
 			ps.setString(5, usuario.getCorreo());
 			ps.setString(1, usuario.getNombre());
 			ps.setString(2, usuario.getApellidos());
@@ -113,11 +135,22 @@ public class DAOUsuario {
 	}
 	
 	public int escribirUsuarioInsert(DTOUsuario usuario) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String insertUsuario = prop.getProperty("insertUsuario");
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("insert into usuario (correoUsuario,nombre,apellidos,fechaInscripcion,fechaNacimiento) values(?,?,?,?,?)");
+			PreparedStatement ps = connection.prepareStatement(insertUsuario);
 			ps.setString(1, usuario.getCorreo());
 			ps.setString(2, usuario.getNombre());
 			ps.setString(3, usuario.getApellidos());
