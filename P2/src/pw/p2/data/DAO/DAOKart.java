@@ -71,10 +71,11 @@ public class DAOKart {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = consultaKartID + id;
-			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-
+			PreparedStatement ps = connection.prepareStatement(consultaKartID);
+			ps.setInt(1, id);
+			ResultSet rs = (ResultSet) ps.executeQuery();
+			
+			
 			while (rs.next()) {
 				Boolean tipo = rs.getBoolean("tipo");
 				Estado estado = Estado.valueOf(rs.getString("estado"));
@@ -82,8 +83,8 @@ public class DAOKart {
 				kart = new DTOKart(id, tipo, estado, pista);
 			}
 
-			if (stmt != null){ 
-				stmt.close(); 
+			if (ps != null){ 
+				ps.close(); 
 			}
 			dbConnection.closeConnection();
 		} catch (Exception e){
@@ -112,8 +113,6 @@ public class DAOKart {
 			PreparedStatement ps = connection.prepareStatement(consultaKartPista);
 			ps.setString(1, nombrePista);
 			ResultSet rs = (ResultSet) ps.executeQuery();
-			//String query = consultaKartPista;
-			//Statement stmt = connection.createStatement();
 
 			while (rs.next()) {
 				Integer id = rs.getInt("idKart");
@@ -198,6 +197,5 @@ public class DAOKart {
 	
 	public void asociarKartAPista() {
 		
-	}
-	
+	}	
 }

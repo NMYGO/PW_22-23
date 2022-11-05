@@ -79,8 +79,6 @@ public class DAOUsuario {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			//String query = consultaUsuarioEspecifico;
-			//Statement stmt = connection.createStatement();
 			PreparedStatement ps = connection.prepareStatement(consultaUsuarioEspecifico);
 			ps.setString(1, correo);
 			ResultSet rs = (ResultSet) ps.executeQuery();

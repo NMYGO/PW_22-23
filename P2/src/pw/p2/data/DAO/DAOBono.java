@@ -81,8 +81,6 @@ public class DAOBono {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			//String query = consultaBonoEspecifico;
-			//Statement stmt = connection.createStatement();
 			PreparedStatement ps = connection.prepareStatement(consultaBonoEspecifico);
 			ps.setString(1, bono.getbUsuario());
 			ps.setString(2, bono.getTipo().toString());

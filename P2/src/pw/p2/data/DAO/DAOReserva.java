@@ -78,8 +78,6 @@ public class DAOReserva {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			//String query =  consultaReservaId;
-			//Statement stmt = connection.createStatement();
 			PreparedStatement ps = connection.prepareStatement(consultaReservaId);
 			ps.setString(1, usuario);
 			ps.setString(2, fecha.toString());
@@ -493,34 +491,4 @@ public class DAOReserva {
 		}
 		return status;
 	}
-
-	/**public ArrayList<Reserva> solicitarReservasBono(Integer bonoid) { //REVISAR EN BASE AL GESTOR RESERVAS. . . 
-		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
-		try {
-			DBConnection dbConnection = new DBConnection();
-			Connection connection = dbConnection.getConnection();
-			String query = "select * from reserva where idBono = 'bonoid'";
-			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-
-			while (rs.next()) {
-				String correo = rs.getString("correoUsuario");
-				LocalDate fecha = LocalDate.parse(rs.getString("fecha"));
-				Integer duracion = rs.getInt("duracion");
-				String pista = rs.getString("nombrePista");
-				Float precio = rs.getFloat("precio");
-				Integer descuento = rs.getInt("descuento");
-				//reservas.add(new Reserva(correo, fecha, duracion, pista, precio, descuento));
-			}
-			if (stmt != null){ 
-				stmt.close(); 
-			}
-			dbConnection.closeConnection();
-		} catch (Exception e){
-			System.err.println(e);
-			e.printStackTrace();
-		}
-		return reservas;
-	}**/
-	
 }
