@@ -16,7 +16,7 @@ updateKart=update kart set tipo=?,estado=?,nombrePista=? where idKart=?
 insertKart=insert into kart (idKart,tipo,estado,nombrePista) values(?,?,?,?)
 
 consultaPista=select * from pista
-consultaPistasLibres=select * from pista where estado = ? and dificultad = ?
+consultaPistasLibres=select * from pista where estado =? and dificultad =?
 consultaPistaNombre=select * from pista where nombrePista =?
 updatePista=update pista set estado=?,dificultad=?,maxKarts=? where nombrePista=?
 insertPista=insert into pista (nombrePista,estado,dificultad,maxKarts) values(?,?,?,?)
