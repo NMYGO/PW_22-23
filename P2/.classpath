@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="lib" path="/home/more/Escritorio/UNIVERSIDAD/TERCERO/PW/PW_P2/PW_22-23/P2/lib/mysql-connector.jar"/>
+	<classpathentry exported="true" kind="lib" path="P2/lib/mysql-connector.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
