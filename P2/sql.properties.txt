@@ -21,6 +21,6 @@ consultaReservaAdulto=select * from reserva where dificultad = 'ADULTO'
 consultaReservaFamiliar=select * from reserva where dificultad = 'FAMILIAR'
 deleteReserva=delete from reserva where correoUsuario=? and fecha=? and nombrePista=? and duracion=?
 consultaUsuario=select * from usuario
-consultaUsuarioEspecifico=select * from usuario where correoUsuario =' correo '
+consultaUsuarioEspecifico=select * from usuario where correoUsuario=?
 updateUsuario=update usuario set nombre=?,apellidos=?,fechaInscripcion=?,fechaNacimiento=? where correoUsuario=?
 insert=insert into usuario (correoUsuario,nombre,apellidos,fechaInscripcion,fechaNacimiento) values(?,?,?,?,?)

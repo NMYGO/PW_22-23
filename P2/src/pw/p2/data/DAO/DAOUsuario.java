@@ -82,7 +82,7 @@ public class DAOUsuario {
 			//String query = consultaUsuarioEspecifico;
 			//Statement stmt = connection.createStatement();
 			PreparedStatement ps = connection.prepareStatement(consultaUsuarioEspecifico);
-			ps.setString(1, usuario.getCorreo());
+			ps.setString(1, correo);
 			ResultSet rs = (ResultSet) ps.executeQuery();
 
 			while (rs.next()) {
