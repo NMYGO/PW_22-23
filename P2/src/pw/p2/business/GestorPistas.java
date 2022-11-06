@@ -26,10 +26,13 @@ public class GestorPistas{
 	public GestorPistas(){}
 
 	/**
-	 * Funcion que crea una pista y la añade al arrayPistas
-	 * @param scan_ Scanner para leer por teclado
-	 * @return Devuelve un booleano 
-	 **/
+	 * Funcion que crea una pista
+	 * @param nombre
+	 * @param estado
+	 * @param dificultad
+	 * @param maxkarts
+	 * @return
+	 */
 	
 	public boolean crearPista (String nombre, Boolean estado, Dificultad dificultad, Integer maxkarts) {		
 		DAOPista pistaTabla = new DAOPista();
@@ -48,10 +51,13 @@ public class GestorPistas{
 	}
 
 	/**
-	 * Funcion que crea un kart y lo añade al arrayPistas
-	 * @param scan_ Scanner para leer por teclado
-	 * @return Devuelve un booleano 
-	 **/
+	 * Funcion que crea un kart
+	 * @param id
+	 * @param tipo
+	 * @param estado
+	 * @param nombrePista
+	 * @return
+	 */
 	
 	public boolean crearKart (Integer id, Boolean tipo, Estado estado, String nombrePista) {				
 		DAOKart kartTabla = new DAOKart();
@@ -70,11 +76,11 @@ public class GestorPistas{
 	}
 
 	/**
-	 * Funcion que añade karts válidos al array de karts de las pistas válidas
-	 * @param idkart Identificador del kart a asociar
-	 * @param nombrepista Nombre de la pista a la que asociamos los karts
-	 * @return Devuelve un booleano
-	 **/
+	 * Asocia un kart a una pista
+	 * @param idkart
+	 * @param nombrepista
+	 * @return
+	 */
 	
 	public boolean asociarKartPista (Integer idkart, String nombrepista) {
 		DAOKart kartTabla = new DAOKart();
@@ -107,9 +113,8 @@ public class GestorPistas{
 	}
 
 	/**
-	 * Función que lista por pantalla el nombre de las pistas en mantenimiento
-	 * return
-	 **/
+	 * Lista las pistas en mantenimiento
+	 */
 	
 	public void listaPistasMantenimiento () {
 		DAOPista pistaTabla = new DAOPista();
@@ -123,12 +128,11 @@ public class GestorPistas{
 	}
 	
 	/**
-	 * Funcion que devuelve un array de las pistas libres con un minimo numero de karts
-	 * @param scan_ Scanner para leer por teclado
-	 * @param kartnum número de karts de la pista
-	 * @param dificultad dificultad de la pista (INFANTIL, FAMILIAR, ADULTA)
-	 * @return Devuelve array de pistas libres
-	 **/
+	 * Devuelve las pistas libres
+	 * @param participantes
+	 * @param dificultad
+	 * @return
+	 */
 	
 	public ArrayList<DTOPista> pistasLibres (Integer participantes, Dificultad dificultad) {							
 		DAOPista pistaTabla = new DAOPista();
@@ -138,9 +142,8 @@ public class GestorPistas{
 	}
 	
 	/**
-	 * Lista por pantalla todos los karts que esten disponibles
-	 * return
-	 **/
+	 * Lista las pistas disponibles por pantalla
+	 */
 	
 	public void listarKartsDisponibles () {
 		DAOKart kartTabla = new DAOKart();

@@ -749,13 +749,13 @@ public class GestorReservas {
 	}
 
 	/**
-	 * Muestra las reservas de un día y una pista específicas
-	 * @param usuario String con el nombre de usuario
-	 * @param fecha LocalDate con la fecha de reserva
-	 * @param pista String con el nombre de pista
-	 * @param scan_ Scanner para leer por teclado
-	 * @return
-	 **/
+	 * Muestra las reservas de un día y una pista específica
+	 * @param usuario
+	 * @param fecha
+	 * @param pista
+	 * @param tipo
+	 * @param scan_
+	 */
 	
 	public void consultarReservaEspecifica (String usuario, LocalDate fecha, String pista, Dificultad tipo, Scanner scan_){ /** **/
 		System.out.println("0. Consultar reserva individual");
@@ -825,12 +825,12 @@ public class GestorReservas {
 
 	/**
 	 * Elimina la reserva selecionada
-	 * @param usuario String con el nombre de usuario
-	 * @param fecha LocalDate con la fecha de reserva
-	 * @param pista String con el nombre de pista
-	 * @param duracion Integer con la duracion de la reserva
-	 * @return
-	 **/
+	 * @param usuario
+	 * @param fecha
+	 * @param pista
+	 * @param tipo
+	 * @param duracion
+	 */
 
 	public void eliminarReserva (String usuario, LocalDate fecha, String pista, Dificultad tipo, Integer duracion){
 		DAOReserva reservaTabla = new DAOReserva();
@@ -880,14 +880,13 @@ public class GestorReservas {
 	}
 
 	/**
-	 * Modifica la reserva seleccionada (infantil)
-	 * @param usuario String con el nombre de usuario
-	 * @param fecha LocalDate con la fecha de reserva
-	 * @param pista String con el nombre de pista
-	 * @param duracion Integer con la duracion de la reserva
-	 * @param scan_ Scanner para leer por teclado
-	 * @return
-	 **/
+	 * Modificar la reserva infantil
+	 * @param usuario
+	 * @param fecha
+	 * @param pista
+	 * @param duracion
+	 * @param scan_
+	 */
 
 	public void modificarReservaInfantil (String usuario, LocalDate fecha, String pista, Integer duracion, Scanner scan_){	
 		DAOReserva reservaTabla = new DAOReserva();
@@ -949,14 +948,13 @@ public class GestorReservas {
 	}
 	
 	/**
-	 * Modifica la reserva seleccionada (adulto)
-	 * @param usuario String con el nombre de usuario
-	 * @param fecha LocalDate con la fecha de reserva
-	 * @param pista String con el nombre de pista
-	 * @param duracion Integer con la duracion de la reserva
-	 * @param scan_ Scanner para leer por teclado
-	 * @return
-	 **/
+	 * Modificar una reserva adulta
+	 * @param usuario
+	 * @param fecha
+	 * @param pista
+	 * @param duracion
+	 * @param scan_
+	 */
 	
 	public void modificarReservaAdulto (String usuario, LocalDate fecha, String pista, Integer duracion, Scanner scan_){	
 		DAOReserva reservaTabla = new DAOReserva();
@@ -1018,14 +1016,13 @@ public class GestorReservas {
 	}
 	
 	/**
-	 * Modifica la reserva seleccionada (familiar)
-	 * @param usuario String con el nombre de usuario
-	 * @param fecha LocalDate con la fecha de reserva
-	 * @param pista String con el nombre de pista
-	 * @param duracion Integer con la duracion de la reserva
-	 * @param scan_ Scanner para leer por teclado
-	 * @return
-	 **/
+	 * Modificar la reserva familiar
+	 * @param usuario
+	 * @param fecha
+	 * @param pista
+	 * @param duracion
+	 * @param scan_
+	 */
 	
 	public void modificarReservaFamiliar (String usuario, LocalDate fecha, String pista, Integer duracion, Scanner scan_){	
 		DAOReserva reservaTabla = new DAOReserva();
