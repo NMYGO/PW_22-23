@@ -96,8 +96,8 @@ public class DAOBono {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			PreparedStatement ps = connection.prepareStatement(consultaBonoEspecifico);
-			ps.setString(1, bono.getbUsuario());
-			ps.setString(2, bono.getTipo().toString());
+			ps.setString(1, usuario);
+			ps.setString(2, tipo.toString());
 
 			ResultSet rs = (ResultSet) ps.executeQuery();
 	
@@ -175,7 +175,7 @@ public class DAOBono {
 			e.printStackTrace();
 		}
 		
-		String insertBono = prop.getProperty("inserBono");
+		String insertBono = prop.getProperty("insertBono");
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -246,6 +246,10 @@ public class DAOBono {
 		
 		String consultaReservaInfantilBono = prop.getProperty("consultaReservaInfantilBono");
 		ArrayList<DTORInfantil> reservas = new ArrayList<DTORInfantil>();
+		DAOBono bonoTabla = new DAOBono();
+		String correoUsuarioB = bono.getbUsuario();
+		Dificultad tipoB = bono.getTipo();
+		bono.setId(bonoTabla.solicitarBono(correoUsuarioB, tipoB).getId());
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
@@ -294,6 +298,10 @@ public class DAOBono {
 		
 		String consultaReservaAdultoBono = prop.getProperty("consultaReservaAdultoBono");
 		ArrayList<DTORAdulto> reservas = new ArrayList<DTORAdulto>();
+		DAOBono bonoTabla = new DAOBono();
+		String correoUsuarioB = bono.getbUsuario();
+		Dificultad tipoB = bono.getTipo();
+		bono.setId(bonoTabla.solicitarBono(correoUsuarioB, tipoB).getId());
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
@@ -343,6 +351,10 @@ public class DAOBono {
 		
 		String consultaReservaFamiliarBono = prop.getProperty("consultaReservaFamiliarBono");
 		ArrayList<DTORFamiliar> reservas = new ArrayList<DTORFamiliar>();
+		DAOBono bonoTabla = new DAOBono();
+		String correoUsuarioB = bono.getbUsuario();
+		Dificultad tipoB = bono.getTipo();
+		bono.setId(bonoTabla.solicitarBono(correoUsuarioB, tipoB).getId());
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
