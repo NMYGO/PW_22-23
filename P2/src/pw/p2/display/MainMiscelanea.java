@@ -205,7 +205,7 @@ public class MainMiscelanea {
 	}
 	
 	/**
-	 * No se que hace aquí
+	 * Al elegir modificar una reserva se encarga de llamar a la función segun sea infantil, familiar o adulta
 	 * @param GestorReservas_
 	 * @param usuario
 	 * @param fecha
