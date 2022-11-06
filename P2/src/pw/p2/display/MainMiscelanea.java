@@ -24,7 +24,6 @@ public class MainMiscelanea {
 	
 	/**
 	 * Funcion que imprime el menu principal de opciones del main
-	 * @return
 	 **/
 	
 	public static void menuPrincipal () {
@@ -39,7 +38,6 @@ public class MainMiscelanea {
 	
 	/**
 	 * Funcion que imprime el menu de pistas del main
-	 * @return
 	 **/
 	
 	public static void menuPistas () {
@@ -69,7 +67,6 @@ public class MainMiscelanea {
 	
 	/**
 	 * Funcion que imprime el menu de reservas del main
-	 * @return
 	 **/
 	
 	public static void menuReservas () {
@@ -88,7 +85,6 @@ public class MainMiscelanea {
 	
 	/**
 	 * Funcion que imprime el menu de karts del main
-	 * @return
 	 **/
 	
 	public static void menuKarts () {
@@ -103,7 +99,7 @@ public class MainMiscelanea {
 	
 	/**
 	 * Funcion que comprueba que un usuario esta registrado
-	 * @param scan_
+	 * @param scan_ scanear entrada por teclado
 	 * @return Devuelve un booleano
 	 **/
 	
@@ -121,7 +117,6 @@ public class MainMiscelanea {
 	
 	/**
 	 * Funcion que restaura las pistas al finalizar el programa
-	 * @return
 	 **/
 	
 	public static void restaurar() {
@@ -146,7 +141,6 @@ public class MainMiscelanea {
 	 * Menu para elegir entre los tipos de reserva individual
 	 * @param GestorReservas_
 	 * @param scan_
-	 * @return
 	 **/
 	
 	public static void crearReservaIndividual (GestorReservas GestorReservas_, Scanner scan_) {
@@ -174,7 +168,6 @@ public class MainMiscelanea {
 	 * @param GestorPistas_
 	 * @param GestorUsuarios_
 	 * @param scan_
-	 * @return
 	 **/
 	
 	public static void crearReservaBono (GestorReservas GestorReservas_, Scanner scan_) {
@@ -199,13 +192,12 @@ public class MainMiscelanea {
 	/**
 	 * Al elegir modificar una reserva se encarga de llamar a la función segun sea infantil, familiar o adulta
 	 * @param GestorReservas_
-	 * @param usuario
-	 * @param fecha
-	 * @param pista
-	 * @param duracion
-	 * @param tipo
+	 * @param usuario - usuario de la reserva
+	 * @param fecha - fecha de la reserva
+	 * @param pista - pista reservada
+	 * @param duracion - duración de la reserva
+	 * @param tipo - tipo de reserva (infantil, familiar o adulto)
 	 * @param scan_
-	 * @return
 	 **/
 	
 	public static void modificarReservaIndividual (GestorReservas GestorReservas_, String usuario, LocalDate fecha, String pista, Integer duracion, Dificultad tipo, Scanner scan_) {
