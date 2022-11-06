@@ -5,6 +5,16 @@ import java.util.Properties;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Clase que gestiona la configuración para acceder a la base de datos
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ */
+
 public class ConfiguracionPropiedades 
 
 {

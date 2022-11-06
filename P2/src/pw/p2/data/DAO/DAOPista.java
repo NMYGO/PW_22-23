@@ -15,8 +15,23 @@ import com.mysql.jdbc.ResultSet;
 import java.util.ArrayList;
 import java.util.Properties;
 
+/**
+ * 
+ * DAO de pista
+ * Encargado de interactuar con la tabla pista de la base de datos
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ **/
+
 public class DAOPista {
-	
+	/**
+	 * Solicita la tabla de pistas
+	 * @return
+	 */
 	public ArrayList<DTOPista> solicitarPistas() {
 		Properties prop = new Properties();
 		try{
@@ -55,7 +70,13 @@ public class DAOPista {
 		}
 		return pistas;
 	}
-	
+	/**
+	 * Solicita las pistas libres
+	 * @param estado
+	 * @param participantes
+	 * @param dificultad
+	 * @return
+	 */
 	public ArrayList<DTOPista> solicitarPistasLibres(Boolean estado, Integer participantes, Dificultad dificultad) {
 		Properties prop = new Properties();
 		try{
@@ -102,7 +123,11 @@ public class DAOPista {
 		}
 		return pistas;
 	}
-	
+	/**
+	 * Solicita una pista específica
+	 * @param nombre
+	 * @return
+	 */
 	public DTOPista solicitarPista(String nombre) {
 		Properties prop = new Properties();
 		try{
@@ -142,7 +167,11 @@ public class DAOPista {
 		}
 		return pista;
 	}
-	
+	/**
+	 * Actualiza una pista
+	 * @param pista
+	 * @return
+	 */
 	public int escribirPistaUpdate(DTOPista pista) {
 		Properties prop = new Properties();
 		try{
@@ -173,7 +202,11 @@ public class DAOPista {
 		}
 		return status;
 	}
-	
+	/**
+	 * Inserta una nueva pista
+	 * @param pista
+	 * @return
+	 */
 	public int escribirPistaInsert(DTOPista pista) {
 		Properties prop = new Properties();
 		try{

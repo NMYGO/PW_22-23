@@ -3,6 +3,16 @@ package pw.p2.display;
 import java.util.Properties;
 import java.io.*;
 
+/**
+ * Clase que gestiona todas las interacciones con la base de datos usando el fichero sql.properties.txt
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ */
+
 public class SQLPropiedades {
 	
 	public static void propiedadesConfiguracion() {

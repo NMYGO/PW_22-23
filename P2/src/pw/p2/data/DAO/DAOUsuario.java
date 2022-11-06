@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.time.LocalDate;
 
-
 /**
  * 
- * DAO Kart
+ * DAO de usuario
+ * Encargado de interactuar con la tabla usuario en la base de datos
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano
@@ -22,7 +22,10 @@ import java.time.LocalDate;
  */
 
 public class DAOUsuario {
-	
+	/**
+	 * Soliciata la tabla usuario
+	 * @return
+	 */
 	public ArrayList<DTOUsuario> solicitarUsuarios() {
 		Properties prop = new Properties();
 		try{
@@ -62,7 +65,9 @@ public class DAOUsuario {
 		}
 		return usuarios;
 	}
-	
+	/**
+	 * Solicita un usuario
+	 */
 	public DTOUsuario solicitarUsuario(String correo) {
 		Properties prop = new Properties();
 		try{
@@ -101,7 +106,11 @@ public class DAOUsuario {
 		}
 		return usuario;
 	}
-	
+	/**
+	 * Actualiza la información de un usuario
+	 * @param usuario
+	 * @return
+	 */
 	public int escribirUsuarioUpdate(DTOUsuario usuario) {
 		Properties prop = new Properties();
 		try{
@@ -133,7 +142,11 @@ public class DAOUsuario {
 		}
 		return status;
 	}
-	
+	/**
+	 * Añade un nuevo usuario
+	 * @param usuario
+	 * @return
+	 */
 	public int escribirUsuarioInsert(DTOUsuario usuario) {
 		Properties prop = new Properties();
 		try{

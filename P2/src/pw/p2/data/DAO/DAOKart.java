@@ -14,8 +14,23 @@ import com.mysql.jdbc.ResultSet;
 import java.util.ArrayList;
 import java.util.Properties;
 
+/**
+ * 
+ * DAO de kart
+ * Encargado de interactuar con la tabla kart de la base de datos
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ **/
+
 public class DAOKart {
-	
+	/**
+	 * Solicita la tabla de los karts
+	 * @return
+	 */
 	public ArrayList<DTOKart> solicitarKarts() {
 		Properties prop = new Properties();
 		try{
@@ -54,7 +69,11 @@ public class DAOKart {
 		}
 		return karts;
 	}
-	
+	/**
+	 * Solicita un kart específico
+	 * @param id - identificador del kart
+	 * @return
+	 */
 	public DTOKart solicitarKart(Integer id) {
 		Properties prop = new Properties();
 		try{
@@ -93,7 +112,11 @@ public class DAOKart {
 		}
 		return kart;
 	}
-	
+	/**
+	 * Solicita los karts de una pista concreta
+	 * @param nombrePista
+	 * @return
+	 */
 	public ArrayList<DTOKart> solicitarKartsPista(String nombrePista) {
 		Properties prop = new Properties();
 		try{
@@ -132,7 +155,9 @@ public class DAOKart {
 		}
 		return kartsPista;
 	}
-	
+	/**
+	 * Actualiza un kart
+	 */
 	public int escribirKartUpdate(DTOKart kart) {
 		Properties prop = new Properties();
 		try{
@@ -163,7 +188,11 @@ public class DAOKart {
 		}
 		return status;
 	}
-	
+	/**
+	 * Inserta un nuevo kart
+	 * @param kart
+	 * @return
+	 */
 	public int escribirKartInsert (DTOKart kart) {
 		Properties prop = new Properties();
 		try{

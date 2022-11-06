@@ -17,8 +17,23 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.time.LocalDate;
 
+/**
+ * 
+ * DAO de reserva
+ * Encargado de interactuar con la tabla reserva de la base de datos
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ **/
+
 public class DAOReserva {
-	
+	/**
+	 * Solicita las reservas infantiles
+	 * @return
+	 */
 	public ArrayList<DTORInfantil> solicitarReservasInfantiles() {
 		Properties prop = new Properties();
 		try{
@@ -61,7 +76,15 @@ public class DAOReserva {
 		}
 		return reservas;
 	}
-	
+	/**
+	 * Solicita el identificador de una reserva
+	 * @param usuario
+	 * @param fecha
+	 * @param pista
+	 * @param duracion
+	 * @param tipo
+	 * @return
+	 */
 	public int solicitarIdReserva(String usuario, LocalDate fecha, String pista, Integer duracion, Dificultad tipo) {	
 		Properties prop = new Properties();
 		try{
@@ -101,7 +124,9 @@ public class DAOReserva {
 		}
 		return idReserva;
 	}
-	
+	/**
+	 * Actualiza una reserva infantil
+	 */
 	public int escribirReservaInfantilUpdate(DTORInfantil reserva) {
 		Properties prop = new Properties();
 		try{
@@ -137,7 +162,9 @@ public class DAOReserva {
 		}
 		return status;
 	}
-	
+	/**
+	 * Añade una reserva infantil
+	 */
 	public int escribirReservaInfantilInsert(DTORInfantil reserva) {
 		Properties prop = new Properties();
 		try{
@@ -173,7 +200,10 @@ public class DAOReserva {
 		}
 		return status;
 	}
-	
+	/**
+	 * Solicita las reservas adultas
+	 * @return
+	 */
 	public ArrayList<DTORAdulto> solicitarReservasAdultos() {
 		Properties prop = new Properties();
 		try{
@@ -216,7 +246,11 @@ public class DAOReserva {
 		}
 		return reservas;
 	}
-	
+	/**
+	 * Actualiza una reserva adulta
+	 * @param reserva
+	 * @return
+	 */
 	public int escribirReservaAdultoUpdate(DTORAdulto reserva) {
 		Properties prop = new Properties();
 		try{
@@ -252,7 +286,11 @@ public class DAOReserva {
 		}
 		return status;
 	}
-	
+	/**
+	 * Inserta la reserva adulta
+	 * @param reserva
+	 * @return
+	 */
 	public int escribirReservaAdultoInsert(DTORAdulto reserva) {
 		Properties prop = new Properties();
 		try{
@@ -288,7 +326,10 @@ public class DAOReserva {
 		}
 		return status;
 	}
-	
+	/**
+	 * Solicita las reservas familiares
+	 * @return
+	 */
 	public ArrayList<DTORFamiliar> solicitarReservasFamiliares() {
 		Properties prop = new Properties();
 		try{
@@ -332,7 +373,11 @@ public class DAOReserva {
 		}
 		return reservas;
 	}
-	
+	/**
+	 * Actualiza una reserva familiar
+	 * @param reserva
+	 * @return
+	 */
 	public int escribirReservaFamiliarUpdate(DTORFamiliar reserva) {
 		Properties prop = new Properties();
 		try{
@@ -368,7 +413,11 @@ public class DAOReserva {
 		}
 		return status;
 	}
-	
+	/**
+	 * Inserta una reserva familiar
+	 * @param reserva
+	 * @return
+	 */
 	public int escribirReservaFamiliarInsert(DTORFamiliar reserva) {
 		Properties prop = new Properties();
 		try{
@@ -404,7 +453,11 @@ public class DAOReserva {
 		}
 		return status;
 	}
-	
+	/**
+	 * Elimina una reserva infantil
+	 * @param reserva
+	 * @return
+	 */
 	public int deleteReservaInfantil(DTORInfantil reserva){
 		Properties prop = new Properties();
 		try{
@@ -433,7 +486,11 @@ public class DAOReserva {
 		}
 		return status;
 	}
-	
+	/**
+	 * Elimina una reserva adulta
+	 * @param reserva
+	 * @return
+	 */
 	public int deleteReservaAdulto(DTORAdulto reserva){
 		Properties prop = new Properties();
 		try{
@@ -462,7 +519,11 @@ public class DAOReserva {
 		}
 		return status;
 	}
-	
+	/**
+	 * Elimina una reserva familiar
+	 * @param reserva
+	 * @return
+	 */
 	public int deleteReservaFamiliar(DTORFamiliar reserva){
 		Properties prop = new Properties();
 		try{

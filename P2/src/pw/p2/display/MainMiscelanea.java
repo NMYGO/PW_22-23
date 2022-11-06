@@ -204,6 +204,16 @@ public class MainMiscelanea {
         }
 	}
 	
+	/**
+	 * No se que hace aquí
+	 * @param GestorReservas_
+	 * @param usuario
+	 * @param fecha
+	 * @param pista
+	 * @param duracion
+	 * @param tipo
+	 * @param scan_
+	 */
 	public static void modificarReservaIndividual (GestorReservas GestorReservas_, String usuario, LocalDate fecha, String pista, Integer duracion, Dificultad tipo, Scanner scan_) {
         if(tipo == Dificultad.INFANTIL) {  	
         	GestorReservas_.modificarReservaInfantil(usuario, fecha, pista, duracion, scan_);	            
