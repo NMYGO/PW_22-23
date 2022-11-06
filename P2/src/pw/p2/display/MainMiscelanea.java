@@ -24,9 +24,8 @@ public class MainMiscelanea {
 	
 	/**
 	 * Funcion que imprime el menu principal de opciones del main
-	 * @param 
-	 * @return void
-	 */
+	 * @return
+	 **/
 	
 	public static void menuPrincipal () {
 		System.out.println("1. MENU DE PISTAS.");
@@ -40,9 +39,8 @@ public class MainMiscelanea {
 	
 	/**
 	 * Funcion que imprime el menu de pistas del main
-	 * @param 
-	 * @return void
-	 */
+	 * @return
+	 **/
 	
 	public static void menuPistas () {
 		System.out.println("-------------------MENU DE PISTAS-------------------");
@@ -56,9 +54,8 @@ public class MainMiscelanea {
 	
 	/**
 	 * Funcion que imprime el menu de usuarios del main
-	 * @param 
-	 * @return void
-	 */
+	 * @return
+	 **/
 	
 	public static void menuUsuarios () {
 		System.out.println("-------------------MENU DE USUARIOS-------------------");
@@ -72,9 +69,8 @@ public class MainMiscelanea {
 	
 	/**
 	 * Funcion que imprime el menu de reservas del main
-	 * @param 
-	 * @return void
-	 */
+	 * @return
+	 **/
 	
 	public static void menuReservas () {
 		System.out.println("-------------------MENU DE RESERVAS-------------------");
@@ -92,9 +88,8 @@ public class MainMiscelanea {
 	
 	/**
 	 * Funcion que imprime el menu de karts del main
-	 * @param 
-	 * @return void
-	 */
+	 * @return
+	 **/
 	
 	public static void menuKarts () {
 		System.out.println("-------------------MENU DE KARTS-------------------");
@@ -108,12 +103,11 @@ public class MainMiscelanea {
 	
 	/**
 	 * Funcion que comprueba que un usuario esta registrado
-	 * @param GestorUsuarios
-	 * @param scan_ Scanner para leer por teclado
+	 * @param scan_
 	 * @return Devuelve un booleano
-	 */
+	 **/
 	
-	public static boolean login (GestorUsuarios GestorUsuarios_, Scanner scan_) {
+	public static boolean login (Scanner scan_) {
 		System.out.println("Introduzca su correo de usuario");
 		String correo = scan_.nextLine();
 		
@@ -127,11 +121,10 @@ public class MainMiscelanea {
 	
 	/**
 	 * Funcion que restaura las pistas al finalizar el programa
-	 * @param GestorPistas
-	 * @return void
-	 */
+	 * @return
+	 **/
 	
-	public static void restaurar(GestorPistas GestorPistas_) {
+	public static void restaurar() {
 		DAOKart kartTabla = new DAOKart();
 		DAOPista pistaTabla = new DAOPista();
 		ArrayList <DTOKart> karts = kartTabla.solicitarKarts();
@@ -141,8 +134,7 @@ public class MainMiscelanea {
 			if (karts.get(i).getEstado() == Estado.RESERVADO) {
 				karts.get(i).setEstado(Estado.DISPONIBLE);
 			}
-		}
-		
+		}		
 		for (int i = 0; i < pistas.size(); i++) {
 			if (pistas.get(i).isEstado()) {
 				pistas.get(i).setEstado(false);
@@ -153,12 +145,11 @@ public class MainMiscelanea {
 	/**
 	 * Menu para elegir entre los tipos de reserva individual
 	 * @param GestorReservas_
-	 * @param GestorPistas_
-	 * @param GestorUsuarios_
 	 * @param scan_
-	 */
+	 * @return
+	 **/
 	
-	public static void crearReservaIndividual (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
+	public static void crearReservaIndividual (GestorReservas GestorReservas_, Scanner scan_) {
 		System.out.println("0. Reserva individual infantil");
         System.out.println("1. Reserva individual familiar");
         System.out.println("2. Reserva individual adulto");
@@ -183,9 +174,10 @@ public class MainMiscelanea {
 	 * @param GestorPistas_
 	 * @param GestorUsuarios_
 	 * @param scan_
-	 */
+	 * @return
+	 **/
 	
-	public static void crearReservaBono (GestorReservas GestorReservas_, GestorPistas GestorPistas_, GestorUsuarios GestorUsuarios_, Scanner scan_) {
+	public static void crearReservaBono (GestorReservas GestorReservas_, Scanner scan_) {
 		System.out.println("0. Reserva bono infantil");
         System.out.println("1. Reserva bono familiar");
         System.out.println("2. Reserva bono adulto");
@@ -213,7 +205,9 @@ public class MainMiscelanea {
 	 * @param duracion
 	 * @param tipo
 	 * @param scan_
-	 */
+	 * @return
+	 **/
+	
 	public static void modificarReservaIndividual (GestorReservas GestorReservas_, String usuario, LocalDate fecha, String pista, Integer duracion, Dificultad tipo, Scanner scan_) {
         if(tipo == Dificultad.INFANTIL) {  	
         	GestorReservas_.modificarReservaInfantil(usuario, fecha, pista, duracion, scan_);	            

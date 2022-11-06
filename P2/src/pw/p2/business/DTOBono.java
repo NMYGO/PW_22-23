@@ -36,10 +36,10 @@ public class DTOBono{
 	
 	/**
 	 * Contructor parametrizado
-	 * @param id
-	 * @param sesion
-	 * @param bUsuario
-	 * @param tipo
+	 * @param id Identificador de bono
+	 * @param sesion Sesion nº de bono
+	 * @param bUsuario Correo de usuario del bono
+	 * @param tipo Tipo de bono
 	 **/
 	
 	public DTOBono(Integer sesion, String bUsuario, Dificultad tipo) {
@@ -51,11 +51,11 @@ public class DTOBono{
 	
 	/**
 	 * Contructor parametrizado
-	 * @param id
-	 * @param sesion
-	 * @param bUsuario
-	 * @param tipo
-	 * @param fecha_de_caducidad
+	 * @param id Identificador de bono
+	 * @param sesion Sesion nº de bono
+	 * @param bUsuario Correo de usuario del bono
+	 * @param tipo Tipo de bono
+	 * @param fecha_de_caducidad Fecha de caducidad del bono
 	 **/
 	
 	public DTOBono(Integer sesion, String bUsuario, Dificultad tipo, LocalDate fcaducidad) {

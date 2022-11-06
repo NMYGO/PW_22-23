@@ -26,9 +26,12 @@ import java.time.LocalDate;
  **/
 
 public class DAOBono {
+	
 	/**
 	 * Solicita todos los bonos y los devuelve en un array
-	 */
+	 * @return ArrayList<DTOBono> de los bonos
+	 **/
+	
 	public ArrayList<DTOBono> solicitarBonos() {
 		Properties prop = new Properties();
 		try{
@@ -67,13 +70,15 @@ public class DAOBono {
 		}
 		return bonos;
 	}
+	
 	/**
 	 * Solicita bono en función del usuario y tipo seleccionado
 	 * 
-	 * @param usuario
-	 * @param tipo
-	 * @return bono
-	 */
+	 * @param usuario Correo del usuario del bono
+	 * @param tipo Tipo de bono
+	 * @return DTOBono
+	 **/
+	
 	public DTOBono solicitarBono(String usuario, Dificultad tipo) {
 		Properties prop = new Properties();
 		try{
@@ -114,11 +119,13 @@ public class DAOBono {
 		}
 		return bono;
 	}
+	
 	/**
 	 * Actualiza en la base de datos un bono específico
-	 * @param bono
-	 * @return
-	 */
+	 * @param bono Bono a escribir
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
 	public int escribirBonoUpdate(DTOBono bono) {
 		Properties prop = new Properties();
 		try{
@@ -150,11 +157,13 @@ public class DAOBono {
 		}
 		return status;
 	}
+	
 	/**
 	 * Inserta en la base de datos un bono
-	 * @param bono
-	 * @return
-	 */
+	 * @param bono Bono a escribir
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
 	public int escribirBonoInsert(DTOBono bono) {
 		Properties prop = new Properties();
 		try{
@@ -185,11 +194,13 @@ public class DAOBono {
 		}
 		return status;
 	}
+	
 	/**
 	 * Elimina un bono de la base de datos
-	 * @param bono
-	 * @return
-	 */
+	 * @param bono Bono a borrar
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
 	public int deleteBono(DTOBono bono){
 		Properties prop = new Properties();
 		try{
@@ -215,11 +226,13 @@ public class DAOBono {
 		}
 		return status;
 	}
+	
 	/**
 	 * Solicita a la BD las reservas de un bono de tipo infantil
-	 * @param bono
-	 * @return
-	 */
+	 * @param bono Bono del que se solicitan las reservas
+	 * @return ArrayList<DTORInfantil> de reservas que se correspondan con el bono
+	 **/
+	
 	public ArrayList<DTORInfantil> solicitarReservasInfantiles(DTOBono bono) {
 		Properties prop = new Properties();
 		try{
@@ -261,11 +274,13 @@ public class DAOBono {
 		}
 		return reservas;
 	}
+	
 	/**
 	 * Solicita a la BD las reservas de un bono de tipo adulto
-	 * @param bono
-	 * @return
-	 */
+	 * @param bono Bono del que se solicitan las reservas
+	 * @return ArrayList<DTORAdulto> de reservas que se correspondan con el bono
+	 **/
+	
 	public ArrayList<DTORAdulto> solicitarReservasAdultos(DTOBono bono) {
 		Properties prop = new Properties();
 		try{
@@ -308,11 +323,13 @@ public class DAOBono {
 		}
 		return reservas;
 	}
+	
 	/**
 	 * Solicita a la BD las reservas de un bono de tipo familiar
-	 * @param bono
-	 * @return
-	 */
+	 * @param bono Bono del que se solicitan las reservas
+	 * @return ArrayList<DTORFamiliar> de reservas que se correspondan con el bono
+	 **/
+	
 	public ArrayList<DTORFamiliar> solicitarReservasFamiliares(DTOBono bono) {
 		Properties prop = new Properties();
 		try{
@@ -356,12 +373,14 @@ public class DAOBono {
 		}
 		return reservas;
 	}
+	
 	/**
 	 * Actualiza la reserva seleccionada
-	 * @param reserva
-	 * @param idBono
-	 * @return
-	 */
+	 * @param reserva Reserva de tipo infantil a escribir
+	 * @param idBono Identificador del bono al que pertenece la reserva
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
 	public int escribirReservaInfantilUpdate(DTORInfantil reserva, Integer idBono) {
 		Properties prop = new Properties();
 		try{
@@ -398,12 +417,14 @@ public class DAOBono {
 		}
 		return status;
 	}
+	
 	/**
 	 * Inserta una nueva reserva en la base de datos
-	 * @param reserva
-	 * @param idBono
-	 * @return
-	 */
+	 * @param reserva Reserva de tipo infantil a escribir
+	 * @param idBono Identificador del bono al que pertenece la reserva
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
 	public int escribirReservaInfantilInsert(DTORInfantil reserva, Integer idBono) {
 		Properties prop = new Properties();
 		try{
@@ -440,12 +461,14 @@ public class DAOBono {
 		}
 		return status;
 	}
+	
 	/**
 	 * Actualiza una reserva adulta
-	 * @param reserva
-	 * @param idBono
-	 * @return
-	 */
+	 * @param reserva Reserva de tipo Adulto a escribir
+	 * @param idBono Identificador del bono al que pertenece la reserva
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
 	public int escribirReservaAdultoUpdate(DTORAdulto reserva, Integer idBono) {
 		Properties prop = new Properties();
 		try{
@@ -482,12 +505,14 @@ public class DAOBono {
 		}
 		return status;
 	}
+	
 	/**
 	 * Inserta una nueva reserva adulta en la base de datos
-	 * @param reserva
-	 * @param idBono
-	 * @return
-	 */
+	 * @param reserva Reserva de tipo Adulto a escribir
+	 * @param idBono Identificador del bono al que pertenece la reserva
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
 	public int escribirReservaAdultoInsert(DTORAdulto reserva, Integer idBono) {
 		Properties prop = new Properties();
 		try{
@@ -524,12 +549,14 @@ public class DAOBono {
 		}
 		return status;
 	}
+	
 	/**
 	 * Actualiza una reserva familiar
-	 * @param reserva
-	 * @param idBono
-	 * @return
-	 */
+	 * @param reserva Reserva de tipo Familiar a escribir
+	 * @param idBono Identificador del bono al que pertenece la reserva
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
 	public int escribirReservaFamiliarUpdate(DTORFamiliar reserva, Integer idBono) {
 		Properties prop = new Properties();
 		try{
@@ -566,12 +593,14 @@ public class DAOBono {
 		}
 		return status;
 	}
+	
 	/**
 	 * Inserta una nueva reserva familiar en la base de datos
-	 * @param reserva
-	 * @param idBono
-	 * @return
-	 */
+	 * @param reserva Reserva de tipo Familiar a escribir
+	 * @param idBono Identificador del bono al que pertenece la reserva
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
 	public int escribirReservaFamiliarInsert(DTORFamiliar reserva, Integer idBono) {
 		Properties prop = new Properties();
 		try{

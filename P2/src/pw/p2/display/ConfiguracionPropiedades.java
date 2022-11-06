@@ -1,12 +1,10 @@
 package pw.p2.display;
 
-import pw.p2.business.*;
 import java.util.Properties;
 import java.io.*;
-import java.util.*;
 
 /**
- * Clase que gestiona la configuración para acceder a la base de datos
+ * Clase usada para comprobar la configuración para acceder a la base de datos usando el fichero config.properties.txt (de forma visual)
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano
@@ -45,8 +43,6 @@ public class ConfiguracionPropiedades
 		} catch (IOException e) {
 			
 			e.printStackTrace();
-		}
-		
-		
+		}		
 	}
 }

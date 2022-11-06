@@ -19,7 +19,7 @@ import java.io.*;
  * @author Ángel Quintero Montes
  * @author Diego Tabas Costa
  *
- */
+ **/
 
 public class MainProgram{
 
@@ -36,7 +36,7 @@ public class MainProgram{
 		Dificultad dificultad, tipoBono;
 		Estado estados;
 		LocalDate fecha, nacimiento;
-        //SQLPropiedades.propiedadesConfiguracion();
+		
         while(!exit_){
         	System.out.println("PROGRAMA MAIN");
         	System.out.println("=====================================");
@@ -57,7 +57,7 @@ public class MainProgram{
 					correo = scan_.nextLine();
 				GestorUsuarios_.registrarUsuario(nombre, apellidos, nacimiento, correo);	            
             }else if(option_ == 1) {           
-        		if(!MainMiscelanea.login(GestorUsuarios_, scan_)) {
+        		if(!MainMiscelanea.login(scan_)) {
         			System.out.println("Debe registrarse antes de iniciar sesion");
         			System.out.println("");
         		}else {
@@ -158,11 +158,11 @@ public class MainProgram{
                 	            
                 	            switch(option_){	               	            
 		        	                case 1: 
-		        	                	MainMiscelanea.crearReservaIndividual(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
+		        	                	MainMiscelanea.crearReservaIndividual(GestorReservas_, scan_);
 		        	                    break;
 		        	                    
 		        	                case 2:
-		        	                	MainMiscelanea.crearReservaBono(GestorReservas_, GestorPistas_, GestorUsuarios_, scan_);
+		        	                	MainMiscelanea.crearReservaBono(GestorReservas_, scan_);
 		        	                    break;
 		        	                    
 		        	                case 3:

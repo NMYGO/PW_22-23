@@ -32,7 +32,14 @@ public class DTORInfantil extends Reserva{
 	
 	/**
 	 * Constructor parametrizado
-	 * @param ninos Participantes niños de la reserva infantil
+	 * @param usuario Usuario que hace la reserva
+	 * @param fecha Fecha de la reserva
+	 * @param duracion Duracion de la reserva
+	 * @param pista Pista en la que se hace la reserva
+	 * @param precio Precio de la reserva
+	 * @param descuento Descuento aplicado al precio
+	 * @param ninos Numero de participantes niños
+	 * @param tipo Tipo de dificultad de reserva
 	 **/
 	
 	public DTORInfantil(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer ninos, Dificultad tipo) {

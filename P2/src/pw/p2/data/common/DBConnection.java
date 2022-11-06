@@ -15,7 +15,7 @@ import java.util.Properties;
  * @author Ángel Quintero Montes
  * @author Diego Tabas Costa
  *
- */
+ **/
 
 public class DBConnection {
 

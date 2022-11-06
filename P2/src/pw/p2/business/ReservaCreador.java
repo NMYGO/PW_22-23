@@ -21,14 +21,14 @@ public abstract class ReservaCreador {
 		
 	/**
 	 * Reserva infantil
-	 * @param usuario
-	 * @param fecha
-	 * @param duracion
-	 * @param pista
-	 * @param precio
-	 * @param descuento
-	 * @param ninos
-	 * @param tipo
+	 * @param usuario Usuario que realiza la reserva
+	 * @param fecha Fecha de la reserva
+	 * @param duracion Duracion de la reserva
+	 * @param pista Pista de la reserva
+	 * @param precio Precio de l reserva
+	 * @param descuento Descuento aplicado a la reserva
+	 * @param ninos Participantes niños de la reserva
+	 * @param tipo Tipo de la reserva
 	 * @return
 	 */
 	
@@ -36,15 +36,15 @@ public abstract class ReservaCreador {
 	
 	/**
 	 * Reserva familiar
-	 * @param usuario
-	 * @param fecha
-	 * @param duracion
-	 * @param pista
-	 * @param precio
-	 * @param descuento
-	 * @param adultos
-	 * @param ninos
-	 * @param tipo
+	 * @param usuario Usuario que realiza la reserva
+	 * @param fecha Fecha de la reserva
+	 * @param duracion Duracion de la reserva
+	 * @param pista Pista de la reserva
+	 * @param precio Precio de l reserva
+	 * @param descuento Descuento aplicado a la reserva
+	 * @param adultos Participantes adultos de la reserva
+	 * @param ninos Participantes niños de la reserva
+	 * @param tipo Tipo de la reserva
 	 * @return
 	 */
 	
@@ -52,14 +52,14 @@ public abstract class ReservaCreador {
 	
 	/**
 	 * Reserva adulta
-	 * @param usuario
-	 * @param fecha
-	 * @param duracion
-	 * @param pista
-	 * @param precio
-	 * @param descuento
-	 * @param adultos
-	 * @param tipo
+	 * @param usuario Usuario que realiza la reserva
+	 * @param fecha Fecha de la reserva
+	 * @param duracion Duracion de la reserva
+	 * @param pista Pista de la reserva
+	 * @param precio Precio de l reserva
+	 * @param descuento Descuento aplicado a la reserva
+	 * @param adultos Participantes adultos de la reserva
+	 * @param tipo Tipo de la reserva
 	 * @return
 	 */
 	

@@ -28,10 +28,12 @@ import java.util.Properties;
  **/
 
 public class DAOPista {
+	
 	/**
 	 * Solicita la tabla de pistas
-	 * @return
-	 */
+	 * @return ArrayList<DTOPista> de pistas
+	 **/
+	
 	public ArrayList<DTOPista> solicitarPistas() {
 		Properties prop = new Properties();
 		try{
@@ -70,13 +72,15 @@ public class DAOPista {
 		}
 		return pistas;
 	}
+	
 	/**
 	 * Solicita las pistas libres
-	 * @param estado
-	 * @param participantes
-	 * @param dificultad
-	 * @return
-	 */
+	 * @param estado Estado de la pista
+	 * @param participantes Numero de participantes
+	 * @param dificultad Dificultad de la pista
+	 * @return ArrayList<DTOPista> de pistas libres
+	 **/
+	
 	public ArrayList<DTOPista> solicitarPistasLibres(Boolean estado, Integer participantes, Dificultad dificultad) {
 		Properties prop = new Properties();
 		try{
@@ -96,8 +100,6 @@ public class DAOPista {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			//String query = consultaPistasLibres;
-			//Statement stmt = connection.createStatement();
 			PreparedStatement ps = connection.prepareStatement(consultaPistasLibres);
 			ps.setInt(1, iestado);
 			ps.setString(2,dificultad.toString());
@@ -123,11 +125,13 @@ public class DAOPista {
 		}
 		return pistas;
 	}
+	
 	/**
 	 * Solicita una pista específica
-	 * @param nombre
-	 * @return
-	 */
+	 * @param nombre Nombre de la pista
+	 * @return DTOPista
+	 **/
+	
 	public DTOPista solicitarPista(String nombre) {
 		Properties prop = new Properties();
 		try{
@@ -144,8 +148,6 @@ public class DAOPista {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			//String query = consultaPistaNombre;
-			//Statement stmt = connection.createStatement();
 			PreparedStatement ps = connection.prepareStatement(consultaPistaNombre);
 			ps.setString(1, nombre);
 			ResultSet rs = (ResultSet) ps.executeQuery();
@@ -167,11 +169,13 @@ public class DAOPista {
 		}
 		return pista;
 	}
+	
 	/**
 	 * Actualiza una pista
-	 * @param pista
-	 * @return
-	 */
+	 * @param pista Nombre de la pista a escribir
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
 	public int escribirPistaUpdate(DTOPista pista) {
 		Properties prop = new Properties();
 		try{
@@ -202,11 +206,13 @@ public class DAOPista {
 		}
 		return status;
 	}
+	
 	/**
 	 * Inserta una nueva pista
-	 * @param pista
-	 * @return
-	 */
+	 * @param pista Nombre de la pista a escribir
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
 	public int escribirPistaInsert(DTOPista pista) {
 		Properties prop = new Properties();
 		try{
@@ -236,6 +242,5 @@ public class DAOPista {
 			e.printStackTrace();
 		}
 		return status;
-	}
-	
+	}	
 }

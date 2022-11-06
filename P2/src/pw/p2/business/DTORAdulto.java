@@ -31,13 +31,14 @@ public class DTORAdulto extends Reserva{
 	
 	/**
 	 * Constructor parametrizado
-	 * @param usuario usuario que hace la reserva
-	 * @param fecha fecha de la reserva
-	 * @param duracion duración de la reserva
-	 * @param pista pista en la que se hace la reserva
-	 * @param precio precio de la reserva
-	 * @param descuento si es necesario descuento aplicado al precio
-	 * @param adultos número de participantes
+	 * @param usuario Usuario que hace la reserva
+	 * @param fecha Fecha de la reserva
+	 * @param duracion Duracion de la reserva
+	 * @param pista Pista en la que se hace la reserva
+	 * @param precio Precio de la reserva
+	 * @param descuento Descuento aplicado al precio
+	 * @param adultos Numero de participantes adultos
+	 * @param tipo Tipo de dificultad de reserva
 	 **/
 	
 	public DTORAdulto(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Dificultad tipo) {

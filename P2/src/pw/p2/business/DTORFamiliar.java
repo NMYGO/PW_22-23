@@ -32,8 +32,15 @@ public class DTORFamiliar extends Reserva{
 	
 	/**
 	 * Constructor parametrizado
-	 * @param ninos Participantes niños de la reserva familiar
-	 * @param adultos Participantes adultos de la reserva familiar
+	 * @param usuario Usuario que hace la reserva
+	 * @param fecha Fecha de la reserva
+	 * @param duracion Duracion de la reserva
+	 * @param pista Pista en la que se hace la reserva
+	 * @param precio Precio de la reserva
+	 * @param descuento Descuento aplicado al precio
+	 * @param adultos Numero de participantes adultos
+	 * @param ninos Numero de participantes niños
+	 * @param tipo Tipo de dificultad de reserva
 	 **/
 	
 	public DTORFamiliar(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Integer ninos, Dificultad tipo) {

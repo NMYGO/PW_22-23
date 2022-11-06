@@ -27,11 +27,11 @@ public class GestorPistas{
 
 	/**
 	 * Funcion que crea una pista
-	 * @param nombre
-	 * @param estado
-	 * @param dificultad
-	 * @param maxkarts
-	 * @return
+	 * @param nombre Nombre de pista
+	 * @param estado Estado de pista
+	 * @param dificultad Dificultad de pista
+	 * @param maxkarts Maximo de karts de la pista
+	 * @return Devuelve true si la pista se ha creado, false si no se ha creado
 	 */
 	
 	public boolean crearPista (String nombre, Boolean estado, Dificultad dificultad, Integer maxkarts) {		
@@ -52,11 +52,11 @@ public class GestorPistas{
 
 	/**
 	 * Funcion que crea un kart
-	 * @param id
-	 * @param tipo
-	 * @param estado
-	 * @param nombrePista
-	 * @return
+	 * @param id Identificador de kart
+	 * @param tipo Tipo de kart
+	 * @param estado Estado de kart
+	 * @param nombrePista Nombre de la pista a la que pertenece el kart
+	 * @return Devuelve true si el kart se ha creado, false si no se ha creado
 	 */
 	
 	public boolean crearKart (Integer id, Boolean tipo, Estado estado, String nombrePista) {				
@@ -77,9 +77,9 @@ public class GestorPistas{
 
 	/**
 	 * Asocia un kart a una pista
-	 * @param idkart
-	 * @param nombrepista
-	 * @return
+	 * @param idkart Identificadr del kart que se quiere asociar
+	 * @param nombrepista Nombre de la pista a la que se asocia el kart
+	 * @return Devuelve true si el kart se ha asociado, false si no se ha asociado
 	 */
 	
 	public boolean asociarKartPista (Integer idkart, String nombrepista) {
@@ -114,6 +114,7 @@ public class GestorPistas{
 
 	/**
 	 * Lista las pistas en mantenimiento
+	 * @return
 	 */
 	
 	public void listaPistasMantenimiento () {
@@ -128,10 +129,10 @@ public class GestorPistas{
 	}
 	
 	/**
-	 * Devuelve las pistas libres
-	 * @param participantes
-	 * @param dificultad
-	 * @return
+	 * Devuelve las pistas libres para un numero concreto de participantes
+	 * @param participantes Numero de participantes
+	 * @param dificultad Dificultad de la pista
+	 * @return ArrayList<DTOPista> de las pistas libres
 	 */
 	
 	public ArrayList<DTOPista> pistasLibres (Integer participantes, Dificultad dificultad) {							
@@ -143,6 +144,7 @@ public class GestorPistas{
 	
 	/**
 	 * Lista las pistas disponibles por pantalla
+	 * @return
 	 */
 	
 	public void listarKartsDisponibles () {

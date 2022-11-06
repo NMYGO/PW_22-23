@@ -22,10 +22,12 @@ import java.time.LocalDate;
  */
 
 public class DAOUsuario {
+	
 	/**
-	 * Soliciata la tabla usuario
-	 * @return
-	 */
+	 * Solicitar la tabla usuario
+	 * @return ArrayList<DTOUsuario> de los usuarios
+	 **/
+	
 	public ArrayList<DTOUsuario> solicitarUsuarios() {
 		Properties prop = new Properties();
 		try{
@@ -65,9 +67,13 @@ public class DAOUsuario {
 		}
 		return usuarios;
 	}
+	
 	/**
-	 * Solicita un usuario
-	 */
+	 * Solicita un usuario especifico
+	 * @param correo Correo del usuario
+	 * @return DTOUsuario
+	 **/
+	
 	public DTOUsuario solicitarUsuario(String correo) {
 		Properties prop = new Properties();
 		try{
@@ -106,11 +112,13 @@ public class DAOUsuario {
 		}
 		return usuario;
 	}
+	
 	/**
 	 * Actualiza la información de un usuario
-	 * @param usuario
-	 * @return
-	 */
+	 * @param usuario Usuario a escribir
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
 	public int escribirUsuarioUpdate(DTOUsuario usuario) {
 		Properties prop = new Properties();
 		try{
@@ -142,11 +150,13 @@ public class DAOUsuario {
 		}
 		return status;
 	}
+	
 	/**
 	 * Añade un nuevo usuario
-	 * @param usuario
-	 * @return
-	 */
+	 * @param usuario Usuario a escribir
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
 	public int escribirUsuarioInsert(DTOUsuario usuario) {
 		Properties prop = new Properties();
 		try{
@@ -177,6 +187,5 @@ public class DAOUsuario {
 			e.printStackTrace();
 		}
 		return status;
-	}
-	
+	}	
 }
