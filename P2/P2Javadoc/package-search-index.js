@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"pw.p2.display"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"pw.p2.business"},{"l":"pw.p2.data"},{"l":"pw.p2.data.common"},{"l":"pw.p2.data.DAO"},{"l":"pw.p2.display"}];updateSearchResults();
