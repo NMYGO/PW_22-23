@@ -1,10 +1,10 @@
-create table `Pista`
+create table `pista`
 	(`nombrePista` varchar(64) primary key,
     `estado` bool NOT NULL,
     `dificultad` varchar(64) NOT NULL,
     `maxKarts` int NOT NULL); 
     
-create table `Usuario`
+create table `usuario`
 	(`correoUsuario` varchar(64) primary key,
     `nombre` varchar(64) NOT NULL,
     `apellidos` varchar(64) NOT NULL,
@@ -12,7 +12,7 @@ create table `Usuario`
     `fechaNacimiento` date NOT NULL,
     `administrador` bool NOT NULL);
     
-create table `Kart`
+create table `kart`
 	(`idKart` int primary key,
     `tipo` bool NOT NULL,
     `estado` varchar(64) NOT NULL,
@@ -20,7 +20,7 @@ create table `Kart`
 constraint fk_kart_pista foreign key (nombrePista) 
 	references Pista(nombrePista));
     
-create table `Bono`
+create table `bono`
 	(`idBono` int primary key,
     `sesion` int NOT NULL,
     `fechaCaducidad` date NOT NULL,
@@ -29,7 +29,7 @@ create table `Bono`
 constraint fk_bono_correo foreign key (correoUsuario)
 	references Usuario(correoUsuario));
     
-create table `Reserva`
+create table `reserva`
 	(`idReserva` int primary key,
     `correoUsuario` varchar(64) NOT NULL,
     `duracion` int NOT NULL,

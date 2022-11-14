@@ -1,5 +1,5 @@
 drop table reserva;
-drop table Bono;
-drop table Kart;
-drop table Pista;
+drop table bono;
+drop table kart;
+drop table pista;
 drop table usuario;

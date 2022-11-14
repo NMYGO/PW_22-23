@@ -1,60 +1,65 @@
-insert into usuario
-values('m@gmail.com','Marcos','Miranda Lozano','2021-06-12','2005-06-14', TRUE);
-insert into usuario
-values('manuel@gmail.com','Manuel','Rosa Lugo','2022-04-25','1999-04-05', FALSE);
-insert into usuario
-values('david@gmail.com','David','Gomez','2022-01-30','2000-08-25', TRUE);
-insert into usuario
-values('a@gmail.com','Antonio','Cano Almeida','2022-10-17','1978-10-13', FALSE);
+INSERT INTO `usuario` VALUES ('m@gmail.com', 'Marcos', 'Miranda Lozano', '2017-03-15', '2005-06-14', FALSE);
+INSERT INTO `usuario` VALUES ('manuel@gmail.com', 'Manuel', 'Rosa Lugo', '2020-02-22', '1999-04-05', FALSE);
+INSERT INTO `usuario` VALUES ('david@gmail.com', 'David', 'Gomez Moreno', '2021-08-26', '2000-08-25', TRUE);
+INSERT INTO `usuario` VALUES ('a@gmail.com', 'Antonio', 'Cano Roman', '2022-06-30', '1978-10-13', FALSE);
+INSERT INTO `usuario` VALUES ('f@gmail.com', 'Francisco', 'Moreno Cano', '2022-10-30', '2002-03-24', FALSE);
+INSERT INTO `usuario` VALUES ('alvaro@gmail.com', 'Alvaro', 'Sanchez Vela', '2022-10-31', '2002-02-13', TRUE);
+INSERT INTO `usuario` VALUES ('clara@gmail.com', 'Clara', 'Gonzalez Fernandez', '2022-11-04', '1997-09-27', TRUE);
+INSERT INTO `usuario` VALUES ('julian@gmail.com', 'Julian', 'Perez Reverte', '2022-11-05', '1999-10-13', FALSE);
+INSERT INTO `usuario` VALUES ('alberto@gmail.com', 'Alberto', 'Plazuela Luque', '2022-11-06', '2001-02-14', TRUE);
 
-insert into pista
-values('pista1',FALSE,'FAMILIAR',4);
-insert into pista
-values('pista2',FALSE,'ADULTO',10);
-insert into pista
-values('pista3',FALSE,'INFANTIL',5);
-insert into pista
-values('pista4',TRUE,'ADULTO',4);
 
-insert into kart
-values(1,TRUE,'RESERVADO','pista1');
-insert into kart
-values(2,TRUE,'RESERVADO','pista1');
-insert into kart
-values(3,TRUE,'RESERVADO','pista3');
-insert into kart
-values(4,TRUE,'RESERVADO','pista3');
-insert into kart
-values(5,TRUE,'RESERVADO','pista1');
-insert into kart
-values(6,FALSE,'RESERVADO','pista1');
-insert into kart
-values(7,FALSE,'RESERVADO','pista2');
-insert into kart
-values(8,FALSE,'RESERVADO','pista2');
-insert into kart
-values(9,TRUE,'RESERVADO','pista3');
+INSERT INTO `pista` VALUES ('pista1', 0, 'FAMILIAR', 4);
+INSERT INTO `pista` VALUES ('pista2', 0, 'ADULTO', 10);
+INSERT INTO `pista` VALUES ('pista3', 0, 'INFANTIL', 5);
+INSERT INTO `pista` VALUES ('pista4', 1, 'ADULTO', 4);
+INSERT INTO `pista` VALUES ('pista5', 1, 'INFANTIL', 7);
+INSERT INTO `pista` VALUES ('pista6', 1, 'FAMILIAR', 10);
 
-insert into bono
-values(1,2,'2023-10-09','a@gmail.com','INFANTIL');
-insert into bono
-values(2,2,'2023-10-09','manuel@gmail.com','FAMILIAR');
+INSERT INTO `kart` VALUES (1, 0, 'RESERVADO', 'pista2');
+INSERT INTO `kart` VALUES (2, 1, 'RESERVADO', 'pista1');
+INSERT INTO `kart` VALUES (3, 1, 'RESERVADO', 'pista3');
+INSERT INTO `kart` VALUES (4, 1, 'RESERVADO', 'pista3');
+INSERT INTO `kart` VALUES (5, 1, 'RESERVADO', 'pista1');
+INSERT INTO `kart` VALUES (6, 0, 'RESERVADO', 'pista1');
+INSERT INTO `kart` VALUES (7, 0, 'RESERVADO', 'pista2');
+INSERT INTO `kart` VALUES (8, 0, 'RESERVADO', 'pista2');
+INSERT INTO `kart` VALUES (9, 1, 'RESERVADO', 'pista3');
+INSERT INTO `kart` VALUES (11, 0, 'RESERVADO', 'pista3');
+INSERT INTO `kart` VALUES (12, 0, 'RESERVADO', 'pista1');
+INSERT INTO `kart` VALUES (13, 0, 'RESERVADO', 'pista2');
 
-insert into reserva
-values(1,'manuel@gmail.com',90,30,0,'2023-02-02','pista1','FAMILIAR',1,1,NULL);
-insert into reserva
-values(2,'manuel@gmail.com',120,40,0,'2022-12-28','pista2','ADULTO',3,0,NULL);
-insert into reserva
-values(3,'a@gmail.com',90,30,0,'2022-10-20','pista2','ADULTO',5,0,NULL);
-insert into reserva
-values(4,'david@gmail.com',120,40,0,'2023-01-15','pista1','FAMILIAR',1,3,NULL);
-insert into reserva
-values(5,'manuel@gmail.com',120,40,5,'2023-02-10','pista1','FAMILIAR',1,2,2);
-insert into reserva
-values(6,'a@gmail.com',60,20,5,'2023-01-01','pista3','INFANTIL',0,2,1);
-insert into reserva
-values(7,'a@gmail.com',90,30,5,'2023-03-15','pista3','INFANTIL',0,3,1);
-insert into reserva
-values(8,'manuel@gmail.com',90,30,5,'2023-05-03','pista1','FAMILIAR',3,4,2);
-insert into reserva
-values(9,'m@gmail.com',90,30,0,'2022-11-15','pista2','ADULTO',2,0,NULL);
+INSERT INTO `bono` VALUES (1, 5, '2023-10-09', 'a@gmail.com', 'INFANTIL');
+INSERT INTO `bono` VALUES (2, 2, '2023-10-09', 'manuel@gmail.com', 'FAMILIAR');
+INSERT INTO `bono` VALUES (5, 2, '2023-11-03', 'manuel@gmail.com', 'INFANTIL');
+INSERT INTO `bono` VALUES (6, 1, '2023-11-04', 'clara@gmail.com', 'INFANTIL');
+INSERT INTO `bono` VALUES (9, 1, '2023-11-04', 'clara@gmail.com', 'FAMILIAR');
+INSERT INTO `bono` VALUES (10, 1, '2023-11-04', 'clara@gmail.com', 'ADULTO');
+INSERT INTO `bono` VALUES (11, 1, '2023-11-06', 'alberto@gmail.com', 'INFANTIL');
+INSERT INTO `bono` VALUES (12, 1, '2023-11-06', 'alberto@gmail.com', 'FAMILIAR');
+INSERT INTO `bono` VALUES (13, 1, '2023-11-06', 'alberto@gmail.com', 'ADULTO');
+
+INSERT INTO `reserva` VALUES (2, 'manuel@gmail.com', 120, 40, 0, '2022-12-28', 'pista2', 'ADULTO', 3, 0, NULL);
+INSERT INTO `reserva` VALUES (4, 'david@gmail.com', 120, 40, 0, '2023-01-15', 'pista1', 'FAMILIAR', 1, 3, NULL);
+INSERT INTO `reserva` VALUES (5, 'manuel@gmail.com', 120, 40, 5, '2023-02-10', 'pista1', 'FAMILIAR', 1, 2, 2);
+INSERT INTO `reserva` VALUES (6, 'a@gmail.com', 90, 30, 5, '2023-01-07', 'pista3', 'INFANTIL', 0, 2, 1);
+INSERT INTO `reserva` VALUES (7, 'a@gmail.com', 90, 30, 5, '2023-03-02', 'pista3', 'INFANTIL', 0, 2, 1);
+INSERT INTO `reserva` VALUES (8, 'manuel@gmail.com', 90, 30, 5, '2023-05-03', 'pista1', 'FAMILIAR', 3, 4, 2);
+INSERT INTO `reserva` VALUES (9, 'm@gmail.com', 90, 30, 0, '2022-11-15', 'pista2', 'ADULTO', 2, 0, NULL);
+INSERT INTO `reserva` VALUES (11, 'f@gmail.com', 90, 30, 0, '2022-02-03', 'pista3', 'INFANTIL', 0, 3, NULL);
+INSERT INTO `reserva` VALUES (12, 'a@gmail.com', 90, 30, 5, '2023-04-03', 'pista3', 'INFANTIL', 0, 2, 1);
+INSERT INTO `reserva` VALUES (17, 'a@gmail.com', 90, 30, 5, '2023-01-05', 'pista3', 'INFANTIL', 0, 2, 1);
+INSERT INTO `reserva` VALUES (18, 'a@gmail.com', 90, 30, 5, '2023-01-08', 'pista3', 'INFANTIL', 0, 2, 1);
+INSERT INTO `reserva` VALUES (19, 'manuel@gmail.com', 60, 20, 5, '2023-01-03', 'pista3', 'INFANTIL', 0, 2, 5);
+INSERT INTO `reserva` VALUES (20, 'manuel@gmail.com', 120, 40, 5, '2023-01-04', 'pista3', 'INFANTIL', 0, 1, 5);
+INSERT INTO `reserva` VALUES (21, 'clara@gmail.com', 90, 30, 0, '2023-04-15', 'pista3', 'INFANTIL', 3, 0, NULL);
+INSERT INTO `reserva` VALUES (22, 'alvaro@gmail.com', 120, 40, 0, '2023-09-27', 'pista1', 'FAMILIAR', 2, 1, NULL);
+INSERT INTO `reserva` VALUES (23, 'clara@gmail.com', 60, 20, 0, '2023-07-02', 'pista2', 'ADULTO', 2, 0, NULL);
+INSERT INTO `reserva` VALUES (24, 'clara@gmail.com', 60, 20, 5, '2023-03-16', 'pista3', 'INFANTIL', 0, 1, 6);
+INSERT INTO `reserva` VALUES (25, 'clara@gmail.com', 60, 20, 5, '2023-03-24', 'pista1', 'FAMILIAR', 1, 1, 9);
+INSERT INTO `reserva` VALUES (26, 'clara@gmail.com', 60, 20, 5, '2023-07-12', 'pista2', 'ADULTO', 1, 0, 10);
+INSERT INTO `reserva` VALUES (28, 'alberto@gmail.com', 60, 20, 0, '2024-02-01', 'pista1', 'FAMILIAR', 1, 1, NULL);
+INSERT INTO `reserva` VALUES (29, 'alberto@gmail.com', 60, 20, 0, '2024-03-01', 'pista7', 'ADULTO', 0, 1, NULL);
+INSERT INTO `reserva` VALUES (30, 'alberto@gmail.com', 60, 20, 5, '2023-04-01', 'pista3', 'INFANTIL', 0, 1, 11);
+INSERT INTO `reserva` VALUES (31, 'alberto@gmail.com', 60, 20, 5, '2023-05-01', 'pista1', 'FAMILIAR', 1, 1, 12);
+INSERT INTO `reserva` VALUES (32, 'alberto@gmail.com', 60, 20, 5, '2023-06-01', 'pista7', 'ADULTO', 0, 1, 13);
