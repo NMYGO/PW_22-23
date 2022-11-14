@@ -1,11 +1,11 @@
 insert into usuario
-values('m@gmail.com','Marcos','Miranda Lozano','2021-06-12','2005-06-14');
+values('m@gmail.com','Marcos','Miranda Lozano','2021-06-12','2005-06-14', TRUE);
 insert into usuario
-values('manuel@gmail.com','Manuel','Rosa Lugo','2022-04-25','1999-04-05');
+values('manuel@gmail.com','Manuel','Rosa Lugo','2022-04-25','1999-04-05', FALSE);
 insert into usuario
-values('david@gmail.com','David','Gomez','2022-01-30','2000-08-25');
+values('david@gmail.com','David','Gomez','2022-01-30','2000-08-25', TRUE);
 insert into usuario
-values('a@gmail.com','Antonio','Cano Almeida','2022-10-17','1978-10-13');
+values('a@gmail.com','Antonio','Cano Almeida','2022-10-17','1978-10-13', FALSE);
 
 insert into pista
 values('pista1',FALSE,'FAMILIAR',4);

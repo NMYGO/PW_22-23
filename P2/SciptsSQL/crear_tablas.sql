@@ -9,7 +9,8 @@ create table `Usuario`
     `nombre` varchar(64) NOT NULL,
     `apellidos` varchar(64) NOT NULL,
     `fechaInscripcion` date NOT NULL,
-    `fechaNacimiento` date NOT NULL);
+    `fechaNacimiento` date NOT NULL,
+    `administrador` bool NOT NULL);
     
 create table `Kart`
 	(`idKart` int primary key,
