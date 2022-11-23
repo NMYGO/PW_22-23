@@ -8,6 +8,16 @@
 <meta charset="UTF-8">
 <title>Index</title>
 </head>
+<header>
+		<h1>KARTS</h1> 
+		<%
+		if (customerBean == null || customerBean.getEmailUser()=="") {
+			<a href="../mvc/view/loginView.jsp">Iniciar Sesi&oacute;n</a>
+		%>
+		<% } else { %>
+		<div> CERRAR SESION VA AQUI </div>
+<% } %>
+</header>
 <body>
 <% 
 //Este código de reset es únicamente para poder probar múltiples veces el MVC
@@ -21,7 +31,7 @@ if (customerBean == null || customerBean.getEmailUser()=="") {
 %>
 <a href="/P3/mvc/controller/loginController.jsp">Acceder</a>
 <% } else { %>
-	¡¡Bienvenido <jsp:getProperty property="emailUser" name="customerBean"/>!! 
+	<div>¡¡Bienvenido <jsp:getProperty property="emailUser" name="customerBean"/>!! </div>
 <% } %>
 
 </body>
