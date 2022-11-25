@@ -1,0 +1,35 @@
+consultaBono=select * from bono
+consultaBonoEspecifico=select * from bono where correoUsuario=? and tipo=?
+updateBono=update bono set sesion=?,fechaCaducidad=?,correoUsuario=?,tipo=? where idBono=?
+insertBono=insert into bono (sesion,fechaCaducidad,correoUsuario,tipo) values(?,?,?,?)
+deleteBono=delete from bono where idBono=?
+consultaReservaInfantilBono=select * from reserva where dificultad = 'INFANTIL' and idBono= 
+consultaReservaAdultoBono=select * from reserva where dificultad = 'ADULTO' and idBono=
+consultaReservaFamiliarBono=select * from reserva where dificultad = 'FAMILIAR' and idBono=
+updateReservaBono=update reserva set duracion=?,precio=?,descuento=?,fecha=?,nombrePista=?,dificultad=?,ninos=?,adultos=?,idBono=? where correoUsuario=?
+insertReservaBono=insert into reserva (correoUsuario,duracion,precio,descuento,fecha,nombrePista,dificultad,ninos,adultos,idBono) values(?,?,?,?,?,?,?,?,?,?)
+
+consultaKart=select * from kart
+consultaKartID=select * from kart where idKart=?
+consultaKartPista=select * from kart where nombrePista=?
+updateKart=update kart set tipo=?,estado=?,nombrePista=? where idKart=?
+insertKart=insert into kart (idKart,tipo,estado,nombrePista) values(?,?,?,?)
+
+consultaPista=select * from pista
+consultaPistasLibres=select * from pista where estado=? and dificultad=?
+consultaPistaNombre=select * from pista where nombrePista=?
+updatePista=update pista set estado=?,dificultad=?,maxKarts=? where nombrePista=?
+insertPista=insert into pista (nombrePista,estado,dificultad,maxKarts) values(?,?,?,?)
+
+consultaReservaInfantil=select * from reserva where dificultad = 'INFANTIL' and idBono IS NULL
+consultaReservaId=select * from reserva where correoUsuario=? and fecha=? and nombrePista=? and duracion=? and dificultad=?
+updateReserva=update reserva set duracion=?,precio=?,descuento=?,fecha=?,nombrePista=?,dificultad=?,adultos=?,ninos=? where idReserva=?
+insertReserva=insert into reserva (correoUsuario,duracion,precio,descuento,fecha,nombrePista,dificultad,ninos,adultos) values(?,?,?,?,?,?,?,?,?)
+consultaReservaAdulto=select * from reserva where dificultad = 'ADULTO' and idBono IS NULL
+consultaReservaFamiliar=select * from reserva where dificultad = 'FAMILIAR'  and idBono IS NULL
+deleteReserva=delete from reserva where correoUsuario=? and fecha=? and nombrePista=? and duracion=?
+
+consultaUsuario=select * from usuario
+consultaUsuarioEspecifico=select * from usuario where correoUsuario=?
+updateUsuario=update usuario set nombre=?,apellidos=?,fechaInscripcion=?,fechaNacimiento=? where correoUsuario=?
+insertUsuario=insert into usuario (correoUsuario,nombre,apellidos,fechaInscripcion,fechaNacimiento) values(?,?,?,?,?)
