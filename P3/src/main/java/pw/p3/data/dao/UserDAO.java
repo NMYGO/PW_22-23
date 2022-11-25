@@ -1,4 +1,3 @@
-// Esta clase DAO es "simulada" - no tiene acceso a la base de datos
 package pw.p3.data.dao;
 
 import java.io.BufferedReader;
@@ -42,10 +41,8 @@ public class UserDAO {
 				String apellidos = rs.getString("apellidos");
 				LocalDate inscripcion = LocalDate.parse(rs.getString("fechaInscripcion"));
 				LocalDate nacimiento = LocalDate.parse(rs.getString("fechaNacimiento"));
-				if(nombre.equalsIgnoreCase("") && apellidos.equalsIgnoreCase("")) {
-					return null;
-				}
-				usuario = new UserDTO(nombre, apellidos, nacimiento, inscripcion, correo);
+				Boolean administrador = rs.getBoolean("administrador");
+				usuario = new UserDTO(nombre, apellidos, nacimiento, inscripcion, correo, administrador);
 			}
 
 			if (ps != null){ 
