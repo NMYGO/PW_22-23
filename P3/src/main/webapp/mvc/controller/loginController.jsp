@@ -13,27 +13,32 @@
 String nextPage = "../../index.jsp";
 String mensajeNextPage = "";
 //Caso 2
-if (customerBean == null || customerBean.getEmailUser().equals("")) {
+if (customerBean == null || customerBean.getEmailUser().equalsIgnoreCase("")) {
 	String emailUser = request.getParameter("email");
 	String passwordUsser = request.getParameter("password");
 
 	//Caso 2.a: Hay parámetros -> procede de la VISTA
 	if (emailUser != null) {
-		//Se accede a bases de datos para obtener el usuario
-		UserDAO userDAO = new UserDAO();
-		UserDTO user = userDAO.solicitarUsuario(emailUser);
-
-		//Se realizan todas las comprobaciones necesarias del dominio
-		//Aquí sólo comprobamos que exista el usuario
-		if (user != null && user.getCorreo().equals(emailUser)){
-		// Usuario válido		
-		%>
-		<jsp:setProperty property="emailUser" value="<%=emailUser%>" name="customerBean"/>
-		<%
+		if(!emailUser.equalsIgnoreCase("") && !passwordUsser.equalsIgnoreCase("")) {
+			//Se accede a bases de datos para obtener el usuario
+			UserDAO userDAO = new UserDAO();
+			UserDTO user = userDAO.solicitarUsuario(emailUser);
+	
+			//Se realizan todas las comprobaciones necesarias del dominio
+			//Aquí sólo comprobamos que exista el usuario
+			if (user != null && user.getCorreo().equalsIgnoreCase(emailUser)){
+			// Usuario válido		
+			%>
+			<jsp:setProperty property="emailUser" value="<%=emailUser%>" name="customerBean"/>
+			<%
+			} else {
+				// Usuario no válido
+				nextPage = "../view/loginView.jsp";
+				mensajeNextPage = "El usuario que ha indicado no existe o no es valido";
+			}
 		} else {
-			// Usuario no válido
 			nextPage = "../view/loginView.jsp";
-			mensajeNextPage = "El usuario que ha indicado no existe o no es valido";
+			mensajeNextPage = "Introduzca el correo y la contraseña";
 		}
 	//Caso 2.b -> se debe ir a la vista por primera vez
 	} else {

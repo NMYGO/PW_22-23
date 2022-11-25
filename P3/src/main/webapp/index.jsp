@@ -28,9 +28,5 @@
 	<% } else { %>
 		<div>¡¡Bienvenido <jsp:getProperty property="emailUser" name="customerBean"/>!! </div>
 	<% } %>
-	<br/>
-	<%UserDAO userDAO = new UserDAO();%>
-	<% UserDTO user = userDAO.solicitarUsuario("a@gmail.com"); %>
-	<% out.println(user.toString());%>
 </body>
 </html>

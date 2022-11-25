@@ -1,10 +1,6 @@
 package pw.p3.data.dao;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
@@ -28,14 +24,15 @@ public class UserDAO {
 		}
 		
 		String consultaUsuarioEspecifico = prop.getProperty("consultaUsuarioEspecifico");
-		UserDTO usuario = new UserDTO();
+		//System.out.println("SQL STATEMENT: " + consultaUsuarioEspecifico);
+		UserDTO usuario = null;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement(consultaUsuarioEspecifico);
+			PreparedStatement ps = connection.prepareStatement("select * from usuario where correoUsuario=?"); //¿METER PROPERTIES?
 			ps.setString(1, correo);
 			ResultSet rs = (ResultSet) ps.executeQuery();
-
+			
 			while (rs.next()) {
 				String nombre = rs.getString("nombre");
 				String apellidos = rs.getString("apellidos");
@@ -53,6 +50,7 @@ public class UserDAO {
 			System.err.println(e);
 			e.printStackTrace();
 		}
+		//System.out.println(usuario.toString());
 		return usuario;
 	}
 }
