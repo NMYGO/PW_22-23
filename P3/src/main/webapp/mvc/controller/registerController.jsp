@@ -13,7 +13,7 @@
 String nextPage = "../../index.jsp";
 String mensajeNextPage = "";
 //Caso 2
-if (customerBean == null || customerBean.getEmailUser().equalsIgnoreCase("")) {
+if (customerBean == null || customerBean.getCorreoUser().equalsIgnoreCase("") || customerBean.getPasswordUser().equalsIgnoreCase("")) {
 	String nombreUser = request.getParameter("nombre");
 	String apellidosUser = request.getParameter("apellidos");
 	String nacimientoUser_string = request.getParameter("nacimiento");
@@ -34,7 +34,11 @@ if (customerBean == null || customerBean.getEmailUser().equalsIgnoreCase("")) {
 			if(userDAO.escribirUsuarioInsert(usuario) == 0) {
 				// Usuario no válido
 				nextPage = "../view/registerView.jsp";
-				mensajeNextPage = "El usuario que ha indicado no es valido";
+				mensajeNextPage = "El usuario no es valido";
+			} else {
+				// Usuario registrado
+				nextPage = "../view/loginView.jsp";
+				mensajeNextPage = "El usuario se ha registrado correctamente";
 			}
 		} else {
 			nextPage = "../view/registerView.jsp";

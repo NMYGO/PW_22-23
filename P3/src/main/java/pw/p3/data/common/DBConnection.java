@@ -33,7 +33,7 @@ public class DBConnection {
 		try {
 			if(this.connection != null && !this.connection.isClosed()) {
 				this.connection.close();
-				System.out.println("Database connection successfully closed!");
+				//System.out.println("Database connection successfully closed!");
 			}
 		} catch (SQLException e) {
 			System.err.println("Error while trying to close the connection.");

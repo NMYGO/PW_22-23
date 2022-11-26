@@ -22,7 +22,7 @@ if (messageNextPage == null) {
 	messageNextPage = "";
 }
 
-if (customerBean != null && !customerBean.getEmailUser().equals("")) {
+if (customerBean != null && !customerBean.getCorreoUser().equals("") && !customerBean.getPasswordUser().equalsIgnoreCase("")) {
 	//No debería estar aquí -> flujo salta a index.jsp
 	nextPage = "../../index.jsp";
 } else {
@@ -39,7 +39,7 @@ if (customerBean != null && !customerBean.getEmailUser().equals("")) {
 	<input type="date" name="nacimiento" value="">
 	<br/>
 	<label for="correo">Correo: </label>
-	<input type="email" name="correo" value="" placeholder="correo@domio.com/es">
+	<input type="email" name="correo" value="" placeholder="correo@dominio">
 	<br/>
 	<label for="password">Contraseña: </label>
 	<input type="password" name="password" value="">	

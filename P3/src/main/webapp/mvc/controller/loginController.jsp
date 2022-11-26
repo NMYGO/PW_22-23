@@ -13,13 +13,13 @@
 String nextPage = "../../index.jsp";
 String mensajeNextPage = "";
 //Caso 2
-if (customerBean == null || customerBean.getEmailUser().equalsIgnoreCase("")) {
+if (customerBean == null || customerBean.getCorreoUser().equalsIgnoreCase("") || customerBean.getPasswordUser().equalsIgnoreCase("")) {
 	String correoUser = request.getParameter("correo");
-	String contraseñaUser = request.getParameter("password");
+	String passwordUser = request.getParameter("password");
 
 	//Caso 2.a: Hay parámetros -> procede de la VISTA
 	if (correoUser != null) {
-		if(!correoUser.equalsIgnoreCase("") && !contraseñaUser.equalsIgnoreCase("")) {
+		if(!correoUser.equalsIgnoreCase("") && !passwordUser.equalsIgnoreCase("")) {
 			//Se accede a bases de datos para obtener el usuario
 			UserDAO userDAO = new UserDAO();
 			UserDTO usuario = userDAO.solicitarUsuario(correoUser);
@@ -29,12 +29,16 @@ if (customerBean == null || customerBean.getEmailUser().equalsIgnoreCase("")) {
 			if (usuario != null && usuario.getCorreo().equalsIgnoreCase(correoUser)){
 			// Usuario válido		
 			%>
-			<jsp:setProperty property="emailUser" value="<%=correoUser%>" name="customerBean"/>
+			<jsp:setProperty property="nombreUser" value="<%=usuario.getNombre()%>" name="customerBean"/>
+			<jsp:setProperty property="antiguedadUser" value="<%=usuario.getAntiguedad()%>" name="customerBean"/>
+			<jsp:setProperty property="correoUser" value="<%=usuario.getCorreo()%>" name="customerBean"/>
+			<jsp:setProperty property="passwordUser" value="<%=passwordUser%>" name="customerBean"/>
+			<jsp:setProperty property="adminUser" value="<%=usuario.getAdministrador()%>" name="customerBean"/>
 			<%
 			} else {
 				// Usuario no válido
 				nextPage = "../view/loginView.jsp";
-				mensajeNextPage = "El usuario que ha indicado no existe o no es valido";
+				mensajeNextPage = "El usuario no existe o no es valido";
 			}
 		} else {
 			nextPage = "../view/loginView.jsp";

@@ -39,7 +39,7 @@ public class UserDAO {
 				LocalDate inscripcion = LocalDate.parse(rs.getString("fechaInscripcion"));
 				LocalDate nacimiento = LocalDate.parse(rs.getString("fechaNacimiento"));
 				Boolean administrador = rs.getBoolean("administrador");
-				usuario = new UserDTO(nombre, apellidos, nacimiento, inscripcion, correo);
+				usuario = new UserDTO(nombre, apellidos, nacimiento, inscripcion, correo, administrador);
 			}
 
 			if (ps != null){ 
