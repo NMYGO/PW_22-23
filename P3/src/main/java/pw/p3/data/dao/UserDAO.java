@@ -39,7 +39,7 @@ public class UserDAO {
 				LocalDate inscripcion = LocalDate.parse(rs.getString("fechaInscripcion"));
 				LocalDate nacimiento = LocalDate.parse(rs.getString("fechaNacimiento"));
 				Boolean administrador = rs.getBoolean("administrador");
-				usuario = new UserDTO(nombre, apellidos, nacimiento, inscripcion, correo, administrador);
+				usuario = new UserDTO(nombre, apellidos, nacimiento, inscripcion, correo);
 			}
 
 			if (ps != null){ 
@@ -52,5 +52,37 @@ public class UserDAO {
 		}
 		//System.out.println(usuario.toString());
 		return usuario;
+	}
+	
+	public int escribirUsuarioInsert(UserDTO usuario) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String insertUsuario = prop.getProperty("insertUsuario");
+		int status = 0;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement("insert into usuario (correoUsuario,nombre,apellidos,fechaInscripcion,fechaNacimiento) values(?,?,?,?,?)");
+			ps.setString(1, usuario.getCorreo());
+			ps.setString(2, usuario.getNombre());
+			ps.setString(3, usuario.getApellidos());
+			ps.setString(4, usuario.getInscripcion().toString());
+			ps.setString(5, usuario.getNacimiento().toString());			
+			status = ps.executeUpdate();
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return status;
 	}
 }

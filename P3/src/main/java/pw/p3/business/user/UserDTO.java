@@ -11,7 +11,7 @@ public class UserDTO {
 	protected LocalDate nacimiento;
 	protected LocalDate inscripcion;
 	protected String correo;
-	protected Boolean administrador;
+	//protected Boolean administrador;
 	
 	/* Constructores */
 	
@@ -28,22 +28,22 @@ public class UserDTO {
 	 * @param correo Correo unico del usuario
 	 **/
 	
-	public UserDTO(String nombre, String apellidos, LocalDate nacimiento, String correo, Boolean administrador) {
+	public UserDTO(String nombre, String apellidos, LocalDate nacimiento, String correo) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.nacimiento = nacimiento;
 		this.inscripcion = LocalDate.now();
 		this.correo = correo;
-		this.administrador = administrador;
+		//this.administrador = administrador;
 	}
 	
-	public UserDTO(String nombre, String apellidos, LocalDate nacimiento, LocalDate inscripcion, String correo, Boolean administrador) {
+	public UserDTO(String nombre, String apellidos, LocalDate nacimiento, LocalDate inscripcion, String correo) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.nacimiento = nacimiento;
 		this.inscripcion = inscripcion;
 		this.correo = correo;
-		this.administrador = administrador;
+		//this.administrador = administrador;
 	}
 	
 	/* Getters y setters */
@@ -88,13 +88,13 @@ public class UserDTO {
 		this.correo = correo;
 	}
 	
-	public Boolean getAdministrador() {
+	/**public Boolean getAdministrador() {
 		return administrador;
 	}
 
 	public void setAdministrador(Boolean administrador) {
 		this.administrador = administrador;
-	}
+	}**/
 	
 	/* Otros metodos */
 
@@ -105,6 +105,6 @@ public class UserDTO {
 	@Override
 	public String toString() {
 		return "UserDTO [nombre=" + nombre + ", apellidos=" + apellidos + ", nacimiento=" + nacimiento
-				+ ", inscripcion=" + inscripcion + ", correo=" + correo + ", administrador=" + administrador + "]";
+				+ ", inscripcion=" + inscripcion + ", correo=" + correo + "]";
 	}
 }

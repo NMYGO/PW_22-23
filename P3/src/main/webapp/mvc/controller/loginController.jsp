@@ -14,22 +14,22 @@ String nextPage = "../../index.jsp";
 String mensajeNextPage = "";
 //Caso 2
 if (customerBean == null || customerBean.getEmailUser().equalsIgnoreCase("")) {
-	String emailUser = request.getParameter("email");
-	String passwordUsser = request.getParameter("password");
+	String correoUser = request.getParameter("correo");
+	String contraseñaUser = request.getParameter("password");
 
 	//Caso 2.a: Hay parámetros -> procede de la VISTA
-	if (emailUser != null) {
-		if(!emailUser.equalsIgnoreCase("") && !passwordUsser.equalsIgnoreCase("")) {
+	if (correoUser != null) {
+		if(!correoUser.equalsIgnoreCase("") && !contraseñaUser.equalsIgnoreCase("")) {
 			//Se accede a bases de datos para obtener el usuario
 			UserDAO userDAO = new UserDAO();
-			UserDTO user = userDAO.solicitarUsuario(emailUser);
-	
+			UserDTO usuario = userDAO.solicitarUsuario(correoUser);
+			
 			//Se realizan todas las comprobaciones necesarias del dominio
 			//Aquí sólo comprobamos que exista el usuario
-			if (user != null && user.getCorreo().equalsIgnoreCase(emailUser)){
+			if (usuario != null && usuario.getCorreo().equalsIgnoreCase(correoUser)){
 			// Usuario válido		
 			%>
-			<jsp:setProperty property="emailUser" value="<%=emailUser%>" name="customerBean"/>
+			<jsp:setProperty property="emailUser" value="<%=correoUser%>" name="customerBean"/>
 			<%
 			} else {
 				// Usuario no válido

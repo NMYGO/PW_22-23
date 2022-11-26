@@ -29,10 +29,11 @@ if (customerBean != null && !customerBean.getEmailUser().equals("")) {
 %>
 <%= messageNextPage %><br/><br/>
 <form method="post" action="../controller/loginController.jsp">
-	<label for="email">Email: </label>
-	<input type="text" name="email" value="">
-	<label for="name">Password: </label>
-	<input type="text" name="password" value="">	
+	<label for="correo">Correo: </label>
+	<input type="email" name="correo" value="" placeholder="correo@domio.com/es">
+	<br/>
+	<label for="password">Contraseña: </label>
+	<input type="password" name="password" value="">	
 	<br/><br/>
 	<input type="submit" value="Acceder">
 </form>
