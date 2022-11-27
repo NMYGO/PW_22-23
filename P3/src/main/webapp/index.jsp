@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import ="pw.p3.business.user.UserDTO, pw.p3.data.dao.UserDAO, java.util.ArrayList" %>
+    <%@ page import ="pw.p3.business.user.UserDTO, pw.p3.data.*, pw.p3.data.dao.*, java.util.ArrayList, java.time.LocalDate, java.time.LocalTime" %>
 <jsp:useBean  id="customerBean" scope="session" class="pw.p3.display.javabean.CustomerBean"></jsp:useBean>
 
 <!DOCTYPE html>
@@ -46,9 +46,17 @@
 				<% } %>
 				</table>
 		<% } else { %>
-			<%--NO SE LLEGA AHORA MISMO AQUI PORQUE ESTOY REDIRIGIENDO A CLIENTMAINCONTROLLER DESDE LOGINCONTROLLER--%>
 			<%= messageNextPage %><br/><br/>
-			<div>¡¡Bienvenido: <jsp:getProperty property="nombreUser" name="customerBean"/>!! </div>
+			<%ReservationDAO reservationDAO = new ReservationDAO();%>
+			<div>¡¡Bienvenido <jsp:getProperty property="nombreUser" name="customerBean"/>!! </div>
+			<div>Fecha actual: <%=LocalDate.now()%>, con hora: <%=LocalTime.now()%> </div>
+			<div>Antigüedad: <jsp:getProperty property="antiguedadUser" name="customerBean"/> meses </div>			
+			<div>Fecha de la proxima reserva: 
+				<label><select id="tReserva" name="Tipo de Reserva">
+							<option value="INFANTIL">Infantil >> <%= reservationDAO.solicitarProximaReservaInfantil(customerBean.getCorreoUser(), Dificultad.INFANTIL).toString() %></option>
+							<option value="ADULTO">Adulto >> <%= reservationDAO.solicitarProximaReservaAdulto(customerBean.getCorreoUser(), Dificultad.ADULTO).toString() %></option>
+							<option value="FAMILIAR">Familiar >> <%= reservationDAO.solicitarProximaReservaFamiliar(customerBean.getCorreoUser(), Dificultad.FAMILIAR).toString() %></option>
+						</select></label></div>
 		<% } %>
 	<% } %>
 </body>

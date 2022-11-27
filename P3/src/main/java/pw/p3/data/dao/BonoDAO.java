@@ -22,7 +22,7 @@ import java.time.LocalDate;
  *
  **/
 
-public class DAOBono {
+public class BonoDAO {
 	
 	/**
 	 * Solicita todos los bonos y los devuelve en un array
@@ -243,7 +243,7 @@ public class DAOBono {
 		
 		String consultaReservaInfantilBono = prop.getProperty("consultaReservaInfantilBono");
 		ArrayList<RInfantileDTO> reservas = new ArrayList<RInfantileDTO>();
-		DAOBono bonoTabla = new DAOBono();
+		BonoDAO bonoTabla = new BonoDAO();
 		String correoUsuarioB = bono.getbUsuario();
 		Dificultad tipoB = bono.getTipo();
 		bono.setId(bonoTabla.solicitarBono(correoUsuarioB, tipoB).getId());
@@ -295,7 +295,7 @@ public class DAOBono {
 		
 		String consultaReservaAdultoBono = prop.getProperty("consultaReservaAdultoBono");
 		ArrayList<RAdultDTO> reservas = new ArrayList<RAdultDTO>();
-		DAOBono bonoTabla = new DAOBono();
+		BonoDAO bonoTabla = new BonoDAO();
 		String correoUsuarioB = bono.getbUsuario();
 		Dificultad tipoB = bono.getTipo();
 		bono.setId(bonoTabla.solicitarBono(correoUsuarioB, tipoB).getId());
@@ -348,7 +348,7 @@ public class DAOBono {
 		
 		String consultaReservaFamiliarBono = prop.getProperty("consultaReservaFamiliarBono");
 		ArrayList<RFamiliarDTO> reservas = new ArrayList<RFamiliarDTO>();
-		DAOBono bonoTabla = new DAOBono();
+		BonoDAO bonoTabla = new BonoDAO();
 		String correoUsuarioB = bono.getbUsuario();
 		Dificultad tipoB = bono.getTipo();
 		bono.setId(bonoTabla.solicitarBono(correoUsuarioB, tipoB).getId());

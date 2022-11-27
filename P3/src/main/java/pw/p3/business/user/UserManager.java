@@ -21,4 +21,15 @@ public class UserManager {
 	 **/	
 	public UserManager(){}
 	
+	/**public String listarUsuariosAdmin () {
+		ArrayList<UserDTO> usuarios = new ArrayList<UserDTO>();
+		UserDAO userDAO = new UserDAO();
+		usuarios = userDAO.solicitarUsuarios();
+		String lista_usuarios = "";
+		for (int i = 0; i < usuarios.size(); i++) {
+			lista_usuarios.concat("Cliente: " + usuarios.get(i).getNombre() + " " + usuarios.get(i).getApellidos() 
+			+ ", con antiguedad " + usuarios.get(i).getAntiguedad() + " meses. Reservas completadas: \n");
+		}
+		return lista_usuarios;
+	}**/
 }
