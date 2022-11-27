@@ -17,12 +17,12 @@ import java.util.ArrayList;
  *
  **/
 
-public class GestorPistas{
+public class CircuitManager{
 
 	/**
 	 * Constructor por defecto
 	 **/
-	public GestorPistas(){}
+	public CircuitManager(){}
 
 	/**
 	 * Funcion que crea una pista
