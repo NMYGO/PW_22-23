@@ -30,25 +30,24 @@ if (customerBean != null && !customerBean.getCorreoUser().equals("") && !custome
 <%= messageNextPage %><br/><br/>
 <form method="post" action="../controller/registerController.jsp">
 	<label for="nombre">Nombre: </label>
-	<input type="text" name="nombre" value="">
+	<input type="text" name="nombre" value="" maxLength="30" required>
 	<br/>
 	<label for="apellidos">Apellidos: </label>
-	<input type="text" name="apellidos" value="">
+	<input type="text" name="apellidos" value="" maxLength="30" required>
 	<br/>
 	<label for="nacimiento">Fecha de Nacimiento: </label>
-	<input type="date" name="nacimiento" value="">
+	<input type="date" name="nacimiento" value="" required>
 	<br/>
 	<label for="correo">Correo: </label>
-	<input type="email" name="correo" value="" placeholder="correo@dominio">
+	<input type="email" name="correo" value="" placeholder="correo@dominio" maxLength="20" required>
 	<br/>
 	<label for="password">Contraseña: </label>
-	<input type="password" name="password" value="">	
+	<input type="password" name="password" value="" maxLength="20" required>	
 	<br/><br/>
 	<input type="submit" value="Registrarse">
 </form>
 <%
 }
 %>
-
 </body>
 </html>

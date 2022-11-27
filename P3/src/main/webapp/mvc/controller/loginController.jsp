@@ -11,7 +11,7 @@
 	*/
 //Caso 1: Por defecto, vuelve al index
 String nextPage = "../../index.jsp";
-String mensajeNextPage = "";
+String mensajeNextPage = "loginController";
 //Caso 2
 if (customerBean == null || customerBean.getCorreoUser().equalsIgnoreCase("") || customerBean.getPasswordUser().equalsIgnoreCase("")) {
 	String correoUser = request.getParameter("correo");
@@ -26,7 +26,7 @@ if (customerBean == null || customerBean.getCorreoUser().equalsIgnoreCase("") ||
 			
 			//Se realizan todas las comprobaciones necesarias del dominio
 			//Aquí sólo comprobamos que exista el usuario
-			if (usuario != null && usuario.getCorreo().equalsIgnoreCase(correoUser)){
+			if (usuario != null && usuario.getCorreo().equalsIgnoreCase(correoUser)) {
 			// Usuario válido		
 			%>
 			<jsp:setProperty property="nombreUser" value="<%=usuario.getNombre()%>" name="customerBean"/>
@@ -35,6 +35,7 @@ if (customerBean == null || customerBean.getCorreoUser().equalsIgnoreCase("") ||
 			<jsp:setProperty property="passwordUser" value="<%=passwordUser%>" name="customerBean"/>
 			<jsp:setProperty property="adminUser" value="<%=usuario.getAdministrador()%>" name="customerBean"/>
 			<%
+			nextPage = "../controller/clientMainController.jsp";
 			} else {
 				// Usuario no válido
 				nextPage = "../view/loginView.jsp";
