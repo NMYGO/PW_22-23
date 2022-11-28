@@ -7,7 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="css/style.css" type="text/css" rel="stylesheet"/>
 <title>Index</title>
+
 </head>
 <header>
 	<h1>GESTOR DE KARTS</h1> 
@@ -46,7 +48,7 @@
 				out.println("Cliente: " + usuarios.get(i).getNombre() + " " + usuarios.get(i).getApellidos() 
 				+ ", con antiguedad " + usuarios.get(i).getAntiguedad() + " meses.");
 				%> <br/>
-					<% reservasInfantil = reservationDAO.solicitarReservasInfantilCompletada(usuarios.get(i).getCorreo(), Dificultad.INFANTIL); %>
+					<% %>
 					<% if (reservasInfantil.size() != 0) { %>
 					<label><select name="Infantil">
 						<% for(int j = 0; j < reservasInfantil.size(); j++){ %>
