@@ -10,8 +10,9 @@ body {
 div{
 
 }
-tr:nth-child(2){
+tr:nth-child(odd){
 	background-color: #DEDEDE;
+	color: #00cc00
 }
 tr{
 	background-color: #A8A3A3
