@@ -1,0 +1,24 @@
+@font-face{
+	font-family: "Open Sans"
+	src
+}
+header{
+	background-color: #EE0033;
+	color: #FFFFFF;
+}
+
+body {
+	background-color: #FFEEDE;
+	color: #1E252E;
+}
+div{
+
+}
+tr{
+	background-color: #A8A3A3
+	color: #1E252E;
+}
+tr:nth-child(odd){
+	background-color: #DEDEDE;
+
+}
