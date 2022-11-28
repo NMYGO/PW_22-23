@@ -10,11 +10,12 @@ body {
 div{
 
 }
-tr{
-	background-color: #A8A3A3
-	color: #1E252E;
-}
 tr:nth-child(odd){
 	background-color: #DEDEDE;
-
+	color: #1E252E;
 }
+tr:nth-child(even){
+	background-color: #C4BEBE;
+	color: #1E252E;
+}
+
