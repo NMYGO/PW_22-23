@@ -10,11 +10,11 @@ body {
 div{
 
 }
+tr:nth-child(2){
+	background-color: #DEDEDE;
+}
 tr{
 	background-color: #A8A3A3
 	color: #1E252E;
 }
-tr:nth-child(odd){
-	background-color: #DEDEDE;
 
-}
