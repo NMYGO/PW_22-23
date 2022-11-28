@@ -1,24 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ page import ="pw.p3.business.user.*, pw.p3.business.reservation.*, pw.p3.data.*, pw.p3.data.dao.*, java.util.ArrayList, java.time.LocalDate, java.time.LocalTime" %>
+<%@ page import ="pw.p3.business.user.*, pw.p3.business.reservation.*, pw.p3.data.*, pw.p3.data.dao.*, java.util.ArrayList, java.time.LocalDate, java.time.LocalTime" %>
 <jsp:useBean  id="customerBean" scope="session" class="pw.p3.display.javabean.CustomerBean"></jsp:useBean>
 <%%>
-/* Posibles flujos:
-	1) customerBean no está logado -> Se redirige al index.jsp
-	2) customerBean está logado (!= null && != "") -> Se redirige al clientMainView.jsp
-	*/
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 
-<title>Index</title>
-<link href="css/style.css" type="text/css" rel="stylesheet"/>
+<title>Menu Admin</title>
+<link href= "<%= request.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <header>
 	<h1>GESTOR DE KARTS</h1> 
 </header>
 <body>
+<% String messageNextPage = request.getParameter("message"); %>
 	<% if(customerBean.getAdminUser()) { %>
 		<div>¡¡Bienvenido Administrador: <jsp:getProperty property="nombreUser" name="customerBean"/>!! </div>
 		<br/>				
