@@ -1,10 +1,14 @@
 header{
 	background-color: #EE0033;
+	font-family: "Open Sans", Sans-serif;
+	font-weight: 800;
 	color: #FFFFFF;
 }
 
 body {
 	background-color: #FFEEDE;
+	font-family: "Open Sans", Sans-serif;
+	font-weight: 500;
 	color: #1E252E;
 }
 div{
@@ -18,4 +22,3 @@ tr:nth-child(even){
 	background-color: #C4BEBE;
 	color: #1E252E;
 }
-
