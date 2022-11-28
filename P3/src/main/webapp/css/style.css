@@ -1,3 +1,8 @@
+@font-face{
+	font-family: "Open Sans";
+	src : url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;800&display=swap");
+}
+
 header{
 	background-color: #EE0033;
 	font-family: "Open Sans", Sans-serif;
