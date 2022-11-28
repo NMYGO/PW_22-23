@@ -7,9 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="css/style.css" type="text/css" rel="stylesheet"/>
-<title>Index</title>
 
+<title>Index</title>
+<link href= "<%= request.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <header>
 	<h1>GESTOR DE KARTS</h1> 
@@ -48,36 +48,11 @@
 				out.println("Cliente: " + usuarios.get(i).getNombre() + " " + usuarios.get(i).getApellidos() 
 				+ ", con antiguedad " + usuarios.get(i).getAntiguedad() + " meses.");
 				%> <br/>
-					<% %>
-					<% if (reservasInfantil.size() != 0) { %>
-					<label><select name="Infantil">
-						<% for(int j = 0; j < reservasInfantil.size(); j++){ %>
-						<option value="INFANTIL">Reservas Infantiles Finalizadas >> 
-							<%= reservasInfantil.get(j).toString() %>
-						</option>
-						<% } %>
-					</select></label><br/>
-					<% } %>
+					<% reservasInfantil = reservationDAO.solicitarReservasInfantilCompletada(usuarios.get(i).getCorreo(), Dificultad.INFANTIL);%>
 					<% reservasAdulto = reservationDAO.solicitarReservasAdultoCompletada(usuarios.get(i).getCorreo(), Dificultad.ADULTO); %>
-					<% if (reservasAdulto.size() != 0) { %>
-					<label><select name="Adulto">
-						<% for(int j = 0; j < reservasAdulto.size(); j++){ %>
-						<option value="ADULTO">Reservas Adultas Finalizadas >> 
-							<%= reservasAdulto.get(j).toString() %>
-						</option>
-						<% } %>
-					</select></label><br/>
-					<% } %>
 					<% reservasFamiliar = reservationDAO.solicitarReservasFamiliarCompletada(usuarios.get(i).getCorreo(), Dificultad.FAMILIAR); %>
-					<% if (reservasFamiliar.size() != 0) { %>
-					<label><select name="Familiar">
-						<% for(int j = 0; j < reservasFamiliar.size(); j++){ %>
-						<option value="FAMILIAR">Reservas Familiares Finalizadas >> 
-							<%= reservasFamiliar.get(j).toString() %>
-						</option>
-						<% } %>
-					</select></label><br/>
-					<% } %>
+					total = <%= reservasInfantil.size() + reservasAdulto.size() + reservasFamiliar.size()%>
+					</br>
 				</td></tr>
 				<% } %>
 				</table>

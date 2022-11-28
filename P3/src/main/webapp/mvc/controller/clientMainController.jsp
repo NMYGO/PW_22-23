@@ -1,20 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import ="" %>
+ <%@ page import ="pw.p3.business.user.*, pw.p3.business.reservation.*, pw.p3.data.*, pw.p3.data.dao.*, java.util.ArrayList, java.time.LocalDate, java.time.LocalTime" %>
 <jsp:useBean  id="customerBean" scope="session" class="pw.p3.display.javabean.CustomerBean"></jsp:useBean>
-<%
+<%%>
 /* Posibles flujos:
 	1) customerBean no está logado -> Se redirige al index.jsp
 	2) customerBean está logado (!= null && != "") -> Se redirige al clientMainView.jsp
 	*/
-//Caso 1: Por defecto, vuelve al index
-String nextPage = "../../index.jsp";
-String mensajeNextPage = "clientMainController";
-//Caso 2
-if (customerBean != null && !customerBean.getCorreoUser().equalsIgnoreCase("") && !customerBean.getPasswordUser().equalsIgnoreCase("")) {
-	nextPage = "../view/clientMainView.jsp";
-}
-%>
-<jsp:forward page="<%=nextPage%>">
-	<jsp:param value="<%=mensajeNextPage%>" name="message"/>
-</jsp:forward>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>Index</title>
+<link href="css/style.css" type="text/css" rel="stylesheet"/>
+</head>
+<header>
+	<h1>GESTOR DE KARTS</h1> 
+</header>
+<body>
+	<% if(customerBean.getAdminUser()) { %>
+		<div>¡¡Bienvenido Administrador: <jsp:getProperty property="nombreUser" name="customerBean"/>!! </div>
+		<br/>				
+		<%ArrayList<UserDTO> usuarios = new ArrayList<UserDTO>();%>
+		<%ArrayList<RInfantileDTO> reservasInfantil = new ArrayList<RInfantileDTO>();%>
+		<%ArrayList<RAdultDTO> reservasAdulto = new ArrayList<RAdultDTO>();%>
+		<%ArrayList<RFamiliarDTO> reservasFamiliar = new ArrayList<RFamiliarDTO>();%>
+		<%UserDAO userDAO = new UserDAO();%>
+		<%ReservationDAO reservationDAO = new ReservationDAO();%>
+		<%usuarios = userDAO.solicitarUsuarios();%>			
+		<table>	
+		<% for (int i = 0; i < usuarios.size(); i++) { %>
+		<tr><td> 
+		<%
+		/**OTRA FORMA DE HACERLO SIN OUT:PRINTLN??**/
+		out.println("Cliente: " + usuarios.get(i).getNombre() + " " + usuarios.get(i).getApellidos() 
+		+ ", con antiguedad " + usuarios.get(i).getAntiguedad() + " meses.");
+		%> <br/>
+			<% reservasInfantil = reservationDAO.solicitarReservasInfantilCompletada(usuarios.get(i).getCorreo(), Dificultad.INFANTIL);%>
+			<% reservasAdulto = reservationDAO.solicitarReservasAdultoCompletada(usuarios.get(i).getCorreo(), Dificultad.ADULTO); %>
+			<% reservasFamiliar = reservationDAO.solicitarReservasFamiliarCompletada(usuarios.get(i).getCorreo(), Dificultad.FAMILIAR); %>
+			total = <%= reservasInfantil.size() + reservasAdulto.size() + reservasFamiliar.size()%>
+			</br>
+		</td></tr>
+		<% } %>
+		</table>
+		<% } else { %>
+			<%= messageNextPage %><br/><br/>
+			<%ReservationDAO reservationDAO = new ReservationDAO();%>
+			<table>
+			<tr><td>¡¡Bienvenido <jsp:getProperty property="nombreUser" name="customerBean"/>!!</td></tr>
+			<tr><td>Fecha actual: <%=LocalDate.now()%>, con hora: <%=LocalTime.now()%></td></tr>
+			<tr><td>Antigüedad: <jsp:getProperty property="antiguedadUser" name="customerBean"/> meses</td></tr>
+			<tr><td><label><select name="Tipo de Reserva">
+				<option value="INFANTIL">Proxima Reserva Infantil >> <%= reservationDAO.solicitarProximaReservaInfantil(customerBean.getCorreoUser(), Dificultad.INFANTIL).getFecha() %></option>
+				<option value="ADULTO">Proxima Reserva Adulto >> <%= reservationDAO.solicitarProximaReservaAdulto(customerBean.getCorreoUser(), Dificultad.ADULTO).getFecha() %></option>
+				<option value="FAMILIAR">Proxima Reserva Familiar >> <%= reservationDAO.solicitarProximaReservaFamiliar(customerBean.getCorreoUser(), Dificultad.FAMILIAR).getFecha() %></option>
+			</select></label></td></tr>
+			</table>
+		<% } %>
+</body>
+</html>

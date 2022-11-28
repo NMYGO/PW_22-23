@@ -35,7 +35,8 @@ if (customerBean == null || customerBean.getCorreoUser().equalsIgnoreCase("") ||
 			<jsp:setProperty property="passwordUser" value="<%=passwordUser%>" name="customerBean"/>
 			<jsp:setProperty property="adminUser" value="<%=usuario.getAdministrador()%>" name="customerBean"/>
 			<%
-			//nextPage = "../controller/clientMainController.jsp";
+			nextPage = "../../index.jsp";
+			mensajeNextPage = "INDEX";
 			} else {
 				// Usuario no válido
 				nextPage = "../view/loginView.jsp";
