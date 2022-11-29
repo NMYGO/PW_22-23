@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%>
     <%@ page import ="pw.p3.business.user.*, pw.p3.business.reservation.*, pw.p3.data.*, pw.p3.data.dao.*, java.util.ArrayList, java.time.LocalDate, java.time.LocalTime" %>
 <jsp:useBean  id="customerBean" scope="session" class="pw.p3.display.javabean.CustomerBean"></jsp:useBean>
+<jsp:useBean  id="auxiliaryBean" scope="session" class="pw.p3.display.javabean.AuxiliaryBean"></jsp:useBean>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 
-<title>Index</title>
+<title>Pagina Principal</title>
 <link href= "<%= request.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <header>
@@ -16,10 +17,11 @@
 </header>
 <body>
 	<% String messageNextPage = request.getParameter("message"); %>
-	<%--Este código de reset es únicamente para poder probar múltiples veces el MVC--%>
-	<% if (request.getParameter("reset") != null) { %>
-	<jsp:setProperty property="correoUser" value="" name="customerBean"/>
-	<% } %>
+	<%--Este código de reset es únicamente para poder probar múltiples veces el MVC
+	<% if (request.getParameter("reset") != null) {
+			request.getSession().removeAttribute("customerBean");
+			request.getSession().removeAttribute("auxiliaryBean");
+		} %> --%>
 	
 	<% if (customerBean == null || customerBean.getCorreoUser() == "") { %>
 	<%--Usuario no registrado -> Se invoca al controlador de la funcionalidad--%>
@@ -31,6 +33,7 @@
 	<a href="/P3/mvc/controller/loginController.jsp">Acceder</a>
 	<% } else { %>
 		<% if(customerBean.getAdminUser()) { %>
+				<%= messageNextPage %><br/><br/>
 				<div>¡¡Bienvenido Administrador: <jsp:getProperty property="nombreUser" name="customerBean"/>!! </div>
 				<br/>				
 				<%ArrayList<UserDTO> usuarios = new ArrayList<UserDTO>();%>
@@ -46,7 +49,7 @@
 				<%
 				/**OTRA FORMA DE HACERLO SIN OUT:PRINTLN??**/
 				out.println("Cliente: " + usuarios.get(i).getNombre() + " " + usuarios.get(i).getApellidos() 
-				+ ", con antiguedad " + usuarios.get(i).getAntiguedad() + " meses.");
+				+ ", con antiguedad " + customerBean.getAntiguedadUser() + " meses.");
 				%> <br/>
 					<% reservasInfantil = reservationDAO.solicitarReservasInfantilCompletada(usuarios.get(i).getCorreo(), Dificultad.INFANTIL);%>
 					<% reservasAdulto = reservationDAO.solicitarReservasAdultoCompletada(usuarios.get(i).getCorreo(), Dificultad.ADULTO); %>
@@ -58,18 +61,18 @@
 				</table>
 				<% } else { %>
 					<%= messageNextPage %><br/><br/>
-					<%ReservationDAO reservationDAO = new ReservationDAO();%>
 					<table>
 					<tr><td>¡¡Bienvenido <jsp:getProperty property="nombreUser" name="customerBean"/>!!</td></tr>
 					<tr><td>Fecha actual: <%=LocalDate.now()%>, con hora: <%=LocalTime.now()%></td></tr>
 					<tr><td>Antigüedad: <jsp:getProperty property="antiguedadUser" name="customerBean"/> meses</td></tr>
-					<tr><td><label><select name="Tipo de Reserva">
-						<option value="INFANTIL">Proxima Reserva Infantil >> <%= reservationDAO.solicitarProximaReservaInfantil(customerBean.getCorreoUser(), Dificultad.INFANTIL).getFecha() %></option>
-						<option value="ADULTO">Proxima Reserva Adulto >> <%= reservationDAO.solicitarProximaReservaAdulto(customerBean.getCorreoUser(), Dificultad.ADULTO).getFecha() %></option>
-						<option value="FAMILIAR">Proxima Reserva Familiar >> <%= reservationDAO.solicitarProximaReservaFamiliar(customerBean.getCorreoUser(), Dificultad.FAMILIAR).getFecha() %></option>
-					</select></label></td></tr>
+					<% if (auxiliaryBean.getFechaProximaReserva() ==  null) { %>
+					<tr><td>Fecha de la proxima reserva (yyyy-mm-dd): No hay ninguna reserva proxima</td></tr>
+					<% } else { %>
+					<tr><td>Fecha de la proxima reserva (yyyy-mm-dd): <jsp:getProperty property="fechaProximaReserva" name="auxiliaryBean"/> => Reserva <jsp:getProperty property="dificultadProximaReserva" name="auxiliaryBean"/></td></tr>
+					<% } %>
 					</table>
 				<% } %>
+				<br/><br/><a href="/P3/mvc/controller/logoutController.jsp">Desconectarse</a>
 			<% } %>
 </body>
 </html>

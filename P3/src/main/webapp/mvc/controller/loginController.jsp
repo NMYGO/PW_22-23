@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import ="pw.p3.business.user.UserDTO, pw.p3.data.dao.UserDAO" %>
+<%@ page import ="pw.p3.business.user.UserDTO, pw.p3.data.dao.UserDAO, java.time.LocalDate, java.time.format.DateTimeFormatter" %>
 <jsp:useBean  id="customerBean" scope="session" class="pw.p3.display.javabean.CustomerBean"></jsp:useBean>
 <%
 /* Posibles flujos:
@@ -27,15 +27,25 @@ if (customerBean == null || customerBean.getCorreoUser().equalsIgnoreCase("") ||
 			//Se realizan todas las comprobaciones necesarias del dominio
 			//Aquí sólo comprobamos que exista el usuario
 			if (usuario != null && usuario.getCorreo().equalsIgnoreCase(correoUser)) {
-			// Usuario válido		
+			// Usuario válido	
+			
+			//Calculo la antiguedad
+			DateTimeFormatter formateadorYY = DateTimeFormatter.ofPattern("yyyy");
+			DateTimeFormatter formateadorMM = DateTimeFormatter.ofPattern("MM");
+			String ahoraYY = (LocalDate.now()).format(formateadorYY);
+			String sInscripcionYY = usuario.getInscripcion().format(formateadorYY);
+			String ahoraMM = (LocalDate.now()).format(formateadorMM);
+			String sInscripcionMM = usuario.getInscripcion().format(formateadorMM);
+			int antiguedad = 12*(Integer.parseInt(ahoraYY) - Integer.parseInt(sInscripcionYY)) + (Integer.parseInt(ahoraMM) - Integer.parseInt(sInscripcionMM));
+			//
 			%>
 			<jsp:setProperty property="nombreUser" value="<%=usuario.getNombre()%>" name="customerBean"/>
-			<jsp:setProperty property="antiguedadUser" value="<%=usuario.getAntiguedad()%>" name="customerBean"/>
+			<jsp:setProperty property="antiguedadUser" value="<%=antiguedad%>" name="customerBean"/>
 			<jsp:setProperty property="correoUser" value="<%=usuario.getCorreo()%>" name="customerBean"/>
 			<jsp:setProperty property="passwordUser" value="<%=passwordUser%>" name="customerBean"/>
 			<jsp:setProperty property="adminUser" value="<%=usuario.getAdministrador()%>" name="customerBean"/>
 			<%
-			nextPage = "./clientMainController.jsp";
+			nextPage = "../controller/mainController.jsp";
 			} else {
 				// Usuario no válido
 				nextPage = "../view/loginView.jsp";

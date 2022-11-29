@@ -1,8 +1,5 @@
 package pw.p3.display.javabean;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 public class CustomerBean implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
