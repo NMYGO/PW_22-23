@@ -9,32 +9,29 @@ String nextPage = "../../index.jsp";
 String mensajeNextPage = "mainController";
 %>
 
-<% if(customerBean.getAdminUser()) { %>
-	<%-- <div>¡¡Bienvenido Administrador: <jsp:getProperty property="nombreUser" name="customerBean"/>!! </div>
-	<br/>				
+<% if(customerBean.getAdminUser()) { %>	
 	<%ArrayList<UserDTO> usuarios = new ArrayList<UserDTO>();%>
 	<%ArrayList<RInfantileDTO> reservasInfantil = new ArrayList<RInfantileDTO>();%>
 	<%ArrayList<RAdultDTO> reservasAdulto = new ArrayList<RAdultDTO>();%>
 	<%ArrayList<RFamiliarDTO> reservasFamiliar = new ArrayList<RFamiliarDTO>();%>
 	<%UserDAO userDAO = new UserDAO();%>
 	<%ReservationDAO reservationDAO = new ReservationDAO();%>
-	<%usuarios = userDAO.solicitarUsuarios();%>			
-	<table>	
+	<%usuarios = userDAO.solicitarUsuarios();%>
+	<% auxiliaryBean.setUsuarios(usuarios); %>
 	<% for (int i = 0; i < usuarios.size(); i++) { %>
-	<tr><td> 
-	<%
-	/**OTRA FORMA DE HACERLO SIN OUT:PRINTLN??**/
-	out.println("Cliente: " + usuarios.get(i).getNombre() + " " + usuarios.get(i).getApellidos() 
-	+ ", con antiguedad " + usuarios.get(i).getAntiguedad() + " meses.");
-	%> <br/>
 		<% reservasInfantil = reservationDAO.solicitarReservasInfantilCompletada(usuarios.get(i).getCorreo(), Dificultad.INFANTIL);%>
+		<% if(reservasInfantil != null) { %>		
+			<% auxiliaryBean.setReservasInfantil(reservasInfantil); %>
+		<% } %>
 		<% reservasAdulto = reservationDAO.solicitarReservasAdultoCompletada(usuarios.get(i).getCorreo(), Dificultad.ADULTO); %>
+		<% if(reservasInfantil != null) { %>			
+			<% auxiliaryBean.setReservasAdulto(reservasAdulto); %>
+		<% } %>
 		<% reservasFamiliar = reservationDAO.solicitarReservasFamiliarCompletada(usuarios.get(i).getCorreo(), Dificultad.FAMILIAR); %>
-		total = <%= reservasInfantil.size() + reservasAdulto.size() + reservasFamiliar.size()%>
-		</br>
-	</td></tr>
+		<% if(reservasInfantil != null) { %>			
+			<% auxiliaryBean.setReservasFamiliar(reservasFamiliar); %>
+		<% } %>
 	<% } %>
-	</table> --%>
 <% } else { %>
 	<% ReservationDAO reservationDAO = new ReservationDAO();
 	LocalDate fechaInfantil = reservationDAO.solicitarProximaReservaInfantil(customerBean.getCorreoUser(), Dificultad.INFANTIL).getFecha();

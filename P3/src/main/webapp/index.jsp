@@ -34,45 +34,32 @@
 	<% } else { %>
 		<% if(customerBean.getAdminUser()) { %>
 				<%= messageNextPage %><br/><br/>
-				<div>¡¡Bienvenido Administrador: <jsp:getProperty property="nombreUser" name="customerBean"/>!! </div>
-				<br/>				
-				<%ArrayList<UserDTO> usuarios = new ArrayList<UserDTO>();%>
-				<%ArrayList<RInfantileDTO> reservasInfantil = new ArrayList<RInfantileDTO>();%>
-				<%ArrayList<RAdultDTO> reservasAdulto = new ArrayList<RAdultDTO>();%>
-				<%ArrayList<RFamiliarDTO> reservasFamiliar = new ArrayList<RFamiliarDTO>();%>
-				<%UserDAO userDAO = new UserDAO();%>
-				<%ReservationDAO reservationDAO = new ReservationDAO();%>
-				<%usuarios = userDAO.solicitarUsuarios();%>			
-				<table>	
-				<% for (int i = 0; i < usuarios.size(); i++) { %>
-				<tr><td> 
-				<%
-				/**OTRA FORMA DE HACERLO SIN OUT:PRINTLN??**/
-				out.println("Cliente: " + usuarios.get(i).getNombre() + " " + usuarios.get(i).getApellidos() 
-				+ ", con antiguedad " + customerBean.getAntiguedadUser() + " meses.");
-				%> <br/>
-					<% reservasInfantil = reservationDAO.solicitarReservasInfantilCompletada(usuarios.get(i).getCorreo(), Dificultad.INFANTIL);%>
-					<% reservasAdulto = reservationDAO.solicitarReservasAdultoCompletada(usuarios.get(i).getCorreo(), Dificultad.ADULTO); %>
-					<% reservasFamiliar = reservationDAO.solicitarReservasFamiliarCompletada(usuarios.get(i).getCorreo(), Dificultad.FAMILIAR); %>
-					total = <%= reservasInfantil.size() + reservasAdulto.size() + reservasFamiliar.size()%>
-					</br>
+				<table>
+				<tr><td>¡¡Bienvenido Administrador: <jsp:getProperty property="nombreUser" name="customerBean"/>!!</td></tr>
+				<% for (int i = 0; i < auxiliaryBean.getUsuarios().size(); i++) { %>
+				<tr><td>
+				<%= auxiliaryBean.getUsuarios().get(i).getNombre() %> <%= auxiliaryBean.getUsuarios().get(i).getApellidos() %> 
+				con antiguedad <%= customerBean.getAntiguedadUser() %> meses
+				</td></tr>
+				<tr><td>
+				total = <%= auxiliaryBean.getReservasInfantil().size() + auxiliaryBean.getReservasAdulto().size() + auxiliaryBean.getReservasFamiliar().size() %>
 				</td></tr>
 				<% } %>
 				</table>
-				<% } else { %>
-					<%= messageNextPage %><br/><br/>
-					<table>
-					<tr><td>¡¡Bienvenido <jsp:getProperty property="nombreUser" name="customerBean"/>!!</td></tr>
-					<tr><td>Fecha actual: <%=LocalDate.now()%>, con hora: <%=LocalTime.now()%></td></tr>
-					<tr><td>Antigüedad: <jsp:getProperty property="antiguedadUser" name="customerBean"/> meses</td></tr>
-					<% if (auxiliaryBean.getFechaProximaReserva() ==  null) { %>
-					<tr><td>Fecha de la proxima reserva (yyyy-mm-dd): No hay ninguna reserva proxima</td></tr>
-					<% } else { %>
-					<tr><td>Fecha de la proxima reserva (yyyy-mm-dd): <jsp:getProperty property="fechaProximaReserva" name="auxiliaryBean"/> => Reserva <jsp:getProperty property="dificultadProximaReserva" name="auxiliaryBean"/></td></tr>
-					<% } %>
-					</table>
-				<% } %>
-				<br/><br/><a href="/P3/mvc/controller/logoutController.jsp">Desconectarse</a>
+		<% } else { %>
+			<%= messageNextPage %><br/><br/>
+			<table>
+			<tr><td>¡¡Bienvenido <jsp:getProperty property="nombreUser" name="customerBean"/>!!</td></tr>
+			<tr><td>Fecha actual: <%=LocalDate.now()%>, con hora: <%=LocalTime.now()%></td></tr>
+			<tr><td>Antigüedad: <jsp:getProperty property="antiguedadUser" name="customerBean"/> meses</td></tr>
+			<% if (auxiliaryBean.getFechaProximaReserva() ==  null) { %>
+			<tr><td>Fecha de la proxima reserva (yyyy-mm-dd): No hay ninguna reserva proxima</td></tr>
+			<% } else { %>
+			<tr><td>Fecha de la proxima reserva (yyyy-mm-dd): <jsp:getProperty property="fechaProximaReserva" name="auxiliaryBean"/> => Reserva <jsp:getProperty property="dificultadProximaReserva" name="auxiliaryBean"/></td></tr>
 			<% } %>
+			</table>
+		<% } %>
+		<br/><br/><a href="/P3/mvc/controller/logoutController.jsp">Desconectarse</a>
+	<% } %>
 </body>
 </html>
