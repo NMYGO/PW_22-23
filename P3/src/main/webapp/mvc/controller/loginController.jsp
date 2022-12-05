@@ -26,7 +26,7 @@ if (customerBean == null || customerBean.getCorreoUser().equalsIgnoreCase("") ||
 			
 			//Se realizan todas las comprobaciones necesarias del dominio
 			//Aquí sólo comprobamos que exista el usuario
-			if (usuario != null && usuario.getCorreo().equalsIgnoreCase(correoUser)) {
+			if (usuario != null && usuario.getCorreo().equalsIgnoreCase(correoUser) && usuario.getPassword().equalsIgnoreCase(passwordUser)) {
 			// Usuario válido	
 			
 			//Calculo la antiguedad
