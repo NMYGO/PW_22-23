@@ -39,7 +39,7 @@
 				<% for (int i = 0; i < auxiliaryBean.getUsuarios().size(); i++) { %>
 				<tr><td>
 				<%= auxiliaryBean.getUsuarios().get(i).getNombre() %> <%= auxiliaryBean.getUsuarios().get(i).getApellidos() %> 
-				con antiguedad <%= customerBean.getAntiguedadUser() %> meses
+				con antiguedad <%= auxiliaryBean.getUsuarios().get(i).calcularAntiguedad()%> meses
 				</td></tr>
 				<tr><td>
 				total = <%= auxiliaryBean.getReservasInfantil().size() + auxiliaryBean.getReservasAdulto().size() + auxiliaryBean.getReservasFamiliar().size() %>

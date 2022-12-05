@@ -40,8 +40,9 @@ public class UserDAO {
 				String apellidos = rs.getString("apellidos");
 				LocalDate inscripcion = LocalDate.parse(rs.getString("fechaInscripcion"));
 				LocalDate nacimiento = LocalDate.parse(rs.getString("fechaNacimiento"));
+				String pass = rs.getString("contrasena");
 				Boolean administrador = rs.getBoolean("administrador");
-				usuarios.add(new UserDTO(nombre, apellidos, nacimiento, inscripcion, correo, administrador));
+				usuarios.add(new UserDTO(nombre, apellidos, nacimiento, inscripcion, correo, pass, administrador));
 			}
 
 			if (stmt != null){ 
@@ -81,8 +82,9 @@ public class UserDAO {
 				String apellidos = rs.getString("apellidos");
 				LocalDate inscripcion = LocalDate.parse(rs.getString("fechaInscripcion"));
 				LocalDate nacimiento = LocalDate.parse(rs.getString("fechaNacimiento"));
+				String pass = rs.getString("contrasena");
 				Boolean administrador = rs.getBoolean("administrador");
-				usuario = new UserDTO(nombre, apellidos, nacimiento, inscripcion, correo, administrador);
+				usuario = new UserDTO(nombre, apellidos, nacimiento, inscripcion, correo, pass, administrador);
 			}
 
 			if (ps != null){ 
@@ -113,12 +115,13 @@ public class UserDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("insert into usuario (correoUsuario,nombre,apellidos,fechaInscripcion,fechaNacimiento) values(?,?,?,?,?)");
+			PreparedStatement ps = connection.prepareStatement("insert into usuario (correoUsuario,nombre,apellidos,fechaInscripcion,fechaNacimiento,contrasena,administrador) values(?,?,?,?,?,?,0)");
 			ps.setString(1, usuario.getCorreo());
 			ps.setString(2, usuario.getNombre());
 			ps.setString(3, usuario.getApellidos());
 			ps.setString(4, usuario.getInscripcion().toString());
-			ps.setString(5, usuario.getNacimiento().toString());			
+			ps.setString(5, usuario.getNacimiento().toString());
+			ps.setString(6, usuario.getPassword());
 			status = ps.executeUpdate();
 
 			dbConnection.closeConnection();

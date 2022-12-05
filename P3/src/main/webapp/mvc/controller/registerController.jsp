@@ -18,15 +18,15 @@ if (customerBean == null || customerBean.getCorreoUser().equalsIgnoreCase("") ||
 	String apellidosUser = request.getParameter("apellidos");
 	String nacimientoUser_string = request.getParameter("nacimiento");
 	String correoUser = request.getParameter("correo");
-	String contraseñaUser = request.getParameter("password");
+	String contrasenaUser = request.getParameter("password");
 	
 	//Caso 2.a: Hay parámetros -> procede de la VISTA
 	if (correoUser != null) {
 		if(!nombreUser.equalsIgnoreCase("") && !apellidosUser.equalsIgnoreCase("") &&
 			!nacimientoUser_string.equalsIgnoreCase("") && !correoUser.equalsIgnoreCase("") &&
-			!contraseñaUser.equalsIgnoreCase("")) {
+			!contrasenaUser.equalsIgnoreCase("")) {
 			LocalDate nacimientolUser = LocalDate.parse(nacimientoUser_string);
-			UserDTO usuario = new UserDTO(nombreUser, apellidosUser, nacimientolUser, correoUser);
+			UserDTO usuario = new UserDTO(nombreUser, apellidosUser, nacimientolUser, correoUser, contrasenaUser);
 			//Se accede a bases de datos para insertar el usuario
 			UserDAO userDAO = new UserDAO();
 			//Se realizan todas las comprobaciones necesarias del dominio

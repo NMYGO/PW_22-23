@@ -31,5 +31,5 @@ deleteReserva=delete from reserva where correoUsuario=? and fecha=? and nombrePi
 
 consultaUsuario=select * from usuario
 consultaUsuarioEspecifico=select * from usuario where correoUsuario=?
-updateUsuario=update usuario set nombre=?,apellidos=?,fechaInscripcion=?,fechaNacimiento=? where correoUsuario=?
-insertUsuario=insert into usuario (correoUsuario,nombre,apellidos,fechaInscripcion,fechaNacimiento) values(?,?,?,?,?)
+updateUsuario=update usuario set nombre=?,apellidos=?,fechaInscripcion=?,fechaNacimiento=?, contrasena=? where correoUsuario=?
+insertUsuario=insert into usuario (correoUsuario,nombre,apellidos,fechaInscripcion,fechaNacimiento,contrasena) values(?,?,?,?,?,?)

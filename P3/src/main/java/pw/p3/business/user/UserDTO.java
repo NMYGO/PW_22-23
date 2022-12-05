@@ -1,6 +1,7 @@
 package pw.p3.business.user;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class UserDTO {
 	
@@ -11,7 +12,7 @@ public class UserDTO {
 	protected LocalDate nacimiento;
 	protected LocalDate inscripcion;
 	protected String correo;
-	//protected String password;
+	protected String password;
 	protected Boolean administrador;
 	
 	/* Constructores */
@@ -29,20 +30,22 @@ public class UserDTO {
 	 * @param correo Correo unico del usuario
 	 **/
 	
-	public UserDTO(String nombre, String apellidos, LocalDate nacimiento, String correo) {
+	public UserDTO(String nombre, String apellidos, LocalDate nacimiento, String correo, String pass) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.nacimiento = nacimiento;
 		this.inscripcion = LocalDate.now();
 		this.correo = correo;
+		this.password = pass;
 	}
 	
-	public UserDTO(String nombre, String apellidos, LocalDate nacimiento, LocalDate inscripcion, String correo, Boolean administrador) {
+	public UserDTO(String nombre, String apellidos, LocalDate nacimiento, LocalDate inscripcion, String correo, String pass, Boolean administrador) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.nacimiento = nacimiento;
 		this.inscripcion = inscripcion;
 		this.correo = correo;
+		this.password = pass;
 		this.administrador = administrador;
 	}
 	
@@ -78,6 +81,12 @@ public class UserDTO {
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String pass) {
+		this.password = pass;
+	}
 	public Boolean getAdministrador() {
 		return administrador;
 	}
@@ -86,7 +95,16 @@ public class UserDTO {
 	}
 	
 	/* Otros metodos */
-
+	public int calcularAntiguedad() {
+		DateTimeFormatter formateadorYY = DateTimeFormatter.ofPattern("yyyy");
+		DateTimeFormatter formateadorMM = DateTimeFormatter.ofPattern("MM");
+		String ahoraYY = (LocalDate.now()).format(formateadorYY);
+		String sInscripcionYY = getInscripcion().format(formateadorYY);
+		String ahoraMM = (LocalDate.now()).format(formateadorMM);
+		String sInscripcionMM = getInscripcion().format(formateadorMM);
+		int antiguedad = 12*(Integer.parseInt(ahoraYY) - Integer.parseInt(sInscripcionYY)) + (Integer.parseInt(ahoraMM) - Integer.parseInt(sInscripcionMM));
+		return antiguedad;
+	}
 	/**
 	 * Funcion toString 
 	 **/
