@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href= "<%= request.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet"/>
 <title>Acceder</title>
 </head>
 <body>
