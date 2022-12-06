@@ -1,17 +1,41 @@
-@font-face{
-	font-family: "Open Sans";
-	src : url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;900&display=swap");
-}
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;800&display=swap');
 
 header{
 	background-color: #EE0033;
+	width: 100%;
+	letter-spacing: -1px;
 	font-family: "Open Sans", Sans-serif;
-	font-weight: 900;
+	font-weight: 800;
 	color: #FFFFFF;
+	margin: 0px;
+  	padding: 0px;
+ 	height: 5em;
 }
-
+h1 {
+	margin: auto;
+	padding: 0.5em;
+}
+a{
+	background-color: #EE0033;
+	border: 2px solid;
+	border-color: #BA1438;
+	margin: 1em;
+	padding: 5px;
+	float: left;
+	clear: left;
+}
+a:link{
+	color: #FFFFFF;
+	text-decoration: none;
+}
+a:visited{
+	color: #FFEEEE;
+	text-decoration: none;
+}
 body {
-	background-color: #FFEEDE;
+	margin: 0px;
+  	padding: 0px;
+	background-color: #F5FFFF;
 	font-family: "Open Sans", Sans-serif;
 	font-weight: 500;
 	color: #1E252E;
@@ -19,11 +43,22 @@ body {
 div{
 
 }
+table, th, td{
+	border: 1px solid;
+	border-collapse: collapse;
+}
+table{
+	width: 100%;
+	font-family: "Open Sans", Sans-serif;
+	font-weight: 500;
+	text-align: center;
+	
+}
 tr:nth-child(odd){
-	background-color: #DEDEDE;
+	background-color: #E5E5EF;
 	color: #1E252E;
 }
 tr:nth-child(even){
-	background-color: #C4BEBE;
+	background-color: #CECEE0;
 	color: #1E252E;
 }
