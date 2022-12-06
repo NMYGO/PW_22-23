@@ -34,22 +34,31 @@
 	<% } else { %>
 		<% if(customerBean.getAdminUser()) { %>
 				<%= messageNextPage %><br/><br/>
+				<div>¡¡Bienvenido Administrador: <jsp:getProperty property="nombreUser" name="customerBean"/>!!</div>
 				<table>
-				<tr><td>¡¡Bienvenido Administrador: <jsp:getProperty property="nombreUser" name="customerBean"/>!!</td></tr>
+				<tr>
+				<th>CLIENTE</th>
+				<th>ANTIGUEDAD</th>
+				<th>Nº RESERVAS</th>
+				</tr>
 				<% for (int i = 0; i < auxiliaryBean.getUsuarios().size(); i++) { %>
-				<tr><td>
-				<%= auxiliaryBean.getUsuarios().get(i).getNombre() %> <%= auxiliaryBean.getUsuarios().get(i).getApellidos() %> 
-				con antiguedad <%= auxiliaryBean.getUsuarios().get(i).calcularAntiguedad()%> meses
-				</td></tr>
-				<tr><td>
-				total = <%= auxiliaryBean.getReservasInfantil().size() + auxiliaryBean.getReservasAdulto().size() + auxiliaryBean.getReservasFamiliar().size() %>
-				</td></tr>
+				<tr>
+					<td>
+					<%= auxiliaryBean.getUsuarios().get(i).getNombre() %> <%= auxiliaryBean.getUsuarios().get(i).getApellidos() %>
+					</td>
+					<td>
+					<%= auxiliaryBean.getUsuarios().get(i).calcularAntiguedad()%> meses
+					</td>
+					<td>
+					total = <%= auxiliaryBean.getReservasInfantil().size() + auxiliaryBean.getReservasAdulto().size() + auxiliaryBean.getReservasFamiliar().size() %>
+					</td>
+				</tr>
 				<% } %>
 				</table>
 		<% } else { %>
 			<%= messageNextPage %><br/><br/>
+			<div>¡¡Bienvenido <jsp:getProperty property="nombreUser" name="customerBean"/>!!</div>
 			<table>
-			<tr><td>¡¡Bienvenido <jsp:getProperty property="nombreUser" name="customerBean"/>!!</td></tr>
 			<tr><td>Fecha actual: <%=LocalDate.now()%>, con hora: <%=LocalTime.now()%></td></tr>
 			<tr><td>Antigüedad: <jsp:getProperty property="antiguedadUser" name="customerBean"/> meses</td></tr>
 			<% if (auxiliaryBean.getFechaProximaReserva() ==  null) { %>
