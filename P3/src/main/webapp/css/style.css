@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&display=swap');
 
 header{
 	background-color: #EE0033;
@@ -23,6 +23,7 @@ a{
 	padding: 5px;
 	float: left;
 	clear: left;
+	cursor: pointer;
 }
 a:link{
 	color: #FFFFFF;
@@ -61,4 +62,27 @@ tr:nth-child(odd){
 tr:nth-child(even){
 	background-color: #CECEE0;
 	color: #1E252E;
+}
+
+
+
+form{
+	margin:2em;
+	margin-left: 1em;
+}
+input{
+	padding:5px 5px;
+	width:100%;
+	margin:10px 0;
+}
+input[type=button], input[type=submit], input[type=reset] {
+	
+	background-color: #EE0033;
+	font-family: "Open Sans", Sans-serif;
+	font-weight: 600;
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	margin: 4px 2px;
+	cursor: pointer;
 }
