@@ -33,6 +33,10 @@ if (customerBean != null && !customerBean.getCorreoUser().equalsIgnoreCase("") &
 			//Se accede a bases de datos para actualizar el usuario
 			//Se realizan todas las comprobaciones necesarias del dominio
 			//Aquí sólo comprobamos que exista el usuario
+			if(nacimientoUser.isAfter(LocalDate.now())){
+				nextPage = "../view/modifyUserView.jsp";
+				mensajeNextPage = "La fecha no es valida;";
+			} else
 			if(userDAO.escribirUsuarioUpdate(usuario) == 0) {
 				// Usuario no modificado
 				nextPage = "../view/modifyUserView.jsp";

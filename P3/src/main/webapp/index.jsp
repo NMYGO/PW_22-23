@@ -50,7 +50,7 @@
 					<%= auxiliaryBean.getUsuarios().get(i).getAntiguedad() %> meses
 					</td>
 					<td>
-					total = <%= auxiliaryBean.getUsuarios().get(i).getNreservas() %>
+					<%= auxiliaryBean.getUsuarios().get(i).getNreservas() %>
 					</td>
 				</tr>
 				<% } %>
