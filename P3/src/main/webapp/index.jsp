@@ -69,6 +69,7 @@
 			</table>
 		<% } %>
 		<br/><br/><a href="/P3/mvc/controller/logoutController.jsp">Desconectarse</a>
+		<br/><br/><a href="/P3/mvc/controller/modifyUserController.jsp">Modificar Datos</a>
 	<% } %>
 </body>
 </html>

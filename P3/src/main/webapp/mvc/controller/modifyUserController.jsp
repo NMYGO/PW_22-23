@@ -13,40 +13,41 @@
 String nextPage = "../../index.jsp";
 String mensajeNextPage = "";
 //Caso 2
-if (customerBean == null || customerBean.getCorreoUser().equalsIgnoreCase("") || customerBean.getPasswordUser().equalsIgnoreCase("")) {
+if (customerBean != null && !customerBean.getCorreoUser().equalsIgnoreCase("") && !customerBean.getPasswordUser().equalsIgnoreCase("")) {
 	String nombreUser = request.getParameter("nombre");
 	String apellidosUser = request.getParameter("apellidos");
 	String nacimientoUser_string = request.getParameter("nacimiento");
-	String correoUser = request.getParameter("correo");
 	String contrasenaUser = request.getParameter("password");
 	
 	//Caso 2.a: Hay parámetros -> procede de la VISTA
-	if (correoUser != null) {
+	if (contrasenaUser != null) {
 		if(!nombreUser.equalsIgnoreCase("") && !apellidosUser.equalsIgnoreCase("") &&
-			!nacimientoUser_string.equalsIgnoreCase("") && !correoUser.equalsIgnoreCase("") &&
-			!contrasenaUser.equalsIgnoreCase("")) {
+		!nacimientoUser_string.equalsIgnoreCase("") && !contrasenaUser.equalsIgnoreCase("")) {
 			LocalDate nacimientoUser = LocalDate.parse(nacimientoUser_string);
-			UserDTO usuario = new UserDTO(nombreUser, apellidosUser, nacimientoUser, correoUser, contrasenaUser);
-			//Se accede a bases de datos para insertar el usuario
 			UserDAO userDAO = new UserDAO();
+			UserDTO usuario = userDAO.solicitarUsuario(customerBean.getCorreoUser());
+				usuario.setNombre(nombreUser);
+				usuario.setApellidos(apellidosUser);
+				usuario.setNacimiento(nacimientoUser);
+				usuario.setPassword(contrasenaUser);
+			//Se accede a bases de datos para actualizar el usuario
 			//Se realizan todas las comprobaciones necesarias del dominio
-			//Aquí sólo comprobamos que no exista el usuario
-			if(userDAO.escribirUsuarioInsert(usuario) == 0) {
-				// Usuario no válido
-				nextPage = "../view/registerView.jsp";
-				mensajeNextPage = "El usuario no es valido";
+			//Aquí sólo comprobamos que exista el usuario
+			if(userDAO.escribirUsuarioUpdate(usuario) == 0) {
+				// Usuario no modificado
+				nextPage = "../view/modifyUserView.jsp";
+				mensajeNextPage = "El usuario no es valido; " + usuario.toString();
 			} else {
-				// Usuario registrado
-				nextPage = "../view/loginView.jsp";
-				mensajeNextPage = "El usuario se ha registrado correctamente";
+				// Usuario modificado
+				mensajeNextPage = "El usuario se ha modificado correctamente";
 			}
-		} else {
-			nextPage = "../view/registerView.jsp";
+		}  else {
+			nextPage = "../view/modifyUserView.jsp";
 			mensajeNextPage = "Introduzca todos los datos necesarios";
 		}
 	//Caso 2.b -> se debe ir a la vista por primera vez
 	} else {
-		nextPage = "../view/registerView.jsp";		
+		nextPage = "../view/modifyUserView.jsp";		
 	}
 }
 %>

@@ -131,4 +131,37 @@ public class UserDAO {
 		}
 		return status;
 	}
+	
+	public int escribirUsuarioUpdate(UserDTO usuario) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String updateUsuario = prop.getProperty("updateUsuario");
+		int status = 0;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement("update usuario set nombre=?,apellidos=?,fechaInscripcion=?,fechaNacimiento=?, contrasena=? where correoUsuario=?");
+			ps.setString(6, usuario.getCorreo());
+			ps.setString(1, usuario.getNombre());
+			ps.setString(2, usuario.getApellidos());
+			ps.setString(3, usuario.getInscripcion().toString());
+			ps.setString(4, usuario.getNacimiento().toString());
+			ps.setString(5, usuario.getPassword());
+			status = ps.executeUpdate();
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return status;
+	}
 }
