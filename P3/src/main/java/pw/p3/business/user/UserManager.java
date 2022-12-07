@@ -1,6 +1,9 @@
 package pw.p3.business.user;
 
 import pw.p3.data.dao.UserDAO;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -21,15 +24,14 @@ public class UserManager {
 	 **/	
 	public UserManager(){}
 	
-	/**public String listarUsuariosAdmin () {
-		ArrayList<UserDTO> usuarios = new ArrayList<UserDTO>();
-		UserDAO userDAO = new UserDAO();
-		usuarios = userDAO.solicitarUsuarios();
-		String lista_usuarios = "";
-		for (int i = 0; i < usuarios.size(); i++) {
-			lista_usuarios.concat("Cliente: " + usuarios.get(i).getNombre() + " " + usuarios.get(i).getApellidos() 
-			+ ", con antiguedad " + usuarios.get(i).getAntiguedad() + " meses. Reservas completadas: \n");
-		}
-		return lista_usuarios;
-	}**/
+	public int calcularAntiguedad(UserDTO usuario) {
+		DateTimeFormatter formateadorYY = DateTimeFormatter.ofPattern("yyyy");
+		DateTimeFormatter formateadorMM = DateTimeFormatter.ofPattern("MM");
+		String ahoraYY = (LocalDate.now()).format(formateadorYY);
+		String sInscripcionYY = usuario.getInscripcion().format(formateadorYY);
+		String ahoraMM = (LocalDate.now()).format(formateadorMM);
+		String sInscripcionMM = usuario.getInscripcion().format(formateadorMM);
+		int antiguedad = 12*(Integer.parseInt(ahoraYY) - Integer.parseInt(sInscripcionYY)) + (Integer.parseInt(ahoraMM) - Integer.parseInt(sInscripcionMM));
+		return antiguedad;
+	}
 }

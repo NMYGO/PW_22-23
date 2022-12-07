@@ -11,10 +11,11 @@ public class UserDTO {
 	protected String apellidos;
 	protected LocalDate nacimiento;
 	protected LocalDate inscripcion;
+	protected Integer antiguedad;
 	protected String correo;
 	protected String password;
 	protected Boolean administrador;
-	
+	protected Integer nreservas;
 	/* Constructores */
 	
 	/**
@@ -75,6 +76,12 @@ public class UserDTO {
 	public void setInscripcion(LocalDate inscripcion) {
 		this.inscripcion = inscripcion;
 	}
+	public Integer getAntiguedad() {
+		return antiguedad;
+	}
+	public void setAntiguedad(Integer antiguedad) {
+		this.antiguedad = antiguedad;
+	}
 	public String getCorreo() {
 		return correo;
 	}
@@ -93,18 +100,16 @@ public class UserDTO {
 	public void setAdministrador(Boolean administrador) {
 		this.administrador = administrador;
 	}
+	public Integer getNreservas() {
+		return nreservas;
+	}
+
+	public void setNreservas(Integer nreservas) {
+		this.nreservas = nreservas;
+	}
 	
 	/* Otros metodos */
-	public int calcularAntiguedad() {
-		DateTimeFormatter formateadorYY = DateTimeFormatter.ofPattern("yyyy");
-		DateTimeFormatter formateadorMM = DateTimeFormatter.ofPattern("MM");
-		String ahoraYY = (LocalDate.now()).format(formateadorYY);
-		String sInscripcionYY = getInscripcion().format(formateadorYY);
-		String ahoraMM = (LocalDate.now()).format(formateadorMM);
-		String sInscripcionMM = getInscripcion().format(formateadorMM);
-		int antiguedad = 12*(Integer.parseInt(ahoraYY) - Integer.parseInt(sInscripcionYY)) + (Integer.parseInt(ahoraMM) - Integer.parseInt(sInscripcionMM));
-		return antiguedad;
-	}
+
 	/**
 	 * Funcion toString 
 	 **/

@@ -15,22 +15,29 @@ String mensajeNextPage = "mainController";
 	<%ArrayList<RAdultDTO> reservasAdulto = new ArrayList<RAdultDTO>();%>
 	<%ArrayList<RFamiliarDTO> reservasFamiliar = new ArrayList<RFamiliarDTO>();%>
 	<%UserDAO userDAO = new UserDAO();%>
-	<%ReservationDAO reservationDAO = new ReservationDAO();%>
+	<%ReservationDAO reservationDAO = new ReservationDAO(); %>
+	<% UserManager userManager = new UserManager(); %>
 	<%usuarios = userDAO.solicitarUsuarios();%>
 	<% auxiliaryBean.setUsuarios(usuarios); %>
-	<% for (int i = 0; i < usuarios.size(); i++) { %>
-		<% reservasInfantil = reservationDAO.solicitarReservasInfantilCompletada(usuarios.get(i).getCorreo(), Dificultad.INFANTIL);%>
+	<% for (int i = 0; i < auxiliaryBean.getUsuarios().size(); i++) { %>
+		<% int nreservas = 0; %>
+		<% auxiliaryBean.getUsuarios().get(i).setAntiguedad(userManager.calcularAntiguedad(usuarios.get(i))); %>
+		<% reservasInfantil = reservationDAO.solicitarReservasInfantilCompletada(usuarios.get(i).getCorreo(), Dificultad.INFANTIL); %>
 		<% if(reservasInfantil != null) { %>		
-			<% auxiliaryBean.setReservasInfantil(reservasInfantil); %>
+			<% //auxiliaryBean.setReservasInfantil(reservasInfantil); %>
+			<% nreservas += reservasInfantil.size(); %>
 		<% } %>
 		<% reservasAdulto = reservationDAO.solicitarReservasAdultoCompletada(usuarios.get(i).getCorreo(), Dificultad.ADULTO); %>
 		<% if(reservasInfantil != null) { %>			
-			<% auxiliaryBean.setReservasAdulto(reservasAdulto); %>
+			<% //auxiliaryBean.setReservasAdulto(reservasAdulto); %>
+			<% nreservas += reservasAdulto.size(); %>
 		<% } %>
 		<% reservasFamiliar = reservationDAO.solicitarReservasFamiliarCompletada(usuarios.get(i).getCorreo(), Dificultad.FAMILIAR); %>
 		<% if(reservasInfantil != null) { %>			
-			<% auxiliaryBean.setReservasFamiliar(reservasFamiliar); %>
+			<% //auxiliaryBean.setReservasFamiliar(reservasFamiliar); %>
+			<% nreservas += reservasFamiliar.size(); %>
 		<% } %>
+		<% auxiliaryBean.getUsuarios().get(i).setNreservas(nreservas); %>
 	<% } %>
 <% } else { %>
 	<% ReservationDAO reservationDAO = new ReservationDAO();
