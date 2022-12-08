@@ -29,23 +29,25 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 } else {
 %>
 <%= messageNextPage %><br/><br/>
-<form method="post" action="../controller/registerController.jsp">
-	<label for="nombre">Nombre: </label>
-	<input type="text" name="nombre" value="" maxLength="30" required>
+<form method="post" action="pw/p3/servlet/RegisterKart.java">
+	<label for="id">ID: </label>
+	<input type="number" name="id" value="" min="1" required>
 	<br/>
-	<label for="apellidos">Apellidos: </label>
-	<input type="text" name="apellidos" value="" maxLength="30" required>
+	<label for="tipo">Tipo: </label>
+	<input type="radio" name="tipo" value="true" checked>
+	<input type="radio" name="tipo" value="false">
 	<br/>
-	<label for="nacimiento">Fecha de Nacimiento: </label>
-	<input type="date" name="nacimiento" value="" required>
+	<label for="estado">Estado: </label>
+	<select name="estado">
+		<option value="DISPONIBLE">Disponible</option>
+		<option value="RESERVADO">Reservado</option>
+		<option value="MANTENIMIENTO">Mantenimiento</option>
+	</select>
 	<br/>
-	<label for="correo">Correo: </label>
-	<input type="email" name="correo" value="" placeholder="correo@dominio" maxLength="20" required>
-	<br/>
-	<label for="password">Contraseña: </label>
-	<input type="password" name="password" value="" maxLength="20" required>	
+	<label for="pista">Nombre de Pista: </label>
+	<input type="text" name="pista" value="" maxLength="20" required>
 	<br/><br/>
-	<input type="submit" value="Registrarse">
+	<input type="submit" value="Registrar Kart">
 </form>
 <%
 }

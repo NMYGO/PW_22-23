@@ -17,36 +17,43 @@ public class RegisterKart extends HttpServlet{
 	private static final long serialVersionUID = -8861667687959414409L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CustomerBean customerBean = new CustomerBean();
-		if(customerBean.getAdminUser()) {
-			RequestDispatcher vista = request.getRequestDispatcher("registerKartView.jsp");
-			vista.forward(request, response);
-			String id_string = request.getParameter("id");
-				Integer id = Integer.parseInt(id_string);
-			String tipo_string = request.getParameter("tipo");
-				Boolean tipo = Boolean.valueOf(tipo_string);
-			String estado_string = request.getParameter("estado");
-				Estado estado = Estado.valueOf(estado_string);
-			String nombrePista = request.getParameter("nombrePista");
-			KartDAO kartDAO = new KartDAO();
-			KartDTO kart = new KartDTO(id, tipo, estado, nombrePista);
-			
-			if(kartDAO.escribirKartInsert(kart) == 0) {
-				response.setContentType("text/html");
-				PrintWriter out = response.getWriter();
-				out.println("Error. Ese kart ya existe");
-				RequestDispatcher error = request.getRequestDispatcher("registerKartView.jsp");
-				error.include(request, response);
+		HttpSession session = request.getSession(true);
+		CustomerBean customerBean = (CustomerBean)session.getAttribute("customerBean");
+		if (customerBean != null && customerBean.getCorreoUser() != "") {
+			if(customerBean.getAdminUser()) {
+				String id_string = request.getParameter("id");					
+				String tipo_string = request.getParameter("tipo");					
+				String estado_string = request.getParameter("estado");		
+				String nombrePista = request.getParameter("nombrePista");
+				
+				if (id_string != null) {
+					Integer id = Integer.parseInt(id_string);
+					Boolean tipo = Boolean.valueOf(tipo_string);
+					Estado estado = Estado.valueOf(estado_string);
+					KartDAO kartDAO = new KartDAO();
+					KartDTO kart = new KartDTO(id, tipo, estado, nombrePista);
+					
+					if(kartDAO.escribirKartInsert(kart) == 0) {
+						response.setContentType("text/html");
+						PrintWriter out = response.getWriter();
+						out.println("Error. Ese kart ya existe");
+						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/registerKartView.jsp");
+						error.include(request, response);
+					} else {
+						RequestDispatcher correcto = request.getRequestDispatcher("../../index.jsp");
+						correcto.forward(request, response);
+					}
+				} else {
+					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/admin/registerKartView.jsp");
+					vista.forward(request, response);
+				}
 			} else {
-				RequestDispatcher correcto = request.getRequestDispatcher("index.html");
-				correcto.forward(request, response);
+				RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/errorUsuarioAdminView.jsp");
+				error.forward(request, response);
 			}
 		} else {
-			response.setContentType("text/html");
-			PrintWriter out = response.getWriter();
-			out.println("Error. Debe ser usuario administrador");
-			RequestDispatcher error = request.getRequestDispatcher("index.html");
-			error.include(request, response);
+			RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/errorUsuarioLoginView.jsp");
+			error.forward(request, response);
 		}
 	}
 }
