@@ -23,15 +23,14 @@ public class RegisterKart extends HttpServlet{
 			if(customerBean.getAdminUser()) {
 				String id_string = request.getParameter("id");					
 				String tipo_string = request.getParameter("tipo");					
-				String estado_string = request.getParameter("estado");		
-				String nombrePista = request.getParameter("nombrePista");
+				String estado_string = request.getParameter("estado");
 				
-				if (id_string != null) {
+				if (id_string != null || tipo_string != null || estado_string != null) {
 					Integer id = Integer.parseInt(id_string);
 					Boolean tipo = Boolean.valueOf(tipo_string);
 					Estado estado = Estado.valueOf(estado_string);
 					KartDAO kartDAO = new KartDAO();
-					KartDTO kart = new KartDTO(id, tipo, estado, nombrePista);
+					KartDTO kart = new KartDTO(id, tipo, estado, null);
 					
 					if(kartDAO.escribirKartInsert(kart) == 0) {
 						response.setContentType("text/html");
@@ -40,8 +39,11 @@ public class RegisterKart extends HttpServlet{
 						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/registerKartView.jsp");
 						error.include(request, response);
 					} else {
-						RequestDispatcher correcto = request.getRequestDispatcher("../../index.jsp");
-						correcto.forward(request, response);
+						response.setContentType("text/html");
+						PrintWriter out = response.getWriter();
+						out.println("RegisterKart");
+						RequestDispatcher correcto = request.getRequestDispatcher("index.jsp");
+						correcto.include(request, response);
 					}
 				} else {
 					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/admin/registerKartView.jsp");

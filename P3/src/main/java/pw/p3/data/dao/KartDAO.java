@@ -221,11 +221,11 @@ public class KartDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement(insertKart);
+			PreparedStatement ps = connection.prepareStatement("insert into kart (idKart,tipo,estado,nombrePista) values(?,?,?,?)");
 			ps.setInt(1, kart.getId());
 			ps.setBoolean(2, kart.isTipo());
 			ps.setString(3, kart.getEstado().toString());
-			ps.setString(4, kart.getNombrePista().toString());			
+			ps.setString(4, kart.getNombrePista());			
 			status = ps.executeUpdate();
 
 			dbConnection.closeConnection();

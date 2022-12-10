@@ -55,6 +55,7 @@
 				</tr>
 				<% } %>
 				</table>
+				<br/><br/><a href="/P3/registerKart">Registrar Kart</a>
 		<% } else { %>
 			<%= messageNextPage %><br/><br/>
 			<div>¡¡Bienvenido <jsp:getProperty property="nombreUser" name="customerBean"/>!!</div>

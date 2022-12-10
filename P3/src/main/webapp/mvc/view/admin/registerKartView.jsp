@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href= "<%= request.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet"/>
 <title>Registrar Kart</title>
 </head>
 <body>
@@ -29,23 +28,20 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 } else {
 %>
 <%= messageNextPage %><br/><br/>
-<form method="post" action="pw/p3/servlet/RegisterKart.java">
+<form method="get" action="/P3/registerKart">
 	<label for="id">ID: </label>
 	<input type="number" name="id" value="" min="1" required>
 	<br/>
-	<label for="tipo">Tipo: </label>
-	<input type="radio" name="tipo" value="true" checked>
-	<input type="radio" name="tipo" value="false">
+	<label for="type">Tipo: </label>
+	<input type="radio" name="tipo" value="true" checked>Infantil
+	<input type="radio" name="tipo" value="false">Adulto
 	<br/>
 	<label for="estado">Estado: </label>
-	<select name="estado">
+	<select name="estado" required>
 		<option value="DISPONIBLE">Disponible</option>
 		<option value="RESERVADO">Reservado</option>
 		<option value="MANTENIMIENTO">Mantenimiento</option>
 	</select>
-	<br/>
-	<label for="pista">Nombre de Pista: </label>
-	<input type="text" name="pista" value="" maxLength="20" required>
 	<br/><br/>
 	<input type="submit" value="Registrar Kart">
 </form>
