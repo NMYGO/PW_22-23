@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Registrar Kart</title>
+<title>Asociar Kart a Pista</title>
 </head>
 <body>
 <%
@@ -19,7 +19,7 @@
 String nextPage = "../../index.jsp";
 String messageNextPage = request.getParameter("message");
 if (messageNextPage == null) {
-	messageNextPage = "registerKartView";
+	messageNextPage = "KartToCircuitView";
 }
 
 if (customerBean == null || customerBean.getCorreoUser().equals("") || customerBean.getPasswordUser().equalsIgnoreCase("")) {
@@ -28,22 +28,14 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 } else {
 %>
 <%= messageNextPage %><br/><br/>
-<form method="get" action="/P3/registerKart">
-	<label for="id">ID: </label>
-	<input type="number" name="id" value="" min="1" required>
+<form method="get" action="/P3/kartToCircuit">
+	<label for="nombrePista">Nombre de la Pista: </label>
+	<input type="text" name="nombrePista" value="" maxLength="30" required>
 	<br/>
-	<label for="tipo">Tipo: </label>
-	<input type="radio" name="tipo" value="true" checked>Niño
-	<input type="radio" name="tipo" value="false">Adulto
-	<br/>
-	<label for="estado">Estado: </label>
-	<select name="estado" required>
-		<option value="DISPONIBLE">Disponible</option>
-		<option value="RESERVADO">Reservado</option>
-		<option value="MANTENIMIENTO">Mantenimiento</option>
-	</select>
+	<label for="idKart">ID del Kart: </label>
+	<input type="number" name="idKart" value="" min="1" required>
 	<br/><br/>
-	<input type="submit" value="Registrar Kart">
+	<input type="submit" value="Asociar Kart a Pista">
 </form>
 <%
 }

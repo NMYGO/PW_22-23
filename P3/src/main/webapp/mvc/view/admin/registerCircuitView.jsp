@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:useBean  id="customerBean" scope="session" class="pw.p3.display.javabean.CustomerBean"></jsp:useBean>
-
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Registrar Kart</title>
+<title>Register Circuit</title>
 </head>
 <body>
 <%
@@ -19,7 +19,7 @@
 String nextPage = "../../index.jsp";
 String messageNextPage = request.getParameter("message");
 if (messageNextPage == null) {
-	messageNextPage = "registerKartView";
+	messageNextPage = "registerCircuitView";
 }
 
 if (customerBean == null || customerBean.getCorreoUser().equals("") || customerBean.getPasswordUser().equalsIgnoreCase("")) {
@@ -28,22 +28,25 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 } else {
 %>
 <%= messageNextPage %><br/><br/>
-<form method="get" action="/P3/registerKart">
-	<label for="id">ID: </label>
-	<input type="number" name="id" value="" min="1" required>
-	<br/>
-	<label for="tipo">Tipo: </label>
-	<input type="radio" name="tipo" value="true" checked>Niño
-	<input type="radio" name="tipo" value="false">Adulto
+<form method="get" action="/P3/registerCircuit">
+	<label for="nombre">Nombre: </label>
+	<input type="text" name="nombre" value="" maxLength="30" required>
 	<br/>
 	<label for="estado">Estado: </label>
-	<select name="estado" required>
-		<option value="DISPONIBLE">Disponible</option>
-		<option value="RESERVADO">Reservado</option>
-		<option value="MANTENIMIENTO">Mantenimiento</option>
+	<input type="radio" name="estado" value="true" checked>Reservado
+	<input type="radio" name="estado" value="false">Disponible
+	<br/>
+	<label for="dificultad">Dificultad: </label>
+	<select name="dificultad" required>
+		<option value="INFANTIL">Infantil</option>
+		<option value="ADULTO">Adulto</option>
+		<option value="FAMILIAR">Familiar</option>
 	</select>
+	<br/>
+	<label for="maxkarts">Maximo de Karts: </label>
+	<input type="number" name="maxkarts" value="" min="1" required>
 	<br/><br/>
-	<input type="submit" value="Registrar Kart">
+	<input type="submit" value="Registrar Pista">
 </form>
 <%
 }

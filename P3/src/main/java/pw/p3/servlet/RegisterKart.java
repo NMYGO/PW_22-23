@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(name="RegisterKart", urlPatterns="/registerKart")
-public class RegisterKart extends HttpServlet{
+public class RegisterKart extends HttpServlet {
 	
 	/** Serial ID */
 	private static final long serialVersionUID = -8861667687959414409L;

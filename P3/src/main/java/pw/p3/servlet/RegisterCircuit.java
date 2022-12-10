@@ -1,0 +1,66 @@
+package pw.p3.servlet;
+
+import pw.p3.business.circuit.*;
+import pw.p3.data.Dificultad;
+import pw.p3.data.dao.CircuitDAO;
+import pw.p3.display.javabean.CustomerBean;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet(name="RegisterCircuit", urlPatterns="/registerCircuit")
+public class RegisterCircuit extends HttpServlet {
+	
+	/** Serial ID */
+	private static final long serialVersionUID = -8861667748359414409L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
+		CustomerBean customerBean = (CustomerBean)session.getAttribute("customerBean");
+		if (customerBean != null && customerBean.getCorreoUser() != "") {
+			if(customerBean.getAdminUser()) {
+				String nombre = request.getParameter("nombre");					
+				String estado_string = request.getParameter("estado");					
+				String dificultad_string = request.getParameter("dificultad");
+				String maxkarts_string = request.getParameter("maxkarts");
+				
+				if (nombre != null || estado_string != null || dificultad_string != null || maxkarts_string != null) {
+					Boolean estado = Boolean.valueOf(estado_string);
+					Dificultad dificultad = Dificultad.valueOf(dificultad_string);
+					Integer maxkarts = Integer.parseInt(maxkarts_string);
+					CircuitDAO circuitDAO = new CircuitDAO();
+					CircuitDTO circuit = new CircuitDTO(nombre, estado, dificultad, maxkarts);
+					
+					if(circuitDAO.escribirPistaInsert(circuit) == 0) {
+						response.setContentType("text/html");
+						PrintWriter out = response.getWriter();
+						out.println("Error. Esa pista ya existe");
+						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/registerCircuitView.jsp");
+						error.include(request, response);
+					} else {
+						response.setContentType("text/html");
+						PrintWriter out = response.getWriter();
+						out.println("RegisterCircuit");
+						RequestDispatcher correcto = request.getRequestDispatcher("index.jsp");
+						correcto.include(request, response);
+					}
+				} else {
+					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/admin/registerCircuitView.jsp");
+					vista.forward(request, response);
+				}
+			} else {
+				RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/errorUsuarioAdminView.jsp");
+				error.forward(request, response);
+			}
+		} else {
+			RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/errorUsuarioLoginView.jsp");
+			error.forward(request, response);
+		}
+	}
+}

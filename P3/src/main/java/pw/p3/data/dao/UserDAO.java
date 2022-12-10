@@ -68,7 +68,6 @@ public class UserDAO {
 		}
 		
 		String consultaUsuarioEspecifico = prop.getProperty("consultaUsuarioEspecifico");
-		//System.out.println("SQL STATEMENT: " + consultaUsuarioEspecifico);
 		UserDTO usuario = null;
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -95,7 +94,6 @@ public class UserDAO {
 			System.err.println(e);
 			e.printStackTrace();
 		}
-		//System.out.println(usuario.toString());
 		return usuario;
 	}
 	

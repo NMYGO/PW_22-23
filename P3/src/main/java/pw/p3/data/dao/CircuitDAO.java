@@ -144,11 +144,11 @@ public class CircuitDAO {
 		}
 		
 		String consultaPistaNombre = prop.getProperty("consultaPistaNombre");
-		CircuitDTO pista = new CircuitDTO();
+		CircuitDTO pista = null;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement(consultaPistaNombre);
+			PreparedStatement ps = connection.prepareStatement("select * from pista where nombrePista=?");
 			ps.setString(1, nombre);
 			ResultSet rs = (ResultSet) ps.executeQuery();
 
@@ -229,7 +229,7 @@ public class CircuitDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement(insertPista);
+			PreparedStatement ps = connection.prepareStatement("insert into pista (nombrePista,estado,dificultad,maxKarts) values(?,?,?,?)");
 			ps.setString(1, pista.getNombre());
 			ps.setBoolean(2, pista.isEstado());
 			ps.setString(3, pista.getDificultad().toString());

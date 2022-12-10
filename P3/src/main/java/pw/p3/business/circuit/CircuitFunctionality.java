@@ -43,23 +43,23 @@ public class CircuitFunctionality {
 	 **/
 	
 	public KartDTO asociarKartAPista(KartDTO kart, CircuitDTO pista) {
-		KartDAO kartTabla = new KartDAO();
-		ArrayList <KartDTO> kartsPista = kartTabla.solicitarKartsPista(pista.getNombre());
-		if(pista.getMaxkarts() > kartsPista.size()) {
-			if(pista.getDificultad() == Dificultad.INFANTIL && kart.isTipo()) {
-				kart.setEstado(Estado.RESERVADO);
-				kart.setNombrePista(pista.getNombre());
-				return kart;
-			}else if(pista.getDificultad() == Dificultad.ADULTO && !kart.isTipo()) {
-				kart.setEstado(Estado.RESERVADO);
-				kart.setNombrePista(pista.getNombre());
-				return kart;
-			}else if(pista.getDificultad() == Dificultad.FAMILIAR) {
-				kart.setEstado(Estado.RESERVADO);
-				kart.setNombrePista(pista.getNombre());
-				return kart;
+			KartDAO kartTabla = new KartDAO();
+			ArrayList <KartDTO> kartsPista = kartTabla.solicitarKartsPista(pista.getNombre());
+			if(pista.getMaxkarts() > kartsPista.size()) {
+				if(pista.getDificultad() == Dificultad.INFANTIL && kart.isTipo()) {
+					kart.setEstado(Estado.RESERVADO);
+					kart.setNombrePista(pista.getNombre());
+					return kart;
+				}else if(pista.getDificultad() == Dificultad.ADULTO && !kart.isTipo()) {
+					kart.setEstado(Estado.RESERVADO);
+					kart.setNombrePista(pista.getNombre());
+					return kart;
+				}else if(pista.getDificultad() == Dificultad.FAMILIAR) {
+					kart.setEstado(Estado.RESERVADO);
+					kart.setNombrePista(pista.getNombre());
+					return kart;
+				}
 			}
-		}
 		return null;
 	}
 }

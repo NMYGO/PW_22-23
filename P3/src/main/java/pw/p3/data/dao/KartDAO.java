@@ -90,11 +90,11 @@ public class KartDAO {
 		}
 		
 		String consultaKartID = prop.getProperty("consultaKartID");
-		KartDTO kart = new KartDTO();
+		KartDTO kart = null;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement(consultaKartID);
+			PreparedStatement ps = connection.prepareStatement("select * from kart where idKart=?");
 			ps.setInt(1, id);
 			ResultSet rs = (ResultSet) ps.executeQuery();
 			
@@ -184,7 +184,7 @@ public class KartDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement(updateKart);
+			PreparedStatement ps = connection.prepareStatement("update kart set tipo=?,estado=?,nombrePista=? where idKart=?");
 			ps.setInt(4, kart.getId());
 			ps.setBoolean(1, kart.isTipo());
 			ps.setString(2, kart.getEstado().toString());
