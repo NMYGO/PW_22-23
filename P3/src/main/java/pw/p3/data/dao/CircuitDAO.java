@@ -192,7 +192,7 @@ public class CircuitDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement(updatePista);
+			PreparedStatement ps = connection.prepareStatement("update pista set estado=?,dificultad=?,maxKarts=? where nombrePista=?");
 			ps.setString(4, pista.getNombre());
 			ps.setBoolean(1, pista.isEstado());
 			ps.setString(2, pista.getDificultad().toString());
