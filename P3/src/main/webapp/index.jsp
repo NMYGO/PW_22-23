@@ -18,9 +18,12 @@
 	</header>
 <% } else {%>
 	<header>
-		<h1>GESTOR DE KARTS</h1> 
+		<h1>GESTOR DE KARTS</h1>
+		<nav>
 		<a href="/P3/mvc/controller/logoutController.jsp">Desconectarse</a>
 		<a href="/P3/mvc/controller/modifyUserController.jsp">Modificar Datos</a>
+		</nav>
+		
 	</header>
 <% } %>
 <body>

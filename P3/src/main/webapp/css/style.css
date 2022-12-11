@@ -19,7 +19,6 @@ body {
 	font-family: "Open Sans", Sans-serif;
 	font-weight: 500;
 	font-size: 1em;
-	text-align: center;
 	color: #1E252E;
 }
 
@@ -31,11 +30,15 @@ div{
 	font-weight: 800;
 	color: #1E252E;
 	text-align: center;
+	margin-top: 20px;
 	margin-bottom: 20px;
 }
 h1 {
 	margin: auto;
 	padding: 0.5em;
+	width: 50%;
+	clear : none;
+	float: left;
 }
 a{
 	background-color: #EE0033;
@@ -46,7 +49,24 @@ a{
 	float: left;
 	clear: left;
 	cursor: pointer;
+	width: 20%;
 }
+
+p{
+	font-weight: 600;
+}
+body > p{
+	padding: 10px;
+	margin: auto;
+	font-weight: 800;
+	font-size: 2em;
+	text-align: center;
+}
+nav{
+	float: right;
+	clear: none;	
+}
+
 a:link{
 	color: #FFFFFF;
 	text-decoration: none;
@@ -58,20 +78,28 @@ a:visited{
 
 header a{
 	background-color: #EE0033;
-	margin: 1em;
+	border: none;
+	float: right;
+	margin: 1.5em;
 	padding: 5px;
 	cursor: pointer;
 	font-family: "Open Sans", Sans-serif;
 	font-weight: 500;
 	font-size: 1em;
+	width: auto;
 }
 
 div a{
 	background-color: #EE0033;
-	margin: 1em;
-	padding: 5px;
+	border: none;
+	margin: auto;
+	margin-top: 1em;
+	font-weight: 600;
+	font-size: 0.4em;
+	padding: 0.5em;
+	text-align: left;
 	cursor: pointer;
-	width: 100%;
+	width: 98%;
 	
 }
 
@@ -108,12 +136,27 @@ form{
 	margin:auto;
 	width: 90%;
 }
+
+
+
 input{
 	padding:0.25em 0.25em;
 	font-size: 1em;
 	width:100%;
 	margin:10px 0;
 }
+input[type=radio]{
+	display: inline;
+	width: 10%;
+}
+
+select {
+	padding:0.25em 0.25em;
+	font-size: 1em;
+	width:100%;
+	margin:10px 0;
+}
+
 input[type=button], input[type=submit], input[type=reset] {
 	
 	background-color: #EE0033;

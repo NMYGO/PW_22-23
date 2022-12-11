@@ -35,9 +35,11 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 	<input type="number" name="id" value="" min="1" required>
 	<br/>
 	<label for="tipo">Tipo: </label>
-	<input type="radio" name="tipo" value="true" checked>Niño
-	<input type="radio" name="tipo" value="false">Adulto
-	<br/>
+	<br></br>
+	Niño<input type="radio" name="tipo" value="true" checked>
+	<br></br>
+	Adulto<input type="radio" name="tipo" value="false">
+	<br><br/>
 	<label for="estado">Estado: </label>
 	<select name="estado" required>
 		<option value="DISPONIBLE">Disponible</option>
@@ -59,14 +61,14 @@ for (int i = 0; i < karts.size(); i++) {
 }
 %>
 <br/><br/>
-<strong>KARTS EXISTENTES</strong>
+<p>KARTS EXISTENTES</p>
 <table>
 	<tr>
 	<th>ID</th>
 	<th>ESTADO</th>
 	<th>PISTA</th>
 	</tr>
-	<tr><td colspan="3"><strong>KARTS INFANTILES</strong></td></tr>
+	<tr><td colspan="3"><p>KARTS INFANTILES</p></td></tr>
 	<% for (int i = 0; i < kartsInfantiles.size(); i++) { %>
 	<tr>
 		<td>
@@ -80,7 +82,7 @@ for (int i = 0; i < karts.size(); i++) {
 		</td>
 	</tr>
 	<% } %>
-	<tr><td colspan="3"><strong>KARTS ADULTOS</strong></td></tr>
+	<tr><td colspan="3"><p>KARTS ADULTOS</p></td></tr>
 	<% for (int i = 0; i < kartsInfantiles.size(); i++) { %>
 	<tr>
 		<td>
