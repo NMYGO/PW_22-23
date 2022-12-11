@@ -35,11 +35,9 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 	<input type="number" name="id" value="" min="1" required>
 	<br/>
 	<label for="tipo">Tipo: </label>
-	<br></br>
-	Niño<input type="radio" name="tipo" value="true" checked>
-	<br></br>
-	Adulto<input type="radio" name="tipo" value="false">
-	<br><br/>
+	<input type="radio" name="tipo" value="true" checked>Niño
+	<input type="radio" name="tipo" value="false">Adulto
+	<br>
 	<label for="estado">Estado: </label>
 	<select name="estado" required>
 		<option value="DISPONIBLE">Disponible</option>
