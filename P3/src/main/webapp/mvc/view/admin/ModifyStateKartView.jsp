@@ -45,27 +45,48 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 </form>
 <%
 ArrayList<KartDTO> karts = (ArrayList<KartDTO>)request.getAttribute("karts");
+ArrayList<KartDTO> kartsInfantiles = new ArrayList<KartDTO>();
+ArrayList<KartDTO> kartsAdultos = new ArrayList<KartDTO>();
+for (int i = 0; i < karts.size(); i++) {
+	if(karts.get(i).isTipo() == true){
+		kartsInfantiles.add(karts.get(i));
+	} else {
+		kartsAdultos.add(karts.get(i));
+	}
+}
 %>
+<br/><br/>
 <table>
 	<tr>
 	<th>ID</th>
 	<th>ESTADO</th>
-	<th>TIPO</th>
 	<th>PISTA</th>
 	</tr>
-	<% for (int i = 0; i < karts.size(); i++) { %>
+	<tr><td colspan="3">KARTS INFANTILES</td></tr>
+	<% for (int i = 0; i < kartsInfantiles.size(); i++) { %>
 	<tr>
 		<td>
-		<%= karts.get(i).getId() %>
+		<%= kartsInfantiles.get(i).getId() %>
 		</td>
 		<td>
-		<%= karts.get(i).getEstado() %>
+		<%= kartsInfantiles.get(i).getEstado() %>
 		</td>
 		<td>
-		<%= karts.get(i).isTipo() %>
+		<%= kartsInfantiles.get(i).getNombrePista() %>
+		</td>
+	</tr>
+	<% } %>
+	<tr><td colspan="3">KARTS ADULTOS</td></tr>
+	<% for (int i = 0; i < kartsInfantiles.size(); i++) { %>
+	<tr>
+		<td>
+		<%= kartsAdultos.get(i).getId() %>
 		</td>
 		<td>
-		<%= karts.get(i).getNombrePista() %>
+		<%= kartsAdultos.get(i).getEstado() %>
+		</td>
+		<td>
+		<%= kartsAdultos.get(i).getNombrePista() %>
 		</td>
 	</tr>
 	<% } %>

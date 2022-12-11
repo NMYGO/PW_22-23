@@ -139,7 +139,7 @@ public class KartDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement(consultaKartPista);
+			PreparedStatement ps = connection.prepareStatement("select * from kart where nombrePista=?");
 			ps.setString(1, nombrePista);
 			ResultSet rs = (ResultSet) ps.executeQuery();
 

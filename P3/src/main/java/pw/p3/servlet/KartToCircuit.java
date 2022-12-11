@@ -7,6 +7,8 @@ import pw.p3.data.dao.*;
 import pw.p3.display.javabean.CustomerBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,11 +30,15 @@ public class KartToCircuit extends HttpServlet {
 			if(customerBean.getAdminUser()) {
 				String nombrePista = request.getParameter("nombrePista");
 				String idKart_string = request.getParameter("idKart");
+				KartDAO kartDAO = new KartDAO();
+				CircuitDAO circuitDAO = new CircuitDAO();
+				ArrayList<KartDTO> karts = kartDAO.solicitarKarts();
+				request.setAttribute("karts", karts);
+				ArrayList<CircuitDTO> pistas = circuitDAO.solicitarPistas();
+				request.setAttribute("pistas", pistas);
 				
 				if (nombrePista != null || idKart_string != null) {
 					Integer idKart = Integer.parseInt(idKart_string);
-					KartDAO kartDAO = new KartDAO();
-					CircuitDAO circuitDAO = new CircuitDAO();
 					KartDTO kart = kartDAO.solicitarKart(idKart);
 					CircuitDTO pista = circuitDAO.solicitarPista(nombrePista);
 					CircuitFunctionality circuitFunctionality = new CircuitFunctionality();

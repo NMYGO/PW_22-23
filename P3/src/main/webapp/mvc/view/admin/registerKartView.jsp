@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import ="java.util.ArrayList, pw.p3.business.kart.*" %>
 <jsp:useBean  id="customerBean" scope="session" class="pw.p3.display.javabean.CustomerBean"></jsp:useBean>
 
 <!DOCTYPE html>
@@ -7,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Registrar Kart</title>
+<link href= "<%= request.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <%
@@ -44,6 +46,55 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 	<br/><br/>
 	<input type="submit" value="Registrar Kart">
 </form>
+<%
+ArrayList<KartDTO> karts = (ArrayList<KartDTO>)request.getAttribute("karts");
+ArrayList<KartDTO> kartsInfantiles = new ArrayList<KartDTO>();
+ArrayList<KartDTO> kartsAdultos = new ArrayList<KartDTO>();
+for (int i = 0; i < karts.size(); i++) {
+	if(karts.get(i).isTipo() == true){
+		kartsInfantiles.add(karts.get(i));
+	} else {
+		kartsAdultos.add(karts.get(i));
+	}
+}
+%>
+<br/><br/>
+KARTS EXISTENTES
+<table>
+	<tr>
+	<th>ID</th>
+	<th>ESTADO</th>
+	<th>PISTA</th>
+	</tr>
+	<tr><td colspan="3">KARTS INFANTILES</td></tr>
+	<% for (int i = 0; i < kartsInfantiles.size(); i++) { %>
+	<tr>
+		<td>
+		<%= kartsInfantiles.get(i).getId() %>
+		</td>
+		<td>
+		<%= kartsInfantiles.get(i).getEstado() %>
+		</td>
+		<td>
+		<%= kartsInfantiles.get(i).getNombrePista() %>
+		</td>
+	</tr>
+	<% } %>
+	<tr><td colspan="3">KARTS ADULTOS</td></tr>
+	<% for (int i = 0; i < kartsInfantiles.size(); i++) { %>
+	<tr>
+		<td>
+		<%= kartsAdultos.get(i).getId() %>
+		</td>
+		<td>
+		<%= kartsAdultos.get(i).getEstado() %>
+		</td>
+		<td>
+		<%= kartsAdultos.get(i).getNombrePista() %>
+		</td>
+	</tr>
+	<% } %>
+</table>
 <%
 }
 %>

@@ -41,6 +41,7 @@ ArrayList<RInfantileDTO> reservasInfantiles = (ArrayList<RInfantileDTO>)request.
 ArrayList<RAdultDTO> reservasAdultas = (ArrayList<RAdultDTO>)request.getAttribute("reservasAdultas");
 ArrayList<RFamiliarDTO> reservasFamiliares = (ArrayList<RFamiliarDTO>)request.getAttribute("reservasFamiliares");
 %>
+<br/><br/>
 <table>
 	<tr>
 	<th>ID</th>

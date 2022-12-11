@@ -6,6 +6,7 @@ import pw.p3.data.dao.CircuitDAO;
 import pw.p3.display.javabean.CustomerBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,12 +30,14 @@ public class RegisterCircuit extends HttpServlet {
 				String estado_string = request.getParameter("estado");					
 				String dificultad_string = request.getParameter("dificultad");
 				String maxkarts_string = request.getParameter("maxkarts");
+				CircuitDAO circuitDAO = new CircuitDAO();
+				ArrayList<CircuitDTO> pistas = circuitDAO.solicitarPistas();
+				request.setAttribute("pistas", pistas);
 				
 				if (nombre != null || estado_string != null || dificultad_string != null || maxkarts_string != null) {
 					Boolean estado = Boolean.valueOf(estado_string);
 					Dificultad dificultad = Dificultad.valueOf(dificultad_string);
 					Integer maxkarts = Integer.parseInt(maxkarts_string);
-					CircuitDAO circuitDAO = new CircuitDAO();
 					CircuitDTO circuit = new CircuitDTO(nombre, estado, dificultad, maxkarts);
 					
 					if(circuitDAO.escribirPistaInsert(circuit) == 0) {

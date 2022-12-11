@@ -7,6 +7,7 @@ import pw.p3.display.javabean.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
+import java.util.ArrayList;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -24,12 +25,14 @@ public class RegisterKart extends HttpServlet {
 				String id_string = request.getParameter("id");					
 				String tipo_string = request.getParameter("tipo");					
 				String estado_string = request.getParameter("estado");
+				KartDAO kartDAO = new KartDAO();
+				ArrayList<KartDTO> karts = kartDAO.solicitarKarts();
+				request.setAttribute("karts", karts);
 				
 				if (id_string != null || tipo_string != null || estado_string != null) {
 					Integer id = Integer.parseInt(id_string);
 					Boolean tipo = Boolean.valueOf(tipo_string);
 					Estado estado = Estado.valueOf(estado_string);
-					KartDAO kartDAO = new KartDAO();
 					KartDTO kart = new KartDTO(id, tipo, estado, null);
 					
 					if(kartDAO.escribirKartInsert(kart) == 0) {
