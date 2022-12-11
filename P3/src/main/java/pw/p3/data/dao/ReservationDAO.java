@@ -1,5 +1,8 @@
 package pw.p3.data.dao;
 
+import pw.p3.business.reservation.*;
+import pw.p3.data.Dificultad;
+import pw.p3.data.common.DBConnection;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,14 +14,143 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Properties;
-
 import com.mysql.jdbc.ResultSet;
 
-import pw.p3.business.reservation.*;
-import pw.p3.data.Dificultad;
-import pw.p3.data.common.DBConnection;
 
 public class ReservationDAO {
+	
+	public ArrayList<RInfantileDTO> solicitarReservasInfantiles() {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaReservaInfantil = prop.getProperty("consultaReservaInfantil");
+		ArrayList<RInfantileDTO> reservas = new ArrayList<RInfantileDTO>();
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query = consultaReservaInfantil;
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery("select * from reserva where dificultad = 'INFANTIL'");
+
+			while (rs.next()) {
+				Integer idReserva = rs.getInt("idReserva");
+				String correo = rs.getString("correoUsuario");
+				LocalDate fecha = LocalDate.parse(rs.getString("fecha"));
+				Integer duracion = rs.getInt("duracion");
+				String pista = rs.getString("nombrePista");
+				Float precio = rs.getFloat("precio");
+				Integer descuento = rs.getInt("descuento");
+				Integer ninos = rs.getInt("ninos");
+				Dificultad tipo = Dificultad.valueOf(rs.getString("dificultad"));
+				reservas.add(new RInfantileDTO(idReserva, correo, fecha, duracion, pista, precio, descuento, ninos, tipo));
+			}
+			
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return reservas;
+	}
+	
+	public ArrayList<RAdultDTO> solicitarReservasAdultos() {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaReservaAdulto = prop.getProperty("consultaReservaAdulto");
+		ArrayList<RAdultDTO> reservas = new ArrayList<RAdultDTO>();
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query = consultaReservaAdulto;
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery("select * from reserva where dificultad = 'ADULTO'");
+
+			while (rs.next()) {
+				Integer idReserva = rs.getInt("idReserva");
+				String correo = rs.getString("correoUsuario");
+				LocalDate fecha = LocalDate.parse(rs.getString("fecha"));
+				Integer duracion = rs.getInt("duracion");
+				String pista = rs.getString("nombrePista");
+				Float precio = rs.getFloat("precio");
+				Integer descuento = rs.getInt("descuento");
+				Integer adultos = rs.getInt("adultos");
+				Dificultad tipo = Dificultad.valueOf(rs.getString("dificultad")); //CAMBIAR A TIPO
+				reservas.add(new RAdultDTO(idReserva, correo, fecha, duracion, pista, precio, descuento, adultos, tipo));
+			}
+			
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return reservas;
+	}
+	
+	public ArrayList<RFamiliarDTO> solicitarReservasFamiliares() {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaReservaFamiliar = prop.getProperty("consultaReservaFamiliar");
+		ArrayList<RFamiliarDTO> reservas = new ArrayList<RFamiliarDTO>();
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			String query = consultaReservaFamiliar;
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery("select * from reserva where dificultad = 'FAMILIAR'");
+
+			while (rs.next()) {
+				Integer idReserva = rs.getInt("idReserva");
+				String correo = rs.getString("correoUsuario");
+				LocalDate fecha = LocalDate.parse(rs.getString("fecha"));
+				Integer duracion = rs.getInt("duracion");
+				String pista = rs.getString("nombrePista");
+				Float precio = rs.getFloat("precio");
+				Integer descuento = rs.getInt("descuento");
+				Integer adultos = rs.getInt("adultos");
+				Integer ninos = rs.getInt("ninos");
+				Dificultad tipo = Dificultad.valueOf(rs.getString("dificultad")); //CAMBIAR A TIPO
+				reservas.add(new RFamiliarDTO(idReserva, correo, fecha, duracion, pista, precio, descuento, adultos, ninos, tipo));
+			}
+			
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return reservas;
+	}
 	
 	public RInfantileDTO solicitarProximaReservaInfantil(String correoUsuario, Dificultad dificultad) {
 		Properties prop = new Properties();
@@ -43,6 +175,7 @@ public class ReservationDAO {
 			ResultSet rs = (ResultSet) ps.executeQuery();
 	
 			while (rs.next()) {
+				Integer idReserva = rs.getInt("idReserva");
 				LocalDate fecha = LocalDate.parse(rs.getString("fecha"));
 				Integer duracion = rs.getInt("duracion");
 				String pista = rs.getString("nombrePista");
@@ -50,7 +183,7 @@ public class ReservationDAO {
 				Integer descuento = rs.getInt("descuento");
 				Integer ninos = rs.getInt("ninos");
 				Dificultad tipo = Dificultad.valueOf(rs.getString("dificultad"));
-				reserva = new RInfantileDTO(correoUsuario, fecha, duracion, pista, precio, descuento, ninos, tipo);
+				reserva = new RInfantileDTO(idReserva, correoUsuario, fecha, duracion, pista, precio, descuento, ninos, tipo);
 			}
 	
 			if (ps != null){ 
@@ -87,6 +220,7 @@ public class ReservationDAO {
 			ResultSet rs = (ResultSet) ps.executeQuery();
 	
 			while (rs.next()) {
+				Integer idReserva = rs.getInt("idReserva");
 				LocalDate fecha = LocalDate.parse(rs.getString("fecha"));
 				Integer duracion = rs.getInt("duracion");
 				String pista = rs.getString("nombrePista");
@@ -94,7 +228,7 @@ public class ReservationDAO {
 				Integer descuento = rs.getInt("descuento");
 				Integer adultos = rs.getInt("adultos");
 				Dificultad tipo = Dificultad.valueOf(rs.getString("dificultad"));
-				reserva = new RAdultDTO(correoUsuario, fecha, duracion, pista, precio, descuento, adultos, tipo);
+				reserva = new RAdultDTO(idReserva, correoUsuario, fecha, duracion, pista, precio, descuento, adultos, tipo);
 			}
 	
 			if (ps != null){ 
@@ -131,6 +265,7 @@ public class ReservationDAO {
 			ResultSet rs = (ResultSet) ps.executeQuery();
 	
 			while (rs.next()) {
+				Integer idReserva = rs.getInt("idReserva");
 				LocalDate fecha = LocalDate.parse(rs.getString("fecha"));
 				Integer duracion = rs.getInt("duracion");
 				String pista = rs.getString("nombrePista");
@@ -139,7 +274,7 @@ public class ReservationDAO {
 				Integer adultos = rs.getInt("adultos");
 				Integer ninos = rs.getInt("ninos");
 				Dificultad tipo = Dificultad.valueOf(rs.getString("dificultad"));
-				reserva = new RFamiliarDTO(correoUsuario, fecha, duracion, pista, precio, descuento, adultos, ninos, tipo);
+				reserva = new RFamiliarDTO(idReserva, correoUsuario, fecha, duracion, pista, precio, descuento, adultos, ninos, tipo);
 			}
 	
 			if (ps != null){ 
@@ -176,6 +311,7 @@ public class ReservationDAO {
 			ResultSet rs = (ResultSet) ps.executeQuery();
 	
 			while (rs.next()) {
+				Integer idReserva = rs.getInt("idReserva");
 				LocalDate fecha = LocalDate.parse(rs.getString("fecha"));
 				Integer duracion = rs.getInt("duracion");
 				String pista = rs.getString("nombrePista");
@@ -183,7 +319,7 @@ public class ReservationDAO {
 				Integer descuento = rs.getInt("descuento");
 				Integer ninos = rs.getInt("ninos");
 				Dificultad tipo = Dificultad.valueOf(rs.getString("dificultad"));
-				reservas.add(new RInfantileDTO(correoUsuario, fecha, duracion, pista, precio, descuento, ninos, tipo));
+				reservas.add(new RInfantileDTO(idReserva, correoUsuario, fecha, duracion, pista, precio, descuento, ninos, tipo));
 			}
 	
 			if (ps != null){ 
@@ -220,6 +356,7 @@ public class ReservationDAO {
 			ResultSet rs = (ResultSet) ps.executeQuery();
 	
 			while (rs.next()) {
+				Integer idReserva = rs.getInt("idReserva");
 				LocalDate fecha = LocalDate.parse(rs.getString("fecha"));
 				Integer duracion = rs.getInt("duracion");
 				String pista = rs.getString("nombrePista");
@@ -227,7 +364,7 @@ public class ReservationDAO {
 				Integer descuento = rs.getInt("descuento");
 				Integer adultos = rs.getInt("adultos");
 				Dificultad tipo = Dificultad.valueOf(rs.getString("dificultad"));
-				reservas.add(new RAdultDTO(correoUsuario, fecha, duracion, pista, precio, descuento, adultos, tipo));
+				reservas.add(new RAdultDTO(idReserva, correoUsuario, fecha, duracion, pista, precio, descuento, adultos, tipo));
 			}
 	
 			if (ps != null){ 
@@ -264,6 +401,7 @@ public class ReservationDAO {
 			ResultSet rs = (ResultSet) ps.executeQuery();
 	
 			while (rs.next()) {
+				Integer idReserva = rs.getInt("idReserva");
 				LocalDate fecha = LocalDate.parse(rs.getString("fecha"));
 				Integer duracion = rs.getInt("duracion");
 				String pista = rs.getString("nombrePista");
@@ -272,7 +410,7 @@ public class ReservationDAO {
 				Integer adultos = rs.getInt("adultos");
 				Integer ninos = rs.getInt("ninos");
 				Dificultad tipo = Dificultad.valueOf(rs.getString("dificultad"));
-				reservas.add(new RFamiliarDTO(correoUsuario, fecha, duracion, pista, precio, descuento, adultos, ninos, tipo));
+				reservas.add(new RFamiliarDTO(idReserva, correoUsuario, fecha, duracion, pista, precio, descuento, adultos, ninos, tipo));
 			}
 	
 			if (ps != null){ 
@@ -284,5 +422,31 @@ public class ReservationDAO {
 			e.printStackTrace();
 		}
 		return reservas;
+	}
+	
+	public Integer deleteReservaPendiente(Integer idReserva){
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String deleteReserva = prop.getProperty("deleteReserva");
+		int status=0;
+		try{
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		PreparedStatement ps = connection.prepareStatement("delete from reserva where idReserva=? and fecha > now()");
+		ps.setInt(1, idReserva);
+		status = ps.executeUpdate();
+		} catch(Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return status;
 	}
 }

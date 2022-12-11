@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import ="java.util.ArrayList, pw.p3.business.circuit.*" %>
 <jsp:useBean  id="customerBean" scope="session" class="pw.p3.display.javabean.CustomerBean"></jsp:useBean>
 
 <!DOCTYPE html>
@@ -7,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Modificar Estado de Pista</title>
+<link href= "<%= request.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <%
@@ -38,6 +40,33 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 	<br/><br/>
 	<input type="submit" value="Modificar Estado de Pista">
 </form>
+<%
+ArrayList<CircuitDTO> pistas = (ArrayList<CircuitDTO>)request.getAttribute("pistas");
+%>
+<table>
+	<tr>
+	<th>NOMBRE</th>
+	<th>ESTADO</th>
+	<th>DIFICULTAD</th>
+	<th>MAXKARTS</th>
+	</tr>
+	<% for (int i = 0; i < pistas.size(); i++) { %>
+	<tr>
+		<td>
+		<%= pistas.get(i).getNombre() %>
+		</td>
+		<td>
+		<%= pistas.get(i).isEstado() %>
+		</td>
+		<td>
+		<%= pistas.get(i).getDificultad() %>
+		</td>
+		<td>
+		<%= pistas.get(i).getMaxkarts() %>
+		</td>
+	</tr>
+	<% } %>
+</table>
 <%
 }
 %>

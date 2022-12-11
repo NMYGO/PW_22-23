@@ -40,7 +40,7 @@ public class RegisterCircuit extends HttpServlet {
 					if(circuitDAO.escribirPistaInsert(circuit) == 0) {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
-						out.println("Error. Esa pista ya existe");
+						out.println("Error. Pista no registrada");
 						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/registerCircuitView.jsp");
 						error.include(request, response);
 					} else {

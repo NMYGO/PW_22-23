@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import ="java.util.ArrayList, pw.p3.business.kart.*" %>
 <jsp:useBean  id="customerBean" scope="session" class="pw.p3.display.javabean.CustomerBean"></jsp:useBean>
 
 <!DOCTYPE html>
@@ -7,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Modificar Estado de Kart</title>
+<link href= "<%= request.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <%
@@ -41,6 +43,33 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 	<br/><br/>
 	<input type="submit" value="Modificar Estado de Kart">
 </form>
+<%
+ArrayList<KartDTO> karts = (ArrayList<KartDTO>)request.getAttribute("karts");
+%>
+<table>
+	<tr>
+	<th>ID</th>
+	<th>ESTADO</th>
+	<th>TIPO</th>
+	<th>PISTA</th>
+	</tr>
+	<% for (int i = 0; i < karts.size(); i++) { %>
+	<tr>
+		<td>
+		<%= karts.get(i).getId() %>
+		</td>
+		<td>
+		<%= karts.get(i).getEstado() %>
+		</td>
+		<td>
+		<%= karts.get(i).isTipo() %>
+		</td>
+		<td>
+		<%= karts.get(i).getNombrePista() %>
+		</td>
+	</tr>
+	<% } %>
+</table>
 <%
 }
 %>

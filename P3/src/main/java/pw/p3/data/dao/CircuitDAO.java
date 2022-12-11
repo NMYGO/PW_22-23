@@ -52,7 +52,7 @@ public class CircuitDAO {
 			Connection connection = dbConnection.getConnection();
 			String query = consultaPista;
 			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			ResultSet rs = (ResultSet) stmt.executeQuery("select * from pista");
 
 			while (rs.next()) {
 				String nombre = rs.getString("nombrePista");

@@ -5,6 +5,7 @@ import pw.p3.data.dao.CircuitDAO;
 import pw.p3.display.javabean.CustomerBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,10 +27,12 @@ public class ModifyStateCircuit extends HttpServlet {
 			if(customerBean.getAdminUser()) {
 				String nombre = request.getParameter("nombre");
 				String estado_string = request.getParameter("estado");
+				CircuitDAO circuitDAO = new CircuitDAO();
+				ArrayList<CircuitDTO> pistas = circuitDAO.solicitarPistas();
+				request.setAttribute("pistas", pistas);
 				
 				if (nombre != null || estado_string != null) {
 					Boolean estado = Boolean.valueOf(estado_string);
-					CircuitDAO circuitDAO = new CircuitDAO();
 					CircuitDTO pista = circuitDAO.solicitarPista(nombre);
 					
 					if(pista == null) {

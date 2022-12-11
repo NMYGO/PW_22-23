@@ -32,7 +32,7 @@ public abstract class ReservationCreator {
 	 * @return
 	 */
 	
-	public abstract RInfantileDTO creaRInf(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer ninos, Dificultad tipo);
+	public abstract RInfantileDTO creaRInf(Integer idReserva, String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer ninos, Dificultad tipo);
 	
 	/**
 	 * Reserva familiar
@@ -48,7 +48,7 @@ public abstract class ReservationCreator {
 	 * @return
 	 */
 	
-	public abstract RFamiliarDTO creaRFam(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Integer ninos, Dificultad tipo);
+	public abstract RFamiliarDTO creaRFam(Integer idReserva, String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Integer ninos, Dificultad tipo);
 	
 	/**
 	 * Reserva adulta
@@ -63,5 +63,5 @@ public abstract class ReservationCreator {
 	 * @return
 	 */
 	
-	public abstract RAdultDTO creaRAdu(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Dificultad tipo);
+	public abstract RAdultDTO creaRAdu(Integer idReserva, String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Dificultad tipo);
 }

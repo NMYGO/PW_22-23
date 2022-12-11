@@ -60,6 +60,7 @@
 				<br/><br/><a href="/P3/kartToCircuit">Asociar Kart a Pista</a>
 				<br/><br/><a href="/P3/modifyStateKart">Modificar Estado de Kart</a>
 				<br/><br/><a href="/P3/modifyStateCircuit">Modificar Estado de Pista</a>
+				<br/><br/><a href="/P3/deleteReservation">Borrar Reserva Pendiente</a>
 		<% } else { %>
 			<%= messageNextPage %><br/><br/>
 			<div>¡¡Bienvenido <jsp:getProperty property="nombreUser" name="customerBean"/>!!</div>

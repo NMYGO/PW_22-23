@@ -51,7 +51,7 @@ public class KartDAO {
 			Connection connection = dbConnection.getConnection();
 			String query = consultaKart;
 			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			ResultSet rs = (ResultSet) stmt.executeQuery("select * from kart");
 
 			while (rs.next()) {
 				Integer id = rs.getInt("idKart");

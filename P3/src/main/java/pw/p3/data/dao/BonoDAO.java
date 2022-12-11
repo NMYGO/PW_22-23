@@ -254,6 +254,7 @@ public class BonoDAO {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 			while (rs.next()) {
+				Integer idReserva = rs.getInt("idReserva");
 				String correo = rs.getString("correoUsuario");
 				LocalDate fecha = LocalDate.parse(rs.getString("fecha"));
 				Integer duracion = rs.getInt("duracion");
@@ -262,7 +263,7 @@ public class BonoDAO {
 				Integer descuento = rs.getInt("descuento");
 				Integer ninos = rs.getInt("ninos");
 				Dificultad tipo = Dificultad.valueOf(rs.getString("dificultad"));
-				reservas.add(new RInfantileDTO(correo, fecha, duracion, pista, precio, descuento, ninos, tipo));
+				reservas.add(new RInfantileDTO(idReserva, correo, fecha, duracion, pista, precio, descuento, ninos, tipo));
 			}
 			
 			if (stmt != null){ 
@@ -307,6 +308,7 @@ public class BonoDAO {
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
 			while (rs.next()) {
+				Integer idReserva = rs.getInt("idReserva");
 				String correo = rs.getString("correoUsuario");
 				LocalDate fecha = LocalDate.parse(rs.getString("fecha"));
 				Integer duracion = rs.getInt("duracion");
@@ -315,7 +317,7 @@ public class BonoDAO {
 				Integer descuento = rs.getInt("descuento");
 				Integer adultos = rs.getInt("adultos");
 				Dificultad tipo = Dificultad.valueOf(rs.getString("dificultad"));
-				reservas.add(new RAdultDTO(correo, fecha, duracion, pista, precio, descuento, adultos, tipo));
+				reservas.add(new RAdultDTO(idReserva, correo, fecha, duracion, pista, precio, descuento, adultos, tipo));
 			}
 			
 			if (stmt != null){ 
@@ -360,6 +362,7 @@ public class BonoDAO {
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
 			while (rs.next()) {
+				Integer idReserva = rs.getInt("idReserva");
 				String correo = rs.getString("correoUsuario");
 				LocalDate fecha = LocalDate.parse(rs.getString("fecha"));
 				Integer duracion = rs.getInt("duracion");
@@ -369,7 +372,7 @@ public class BonoDAO {
 				Integer adultos = rs.getInt("adultos");
 				Integer ninos = rs.getInt("ninos");
 				Dificultad tipo = Dificultad.valueOf(rs.getString("dificultad"));
-				reservas.add(new RFamiliarDTO(correo, fecha, duracion, pista, precio, descuento, adultos, ninos, tipo));
+				reservas.add(new RFamiliarDTO(idReserva, correo, fecha, duracion, pista, precio, descuento, adultos, ninos, tipo));
 			}
 			
 			if (stmt != null){ 

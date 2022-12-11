@@ -42,7 +42,8 @@ public abstract class Reservation {
 	 * @param descuento Descuento de la reserva
 	 **/
 	
-	public Reservation(String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento) {
+	public Reservation(Integer idReserva, String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento) {
+		this.idReserva = idReserva;
 		this.usuario = usuario;
 		this.fecha = fecha;
 		this.duracion = duracion;

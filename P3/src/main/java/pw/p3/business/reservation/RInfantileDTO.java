@@ -41,8 +41,8 @@ public class RInfantileDTO extends Reservation{
 	 * @param tipo Tipo de dificultad de reserva
 	 **/
 	
-	public RInfantileDTO(String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer ninos, Dificultad tipo) {
-		super(usuario, fecha, duracion, pista, precio, descuento);
+	public RInfantileDTO(Integer idReserva, String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer ninos, Dificultad tipo) {
+		super(idReserva, usuario, fecha, duracion, pista, precio, descuento);
 		this.ninos = ninos;
 		this.tipo = tipo;
 	}

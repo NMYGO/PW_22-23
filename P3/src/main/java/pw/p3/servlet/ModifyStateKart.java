@@ -6,6 +6,7 @@ import pw.p3.data.dao.KartDAO;
 import pw.p3.display.javabean.CustomerBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,11 +28,13 @@ public class ModifyStateKart extends HttpServlet {
 			if(customerBean.getAdminUser()) {
 				String id_string = request.getParameter("id");
 				String estado_string = request.getParameter("estado");
+				KartDAO kartDAO = new KartDAO();
+				ArrayList<KartDTO> karts = kartDAO.solicitarKarts();
+				request.setAttribute("karts", karts);
 				
 				if (id_string != null || estado_string != null) {
 					Integer id = Integer.parseInt(id_string);
 					Estado estado = Estado.valueOf(estado_string);
-					KartDAO kartDAO = new KartDAO();
 					KartDTO kart = kartDAO.solicitarKart(id);
 					
 					if(kart == null) {
