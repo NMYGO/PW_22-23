@@ -19,6 +19,7 @@ body {
 	font-family: "Open Sans", Sans-serif;
 	font-weight: 500;
 	font-size: 1em;
+	text-align: center;
 	color: #1E252E;
 }
 
@@ -55,9 +56,25 @@ a:visited{
 	text-decoration: none;
 }
 
-div{
-
+header a{
+	background-color: #EE0033;
+	margin: 1em;
+	padding: 5px;
+	cursor: pointer;
+	font-family: "Open Sans", Sans-serif;
+	font-weight: 500;
+	font-size: 1em;
 }
+
+div a{
+	background-color: #EE0033;
+	margin: 1em;
+	padding: 5px;
+	cursor: pointer;
+	width: 100%;
+	
+}
+
 table, th, tr, td{
 	border: 1px solid;
 	border-collapse: collapse;

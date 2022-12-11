@@ -12,9 +12,17 @@
 <title>Pagina Principal</title>
 <link href= "<%= request.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
-<header>
-	<h1>GESTOR DE KARTS</h1> 
-</header>
+<% if (customerBean == null || customerBean.getCorreoUser() == "") { %>
+	<header>
+		<h1>GESTOR DE KARTS</h1> 
+	</header>
+<% } else {%>
+	<header>
+		<h1>GESTOR DE KARTS</h1> 
+		<a href="/P3/mvc/controller/logoutController.jsp">Desconectarse</a>
+		<a href="/P3/mvc/controller/modifyUserController.jsp">Modificar Datos</a>
+	</header>
+<% } %>
 <body>
 	<% String messageNextPage = request.getParameter("message"); %>
 	<%--Este código de reset es únicamente para poder probar múltiples veces el MVC
@@ -55,12 +63,14 @@
 				</tr>
 				<% } %>
 				</table>
-				<br/><br/><a href="/P3/registerKart">Registrar Kart</a>
-				<br/><br/><a href="/P3/registerCircuit">Registrar Pista</a>
-				<br/><br/><a href="/P3/kartToCircuit">Asociar Kart a Pista</a>
-				<br/><br/><a href="/P3/modifyStateKart">Modificar Estado de Kart</a>
-				<br/><br/><a href="/P3/modifyStateCircuit">Modificar Estado de Pista</a>
-				<br/><br/><a href="/P3/deleteReservation">Borrar Reserva Pendiente</a>
+				<div>
+				<a href="/P3/registerKart">Registrar Kart</a>
+				<a href="/P3/registerCircuit">Registrar Pista</a>
+				<a href="/P3/kartToCircuit">Asociar Kart a Pista</a>
+				<a href="/P3/modifyStateKart">Modificar Estado de Kart</a>
+				<a href="/P3/modifyStateCircuit">Modificar Estado de Pista</a>
+				<a href="/P3/deleteReservation">Borrar Reserva Pendiente</a>
+				</div>
 		<% } else { %>
 			<%= messageNextPage %><br/><br/>
 			<div>¡¡Bienvenido <jsp:getProperty property="nombreUser" name="customerBean"/>!!</div>
@@ -74,8 +84,6 @@
 			<% } %>
 			</table>
 		<% } %>
-		<br/><br/><a href="/P3/mvc/controller/logoutController.jsp">Desconectarse</a>
-		<br/><br/><a href="/P3/mvc/controller/modifyUserController.jsp">Modificar Datos</a>
 	<% } %>
 </body>
 </html>
