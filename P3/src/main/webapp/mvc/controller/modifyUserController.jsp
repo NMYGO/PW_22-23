@@ -10,7 +10,7 @@
 		b) No hay parámetros en el request -> procede de otra funcionalidad o index.jsp
 	*/
 //Caso 1: Por defecto, vuelve al index
-String nextPage = "../../index.jsp";
+String nextPage = "./mainController.jsp";
 String mensajeNextPage = "";
 //Caso 2
 if (customerBean != null && !customerBean.getCorreoUser().equalsIgnoreCase("") && !customerBean.getPasswordUser().equalsIgnoreCase("")) {
@@ -21,33 +21,38 @@ if (customerBean != null && !customerBean.getCorreoUser().equalsIgnoreCase("") &
 	
 	//Caso 2.a: Hay parámetros -> procede de la VISTA
 	if (contrasenaUser != null) {
-		if(!nombreUser.equalsIgnoreCase("") && !apellidosUser.equalsIgnoreCase("") &&
-		!nacimientoUser_string.equalsIgnoreCase("") && !contrasenaUser.equalsIgnoreCase("")) {
-			LocalDate nacimientoUser = LocalDate.parse(nacimientoUser_string);
-			UserDAO userDAO = new UserDAO();
-			UserDTO usuario = userDAO.solicitarUsuario(customerBean.getCorreoUser());
-				usuario.setNombre(nombreUser);
-				usuario.setApellidos(apellidosUser);
-				usuario.setNacimiento(nacimientoUser);
-				usuario.setPassword(contrasenaUser);
+		LocalDate nacimientoUser = LocalDate.MAX;
+		UserDAO userDAO = new UserDAO();
+		UserDTO usuario = userDAO.solicitarUsuario(customerBean.getCorreoUser());
+		if(!nombreUser.equalsIgnoreCase("")){
+			usuario.setNombre(nombreUser);
+		}
+		if(!apellidosUser.equalsIgnoreCase("")){
+			usuario.setApellidos(apellidosUser);
+			}
+		if(!nacimientoUser_string.equalsIgnoreCase("")){
+			nacimientoUser = LocalDate.parse(nacimientoUser_string);
+			usuario.setNacimiento(nacimientoUser);
+			}
+		if(!contrasenaUser.equalsIgnoreCase("")){
+			usuario.setPassword(contrasenaUser);
+			}
 			//Se accede a bases de datos para actualizar el usuario
 			//Se realizan todas las comprobaciones necesarias del dominio
 			//Aquí sólo comprobamos que exista el usuario
+		if(!nacimientoUser_string.equalsIgnoreCase("")){
 			if(nacimientoUser.isAfter(LocalDate.now())){
 				nextPage = "../view/modifyUserView.jsp";
 				mensajeNextPage = "La fecha no es valida;";
-			} else
-			if(userDAO.escribirUsuarioUpdate(usuario) == 0) {
-				// Usuario no modificado
-				nextPage = "../view/modifyUserView.jsp";
-				mensajeNextPage = "El usuario no es valido; " + usuario.toString();
-			} else {
-				// Usuario modificado
-				mensajeNextPage = "El usuario se ha modificado correctamente";
 			}
-		}  else {
+		}
+		if(userDAO.escribirUsuarioUpdate(usuario) == 0) {
+			// Usuario no modificado
 			nextPage = "../view/modifyUserView.jsp";
-			mensajeNextPage = "Introduzca todos los datos necesarios";
+			mensajeNextPage = "El usuario no es valido; " + usuario.toString();
+		} else {
+			// Usuario modificado
+			mensajeNextPage = "El usuario se ha modificado correctamente";
 		}
 	//Caso 2.b -> se debe ir a la vista por primera vez
 	} else {

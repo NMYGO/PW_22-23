@@ -31,16 +31,16 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 <%= messageNextPage %><br/><br/>
 <form method="post" action="../controller/modifyUserController.jsp">
 	<label for="nombre">Nombre: </label>
-	<input type="text" name="nombre" value="" maxLength="30" required>
+	<input type="text" name="nombre" value="" maxLength="30">
 	<br/>
 	<label for="apellidos">Apellidos: </label>
-	<input type="text" name="apellidos" value="" maxLength="30" required>
+	<input type="text" name="apellidos" value="" maxLength="30">
 	<br/>
 	<label for="nacimiento">Fecha de Nacimiento: </label>
-	<input type="date" name="nacimiento" value="" required>
+	<input type="date" name="nacimiento" value="">
 	<br/>
 	<label for="password">Contraseña: </label>
-	<input type="password" name="password" value="" maxLength="20" required>	
+	<input type="password" name="password" value="" maxLength="20">	
 	<br/><br/>
 	<input type="submit" value="Modificar Datos">
 </form>
