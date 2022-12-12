@@ -38,6 +38,7 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 	<input type="radio" name="estado" value="true" checked>Reservado
 	<input type="radio" name="estado" value="false">Disponible
 	<br/>
+	<br/>
 	<label for="dificultad">Dificultad: </label>
 	<select name="dificultad" required>
 		<option value="INFANTIL">Infantil</option>
@@ -66,14 +67,14 @@ for (int i = 0; i < pistas.size(); i++) {
 }
 %>
 <br/><br/>
-PISTAS EXISTENTES
+<p>PISTAS EXISTENTES</p>
 <table>
 	<tr>
 	<th>NOMBRE</th>
 	<th>ESTADO</th>
 	<th>MAXKARTS</th>
 	</tr>
-	<tr><td colspan="3">PISTAS INFANTILES</td></tr>
+	<tr><td colspan="3"><p>PISTAS INFANTILES</p></td></tr>
 	<% for (int i = 0; i < pistasInfantiles.size(); i++) { %>
 	<tr>
 		<td>
@@ -87,7 +88,7 @@ PISTAS EXISTENTES
 		</td>
 	</tr>
 	<% } %>
-	<tr><td colspan="3">PISTAS ADULTOS</td></tr>
+	<tr><td colspan="3"><p>PISTAS ADULTOS</p></td></tr>
 	<% for (int i = 0; i < pistasAdultos.size(); i++) { %>
 	<tr>
 		<td>
@@ -101,7 +102,7 @@ PISTAS EXISTENTES
 		</td>
 	</tr>
 	<% } %>
-	<tr><td colspan="3">PISTAS FAMILIARES</td></tr>
+	<tr><td colspan="3"><p>PISTAS FAMILIARES</p></td></tr>
 	<% for (int i = 0; i < pistasFamiliares.size(); i++) { %>
 	<tr>
 		<td>

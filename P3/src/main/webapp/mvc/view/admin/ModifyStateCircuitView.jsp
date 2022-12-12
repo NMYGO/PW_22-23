@@ -62,7 +62,7 @@ for (int i = 0; i < pistas.size(); i++) {
 	<th>ESTADO</th>
 	<th>MAXKARTS</th>
 	</tr>
-	<tr><td colspan="3">PISTAS INFANTILES</td></tr>
+	<tr><td colspan="3"><p>PISTAS INFANTILES</p></td></tr>
 	<% for (int i = 0; i < pistasInfantiles.size(); i++) { %>
 	<tr>
 		<td>
@@ -76,7 +76,7 @@ for (int i = 0; i < pistas.size(); i++) {
 		</td>
 	</tr>
 	<% } %>
-	<tr><td colspan="3">PISTAS ADULTOS</td></tr>
+	<tr><td colspan="3"><p>PISTAS ADULTOS</p></td></tr>
 	<% for (int i = 0; i < pistasAdultos.size(); i++) { %>
 	<tr>
 		<td>
@@ -90,7 +90,7 @@ for (int i = 0; i < pistas.size(); i++) {
 		</td>
 	</tr>
 	<% } %>
-	<tr><td colspan="3">PISTAS FAMILIARES</td></tr>
+	<tr><td colspan="3"><p>PISTAS FAMILIARES</p></td></tr>
 	<% for (int i = 0; i < pistasFamiliares.size(); i++) { %>
 	<tr>
 		<td>

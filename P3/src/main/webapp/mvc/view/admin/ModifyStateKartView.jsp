@@ -62,7 +62,7 @@ for (int i = 0; i < karts.size(); i++) {
 	<th>ESTADO</th>
 	<th>PISTA</th>
 	</tr>
-	<tr><td colspan="3">KARTS INFANTILES</td></tr>
+	<tr><td colspan="3"><p>KARTS INFANTILES</p></td></tr>
 	<% for (int i = 0; i < kartsInfantiles.size(); i++) { %>
 	<tr>
 		<td>
@@ -76,7 +76,7 @@ for (int i = 0; i < karts.size(); i++) {
 		</td>
 	</tr>
 	<% } %>
-	<tr><td colspan="3">KARTS ADULTOS</td></tr>
+	<tr><td colspan="3"><p>KARTS ADULTOS</p></td></tr>
 	<% for (int i = 0; i < kartsInfantiles.size(); i++) { %>
 	<tr>
 		<td>

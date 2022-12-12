@@ -49,7 +49,7 @@ ArrayList<RFamiliarDTO> reservasFamiliares = (ArrayList<RFamiliarDTO>)request.ge
 	<th>FECHA</th>
 	<th>PISTA</th>
 	</tr>
-	<tr><td colspan="4">RESERVAS INFANTILES</td></tr>
+	<tr><td colspan="4"><p>RESERVAS INFANTILES</p></td></tr>
 	<% for (int i = 0; i < reservasInfantiles.size(); i++) { %>
 	<tr>
 		<td>
@@ -66,7 +66,7 @@ ArrayList<RFamiliarDTO> reservasFamiliares = (ArrayList<RFamiliarDTO>)request.ge
 		</td>
 	</tr>
 	<% } %>
-	<tr><td colspan="4">RESERVAS ADULTAS</td></tr>
+	<tr><td colspan="4"><p>RESERVAS ADULTAS</p></td></tr>
 	<% for (int i = 0; i < reservasAdultas.size(); i++) { %>
 	<tr>
 		<td>
@@ -83,7 +83,7 @@ ArrayList<RFamiliarDTO> reservasFamiliares = (ArrayList<RFamiliarDTO>)request.ge
 		</td>
 	</tr>
 	<% } %>
-	<tr><td colspan="4">RESERVAS FAMILIARES</td></tr>
+	<tr><td colspan="4"><p>RESERVAS FAMILIARES</p></td></tr>
 	<% for (int i = 0; i < reservasFamiliares.size(); i++) { %>
 	<tr>
 		<td>
