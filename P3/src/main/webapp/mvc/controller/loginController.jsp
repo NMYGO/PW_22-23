@@ -11,7 +11,8 @@
 	*/
 //Caso 1: Por defecto, vuelve al index
 String nextPage = "../../index.jsp";
-String mensajeNextPage = "loginController";
+String mensajeNextPage = "";
+//mensajeNextPage = "loginController";
 //Caso 2
 if (customerBean == null || customerBean.getCorreoUser().equalsIgnoreCase("") || customerBean.getPasswordUser().equalsIgnoreCase("")) {
 	String correoUser = request.getParameter("correo");
