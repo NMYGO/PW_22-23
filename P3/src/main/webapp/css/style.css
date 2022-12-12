@@ -33,6 +33,7 @@ div{
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+
 h1 {
 	margin: auto;
 	padding: 0.5em;
@@ -40,6 +41,7 @@ h1 {
 	clear : none;
 	float: left;
 }
+
 a{
 	background-color: #EE0033;
 	border: 2px solid;
@@ -52,11 +54,20 @@ a{
 	width: 20%;
 }
 
+h2{
+	font-weight: 600;
+	color: #FF0000;
+	margin: 2em;
+	margin-bottom: -1em;
+}
+
 p{
 	font-weight: 600;
 }
 body > p{
 	padding: 10px;
+	background-color: inherit;
+	color: inherit;
 	margin: auto;
 	font-weight: 800;
 	font-size: 2em;
