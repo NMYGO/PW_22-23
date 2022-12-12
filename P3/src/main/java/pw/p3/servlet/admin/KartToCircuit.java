@@ -1,4 +1,4 @@
-package pw.p3.servlet;
+package pw.p3.servlet.admin;
 
 import pw.p3.business.kart.*;
 import pw.p3.business.circuit.*;
