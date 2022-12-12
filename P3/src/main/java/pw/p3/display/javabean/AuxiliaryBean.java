@@ -13,9 +13,11 @@ public class AuxiliaryBean implements java.io.Serializable {
 	private Dificultad dificultadProximaReserva;
 	private LocalDate fechaProximaReserva;
 	private ArrayList<UserDTO> usuarios;
+	private ArrayList<Integer> antiguedades;
 	private ArrayList<RInfantileDTO> reservasInfantil;
 	private ArrayList<RAdultDTO> reservasAdulto;
 	private ArrayList<RFamiliarDTO> reservasFamiliar;
+	private ArrayList<Integer> nreservas;
 	
 	public Dificultad getDificultadProximaReserva() {
 		return dificultadProximaReserva;
@@ -35,6 +37,12 @@ public class AuxiliaryBean implements java.io.Serializable {
 	public void setUsuarios(ArrayList<UserDTO> usuarios) {
 		this.usuarios = usuarios;
 	}
+	public ArrayList<Integer> getAntiguedades() {
+		return antiguedades;
+	}
+	public void setAntiguedades(ArrayList<Integer> antiguedades) {
+		this.antiguedades = antiguedades;
+	}
 	public ArrayList<RInfantileDTO> getReservasInfantil() {
 		return reservasInfantil;
 	}
@@ -52,5 +60,11 @@ public class AuxiliaryBean implements java.io.Serializable {
 	}
 	public void setReservasFamiliar(ArrayList<RFamiliarDTO> reservasFamiliar) {
 		this.reservasFamiliar = reservasFamiliar;
+	}
+	public ArrayList<Integer> getNreservas() {
+		return nreservas;
+	}
+	public void setNreservas(ArrayList<Integer> nreservas) {
+		this.nreservas = nreservas;
 	}
 }

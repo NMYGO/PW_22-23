@@ -58,10 +58,10 @@
 					<%= auxiliaryBean.getUsuarios().get(i).getNombre() %> <%= auxiliaryBean.getUsuarios().get(i).getApellidos() %>
 					</td>
 					<td>
-					<%= auxiliaryBean.getUsuarios().get(i).getAntiguedad() %> meses
+					<%= auxiliaryBean.getAntiguedades().get(i) %> meses
 					</td>
 					<td>
-					<%= auxiliaryBean.getUsuarios().get(i).getNreservas() %>
+					<%= auxiliaryBean.getNreservas().get(i) %>
 					</td>
 				</tr>
 				<% } %>

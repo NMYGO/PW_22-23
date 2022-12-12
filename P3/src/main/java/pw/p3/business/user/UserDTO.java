@@ -11,11 +11,9 @@ public class UserDTO {
 	protected String apellidos;
 	protected LocalDate nacimiento;
 	protected LocalDate inscripcion;
-	protected Integer antiguedad;
 	protected String correo;
 	protected String password;
 	protected Boolean administrador;
-	protected Integer nreservas;
 	/* Constructores */
 	
 	/**
@@ -76,12 +74,6 @@ public class UserDTO {
 	public void setInscripcion(LocalDate inscripcion) {
 		this.inscripcion = inscripcion;
 	}
-	public Integer getAntiguedad() {
-		return antiguedad;
-	}
-	public void setAntiguedad(Integer antiguedad) {
-		this.antiguedad = antiguedad;
-	}
 	public String getCorreo() {
 		return correo;
 	}
@@ -99,13 +91,6 @@ public class UserDTO {
 	}
 	public void setAdministrador(Boolean administrador) {
 		this.administrador = administrador;
-	}
-	public Integer getNreservas() {
-		return nreservas;
-	}
-
-	public void setNreservas(Integer nreservas) {
-		this.nreservas = nreservas;
 	}
 	
 	/* Otros metodos */

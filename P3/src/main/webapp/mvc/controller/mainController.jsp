@@ -11,6 +11,8 @@ String mensajeNextPage = "mainController";
 
 <% if(customerBean.getAdminUser()) { %>	
 	<%ArrayList<UserDTO> usuarios = new ArrayList<UserDTO>();%>
+	<% ArrayList<Integer> arrayAntiguedades = new ArrayList<Integer>(); %>
+	<% ArrayList<Integer> arrayNreservas = new ArrayList<Integer>(); %>
 	<%ArrayList<RInfantileDTO> reservasInfantil = new ArrayList<RInfantileDTO>();%>
 	<%ArrayList<RAdultDTO> reservasAdulto = new ArrayList<RAdultDTO>();%>
 	<%ArrayList<RFamiliarDTO> reservasFamiliar = new ArrayList<RFamiliarDTO>();%>
@@ -21,7 +23,7 @@ String mensajeNextPage = "mainController";
 	<% auxiliaryBean.setUsuarios(usuarios); %>
 	<% for (int i = 0; i < auxiliaryBean.getUsuarios().size(); i++) { %>
 		<% int nreservas = 0; %>
-		<% auxiliaryBean.getUsuarios().get(i).setAntiguedad(userManager.calcularAntiguedad(usuarios.get(i))); %>
+		<% arrayAntiguedades.add(userManager.calcularAntiguedad(usuarios.get(i))); %>
 		<% reservasInfantil = reservationDAO.solicitarReservasInfantilCompletada(usuarios.get(i).getCorreo(), Dificultad.INFANTIL); %>
 		<% if(reservasInfantil != null) { %>		
 			<% //auxiliaryBean.setReservasInfantil(reservasInfantil); %>
@@ -37,8 +39,10 @@ String mensajeNextPage = "mainController";
 			<% //auxiliaryBean.setReservasFamiliar(reservasFamiliar); %>
 			<% nreservas += reservasFamiliar.size(); %>
 		<% } %>
-		<% auxiliaryBean.getUsuarios().get(i).setNreservas(nreservas); %>
+		<% arrayNreservas.add(nreservas); %>
 	<% } %>
+	<% auxiliaryBean.setAntiguedades(arrayAntiguedades); %>
+	<% auxiliaryBean.setNreservas(arrayNreservas); %>
 <% } else { %>
 	<% ReservationDAO reservationDAO = new ReservationDAO();
 	LocalDate fechaInfantil = reservationDAO.solicitarProximaReservaInfantil(customerBean.getCorreoUser(), Dificultad.INFANTIL).getFecha();
