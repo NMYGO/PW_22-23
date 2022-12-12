@@ -20,14 +20,14 @@
 String nextPage = "../controller/loginController.jsp";
 String messageNextPage = request.getParameter("message");
 if (messageNextPage == null) {
-	messageNextPage = "loginView";
+	messageNextPage = "";
 }
 
 if (customerBean != null && !customerBean.getCorreoUser().equals("") && !customerBean.getPasswordUser().equalsIgnoreCase("")) {
 	//No debería estar aquí -> flujo salta a index.jsp
 	nextPage = "../../index.jsp";
 } else { %>
-<%= messageNextPage %><br/><br/>
+<h2><%= messageNextPage %></h2><br/><br/>
 <form method="post" action="../controller/loginController.jsp">
 	<label for="correo">Correo: </label>
 	<input type="email" name="correo" value="" placeholder="correo@dominio" required>
