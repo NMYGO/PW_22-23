@@ -29,7 +29,7 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 	nextPage = "../../index.jsp";
 } else {
 %>
-<%= messageNextPage %><br/><br/>
+<h2><%= messageNextPage %></h2><br/><br/>
 <form method="get" action="/P3/registerKart">
 	<label for="id">ID: </label>
 	<input type="number" name="id" value="" min="1" required>

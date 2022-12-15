@@ -29,7 +29,7 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 	nextPage = "../../index.jsp";
 } else {
 %>
-<%= messageNextPage %><br/><br/>
+<h2><%= messageNextPage %></h2><br/><br/>
 <form method="get" action="/P3/modifyStateCircuit">
 	<label for="nombre">Nombre: </label>
 	<input type="text" name="nombre" value="" maxLength="30" required>

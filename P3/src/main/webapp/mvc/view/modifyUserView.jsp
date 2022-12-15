@@ -28,7 +28,7 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 	nextPage = "../../index.jsp";
 } else {
 %>
-<%= messageNextPage %><br/><br/>
+<h2><%= messageNextPage %></h2><br/><br/>
 <form method="post" action="../controller/modifyUserController.jsp">
 	<label for="nombre">Nombre: </label>
 	<input type="text" name="nombre" value="" maxLength="30">

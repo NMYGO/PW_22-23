@@ -7,7 +7,7 @@
 <link href= "<%= request.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet"/>
 <title>Error Usuario</title>
 </head>
-<h1>ERROR USUARIO NO LOGUEADO</h1>
+<h2>ERROR USUARIO NO LOGUEADO</h2>
 <body>
 <br/><br/><a href="index.jsp">Volver</a>
 </body>

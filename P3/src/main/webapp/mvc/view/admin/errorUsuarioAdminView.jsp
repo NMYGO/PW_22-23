@@ -7,7 +7,7 @@
 <link href= "<%= request.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet"/>
 <title>Error Usuario</title>
 </head>
-<h1>ERROR USUARIO NO ADMINISTRADOR</h1>
+<h2>ERROR USUARIO NO ADMINISTRADOR</h2>
 <body>
 <br/><br/><a href="index.jsp">Volver</a>
 </body>
