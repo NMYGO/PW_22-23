@@ -86,6 +86,9 @@
 			<tr><td>Fecha de la proxima reserva (yyyy-mm-dd): <jsp:getProperty property="fechaProximaReserva" name="auxiliaryBean"/> => Reserva <jsp:getProperty property="dificultadProximaReserva" name="auxiliaryBean"/></td></tr>
 			<% } %>
 			</table>
+			<div>
+			<a href="/P3/consultarReservas">Consultar Reservas</a>
+			</div>
 		<% } %>
 	<% } %>
 </body>
