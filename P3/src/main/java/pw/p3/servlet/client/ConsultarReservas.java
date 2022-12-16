@@ -46,6 +46,7 @@ public class ConsultarReservas extends HttpServlet {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
 						out.println("Jajant");
+						
 						RequestDispatcher correcto = request.getRequestDispatcher("/mvc/view/client/showReservationsView.jsp");
 						correcto.include(request, response);
 					}

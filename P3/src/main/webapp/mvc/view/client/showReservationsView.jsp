@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ page import ="java.util.ArrayList, java.time.LocalDate, pw.p3.business.reservation.*" %>
 <jsp:useBean  id="customerBean" scope="session" class="pw.p3.display.javabean.CustomerBean"></jsp:useBean>
-
+<jsp:useBean  id="dateBean" scope="application" class="pw.p3.display.javabean.DateBean"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +24,8 @@ if (messageNextPage == null) {
 	messageNextPage = "ConsultarReservasView";
 }
 
-if (customerBean == null || customerBean.getCorreoUser().equals("") || customerBean.getPasswordUser().equalsIgnoreCase("")) {
+if (customerBean == null || customerBean.getCorreoUser().equals("") || customerBean.getPasswordUser().equalsIgnoreCase("") ||
+	request.getParameter("fechaFinal") == null || request.getParameter("fechaInicio") == null) {
 	//No debería estar aquí -> flujo salta a index.jsp
 	nextPage = "../../index.jsp";
 } else {
@@ -32,6 +33,9 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 <h2><%= messageNextPage %></h2><br/><br/>
 <%
 LocalDate hoy = LocalDate.now();
+LocalDate init = LocalDate.parse(request.getParameter("fechaInicio"));
+LocalDate fin = LocalDate.parse(request.getParameter("fechaFinal"));
+
 ArrayList<RInfantileDTO> reservasInfantiles = (ArrayList<RInfantileDTO>)request.getAttribute("reservasInfantiles");
 ArrayList<RAdultDTO> reservasAdultas = (ArrayList<RAdultDTO>)request.getAttribute("reservasAdultas");
 ArrayList<RFamiliarDTO> reservasFamiliares = (ArrayList<RFamiliarDTO>)request.getAttribute("reservasFamiliares");
@@ -47,7 +51,8 @@ ArrayList<RFamiliarDTO> reservasFamiliares = (ArrayList<RFamiliarDTO>)request.ge
 	<tr><td colspan="4"><p>RESERVAS INFANTILES</p></td></tr>
 	<% for (int i = 0; i < reservasInfantiles.size(); i++) { %>
 	<tr>
-		<%if(customerBean.getCorreoUser().equals(reservasInfantiles.get(i).getUsuario())){  %>
+		<%if(customerBean.getCorreoUser().equals(reservasInfantiles.get(i).getUsuario()) 
+				&& reservasInfantiles.get(i).getFecha().isBefore(fin) && reservasInfantiles.get(i).getFecha().isAfter(init)){  %>
 		<td>
 		<%= reservasInfantiles.get(i).getIdReserva() %>
 		</td>
@@ -67,7 +72,8 @@ ArrayList<RFamiliarDTO> reservasFamiliares = (ArrayList<RFamiliarDTO>)request.ge
 	<tr><td colspan="4"><p>RESERVAS ADULTAS</p></td></tr>
 	<% for (int i = 0; i < reservasAdultas.size(); i++) { %>
 	<tr>
-		<%if(customerBean.getCorreoUser().equals(reservasAdultas.get(i).getUsuario())){  %>
+		<%if(customerBean.getCorreoUser().equals(reservasAdultas.get(i).getUsuario())
+				&& reservasAdultas.get(i).getFecha().isBefore(fin) && reservasAdultas.get(i).getFecha().isAfter(init)){  %>
 		<td>
 		<%= reservasAdultas.get(i).getIdReserva() %>
 		</td>
@@ -87,7 +93,8 @@ ArrayList<RFamiliarDTO> reservasFamiliares = (ArrayList<RFamiliarDTO>)request.ge
 	<tr><td colspan="4"><p>RESERVAS FAMILIARES</p></td></tr>
 	<% for (int i = 0; i < reservasFamiliares.size(); i++) { %>
 	<tr>
-		<%if(customerBean.getCorreoUser().equals(reservasFamiliares.get(i).getUsuario())){  %>
+		<%if(customerBean.getCorreoUser().equals(reservasFamiliares.get(i).getUsuario())
+				&& reservasFamiliares.get(i).getFecha().isBefore(fin) && reservasFamiliares.get(i).getFecha().isAfter(init)){  %>
 		<td>
 		<%= reservasFamiliares.get(i).getIdReserva() %>
 		</td>
