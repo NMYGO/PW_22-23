@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import ="java.util.ArrayList, pw.p3.business.reservation.*, pw.p3.data.Dificultad" %>
+    <%@ page import ="java.util.ArrayList, pw.p3.business.circuit.*, pw.p3.data.Dificultad" %>
 <jsp:useBean  id="customerBean" scope="session" class="pw.p3.display.javabean.CustomerBean"></jsp:useBean>
-
+<jsp:useBean  id="reservaBean" scope="session" class="pw.p3.display.javabean.ReservationBean"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,27 +31,30 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 %>
 <h2><%= messageNextPage %></h2><br/><br/>
 <form method="get" action="/P3/newReservation">
-	<label for="dificultad">Dificultad: </label>
-	<input type="radio" name="estado" value="infantil" checked>Infantil
-	<input type="radio" name="estado" value="adulto">Adulto
-	<input type="radio" name="estado" value="familiar">Familiar
-	<br/>
-	<label for="duracion">Duracion: </label>
-	<input type="radio" name="duracion" value="60" checked>60 minutos
-	<input type="radio" name="duracion" value="90">90 minutos
-	<input type="radio" name="duracion" value="120">120 minutos
-	<br/>
-	<label for="fecha">Fecha:</label>
-	<input type="date" name="fecha" value="">
-	<br/>
-	<label for="adultos">Numero de Adultos:</label>
-	<input type="number" name="adultos"> (No se tendrá en cuenta para reservas infantiles)
-	<br/>
-	<label for="ninos">Número de niños :</label>
-	<input type="number" name="ninos">(No se tendrá en cuenta para reservas adultas)
+	<label for="pista">Pista: </label>
+	<input type="text" name="pista" value="" required>
 	<br/><br/>
-	<input type="submit" value="Modificar Estado de Pista">
+	<input type="submit" value="Elegir pista">
 </form>
+<%
+CircuitManager circuitos = new CircuitManager();
+Integer total = reservaBean.getNinos()+reservaBean.getAdultos();
+ArrayList<CircuitDTO> pistas = circuitos.pistasLibres(total, reservaBean.getDificultad());
+%>
+<br/><br/>
+<%=pistas.size() %>
+<table>
+	<tr>
+	<th>PISTA</th>
+	</tr>
+	<% for (int i = 0; i < pistas.size(); i++) { %>
+	<tr>
+		<td>
+		<%= pistas.get(i).getNombre() %>
+		</td>
+	</tr>
+	<% } %>
+</table>
 <%
 }
 %>
