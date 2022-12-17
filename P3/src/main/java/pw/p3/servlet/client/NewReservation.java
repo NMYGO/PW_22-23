@@ -1,5 +1,12 @@
 package pw.p3.servlet.client;
 
+import pw.p2.business.DTOPista;
+import pw.p2.business.DTORFamiliar;
+import pw.p2.business.DTOUsuario;
+import pw.p2.business.RIndividualCreador;
+import pw.p2.data.DAO.DAOPista;
+import pw.p2.data.DAO.DAOReserva;
+import pw.p2.data.DAO.DAOUsuario;
 import pw.p3.business.reservation.*;
 import pw.p3.data.Dificultad;
 import pw.p3.data.dao.ReservationDAO;
@@ -35,7 +42,6 @@ public class NewReservation extends HttpServlet {
 					String dificultad = request.getParameter("dificultad");
 					String string_ninos = "0";
 					String string_adultos = "0";
-					String pista = request.getParameter("pista");
 					if(dificultad != "ADULTO") {
 					string_ninos = request.getParameter("ninos");
 					}
@@ -57,7 +63,24 @@ public class NewReservation extends HttpServlet {
 						vista.forward(request, response);
 					}
 				} else {
+					String pista = request.getParameter("pista");
+					float precio = 0;
+					int descuento = 0;
+					switch(reservaBean.getDuracion()) {
+						
+					if(customerBean.getAntiguedadUser()>2) {
+						descuento = 10;
+					}
 					
+					RIndividualCreator individualCreador = new RIndividualCreator();
+					RFamiliarDTO newReserva = individualCreador.creaRFam(usuario.getCorreo(), fecha, duracion, pista, precio, descuento, participantesInfantiles, participantesAdultos, Dificultad.FAMILIAR);
+					if(reservaTabla.escribirReservaFamiliarInsert(newReserva) == 0) {
+					System.out.println("Error. Reserva no creada");
+						System.out.println("");
+					}
+					System.out.println("Reserva creada con exito");
+					System.out.println("-------------------------------------");
+					System.out.println("");
 				}
 			} else {
 				RequestDispatcher error = request.getRequestDispatcher("/mvc/view/client/errorUsuarioClienteView.jsp");
