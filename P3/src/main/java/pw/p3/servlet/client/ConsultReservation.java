@@ -21,6 +21,7 @@ public class ConsultReservation extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		CustomerBean customerBean = (CustomerBean)session.getAttribute("customerBean");
 		if (customerBean != null && customerBean.getCorreoUser() != "") {
+			if(!customerBean.getAdminUser()) {	
 				String fecha1_string = request.getParameter("fechaInicio");
 				String fecha2_string = request.getParameter("fechaFinal");
 				ReservationDAO reservationDAO = new ReservationDAO();
@@ -37,15 +38,15 @@ public class ConsultReservation extends HttpServlet {
 					if(init.isAfter(fin)) {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
-						out.println("Error. La fecha final tiene que ser menos a la fecha de inicio");
+						out.println("Error. La fecha final tiene que ser mayor a la fecha de inicio");
 						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/client/selectDatesView.jsp");
 						error.include(request, response);
 					}
-					
+						
 					else {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
-						out.println("Jajant");
+						out.println("Mostrar reservas");
 						
 						RequestDispatcher correcto = request.getRequestDispatcher("/mvc/view/client/showReservationsView.jsp");
 						correcto.include(request, response);
@@ -55,8 +56,12 @@ public class ConsultReservation extends HttpServlet {
 					vista.forward(request, response);
 				}
 			} else {
-			RequestDispatcher error = request.getRequestDispatcher("/mvc/view/errorUsuarioLoginView.jsp");
-			error.forward(request, response);
+				RequestDispatcher error = request.getRequestDispatcher("/mvc/view/client/errorUsuarioClienteView.jsp");
+				error.forward(request, response);
+			}
+		} else {
+		RequestDispatcher error = request.getRequestDispatcher("/mvc/view/errorUsuarioLoginView.jsp");
+		error.forward(request, response);
 		}
 	}
 }
