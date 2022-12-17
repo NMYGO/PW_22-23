@@ -126,6 +126,120 @@ public class CircuitDAO {
 		return pistas;
 	}
 	
+	public ArrayList<CircuitDTO> solicitarPistasDisponiblesDificultad(Dificultad dificultad) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaPistasLibres = prop.getProperty("solicitarPistasDisponiblesDificultad");
+		ArrayList<CircuitDTO> pistas = new ArrayList<CircuitDTO>();
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement("select * from pista where estado=0 and dificultad=?");
+			ps.setString(1,dificultad.toString());
+			
+			ResultSet rs = (ResultSet) ps.executeQuery();
+
+			while (rs.next()) {
+				String nombre = rs.getString("nombrePista");
+				Integer maxkarts = rs.getInt("maxKarts");
+				pistas.add(new CircuitDTO(nombre, false, dificultad, maxkarts));
+			}
+
+			if (ps != null){ 
+				ps.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return pistas;
+	}
+	
+	public ArrayList<CircuitDTO> solicitarPistasDisponiblesNombre(String nombre) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaPistasLibres = prop.getProperty("solicitarPistasDisponiblesNombre");
+		ArrayList<CircuitDTO> pistas = new ArrayList<CircuitDTO>();;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement("select * from pista where estado=0 and nombrePista=?");
+			ps.setString(1,nombre);
+			
+			ResultSet rs = (ResultSet) ps.executeQuery();
+
+			while (rs.next()) {
+				Integer maxkarts = rs.getInt("maxKarts");
+				Dificultad dificultad = Dificultad.valueOf(rs.getString("dificultad"));
+				pistas.add(new CircuitDTO(nombre, false, dificultad, maxkarts));
+			}
+
+			if (ps != null){ 
+				ps.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return pistas;
+	}
+	
+	/**public ArrayList<CircuitDTO> solicitarPistasDisponiblesNkarts(Integer nkarts) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaPistasLibres = prop.getProperty("solicitarPistasDisponiblesNkarts");
+		ArrayList<CircuitDTO> pistas = new ArrayList<CircuitDTO>();
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement("select * from pista where estado=0 and dificultad=?");
+			ps.setString(1,dificultad.toString());
+			
+			ResultSet rs = (ResultSet) ps.executeQuery();
+
+			while (rs.next()) {
+				String nombre = rs.getString("nombrePista");
+				Integer maxkarts = rs.getInt("maxKarts");
+				pistas.add(new CircuitDTO(nombre, false, dificultad, maxkarts));
+			}
+
+			if (ps != null){ 
+				ps.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return pistas;
+	}**/
+	
 	/**
 	 * Solicita una pista específica
 	 * @param nombre Nombre de la pista

@@ -87,7 +87,8 @@
 			<% } %>
 			</table>
 			<div>
-			<a href="/P3/consultarReservas">Consultar Reservas</a>
+			<a href="/P3/consultReservation">Consultar Reservas</a>
+			<a href="/P3/searchCircuit">Buscar Pistas</a>
 			</div>
 		<% } %>
 	<% } %>

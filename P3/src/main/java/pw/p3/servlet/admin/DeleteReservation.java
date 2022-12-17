@@ -55,7 +55,7 @@ public class DeleteReservation extends HttpServlet {
 				error.forward(request, response);
 			}
 		} else {
-			RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/errorUsuarioLoginView.jsp");
+			RequestDispatcher error = request.getRequestDispatcher("/mvc/view/errorUsuarioLoginView.jsp");
 			error.forward(request, response);
 		}
 	}

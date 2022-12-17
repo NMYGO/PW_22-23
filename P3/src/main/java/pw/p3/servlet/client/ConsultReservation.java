@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 
-@WebServlet(name="ConsultarReservas", urlPatterns="/consultarReservas")
-public class ConsultarReservas extends HttpServlet {
+@WebServlet(name="ConsultReservation", urlPatterns="/consultReservation")
+public class ConsultReservation extends HttpServlet {
 	
 	/** Serial ID */
 	private static final long serialVersionUID = -937488287959414409L;
@@ -55,7 +55,7 @@ public class ConsultarReservas extends HttpServlet {
 					vista.forward(request, response);
 				}
 			} else {
-			RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/errorUsuarioLoginView.jsp");
+			RequestDispatcher error = request.getRequestDispatcher("/mvc/view/errorUsuarioLoginView.jsp");
 			error.forward(request, response);
 		}
 	}

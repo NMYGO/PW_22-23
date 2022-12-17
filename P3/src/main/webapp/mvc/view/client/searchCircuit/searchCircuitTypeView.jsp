@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import ="java.util.ArrayList, pw.p3.business.reservation.*" %>
+    <%@ page import ="java.util.ArrayList, pw.p3.business.kart.*" %>
 <jsp:useBean  id="customerBean" scope="session" class="pw.p3.display.javabean.CustomerBean"></jsp:useBean>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Elegir fechas</title>
+<title>Buscar Pista Disponible (Tipo)</title>
 <link href= "<%= request.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
@@ -21,7 +21,7 @@
 String nextPage = "../../index.jsp";
 String messageNextPage = request.getParameter("message");
 if (messageNextPage == null) {
-	messageNextPage = "ConsultarReservasView";
+	messageNextPage = "searchCircuitTypeView";
 }
 
 if (customerBean == null || customerBean.getCorreoUser().equals("") || customerBean.getPasswordUser().equalsIgnoreCase("")) {
@@ -30,14 +30,13 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 } else {
 %>
 <h2><%= messageNextPage %></h2><br/><br/>
-<form method="get" action="/P3/consultReservation">
-	<label for="fechaInicio">Desde: </label>
-	<input type="date" name="fechaInicio" value="" required>
+<form method="get" action="/P3/searchCircuitType">
+	<label for="tipo">Tipo: </label>
+	<input type="radio" name="tipo" value="INFANTIL" checked>Infantil
+	<input type="radio" name="tipo" value="ADULTO">Adulto
+	<input type="radio" name="tipo" value="FAMILIAR">Familiar
 	<br/><br/>
-	<label for="fechaFinal">Hasta: </label>
-	<input type="date" name="fechaFinal" value="" required>
-	<br/><br/>
-	<input type="submit" value="Buscar reservas">
+	<input type="submit" value="Establecer Tipo">
 </form>
 <%
 }
