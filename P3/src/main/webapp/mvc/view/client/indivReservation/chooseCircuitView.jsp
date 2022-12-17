@@ -33,15 +33,22 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 <form method="get" action="/P3/newReservation">
 	<label for="pista">Pista: </label>
 	<input type="text" name="pista" value="" required>
+	<br/>
+	<label for="dificultad"></label>
+	<input type="hidden" name="dificultad" value='<jsp:getProperty property="dificultad" name="reservaBean"/>'>
+	<label for="adultos"></label>
+	<input type="hidden" name="adultos" value='<jsp:getProperty property="adultos" name="reservaBean"/>'>
+	<label for="ninos"></label>
+	<input type="hidden" name="ninos" value='<jsp:getProperty property="ninos" name="reservaBean"/>'>
+	<label for="duracion"></label>
+	<input type="hidden" name="duracion" value='<jsp:getProperty property="duracion" name="reservaBean"/>'>
+	<label for="fecha"></label>
+	<input type="hidden" name="fecha" value='<jsp:getProperty property="fecha" name="reservaBean"/>'>
 	<br/><br/>
 </form>
-<% request.setAttribute("dificultad", reservaBean.getDificultad());
-request.setAttribute("adultos", reservaBean.getAdultos()); 
-request.setAttribute("ninos", reservaBean.getNinos()); 
-request.setAttribute("duracion", reservaBean.getDificultad()); 
-request.setAttribute("fecha", reservaBean.getFecha()); 
 
 
+<%
 CircuitManager circuitos = new CircuitManager();
 Integer total = reservaBean.getNinos()+reservaBean.getAdultos();
 String dificultad = reservaBean.getDificultad();
