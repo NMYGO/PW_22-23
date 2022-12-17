@@ -88,11 +88,11 @@ public class BonoDAO {
 		}
 		
 		String consultaBonoEspecifico = prop.getProperty("consultaBonoEspecifico");
-		BonoDTO bono = new BonoDTO();
+		BonoDTO bono = null;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement(consultaBonoEspecifico);
+			PreparedStatement ps = connection.prepareStatement("select * from bono where correoUsuario=? and tipo=?");
 			ps.setString(1, usuario);
 			ps.setString(2, tipo.toString());
 
@@ -177,7 +177,7 @@ public class BonoDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement(insertBono);
+			PreparedStatement ps = connection.prepareStatement("insert into bono (sesion,fechaCaducidad,correoUsuario,tipo) values(?,?,?,?)");
 			ps.setInt(1, bono.getSesion());
 			ps.setString(2, bono.getFcaducidad().toString());
 			ps.setString(3, bono.getbUsuario());

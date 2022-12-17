@@ -1,8 +1,8 @@
 package pw.p3.servlet.client;
 
-import pw.p3.business.circuit.*;
+import pw.p3.business.reservation.*;
 import pw.p3.data.Dificultad;
-import pw.p3.data.dao.CircuitDAO;
+import pw.p3.data.dao.BonoDAO;
 import pw.p3.display.javabean.CustomerBean;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,16 +28,33 @@ public class GetNewBono extends HttpServlet {
 		CustomerBean customerBean = (CustomerBean)session.getAttribute("customerBean");
 		if (customerBean != null && customerBean.getCorreoUser() != "") {
 			if(!customerBean.getAdminUser()) {
-				String nombre = request.getParameter("nombre");
-				if (nombre != null) {
-					CircuitDAO circuitDAO = new CircuitDAO();
-					ArrayList<CircuitDTO> pistas = circuitDAO.solicitarPistasDisponiblesNombre(nombre);
-					request.setAttribute("pistas", pistas);
+				String tipo_string = request.getParameter("tipo");
+				if (tipo_string != null) {
+					Integer sesion = 0;
+					Dificultad tipo = Dificultad.valueOf(tipo_string);
+					BonoDAO bonoDAO = new BonoDAO();
+					BonoDTO bono = new BonoDTO(sesion, customerBean.getCorreoUser(), tipo);
 					
-					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/searchCircuit/circuitAvalaibleView.jsp");
-					vista.forward(request, response);
+					if (bonoDAO.solicitarBono(customerBean.getCorreoUser(), tipo) != null) {
+						response.setContentType("text/html");
+						PrintWriter out = response.getWriter();
+						out.println("Error. Bono de ese tipo ya existente");
+						RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/getNewBonoView.jsp");
+						vista.include(request, response);
+					} else {
+						if (bonoDAO.escribirBonoInsert(bono) == 0) {
+							RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/getNewBonoView.jsp");
+							vista.forward(request, response);
+						} else {
+							response.setContentType("text/html");
+							PrintWriter out = response.getWriter();
+							out.println("GetNewBono");
+							RequestDispatcher vista = request.getRequestDispatcher("index.jsp");
+							vista.include(request, response);
+						}
+					}
 				} else {
-					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/searchCircuit/searchCircuitNameView.jsp");
+					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/getNewBonoView.jsp");
 					vista.forward(request, response);
 				}
 			} else {
