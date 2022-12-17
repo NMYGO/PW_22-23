@@ -39,7 +39,7 @@ public class ModifyStateCircuit extends HttpServlet {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
 						out.println("Error. La pista no existe");
-						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/ModifyStateCircuitView.jsp");
+						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/circuit/ModifyStateCircuitView.jsp");
 						error.include(request, response);
 					} else {
 						pista.setEstado(estado);
@@ -47,7 +47,7 @@ public class ModifyStateCircuit extends HttpServlet {
 							response.setContentType("text/html");
 							PrintWriter out = response.getWriter();
 							out.println("Error. Pista no modificada");
-							RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/ModifyStateCircuitView.jsp");
+							RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/circuit/ModifyStateCircuitView.jsp");
 							error.include(request, response);
 						} else {
 							response.setContentType("text/html");
@@ -58,7 +58,7 @@ public class ModifyStateCircuit extends HttpServlet {
 						}
 					}
 				} else {
-					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/admin/ModifyStateCircuitView.jsp");
+					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/admin/circuit/ModifyStateCircuitView.jsp");
 					vista.forward(request, response);
 				}
 			} else {

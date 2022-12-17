@@ -41,14 +41,14 @@ public class ModifyStateKart extends HttpServlet {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
 						out.println("Error. El kart no existe");
-						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/ModifyStateKartView.jsp");
+						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/kart/ModifyStateKartView.jsp");
 						error.include(request, response);
 					} else {
 						if(kart.getNombrePista() == null && estado == Estado.RESERVADO) { //CON JS?? NO PASAR DE NO ASOCIADO A RESERVADO
 							response.setContentType("text/html");
 							PrintWriter out = response.getWriter();
 							out.println("Error. Debe asignar este kart a una pista");
-							RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/ModifyStateKartView.jsp");
+							RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/kart/ModifyStateKartView.jsp");
 							error.include(request, response);
 						} else {
 							kart.setEstado(estado);
@@ -59,7 +59,7 @@ public class ModifyStateKart extends HttpServlet {
 								response.setContentType("text/html");
 								PrintWriter out = response.getWriter();
 								out.println("Error. Kart no modificado");
-								RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/ModifyStateKartView.jsp");
+								RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/kart/ModifyStateKartView.jsp");
 								error.include(request, response);
 							} else {
 								response.setContentType("text/html");
@@ -71,7 +71,7 @@ public class ModifyStateKart extends HttpServlet {
 						}
 					}
 				} else {
-					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/admin/ModifyStateKartView.jsp");
+					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/admin/kart/ModifyStateKartView.jsp");
 					vista.forward(request, response);
 				}
 			} else {

@@ -39,7 +39,7 @@ public class RegisterKart extends HttpServlet {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
 						out.println("Error. Kart no registrado");
-						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/registerKartView.jsp");
+						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/kart/registerKartView.jsp");
 						error.include(request, response);
 					} else {
 						response.setContentType("text/html");
@@ -49,7 +49,7 @@ public class RegisterKart extends HttpServlet {
 						correcto.include(request, response);
 					}
 				} else {
-					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/admin/registerKartView.jsp");
+					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/admin/kart/registerKartView.jsp");
 					vista.forward(request, response);
 				}
 			} else {
