@@ -12,7 +12,7 @@ public class ReservationBean implements java.io.Serializable {
 	private Integer adultos;
 	private Integer duracion;
 	private LocalDate fecha;
-	private Dificultad dificultad;
+	private String dificultad;
 	
 	
 	public Integer getNinos() {
@@ -33,10 +33,10 @@ public class ReservationBean implements java.io.Serializable {
 	public void setDuracion(Integer dur) {
 		this.duracion = dur;
 	}
-	public Dificultad getDificultad() {
+	public String getDificultad() {
 		return dificultad;
 	}
-	public void setDificultad(Dificultad dif) {
+	public void setDificultad(String dif) {
 		this.dificultad = dif;
 	}
 	public LocalDate getFecha() {

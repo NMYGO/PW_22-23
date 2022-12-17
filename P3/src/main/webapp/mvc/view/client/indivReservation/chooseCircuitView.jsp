@@ -39,10 +39,18 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 <%
 CircuitManager circuitos = new CircuitManager();
 Integer total = reservaBean.getNinos()+reservaBean.getAdultos();
-ArrayList<CircuitDTO> pistas = circuitos.pistasLibres(total, reservaBean.getDificultad());
+String dificultad = reservaBean.getDificultad();
+ArrayList<CircuitDTO> pistas = new ArrayList<CircuitDTO>();
+if(dificultad.equals("ADULTO")){
+	pistas = circuitos.pistasLibres(total, Dificultad.ADULTO);
+}else if (dificultad.equals("INFANTIL")){
+	pistas = circuitos.pistasLibres(total, Dificultad.INFANTIL);
+}else if (dificultad.equals("FAMILIAR")){
+	pistas = circuitos.pistasLibres(total, Dificultad.FAMILIAR);
+}
+
 %>
 <br/><br/>
-<%=pistas.size() %>
 <table>
 	<tr>
 	<th>PISTA</th>

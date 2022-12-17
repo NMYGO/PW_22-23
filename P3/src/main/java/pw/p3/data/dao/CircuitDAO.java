@@ -100,9 +100,10 @@ public class CircuitDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement(consultaPistasLibres);
+			PreparedStatement ps = connection.prepareStatement("select * from pista where estado=? and dificultad=? and maxKarts>?");
 			ps.setInt(1, iestado);
 			ps.setString(2,dificultad.toString());
+			ps.setInt(3,participantes);
 			
 			ResultSet rs = (ResultSet) ps.executeQuery();
 

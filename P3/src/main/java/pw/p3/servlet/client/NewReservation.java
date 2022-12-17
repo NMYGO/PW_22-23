@@ -1,4 +1,4 @@
-package pw.p3.servlet.client.reservation;
+package pw.p3.servlet.client;
 
 import pw.p3.business.reservation.*;
 import pw.p3.data.Dificultad;
@@ -29,37 +29,35 @@ public class NewReservation extends HttpServlet {
 		ReservationBean reservaBean = (ReservationBean)session.getAttribute("reservaBean");
 		if (customerBean != null && customerBean.getCorreoUser() != "") {
 			if(!customerBean.getAdminUser()) {
-				String string_duracion = request.getParameter("duracion");
-				String string_fecha = request.getParameter("fecha");
-				String dificultad = request.getParameter("dificultad");
-				String string_ninos = "0";
-				String string_adultos = "0";
-				if(dificultad != "ADULTO") {
-				string_ninos = request.getParameter("ninos");
-				}
-				if(dificultad != "INFANTIL") {
-				string_adultos = request.getParameter("adultos");
-				}
-				
-				if (string_duracion != null && string_fecha != null && string_ninos != null && string_adultos != null && dificultad != null) {
-					reservaBean.setAdultos(Integer.parseInt(string_adultos));
-					reservaBean.setNinos(Integer.parseInt(string_ninos));
-					reservaBean.setDuracion(Integer.parseInt(string_duracion));
-					reservaBean.setFecha(LocalDate.parse(string_fecha));
-					if(dificultad=="ADULTO") {
-						reservaBean.setDificultad(Dificultad.ADULTO);
-					}else if (dificultad=="INFANTIL") {
-						reservaBean.setDificultad(Dificultad.INFANTIL);
-					}else {
-						reservaBean.setDificultad(Dificultad.FAMILIAR);
+				if(reservaBean == null) {
+					String string_duracion = request.getParameter("duracion");
+					String string_fecha = request.getParameter("fecha");
+					String dificultad = request.getParameter("dificultad");
+					String string_ninos = "0";
+					String string_adultos = "0";
+					String pista = request.getParameter("pista");
+					if(dificultad != "ADULTO") {
+					string_ninos = request.getParameter("ninos");
 					}
-					request.setAttribute("datosReserva", reservaBean);
-					
-					RequestDispatcher vista2 = request.getRequestDispatcher("/mvc/view/client/indivReservation/chooseCircuitView.jsp");
-					vista2.forward(request, response);
+					if(dificultad != "INFANTIL") {
+					string_adultos = request.getParameter("adultos");
+					}
+					if (string_duracion != null && string_fecha != null && string_ninos != null && string_adultos != null && dificultad != null) {
+						reservaBean.setAdultos(Integer.parseInt(string_adultos));
+						reservaBean.setNinos(Integer.parseInt(string_ninos));
+						reservaBean.setDuracion(Integer.parseInt(string_duracion));
+						reservaBean.setFecha(LocalDate.parse(string_fecha));
+						reservaBean.setDificultad(dificultad);
+						request.setAttribute("datosReserva", reservaBean);
+						
+						RequestDispatcher vista2 = request.getRequestDispatcher("/mvc/view/client/indivReservation/chooseCircuitView.jsp");
+						vista2.forward(request, response);
+					} else {
+						RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/indivReservation/newReservationView.jsp");
+						vista.forward(request, response);
+					}
 				} else {
-					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/indivReservation/newReservationView.jsp");
-					vista.forward(request, response);
+					
 				}
 			} else {
 				RequestDispatcher error = request.getRequestDispatcher("/mvc/view/client/errorUsuarioClienteView.jsp");
