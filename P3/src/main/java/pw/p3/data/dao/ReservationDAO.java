@@ -449,4 +449,130 @@ public class ReservationDAO {
 		}
 		return status;
 	}
+	
+	/**
+	 * Añade una reserva infantil
+	 * @param reserva Reserva Infantil a escribir
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
+	public int escribirReservaInfantilInsert(RInfantileDTO reserva) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String insertReserva = prop.getProperty("insertReserva");
+		int status = 0;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement(insertReserva);
+			ps.setString(1, reserva.getUsuario());
+			ps.setInt(2, reserva.getDur());
+			ps.setFloat(3, reserva.getPrecio());
+			ps.setInt(4, reserva.getDesc());
+			ps.setString(5, reserva.getFecha().toString());
+			ps.setString(6, reserva.getPista());
+			ps.setString(7, reserva.getTipo().toString());
+			ps.setInt(8, reserva.getParticipantes());
+			ps.setInt(9, 0);
+			status = ps.executeUpdate();
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return status;
+	}
+	
+	/**
+	 * Inserta la reserva adulta
+	 * @param reserva Reserva Adulto a escribir
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
+	public int escribirReservaAdultoInsert(RAdultDTO reserva) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String insertReserva = prop.getProperty("insertReserva");
+		int status = 0;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement(insertReserva);
+			ps.setString(1, reserva.getUsuario());
+			ps.setInt(2, reserva.getDur());
+			ps.setFloat(3, reserva.getPrecio());
+			ps.setInt(4, reserva.getDesc());
+			ps.setString(5, reserva.getFecha().toString());
+			ps.setString(6, reserva.getPista());
+			ps.setString(7, reserva.getTipo().toString());
+			ps.setInt(8, reserva.getPartipantes());
+			ps.setInt(9, 0);
+			status = ps.executeUpdate();
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return status;
+	}
+	
+	/**
+	 * Inserta una reserva familiar
+	 * @param reserva Reserva Familiar a escribir
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
+	public int escribirReservaFamiliarInsert(RFamiliarDTO reserva) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String insertReserva = prop.getProperty("insertReserva");
+		int status = 0;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement(insertReserva);
+			ps.setString(1, reserva.getUsuario());
+			ps.setInt(2, reserva.getDur());
+			ps.setFloat(3, reserva.getPrecio());
+			ps.setInt(4, reserva.getDesc());
+			ps.setString(5, reserva.getFecha().toString());
+			ps.setString(6, reserva.getPista());
+			ps.setString(7, reserva.getTipo().toString());
+			ps.setInt(8, reserva.getadultos());
+			ps.setInt(9, reserva.getNinos());
+			status = ps.executeUpdate();
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return status;
+	}
 }
