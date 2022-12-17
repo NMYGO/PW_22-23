@@ -21,7 +21,7 @@
 String nextPage = "../../index.jsp";
 String messageNextPage = request.getParameter("message");
 if (messageNextPage == null) {
-	messageNextPage = "searchCircuitNametView";
+	messageNextPage = "searchCircuitNkartsView";
 }
 
 if (customerBean == null || customerBean.getCorreoUser().equals("") || customerBean.getPasswordUser().equalsIgnoreCase("")) {
@@ -30,11 +30,11 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 } else {
 %>
 <h2><%= messageNextPage %></h2><br/><br/>
-<form method="get" action="/P3/searchCircuitName">
-	<label for="nombre">Nombre: </label>
-	<input type="text" name="nombre" value="" required>
+<form method="get" action="/P3/searchCircuitNkarts">
+	<label for="nkarts">Numero minimo de karts: </label>
+	<input type="number" name="nkarts" min="1" required>
 	<br/><br/>
-	<input type="submit" value="Establecer Nombre">
+	<input type="submit" value="Establecer Numero Karts">
 </form>
 <%
 }

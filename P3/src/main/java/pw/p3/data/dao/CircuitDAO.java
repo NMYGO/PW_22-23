@@ -202,7 +202,7 @@ public class CircuitDAO {
 		return pistas;
 	}
 	
-	/**public ArrayList<CircuitDTO> solicitarPistasDisponiblesNkarts(Integer nkarts) {
+	public ArrayList<CircuitDTO> solicitarPistasDisponiblesNkarts(Integer nkarts) {
 		Properties prop = new Properties();
 		try{
 			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
@@ -214,19 +214,25 @@ public class CircuitDAO {
 		}
 		
 		String consultaPistasLibres = prop.getProperty("solicitarPistasDisponiblesNkarts");
+		KartDAO kartTabla = new KartDAO();
+		ArrayList <KartDTO> kartsPista = new ArrayList<KartDTO>();
 		ArrayList<CircuitDTO> pistas = new ArrayList<CircuitDTO>();
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("select * from pista where estado=0 and dificultad=?");
-			ps.setString(1,dificultad.toString());
+			PreparedStatement ps = connection.prepareStatement("select * from pista where estado=0 and maxKarts>=?");
+			ps.setInt(1,nkarts);
 			
 			ResultSet rs = (ResultSet) ps.executeQuery();
 
 			while (rs.next()) {
 				String nombre = rs.getString("nombrePista");
+				Dificultad dificultad = Dificultad.valueOf(rs.getString("dificultad"));
 				Integer maxkarts = rs.getInt("maxKarts");
-				pistas.add(new CircuitDTO(nombre, false, dificultad, maxkarts));
+				kartsPista = kartTabla.solicitarKartsPista(nombre);
+				if(maxkarts >= nkarts && nkarts <= (maxkarts - kartsPista.size())) {
+						pistas.add(new CircuitDTO(nombre, false, dificultad, maxkarts));
+				}
 			}
 
 			if (ps != null){ 
@@ -238,7 +244,7 @@ public class CircuitDAO {
 			e.printStackTrace();
 		}
 		return pistas;
-	}**/
+	}
 	
 	/**
 	 * Solicita una pista específica
