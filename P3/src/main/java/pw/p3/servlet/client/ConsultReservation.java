@@ -39,7 +39,7 @@ public class ConsultReservation extends HttpServlet {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
 						out.println("Error. La fecha final tiene que ser mayor a la fecha de inicio");
-						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/client/selectDatesView.jsp");
+						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/client/showReservations/selectDatesView.jsp");
 						error.include(request, response);
 					}
 						
@@ -48,11 +48,11 @@ public class ConsultReservation extends HttpServlet {
 						PrintWriter out = response.getWriter();
 						out.println("Mostrar reservas");
 						
-						RequestDispatcher correcto = request.getRequestDispatcher("/mvc/view/client/showReservationsView.jsp");
+						RequestDispatcher correcto = request.getRequestDispatcher("/mvc/view/client/showReservations/showReservationsView.jsp");
 						correcto.include(request, response);
 					}
 				} else {
-					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/selectDatesView.jsp");
+					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/showReservations/selectDatesView.jsp");
 					vista.forward(request, response);
 				}
 			} else {
