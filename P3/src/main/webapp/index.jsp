@@ -90,6 +90,7 @@
 			<a href="/P3/consultReservation">Consultar Reservas</a>
 			<a href="/P3/searchCircuit">Buscar Pistas</a>
 			<a href="/P3/newReservation">Nueva Reserva Individual</a>
+			<a href="/P3/getBono">Nueva Reserva Bono</a>
 			</div>
 		<% } %>
 	<% } %>
