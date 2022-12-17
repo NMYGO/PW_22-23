@@ -1,21 +1,12 @@
 package pw.p3.servlet.client;
 
-import pw.p2.business.DTOPista;
-import pw.p2.business.DTORFamiliar;
-import pw.p2.business.DTOUsuario;
-import pw.p2.business.RIndividualCreador;
-import pw.p2.data.DAO.DAOPista;
-import pw.p2.data.DAO.DAOReserva;
-import pw.p2.data.DAO.DAOUsuario;
 import pw.p3.business.reservation.*;
-import pw.p3.data.Dificultad;
-import pw.p3.data.dao.ReservationDAO;
 import pw.p3.display.javabean.CustomerBean;
 import pw.p3.display.javabean.ReservationBean;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,18 +27,19 @@ public class NewReservation extends HttpServlet {
 		ReservationBean reservaBean = (ReservationBean)session.getAttribute("reservaBean");
 		if (customerBean != null && customerBean.getCorreoUser() != "") {
 			if(!customerBean.getAdminUser()) {
-				if(reservaBean == null) {
-					String string_duracion = request.getParameter("duracion");
-					String string_fecha = request.getParameter("fecha");
-					String dificultad = request.getParameter("dificultad");
-					String string_ninos = "0";
-					String string_adultos = "0";
-					if(dificultad != "ADULTO") {
-					string_ninos = request.getParameter("ninos");
-					}
-					if(dificultad != "INFANTIL") {
-					string_adultos = request.getParameter("adultos");
-					}
+				String string_duracion = request.getParameter("duracion");
+				String string_fecha = request.getParameter("fecha");
+				String dificultad = request.getParameter("dificultad");
+				String string_ninos = "0";
+				String string_adultos = "0";
+				if(dificultad != "ADULTO") {
+				string_ninos = request.getParameter("ninos");
+				}
+				if(dificultad != "INFANTIL") {
+				string_adultos = request.getParameter("adultos");
+				}
+				if(request.getParameter("pista") == null) {
+					
 					if (string_duracion != null && string_fecha != null && string_ninos != null && string_adultos != null && dificultad != null) {
 						reservaBean.setAdultos(Integer.parseInt(string_adultos));
 						reservaBean.setNinos(Integer.parseInt(string_ninos));
@@ -64,23 +56,29 @@ public class NewReservation extends HttpServlet {
 					}
 				} else {
 					String pista = request.getParameter("pista");
-					float precio = 0;
-					int descuento = 0;
-					switch(reservaBean.getDuracion()) {
-						
+					Integer adultos = Integer.parseInt(string_adultos);
+					Integer ninos = Integer.parseInt(string_ninos);
+					Integer duracion = Integer.parseInt(string_duracion);
+					LocalDate fecha = LocalDate.parse(string_fecha);
+					Integer descuento=0;
 					if(customerBean.getAntiguedadUser()>2) {
 						descuento = 10;
 					}
 					
-					RIndividualCreator individualCreador = new RIndividualCreator();
-					RFamiliarDTO newReserva = individualCreador.creaRFam(usuario.getCorreo(), fecha, duracion, pista, precio, descuento, participantesInfantiles, participantesAdultos, Dificultad.FAMILIAR);
-					if(reservaTabla.escribirReservaFamiliarInsert(newReserva) == 0) {
-					System.out.println("Error. Reserva no creada");
-						System.out.println("");
+					ReservationManager reserva = new ReservationManager();
+					if(!reserva.crearPista(customerBean.getCorreoUser(), pista, dificultad, ninos, adultos, duracion, descuento, fecha)) {
+						response.setContentType("text/html");
+						PrintWriter out = response.getWriter();
+						out.println("Error. Reserva no creada");
+						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/client/indivReservation/newReservationView.jsp");
+						error.include(request, response);
+					} else {
+						response.setContentType("text/html");
+						PrintWriter out = response.getWriter();
+						out.println("Reserva Creada");
+						RequestDispatcher correcto = request.getRequestDispatcher("index.jsp");
+						correcto.include(request, response);
 					}
-					System.out.println("Reserva creada con exito");
-					System.out.println("-------------------------------------");
-					System.out.println("");
 				}
 			} else {
 				RequestDispatcher error = request.getRequestDispatcher("/mvc/view/client/errorUsuarioClienteView.jsp");
@@ -90,5 +88,7 @@ public class NewReservation extends HttpServlet {
 			RequestDispatcher error = request.getRequestDispatcher("/mvc/view/errorUsuarioLoginView.jsp");
 			error.forward(request, response);
 		}
+
 	}
+
 }

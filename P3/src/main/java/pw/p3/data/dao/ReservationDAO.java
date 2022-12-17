@@ -467,7 +467,7 @@ public class ReservationDAO {
 			e.printStackTrace();
 		}
 		
-		String insertReserva = prop.getProperty("insertReserva");
+		String insertReserva = "insert into reserva (correoUsuario,duracion,precio,descuento,fecha,nombrePista,dificultad,ninos,adultos) values(?,?,?,?,?,?,?,?,?)";
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -509,7 +509,7 @@ public class ReservationDAO {
 			e.printStackTrace();
 		}
 		
-		String insertReserva = prop.getProperty("insertReserva");
+		String insertReserva = "insert into reserva (correoUsuario,duracion,precio,descuento,fecha,nombrePista,dificultad,ninos,adultos) values(?,?,?,?,?,?,?,?,?)";
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();
@@ -551,7 +551,7 @@ public class ReservationDAO {
 			e.printStackTrace();
 		}
 		
-		String insertReserva = prop.getProperty("insertReserva");
+		String insertReserva = "insert into reserva (correoUsuario,duracion,precio,descuento,fecha,nombrePista,dificultad,ninos,adultos) values(?,?,?,?,?,?,?,?,?)";
 		int status = 0;
 		try {
 			DBConnection dbConnection = new DBConnection();

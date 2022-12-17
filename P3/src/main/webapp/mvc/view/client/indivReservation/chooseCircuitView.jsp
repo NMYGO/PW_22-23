@@ -34,9 +34,14 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 	<label for="pista">Pista: </label>
 	<input type="text" name="pista" value="" required>
 	<br/><br/>
-	<input type="submit" value="Elegir pista">
 </form>
-<%
+<% request.setAttribute("dificultad", reservaBean.getDificultad());
+request.setAttribute("adultos", reservaBean.getAdultos()); 
+request.setAttribute("ninos", reservaBean.getNinos()); 
+request.setAttribute("duracion", reservaBean.getDificultad()); 
+request.setAttribute("fecha", reservaBean.getFecha()); 
+
+
 CircuitManager circuitos = new CircuitManager();
 Integer total = reservaBean.getNinos()+reservaBean.getAdultos();
 String dificultad = reservaBean.getDificultad();
