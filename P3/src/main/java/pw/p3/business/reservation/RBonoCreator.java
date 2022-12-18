@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 /**
  * 
- * La factoria para crear una reserva bono
+ * Factoria para crear una reserva bono
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano
@@ -19,7 +19,7 @@ public class RBonoCreator extends ReservationCreator {
 
 	/**
 	 * Reserva bono infantil
-	 */
+	 **/
 	
 	@Override
 	public RInfantileDTO creaRInf(Integer idReserva, String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer ninos, Dificultad tipo) {
@@ -27,9 +27,9 @@ public class RBonoCreator extends ReservationCreator {
 		return reserva;
 	}
 	
-/**
- * Reserva bono familiar
- */
+	/**
+	 * Reserva bono familiar
+	 **/
 	
 	@Override
 	public RFamiliarDTO creaRFam(Integer idReserva, String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Integer ninos, Dificultad tipo) {
@@ -39,7 +39,7 @@ public class RBonoCreator extends ReservationCreator {
 	
 	/**
 	 * Reserva bono adulta
-	 */
+	 **/
 	
 	@Override
 	public RAdultDTO creaRAdu(Integer idReserva, String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Dificultad tipo) {

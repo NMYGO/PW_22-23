@@ -6,20 +6,20 @@ import java.time.LocalDate;
 
 /**
  * 
- * La factoria concreta que realiza la reserva individual
+ * Factoria concreta que realiza la reserva individual
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano
  * @author Ángel Quintero Montes
  * @author Diego Tabas Costa
  *
- */
+ **/
 
 public class RIndividualCreator extends ReservationCreator{
 	
 	/**
 	 * Reserva individual infantil
-	 */
+	 **/
 	
 	@Override
 	public RInfantileDTO creaRInf(Integer idReserva, String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer ninos, Dificultad tipo) {
@@ -29,7 +29,7 @@ public class RIndividualCreator extends ReservationCreator{
 	
 	/**
 	 * Reserva individual familiar
-	 */
+	 **/
 	
 	@Override
 	public RFamiliarDTO creaRFam(Integer idReserva, String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Integer ninos, Dificultad tipo) {
@@ -39,7 +39,7 @@ public class RIndividualCreator extends ReservationCreator{
 	
 	/**
 	 * Reserva individual adulta
-	 */
+	 **/
 	
 	@Override
 	public RAdultDTO creaRAdu(Integer idReserva, String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Dificultad tipo) {
