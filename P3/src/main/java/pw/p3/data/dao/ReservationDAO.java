@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.time.LocalDate;
@@ -649,4 +650,41 @@ public class ReservationDAO {
 		}
 		return status;
 	}
+	
+	/**
+	 * Cancela una reserva con 24 horas de antelacion
+	 * @param idReserva Identificador de la reserva a eliminar
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+
+	public Integer cancelReservaCliente(Integer idReserva){
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		LocalDate fecha = LocalDate.now().plusDays(1);
+		
+		String deleteReserva = prop.getProperty("deleteReserva");
+		int status=0;
+		try{
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		PreparedStatement ps = connection.prepareStatement("delete from reserva where idReserva=? and fecha > ?");
+		ps.setInt(1, idReserva);
+		ps.setString(2, fecha.toString());
+		status = ps.executeUpdate();
+		} catch(Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return status;
+	}
 }
+	
+
