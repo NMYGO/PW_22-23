@@ -750,4 +750,39 @@ public class BonoDAO {
 		}
 		return status;
 	}
+	
+	public int solicitarBonoReserva(Integer reserva) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaBonoEspecifico = prop.getProperty("consultaBonoEspecifico");
+		int bono=-1;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement("select * from reserva where idReserva=?");
+			ps.setInt(1, reserva);
+			ResultSet rs = (ResultSet) ps.executeQuery();
+	
+			while (rs.next()) {			
+				bono = rs.getInt("idBono"); 
+			}
+	
+			if (ps != null){ 
+				ps.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return bono;
+	}
 }

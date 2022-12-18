@@ -1,6 +1,7 @@
 package pw.p3.servlet.client;
 
 import pw.p3.business.reservation.*;
+import pw.p3.data.dao.BonoDAO;
 import pw.p3.data.dao.ReservationDAO;
 import pw.p3.display.javabean.*;
 import javax.servlet.*;
@@ -12,7 +13,7 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 
 @WebServlet(name="CancelReservation", urlPatterns="/cancelReservation")
-public class ModifyReservation extends HttpServlet {
+public class CancelReservation extends HttpServlet {
 
 	/** Serial ID */
 	private static final long serialVersionUID = -937488287959414409L;
@@ -34,7 +35,8 @@ public class ModifyReservation extends HttpServlet {
 				
 				if (id_string != null) {
 					Integer id = Integer.parseInt(id_string);
-					
+					BonoDAO bonoManager = new BonoDAO();
+					Integer idBono = bonoManager.solicitarBonoReserva(id);
 					if(reservationDAO.cancelReservaCliente(id) == 0) {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
@@ -42,6 +44,11 @@ public class ModifyReservation extends HttpServlet {
 						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/client/CancelReservationView.jsp");
 						error.include(request, response);
 					} else {
+						if(idBono != (-1)) {
+							BonoDTO actualizador = bonoManager.solicitarBono(idBono, customerBean.getCorreoUser());
+							actualizador.setSesion(actualizador.getSesion()-1);
+							bonoManager.escribirBonoUpdate(actualizador);
+						}
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
 						out.println("CancelReservation");
@@ -49,7 +56,7 @@ public class ModifyReservation extends HttpServlet {
 						correcto.include(request, response);
 					}
 				} else {
-					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/CancelReservationView.jsp");
+					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/showReservations/showCancelReservationView.jsp");
 					vista.forward(request, response);
 				}
 			} else {
