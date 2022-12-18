@@ -17,12 +17,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * 
+ * Servlet asignar un kart a una pista
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ **/
+
 @WebServlet(name="KartToCircuit", urlPatterns="/kartToCircuit")
 public class KartToCircuit extends HttpServlet {
 	
 	/** Serial ID */
 	private static final long serialVersionUID = -8869673328359414409L;
-
+	
+	/**
+	 * Metodo Get del servlet
+	 * @param request Request
+	 * @param response Response
+	 * @return
+	 **/
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		CustomerBean customerBean = (CustomerBean)session.getAttribute("customerBean");

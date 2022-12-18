@@ -10,12 +10,30 @@ import java.util.ArrayList;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * 
+ * Servlet para borrar reservas
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ **/
+
 @WebServlet(name="DeleteReservation", urlPatterns="/deleteReservation")
 public class DeleteReservation extends HttpServlet {
 	
 	/** Serial ID */
 	private static final long serialVersionUID = -937488287959414409L;
-
+	
+	/**
+	 * Metodo Get del servlet
+	 * @param request Request
+	 * @param response Response
+	 * @return
+	 **/
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		CustomerBean customerBean = (CustomerBean)session.getAttribute("customerBean");
