@@ -1,4 +1,4 @@
-package pw.p3.servlet.client;
+package pw.p3.servlet.client.bono;
 
 import pw.p3.business.reservation.*;
 import pw.p3.display.javabean.CustomerBean;
@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name="NewReservation", urlPatterns="/newReservation")
-public class NewReservation extends HttpServlet {
+@WebServlet(name="NewBonoReservation", urlPatterns="/newBonoReservation")
+public class NewBonoReservation extends HttpServlet {
 	
 	/** Serial ID */
 	private static final long serialVersionUID = -8869673328353849111L;
@@ -48,10 +48,10 @@ public class NewReservation extends HttpServlet {
 						reservaBean.setDificultad(dificultad);
 						request.setAttribute("datosReserva", reservaBean);
 						
-						RequestDispatcher vista2 = request.getRequestDispatcher("/mvc/view/client/indivReservation/chooseCircuitView.jsp");
+						RequestDispatcher vista2 = request.getRequestDispatcher("/mvc/view/client/getBono/chooseBCircuitView.jsp");
 						vista2.forward(request, response);
 					} else {
-						RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/indivReservation/newReservationView.jsp");
+						RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/newBonoReservationView.jsp");
 						vista.forward(request, response);
 					}
 				} else {
@@ -70,7 +70,7 @@ public class NewReservation extends HttpServlet {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
 						out.println("Error. Reserva no creada");
-						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/client/indivReservation/newReservationView.jsp");
+						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/client/getBono/newBonoReservationView.jsp");
 						error.include(request, response);
 					} else {
 						response.setContentType("text/html");

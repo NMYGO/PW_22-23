@@ -33,6 +33,8 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 <form method="get" action="/P3/getActualBono">
 	<label for="id">ID bono:</label>
 	<input type="number" name="id" value="" required>
+	<label for="criterio"></label>
+	<input type="hidden" name="criterio" value="actual">
 	<br/><br/>
 	<input type="submit" value="Elegir Bono">
 </form>

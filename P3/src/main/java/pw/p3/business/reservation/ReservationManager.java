@@ -29,7 +29,7 @@ public class ReservationManager{
 	public ReservationManager(){}
 	
 	/**
-	 * Funcion para crear pista
+	 * Funcion para crear reserva
 	 * @param usuario nombre Nombre de usuario que reserva
 	 * @param pista Pista en la que se hace la reserva 
 	 * @param dificultad Tipo de dificultad de reserva
@@ -40,7 +40,7 @@ public class ReservationManager{
 	 * @param fecha Fecha de la reserva
 	 **/
 	
-	public boolean crearPista (String nombre, String pista, String dificultad, Integer ninos, Integer adultos, Integer duracion, Integer descuento, LocalDate fecha) {		
+	public boolean crearReserva (String nombre, String pista, String dificultad, Integer ninos, Integer adultos, Integer duracion, Integer descuento, LocalDate fecha) {		
 		RIndividualCreator individualCreador = new RIndividualCreator();
 		Float precio=(float)0;
 		switch (duracion) {

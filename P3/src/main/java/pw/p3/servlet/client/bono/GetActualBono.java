@@ -5,6 +5,7 @@ import pw.p3.data.Dificultad;
 import pw.p3.data.dao.BonoDAO;
 import pw.p3.data.dao.ReservationDAO;
 import pw.p3.display.javabean.CustomerBean;
+import pw.p3.display.javabean.ReservationBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -36,16 +37,19 @@ public class GetActualBono extends HttpServlet {
 						ArrayList<BonoDTO> bonos = bonoDAO.solicitarBonosUsuario(customerBean.getCorreoUser());
 						request.setAttribute("arrayBonos", bonos);
 						if(id_string != null) {
-							Integer sesion = 0;
-							Dificultad tipo = Dificultad.valueOf(tipo_string);
-							BonoDTO bono = new BonoDTO(sesion, customerBean.getCorreoUser(), tipo);
+							BonoDTO bono = new BonoDTO();
 							if (bonoDAO.solicitarBono(Integer.parseInt(id_string),customerBean.getCorreoUser()) != null) {
 									bono = bonoDAO.solicitarBono(Integer.parseInt(id_string), customerBean.getCorreoUser());
-									
+									bono.setSesion(bono.getSesion()+1);
+									bonoDAO.escribirBonoUpdate(bono);
+									ReservationBean reservaBean = (ReservationBean)session.getAttribute("reservaBean");
+									reservaBean.setDificultad(bono.getTipo().toString());
+									RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/newBonoReservation.jsp");
+									vista.include(request, response);
 							} else {
 								response.setContentType("text/html");
 								PrintWriter out = response.getWriter();
-								out.println("Error. Bono de ese tipo no existe");
+								out.println("Error. Ese bono no existe");
 								RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/getActualBonoView.jsp");
 								vista.include(request, response);
 							}
