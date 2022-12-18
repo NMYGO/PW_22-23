@@ -46,19 +46,20 @@ public class KartToCircuit extends HttpServlet {
 		CustomerBean customerBean = (CustomerBean)session.getAttribute("customerBean");
 		if (customerBean != null && customerBean.getCorreoUser() != "") {
 			if(customerBean.getAdminUser()) {
+				String path = getServletContext().getRealPath("/WEB-INF/sql.properties.txt");
 				String nombrePista = request.getParameter("nombrePista");
 				String idKart_string = request.getParameter("idKart");
 				KartDAO kartDAO = new KartDAO();
 				CircuitDAO circuitDAO = new CircuitDAO();
-				ArrayList<KartDTO> karts = kartDAO.solicitarKarts();
+				ArrayList<KartDTO> karts = kartDAO.solicitarKarts(path);
 				request.setAttribute("karts", karts);
-				ArrayList<CircuitDTO> pistas = circuitDAO.solicitarPistas();
+				ArrayList<CircuitDTO> pistas = circuitDAO.solicitarPistas(path);
 				request.setAttribute("pistas", pistas);
 				
 				if (nombrePista != null || idKart_string != null) {
 					Integer idKart = Integer.parseInt(idKart_string);
-					KartDTO kart = kartDAO.solicitarKart(idKart);
-					CircuitDTO pista = circuitDAO.solicitarPista(nombrePista);
+					KartDTO kart = kartDAO.solicitarKart(path, idKart);
+					CircuitDTO pista = circuitDAO.solicitarPista(path, nombrePista);
 					CircuitFunctionality circuitFunctionality = new CircuitFunctionality();
 					
 					if(kart == null || pista == null) {
@@ -68,14 +69,14 @@ public class KartToCircuit extends HttpServlet {
 						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/KartToCircuitView.jsp");
 						error.include(request, response);
 					} else {
-						if(kart.getEstado() != Estado.DISPONIBLE || pista.isEstado() == true || circuitFunctionality.asociarKartAPista(kart, pista) == null) {
+						if(kart.getEstado() != Estado.DISPONIBLE || pista.isEstado() == true || circuitFunctionality.asociarKartAPista(path, kart, pista) == null) {
 							response.setContentType("text/html");
 							PrintWriter out = response.getWriter();
 							out.println("Error. Elija un kart y pista adecuados");
 							RequestDispatcher error = request.getRequestDispatcher("/mvc/view/admin/KartToCircuitView.jsp");
 							error.include(request, response);
 						} else {
-							if(kartDAO.escribirKartUpdate(kart) == 0) {
+							if(kartDAO.escribirKartUpdate(path, kart) == 0) {
 								response.setContentType("text/html");
 								PrintWriter out = response.getWriter();
 								out.println("Error. Kart no asociado");

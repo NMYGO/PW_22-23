@@ -31,10 +31,10 @@ public class UserDAO {
 	 * @return ArrayList<UserDTO> de los usuarios
 	 **/
 	
-	public ArrayList<UserDTO> solicitarUsuarios() {
+	public ArrayList<UserDTO> solicitarUsuarios(String path) {
 		Properties prop = new Properties();
 		try{
-			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File(path)));
 			prop.load(reader_sqlproperties);
 		} catch (FileNotFoundException e) {		
 			e.printStackTrace();
@@ -47,7 +47,7 @@ public class UserDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			String query = "select * from usuario";
+			String query = consultaUsuario;
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
@@ -79,10 +79,10 @@ public class UserDAO {
 	 * @return UserDTO del usuario
 	 **/
 	
-	public UserDTO solicitarUsuario(String correo) {
+	public UserDTO solicitarUsuario(String path, String correo) {
 		Properties prop = new Properties();
 		try{
-			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File(path)));
 			prop.load(reader_sqlproperties);
 		} catch (FileNotFoundException e) {		
 			e.printStackTrace();
@@ -95,7 +95,7 @@ public class UserDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("select * from usuario where correoUsuario=?"); //¿METER PROPERTIES?
+			PreparedStatement ps = connection.prepareStatement(consultaUsuarioEspecifico);
 			ps.setString(1, correo);
 			ResultSet rs = (ResultSet) ps.executeQuery();
 			
@@ -126,10 +126,10 @@ public class UserDAO {
 	 * @return Integer que informa sobre el status de la devolucion
 	 **/
 	
-	public int escribirUsuarioInsert(UserDTO usuario) {
+	public int escribirUsuarioInsert(String path, UserDTO usuario) {
 		Properties prop = new Properties();
 		try{
-			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File(path)));
 			prop.load(reader_sqlproperties);
 		} catch (FileNotFoundException e) {		
 			e.printStackTrace();
@@ -142,7 +142,7 @@ public class UserDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("insert into usuario (correoUsuario,nombre,apellidos,fechaInscripcion,fechaNacimiento,contrasena,administrador) values(?,?,?,?,?,?,0)");
+			PreparedStatement ps = connection.prepareStatement(insertUsuario);
 			ps.setString(1, usuario.getCorreo());
 			ps.setString(2, usuario.getNombre());
 			ps.setString(3, usuario.getApellidos());
@@ -165,10 +165,10 @@ public class UserDAO {
 	 * @return Integer que informa sobre el status de la devolucion
 	 **/
 	
-	public int escribirUsuarioUpdate(UserDTO usuario) {
+	public int escribirUsuarioUpdate(String path, UserDTO usuario) {
 		Properties prop = new Properties();
 		try{
-			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File(path)));
 			prop.load(reader_sqlproperties);
 		} catch (FileNotFoundException e) {		
 			e.printStackTrace();
@@ -181,7 +181,7 @@ public class UserDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("update usuario set nombre=?,apellidos=?,fechaInscripcion=?,fechaNacimiento=?, contrasena=? where correoUsuario=?");
+			PreparedStatement ps = connection.prepareStatement(updateUsuario);
 			ps.setString(6, usuario.getCorreo());
 			ps.setString(1, usuario.getNombre());
 			ps.setString(2, usuario.getApellidos());

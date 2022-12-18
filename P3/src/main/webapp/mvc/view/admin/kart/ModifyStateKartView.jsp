@@ -77,7 +77,7 @@ for (int i = 0; i < karts.size(); i++) {
 	</tr>
 	<% } %>
 	<tr><td colspan="3"><p>KARTS ADULTOS</p></td></tr>
-	<% for (int i = 0; i < kartsInfantiles.size(); i++) { %>
+	<% for (int i = 0; i < kartsAdultos.size(); i++) { %>
 	<tr>
 		<td>
 		<%= kartsAdultos.get(i).getId() %>

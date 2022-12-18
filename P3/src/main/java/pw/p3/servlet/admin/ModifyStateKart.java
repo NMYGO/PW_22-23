@@ -44,16 +44,17 @@ public class ModifyStateKart extends HttpServlet {
 		CustomerBean customerBean = (CustomerBean)session.getAttribute("customerBean");
 		if (customerBean != null && customerBean.getCorreoUser() != "") {
 			if(customerBean.getAdminUser()) {
+				String path = getServletContext().getRealPath("/WEB-INF/sql.properties.txt");
 				String id_string = request.getParameter("id");
 				String estado_string = request.getParameter("estado");
 				KartDAO kartDAO = new KartDAO();
-				ArrayList<KartDTO> karts = kartDAO.solicitarKarts();
+				ArrayList<KartDTO> karts = kartDAO.solicitarKarts(path);
 				request.setAttribute("karts", karts);
 				
 				if (id_string != null || estado_string != null) {
 					Integer id = Integer.parseInt(id_string);
 					Estado estado = Estado.valueOf(estado_string);
-					KartDTO kart = kartDAO.solicitarKart(id);
+					KartDTO kart = kartDAO.solicitarKart(path, id);
 					
 					if(kart == null) {
 						response.setContentType("text/html");
@@ -73,7 +74,7 @@ public class ModifyStateKart extends HttpServlet {
 							if(estado == Estado.DISPONIBLE) {
 								kart.setNombrePista(null);
 							}
-							if(kartDAO.escribirKartUpdate(kart) == 0) {
+							if(kartDAO.escribirKartUpdate(path, kart) == 0) {
 								response.setContentType("text/html");
 								PrintWriter out = response.getWriter();
 								out.println("Error. Kart no modificado");

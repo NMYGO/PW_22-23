@@ -43,15 +43,16 @@ public class ModifyStateCircuit extends HttpServlet {
 		CustomerBean customerBean = (CustomerBean)session.getAttribute("customerBean");
 		if (customerBean != null && customerBean.getCorreoUser() != "") {
 			if(customerBean.getAdminUser()) {
+				String path = getServletContext().getRealPath("/WEB-INF/sql.properties.txt");
 				String nombre = request.getParameter("nombre");
 				String estado_string = request.getParameter("estado");
 				CircuitDAO circuitDAO = new CircuitDAO();
-				ArrayList<CircuitDTO> pistas = circuitDAO.solicitarPistas();
+				ArrayList<CircuitDTO> pistas = circuitDAO.solicitarPistas(path);
 				request.setAttribute("pistas", pistas);
 				
 				if (nombre != null || estado_string != null) {
 					Boolean estado = Boolean.valueOf(estado_string);
-					CircuitDTO pista = circuitDAO.solicitarPista(nombre);
+					CircuitDTO pista = circuitDAO.solicitarPista(path, nombre);
 					
 					if(pista == null) {
 						response.setContentType("text/html");
@@ -61,7 +62,7 @@ public class ModifyStateCircuit extends HttpServlet {
 						error.include(request, response);
 					} else {
 						pista.setEstado(estado);
-						if(circuitDAO.escribirPistaUpdate(pista) == 0) {
+						if(circuitDAO.escribirPistaUpdate(path, pista) == 0) {
 							response.setContentType("text/html");
 							PrintWriter out = response.getWriter();
 							out.println("Error. Pista no modificada");

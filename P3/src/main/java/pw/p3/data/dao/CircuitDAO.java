@@ -33,10 +33,10 @@ public class CircuitDAO {
 	 * @return ArrayList<CircuitDTO> de pistas
 	 **/
 	
-	public ArrayList<CircuitDTO> solicitarPistas() {
+	public ArrayList<CircuitDTO> solicitarPistas(String path) {
 		Properties prop = new Properties();
 		try{
-			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File(path)));
 			prop.load(reader_sqlproperties);
 		} catch (FileNotFoundException e) {		
 			e.printStackTrace();
@@ -51,7 +51,7 @@ public class CircuitDAO {
 			Connection connection = dbConnection.getConnection();
 			String query = consultaPista;
 			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery("select * from pista");
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
 			while (rs.next()) {
 				String nombre = rs.getString("nombrePista");
@@ -80,10 +80,10 @@ public class CircuitDAO {
 	 * @return ArrayList<CircuitDTO> de pistas libres
 	 **/
 	
-	public ArrayList<CircuitDTO> solicitarPistasLibres(Boolean estado, Integer participantes, Dificultad dificultad) {
+	public ArrayList<CircuitDTO> solicitarPistasLibres(String path, Boolean estado, Integer participantes, Dificultad dificultad) {
 		Properties prop = new Properties();
 		try{
-			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File(path)));
 			prop.load(reader_sqlproperties);
 		} catch (FileNotFoundException e) {		
 			e.printStackTrace();
@@ -99,7 +99,7 @@ public class CircuitDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("select * from pista where estado=? and dificultad=? and maxKarts>=?");
+			PreparedStatement ps = connection.prepareStatement(consultaPistasLibres);
 			ps.setInt(1, iestado);
 			ps.setString(2,dificultad.toString());
 			ps.setInt(3,participantes);
@@ -109,7 +109,7 @@ public class CircuitDAO {
 			while (rs.next()) {
 				String nombre = rs.getString("nombrePista");
 				Integer maxkarts = rs.getInt("maxKarts");
-				kartsPista = kartTabla.solicitarKartsPista(nombre);
+				kartsPista = kartTabla.solicitarKartsPista(path, nombre);
 				if(maxkarts >= participantes && participantes <= kartsPista.size()) {
 						pistas.add(new CircuitDTO(nombre, estado, dificultad, maxkarts));
 				}
@@ -132,10 +132,10 @@ public class CircuitDAO {
 	 * @return ArrayList<CircuitDTO> de pistas disponibles
 	 **/
 	
-	public ArrayList<CircuitDTO> solicitarPistasDisponiblesDificultad(Dificultad dificultad) {
+	public ArrayList<CircuitDTO> solicitarPistasDisponiblesDificultad(String path, Dificultad dificultad) {
 		Properties prop = new Properties();
 		try{
-			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File(path)));
 			prop.load(reader_sqlproperties);
 		} catch (FileNotFoundException e) {		
 			e.printStackTrace();
@@ -148,7 +148,7 @@ public class CircuitDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("select * from pista where estado=0 and dificultad=?");
+			PreparedStatement ps = connection.prepareStatement(consultaPistasLibres);
 			ps.setString(1,dificultad.toString());
 			
 			ResultSet rs = (ResultSet) ps.executeQuery();
@@ -176,10 +176,10 @@ public class CircuitDAO {
 	 * @return ArrayList<CircuitDTO> de pistas disponibles
 	 **/
 	
-	public ArrayList<CircuitDTO> solicitarPistasDisponiblesNombre(String nombre) {
+	public ArrayList<CircuitDTO> solicitarPistasDisponiblesNombre(String path, String nombre) {
 		Properties prop = new Properties();
 		try{
-			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File(path)));
 			prop.load(reader_sqlproperties);
 		} catch (FileNotFoundException e) {		
 			e.printStackTrace();
@@ -192,7 +192,7 @@ public class CircuitDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("select * from pista where estado=0 and nombrePista=?");
+			PreparedStatement ps = connection.prepareStatement(consultaPistasLibres);
 			ps.setString(1,nombre);
 			
 			ResultSet rs = (ResultSet) ps.executeQuery();
@@ -220,10 +220,10 @@ public class CircuitDAO {
 	 * @return ArrayList<CircuitDTO> de pistas disponibles
 	 **/
 	
-	public ArrayList<CircuitDTO> solicitarPistasDisponiblesNkarts(Integer nkarts) {
+	public ArrayList<CircuitDTO> solicitarPistasDisponiblesNkarts(String path, Integer nkarts) {
 		Properties prop = new Properties();
 		try{
-			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File(path)));
 			prop.load(reader_sqlproperties);
 		} catch (FileNotFoundException e) {		
 			e.printStackTrace();
@@ -238,7 +238,7 @@ public class CircuitDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("select * from pista where estado=0 and maxKarts>=?");
+			PreparedStatement ps = connection.prepareStatement(consultaPistasLibres);
 			ps.setInt(1,nkarts);
 			
 			ResultSet rs = (ResultSet) ps.executeQuery();
@@ -247,7 +247,7 @@ public class CircuitDAO {
 				String nombre = rs.getString("nombrePista");
 				Dificultad dificultad = Dificultad.valueOf(rs.getString("dificultad"));
 				Integer maxkarts = rs.getInt("maxKarts");
-				kartsPista = kartTabla.solicitarKartsPista(nombre);
+				kartsPista = kartTabla.solicitarKartsPista(path, nombre);
 				if(maxkarts >= nkarts && nkarts <= kartsPista.size()) {
 						pistas.add(new CircuitDTO(nombre, false, dificultad, maxkarts));
 				}
@@ -270,10 +270,10 @@ public class CircuitDAO {
 	 * @return CircuitDTO de la pista
 	 **/
 	
-	public CircuitDTO solicitarPista(String nombre) {
+	public CircuitDTO solicitarPista(String path, String nombre) {
 		Properties prop = new Properties();
 		try{
-			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File(path)));
 			prop.load(reader_sqlproperties);
 		} catch (FileNotFoundException e) {		
 			e.printStackTrace();
@@ -286,7 +286,7 @@ public class CircuitDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("select * from pista where nombrePista=?");
+			PreparedStatement ps = connection.prepareStatement(consultaPistaNombre);
 			ps.setString(1, nombre);
 			ResultSet rs = (ResultSet) ps.executeQuery();
 
@@ -314,10 +314,10 @@ public class CircuitDAO {
 	 * @return Integer que informa sobre el status de la devolucion
 	 **/
 	
-	public int escribirPistaUpdate(CircuitDTO pista) {
+	public int escribirPistaUpdate(String path, CircuitDTO pista) {
 		Properties prop = new Properties();
 		try{
-			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File(path)));
 			prop.load(reader_sqlproperties);
 		} catch (FileNotFoundException e) {		
 			e.printStackTrace();
@@ -330,7 +330,7 @@ public class CircuitDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("update pista set estado=?,dificultad=?,maxKarts=? where nombrePista=?");
+			PreparedStatement ps = connection.prepareStatement(updatePista);
 			ps.setString(4, pista.getNombre());
 			ps.setBoolean(1, pista.isEstado());
 			ps.setString(2, pista.getDificultad().toString());
@@ -351,10 +351,10 @@ public class CircuitDAO {
 	 * @return Integer que informa sobre el status de la devolucion
 	 **/
 	
-	public int escribirPistaInsert(CircuitDTO pista) {
+	public int escribirPistaInsert(String path, CircuitDTO pista) {
 		Properties prop = new Properties();
 		try{
-			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File(path)));
 			prop.load(reader_sqlproperties);
 		} catch (FileNotFoundException e) {		
 			e.printStackTrace();
@@ -367,7 +367,7 @@ public class CircuitDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("insert into pista (nombrePista,estado,dificultad,maxKarts) values(?,?,?,?)");
+			PreparedStatement ps = connection.prepareStatement(insertPista);
 			ps.setString(1, pista.getNombre());
 			ps.setBoolean(2, pista.isEstado());
 			ps.setString(3, pista.getDificultad().toString());

@@ -16,7 +16,10 @@ updateKart=update kart set tipo=?,estado=?,nombrePista=? where idKart=?
 insertKart=insert into kart (idKart,tipo,estado,nombrePista) values(?,?,?,?)
 
 consultaPista=select * from pista
-consultaPistasLibres=select * from pista where estado=? and dificultad=?
+consultaPistasLibres=select * from pista where estado=? and dificultad=? and maxKarts>=?
+solicitarPistasDisponiblesDificultad=select * from pista where estado=0 and dificultad=?
+solicitarPistasDisponiblesNombre=select * from pista where estado=0 and nombrePista=?
+solicitarPistasDisponiblesNkarts=select * from pista where estado=0 and maxKarts>=?
 consultaPistaNombre=select * from pista where nombrePista=?
 updatePista=update pista set estado=?,dificultad=?,maxKarts=? where nombrePista=?
 insertPista=insert into pista (nombrePista,estado,dificultad,maxKarts) values(?,?,?,?)
@@ -32,4 +35,4 @@ deleteReserva=delete from reserva where correoUsuario=? and fecha=? and nombrePi
 consultaUsuario=select * from usuario
 consultaUsuarioEspecifico=select * from usuario where correoUsuario=?
 updateUsuario=update usuario set nombre=?,apellidos=?,fechaInscripcion=?,fechaNacimiento=?, contrasena=? where correoUsuario=?
-insertUsuario=insert into usuario (correoUsuario,nombre,apellidos,fechaInscripcion,fechaNacimiento,contrasena) values(?,?,?,?,?,?)
+insertUsuario=insert into usuario (correoUsuario,nombre,apellidos,fechaInscripcion,fechaNacimiento,contrasena,administrador) values(?,?,?,?,?,?,0)

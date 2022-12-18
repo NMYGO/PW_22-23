@@ -40,11 +40,12 @@ public class RegisterKart extends HttpServlet {
 		CustomerBean customerBean = (CustomerBean)session.getAttribute("customerBean");
 		if (customerBean != null && customerBean.getCorreoUser() != "") {
 			if(customerBean.getAdminUser()) {
+				String path = getServletContext().getRealPath("/WEB-INF/sql.properties.txt");
 				String id_string = request.getParameter("id");					
 				String tipo_string = request.getParameter("tipo");					
 				String estado_string = request.getParameter("estado");
 				KartDAO kartDAO = new KartDAO();
-				ArrayList<KartDTO> karts = kartDAO.solicitarKarts();
+				ArrayList<KartDTO> karts = kartDAO.solicitarKarts(path);
 				request.setAttribute("karts", karts);
 				
 				if (id_string != null || tipo_string != null || estado_string != null) {
@@ -53,7 +54,7 @@ public class RegisterKart extends HttpServlet {
 					Estado estado = Estado.valueOf(estado_string);
 					KartDTO kart = new KartDTO(id, tipo, estado, null);
 					
-					if(kartDAO.escribirKartInsert(kart) == 0) {
+					if(kartDAO.escribirKartInsert(path, kart) == 0) {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
 						out.println("Error. Kart no registrado");

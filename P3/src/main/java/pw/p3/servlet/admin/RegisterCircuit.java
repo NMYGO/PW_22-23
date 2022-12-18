@@ -44,12 +44,13 @@ public class RegisterCircuit extends HttpServlet {
 		CustomerBean customerBean = (CustomerBean)session.getAttribute("customerBean");
 		if (customerBean != null && customerBean.getCorreoUser() != "") {
 			if(customerBean.getAdminUser()) {
+				String path = getServletContext().getRealPath("/WEB-INF/sql.properties.txt");
 				String nombre = request.getParameter("nombre");					
 				String estado_string = request.getParameter("estado");					
 				String dificultad_string = request.getParameter("dificultad");
 				String maxkarts_string = request.getParameter("maxkarts");
 				CircuitDAO circuitDAO = new CircuitDAO();
-				ArrayList<CircuitDTO> pistas = circuitDAO.solicitarPistas();
+				ArrayList<CircuitDTO> pistas = circuitDAO.solicitarPistas(path);
 				request.setAttribute("pistas", pistas);
 				
 				if (nombre != null || estado_string != null || dificultad_string != null || maxkarts_string != null) {
@@ -58,7 +59,7 @@ public class RegisterCircuit extends HttpServlet {
 					Integer maxkarts = Integer.parseInt(maxkarts_string);
 					CircuitDTO circuit = new CircuitDTO(nombre, estado, dificultad, maxkarts);
 					
-					if(circuitDAO.escribirPistaInsert(circuit) == 0) {
+					if(circuitDAO.escribirPistaInsert(path, circuit) == 0) {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
 						out.println("Error. Pista no registrada");

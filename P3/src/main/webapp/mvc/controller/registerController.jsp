@@ -25,13 +25,14 @@ if (customerBean == null || customerBean.getCorreoUser().equalsIgnoreCase("") ||
 		if(!nombreUser.equalsIgnoreCase("") && !apellidosUser.equalsIgnoreCase("") &&
 			!nacimientoUser_string.equalsIgnoreCase("") && !correoUser.equalsIgnoreCase("") &&
 			!contrasenaUser.equalsIgnoreCase("")) {
+			String path = getServletContext().getRealPath("/WEB-INF/sql.properties.txt");
 			LocalDate nacimientoUser = LocalDate.parse(nacimientoUser_string);
 			UserDTO usuario = new UserDTO(nombreUser, apellidosUser, nacimientoUser, correoUser, contrasenaUser);
 			//Se accede a bases de datos para insertar el usuario
 			UserDAO userDAO = new UserDAO();
 			//Se realizan todas las comprobaciones necesarias del dominio
 			//Aquí sólo comprobamos que no exista el usuario
-			if(userDAO.escribirUsuarioInsert(usuario) == 0) {
+			if(userDAO.escribirUsuarioInsert(path, usuario) == 0) {
 				// Usuario no válido
 				nextPage = "../view/registerView.jsp";
 				mensajeNextPage = "El usuario no es valido";

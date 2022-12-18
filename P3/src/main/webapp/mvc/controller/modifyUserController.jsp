@@ -14,6 +14,7 @@ String nextPage = "./mainController.jsp";
 String mensajeNextPage = "";
 //Caso 2
 if (customerBean != null && !customerBean.getCorreoUser().equalsIgnoreCase("") && !customerBean.getPasswordUser().equalsIgnoreCase("")) {
+	String path = getServletContext().getRealPath("/WEB-INF/sql.properties.txt");
 	String nombreUser = request.getParameter("nombre");
 	String apellidosUser = request.getParameter("apellidos");
 	String nacimientoUser_string = request.getParameter("nacimiento");
@@ -23,7 +24,7 @@ if (customerBean != null && !customerBean.getCorreoUser().equalsIgnoreCase("") &
 	if (contrasenaUser != null) {
 		LocalDate nacimientoUser = LocalDate.MAX;
 		UserDAO userDAO = new UserDAO();
-		UserDTO usuario = userDAO.solicitarUsuario(customerBean.getCorreoUser());
+		UserDTO usuario = userDAO.solicitarUsuario(path, customerBean.getCorreoUser());
 		if(!nombreUser.equalsIgnoreCase("")){
 			usuario.setNombre(nombreUser);
 		}
@@ -46,7 +47,7 @@ if (customerBean != null && !customerBean.getCorreoUser().equalsIgnoreCase("") &
 				mensajeNextPage = "La fecha no es valida;";
 			}
 		}
-		if(userDAO.escribirUsuarioUpdate(usuario) == 0) {
+		if(userDAO.escribirUsuarioUpdate(path, usuario) == 0) {
 			// Usuario no modificado
 			nextPage = "../view/modifyUserView.jsp";
 			mensajeNextPage = "El usuario no es valido; " + usuario.toString();

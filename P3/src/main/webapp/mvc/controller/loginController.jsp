@@ -22,8 +22,9 @@ if (customerBean == null || customerBean.getCorreoUser().equalsIgnoreCase("") ||
 	if (correoUser != null) {
 		if(!correoUser.equalsIgnoreCase("") && !passwordUser.equalsIgnoreCase("")) {
 			//Se accede a bases de datos para obtener el usuario
+			String path = getServletContext().getRealPath("/WEB-INF/sql.properties.txt");
 			UserDAO userDAO = new UserDAO();
-			UserDTO usuario = userDAO.solicitarUsuario(correoUser);
+			UserDTO usuario = userDAO.solicitarUsuario(path, correoUser);
 			
 			//Se realizan todas las comprobaciones necesarias del dominio
 			//Aquí sólo comprobamos que exista el usuario

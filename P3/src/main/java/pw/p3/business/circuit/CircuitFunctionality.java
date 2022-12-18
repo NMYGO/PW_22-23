@@ -42,9 +42,9 @@ public class CircuitFunctionality {
 	 * @return Devuelve el kart asociado
 	 **/
 	
-	public KartDTO asociarKartAPista(KartDTO kart, CircuitDTO pista) {
+	public KartDTO asociarKartAPista(String path, KartDTO kart, CircuitDTO pista) {
 			KartDAO kartTabla = new KartDAO();
-			ArrayList <KartDTO> kartsPista = kartTabla.solicitarKartsPista(pista.getNombre());
+			ArrayList <KartDTO> kartsPista = kartTabla.solicitarKartsPista(path, pista.getNombre());
 			if(pista.getMaxkarts() > kartsPista.size()) {
 				if(pista.getDificultad() == Dificultad.INFANTIL && kart.isTipo()) {
 					kart.setEstado(Estado.RESERVADO);

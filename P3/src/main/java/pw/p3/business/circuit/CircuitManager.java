@@ -33,11 +33,11 @@ public class CircuitManager{
 	 * @return Devuelve true si la pista se ha creado, false si no se ha creado
 	 */
 	
-	public boolean crearPista (String nombre, Boolean estado, Dificultad dificultad, Integer maxkarts) {		
+	public boolean crearPista (String path, String nombre, Boolean estado, Dificultad dificultad, Integer maxkarts) {		
 		CircuitDAO pistaTabla = new CircuitDAO();
 		CircuitDTO pista = new CircuitDTO(nombre, estado, dificultad, maxkarts);
 		
-		if(pistaTabla.escribirPistaInsert(pista) == 0) {
+		if(pistaTabla.escribirPistaInsert(path, pista) == 0) {
 			System.out.println("Error. Pista no creada");
 			System.out.println("-------------------------------------");
 			System.out.println("");
@@ -58,11 +58,11 @@ public class CircuitManager{
 	 * @return Devuelve true si el kart se ha creado, false si no se ha creado
 	 */
 	
-	public boolean crearKart (Integer id, Boolean tipo, Estado estado, String nombrePista) {				
+	public boolean crearKart (String path, Integer id, Boolean tipo, Estado estado, String nombrePista) {				
 		KartDAO kartTabla = new KartDAO();
 		KartDTO kart = new KartDTO(id, tipo, estado, nombrePista);
 		
-		if (kartTabla.escribirKartInsert(kart) == 0) {
+		if (kartTabla.escribirKartInsert(path, kart) == 0) {
 			System.out.println("Error. Ese kart ya existe");
 			System.out.println("-------------------------------------");
 			System.out.println("");
@@ -81,20 +81,20 @@ public class CircuitManager{
 	 * @return Devuelve true si el kart se ha asociado, false si no se ha asociado
 	 */
 	
-	public boolean asociarKartPista (Integer idkart, String nombrepista) {
+	public boolean asociarKartPista (String path, Integer idkart, String nombrepista) {
 		KartDAO kartTabla = new KartDAO();
 		CircuitDAO pistaTabla = new CircuitDAO();
-		KartDTO kart = kartTabla.solicitarKart(idkart);
-		ArrayList <CircuitDTO> pistas = pistaTabla.solicitarPistas();
+		KartDTO kart = kartTabla.solicitarKart(path, idkart);
+		ArrayList <CircuitDTO> pistas = pistaTabla.solicitarPistas(path);
 		
 		for (int i = 0;i< pistas.size() ; i++) {
 			if (pistas.get(i).getNombre().equals(nombrepista)) {
 				if(!pistas.get(i).isEstado()) {
 					if(kart.getEstado() == Estado.DISPONIBLE) {
 						CircuitFunctionality pistaF = new CircuitFunctionality();
-						kart = pistaF.asociarKartAPista(kart, pistas.get(i));
+						kart = pistaF.asociarKartAPista(path, kart, pistas.get(i));
 						if(kart != null) {
-							if (!(kartTabla.escribirKartUpdate(kart) == 0)) {
+							if (!(kartTabla.escribirKartUpdate(path, kart) == 0)) {
 								System.out.println("Kart asociado con exito");
 								System.out.println("-------------------------------------");
 								System.out.println("");
@@ -116,9 +116,9 @@ public class CircuitManager{
 	 * @return
 	 */
 	
-	public void listaPistasMantenimiento () {
+	public void listaPistasMantenimiento (String path) {
 		CircuitDAO pistaTabla = new CircuitDAO();
-		ArrayList <CircuitDTO> pistas = pistaTabla.solicitarPistas();
+		ArrayList <CircuitDTO> pistas = pistaTabla.solicitarPistas(path);
 		
 		for (int i = 0;i< pistas.size() ; i++) {
 			if (pistas.get(i).isEstado()) {
@@ -134,10 +134,10 @@ public class CircuitManager{
 	 * @return ArrayList<DTOPista> de las pistas libres
 	 */
 	
-	public ArrayList<CircuitDTO> pistasLibres (Integer participantes, Dificultad dificultad) {							
+	public ArrayList<CircuitDTO> pistasLibres (String path, Integer participantes, Dificultad dificultad) {							
 		CircuitDAO pistaTabla = new CircuitDAO();
 		
-		ArrayList <CircuitDTO> pistas = pistaTabla.solicitarPistasLibres(false, participantes, dificultad);
+		ArrayList <CircuitDTO> pistas = pistaTabla.solicitarPistasLibres(path, false, participantes, dificultad);
 		return pistas;
 	}
 	
@@ -146,9 +146,9 @@ public class CircuitManager{
 	 * @return
 	 */
 	
-	public void listarKartsDisponibles () {
+	public void listarKartsDisponibles (String path) {
 		KartDAO kartTabla = new KartDAO();
-		ArrayList <KartDTO> karts = kartTabla.solicitarKarts();
+		ArrayList <KartDTO> karts = kartTabla.solicitarKarts(path);
 		for(int i = 0; i < karts.size(); i++) {
 			if(karts.get(i).getEstado() == Estado.DISPONIBLE) {
 				System.out.println(karts.get(i).toString());

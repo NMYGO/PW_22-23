@@ -10,6 +10,7 @@ String mensajeNextPage = "mainController";
 %>
 
 <% if(customerBean.getAdminUser()) { %>	
+	<% String path = getServletContext().getRealPath("/WEB-INF/sql.properties.txt"); %>
 	<%ArrayList<UserDTO> usuarios = new ArrayList<UserDTO>();%>
 	<% ArrayList<Integer> arrayAntiguedades = new ArrayList<Integer>(); %>
 	<% ArrayList<Integer> arrayNreservas = new ArrayList<Integer>(); %>
@@ -19,7 +20,7 @@ String mensajeNextPage = "mainController";
 	<%UserDAO userDAO = new UserDAO();%>
 	<%ReservationDAO reservationDAO = new ReservationDAO(); %>
 	<% UserManager userManager = new UserManager(); %>
-	<%usuarios = userDAO.solicitarUsuarios();%>
+	<%usuarios = userDAO.solicitarUsuarios(path);%>
 	<% auxiliaryBean.setUsuarios(usuarios); %>
 	<% for (int i = 0; i < auxiliaryBean.getUsuarios().size(); i++) { %>
 		<% int nreservas = 0; %>

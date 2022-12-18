@@ -28,11 +28,12 @@ public class SearchCircuitType extends HttpServlet {
 		CustomerBean customerBean = (CustomerBean)session.getAttribute("customerBean");
 		if (customerBean != null && customerBean.getCorreoUser() != "") {
 			if(!customerBean.getAdminUser()) {
+				String path = getServletContext().getRealPath("/WEB-INF/sql.properties.txt");
 				String tipo_string = request.getParameter("tipo");
 				if (tipo_string != null) {
 					Dificultad tipo = Dificultad.valueOf(tipo_string);
 					CircuitDAO circuitDAO = new CircuitDAO();
-					ArrayList<CircuitDTO> pistas = circuitDAO.solicitarPistasDisponiblesDificultad(tipo);
+					ArrayList<CircuitDTO> pistas = circuitDAO.solicitarPistasDisponiblesDificultad(path, tipo);
 					request.setAttribute("pistas", pistas);
 					
 					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/searchCircuit/circuitAvalaibleView.jsp");

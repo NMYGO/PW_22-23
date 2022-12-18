@@ -32,10 +32,10 @@ public class KartDAO {
 	 * @return ArrayList<KartDTO> de los karts
 	 **/
 	
-	public ArrayList<KartDTO> solicitarKarts() {
+	public ArrayList<KartDTO> solicitarKarts(String path) {
 		Properties prop = new Properties();
 		try{
-			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File(path)));
 			prop.load(reader_sqlproperties);
 		} catch (FileNotFoundException e) {		
 			e.printStackTrace();
@@ -50,7 +50,7 @@ public class KartDAO {
 			Connection connection = dbConnection.getConnection();
 			String query = consultaKart;
 			Statement stmt = connection.createStatement();
-			ResultSet rs = (ResultSet) stmt.executeQuery("select * from kart");
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 
 			while (rs.next()) {
 				Integer id = rs.getInt("idKart");
@@ -77,10 +77,10 @@ public class KartDAO {
 	 * @return KartDTO
 	 **/
 	
-	public KartDTO solicitarKart(Integer id) {
+	public KartDTO solicitarKart(String path, Integer id) {
 		Properties prop = new Properties();
 		try{
-			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File(path)));
 			prop.load(reader_sqlproperties);
 		} catch (FileNotFoundException e) {		
 			e.printStackTrace();
@@ -93,7 +93,7 @@ public class KartDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("select * from kart where idKart=?");
+			PreparedStatement ps = connection.prepareStatement(consultaKartID);
 			ps.setInt(1, id);
 			ResultSet rs = (ResultSet) ps.executeQuery();
 			
@@ -122,10 +122,10 @@ public class KartDAO {
 	 * @return ArrayList<KartDTO> de los karts que pertenecen a la pista
 	 **/
 	
-	public ArrayList<KartDTO> solicitarKartsPista(String nombrePista) {
+	public ArrayList<KartDTO> solicitarKartsPista(String path, String nombrePista) {
 		Properties prop = new Properties();
 		try{
-			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File(path)));
 			prop.load(reader_sqlproperties);
 		} catch (FileNotFoundException e) {		
 			e.printStackTrace();
@@ -138,7 +138,7 @@ public class KartDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("select * from kart where nombrePista=?");
+			PreparedStatement ps = connection.prepareStatement(consultaKartPista);
 			ps.setString(1, nombrePista);
 			ResultSet rs = (ResultSet) ps.executeQuery();
 
@@ -167,10 +167,10 @@ public class KartDAO {
 	 * @return Integer que informa sobre el status de la devolucion
 	 **/
 	
-	public int escribirKartUpdate(KartDTO kart) {
+	public int escribirKartUpdate(String path, KartDTO kart) {
 		Properties prop = new Properties();
 		try{
-			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File(path)));
 			prop.load(reader_sqlproperties);
 		} catch (FileNotFoundException e) {		
 			e.printStackTrace();
@@ -183,7 +183,7 @@ public class KartDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("update kart set tipo=?,estado=?,nombrePista=? where idKart=?");
+			PreparedStatement ps = connection.prepareStatement(updateKart);
 			ps.setInt(4, kart.getId());
 			ps.setBoolean(1, kart.isTipo());
 			ps.setString(2, kart.getEstado().toString());
@@ -204,10 +204,10 @@ public class KartDAO {
 	 * @return Integer que informa sobre el status de la devolucion
 	 **/
 	
-	public int escribirKartInsert (KartDTO kart) {
+	public int escribirKartInsert (String path, KartDTO kart) {
 		Properties prop = new Properties();
 		try{
-			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File(path)));
 			prop.load(reader_sqlproperties);
 		} catch (FileNotFoundException e) {		
 			e.printStackTrace();
@@ -220,7 +220,7 @@ public class KartDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("insert into kart (idKart,tipo,estado,nombrePista) values(?,?,?,?)");
+			PreparedStatement ps = connection.prepareStatement(insertKart);
 			ps.setInt(1, kart.getId());
 			ps.setBoolean(2, kart.isTipo());
 			ps.setString(3, kart.getEstado().toString());

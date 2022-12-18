@@ -28,11 +28,12 @@ public class SearchCircuitNkarts extends HttpServlet {
 		CustomerBean customerBean = (CustomerBean)session.getAttribute("customerBean");
 		if (customerBean != null && customerBean.getCorreoUser() != "") {
 			if(!customerBean.getAdminUser()) {
+				String path = getServletContext().getRealPath("/WEB-INF/sql.properties.txt");
 				String nkarts_string = request.getParameter("nkarts");
 				if (nkarts_string != null) {
 					Integer nkarts = Integer.parseInt(nkarts_string);
 					CircuitDAO circuitDAO = new CircuitDAO();
-					ArrayList<CircuitDTO> pistas = circuitDAO.solicitarPistasDisponiblesNkarts(nkarts);
+					ArrayList<CircuitDTO> pistas = circuitDAO.solicitarPistasDisponiblesNkarts(path, nkarts);
 					request.setAttribute("pistas", pistas);
 					
 					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/searchCircuit/circuitAvalaibleView.jsp");
