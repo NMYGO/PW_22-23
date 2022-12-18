@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  * 
- *  
+ *  Clase que gestiona las reservas
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano

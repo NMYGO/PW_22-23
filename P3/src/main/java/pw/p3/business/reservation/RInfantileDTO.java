@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 /**
  * 
- * DTO de las reservas de tipo infantil
+ * DTO Reserva Infantil
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano
@@ -31,6 +31,7 @@ public class RInfantileDTO extends Reservation{
 	
 	/**
 	 * Constructor parametrizado
+	 * @param idReserva Identificador de la reserva
 	 * @param usuario Usuario que hace la reserva
 	 * @param fecha Fecha de la reserva
 	 * @param duracion Duracion de la reserva

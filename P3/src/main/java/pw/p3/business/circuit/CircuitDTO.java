@@ -4,7 +4,7 @@ import pw.p3.data.Dificultad;
 
 /**
  * 
- * DTO pista
+ * DTO Pista
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano

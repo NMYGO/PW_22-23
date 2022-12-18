@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 /**
  * 
- *  La factoria abstracta para crear una reserva
+ *  Factoria abstracta para crear una reserva
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano
@@ -21,6 +21,7 @@ public abstract class ReservationCreator {
 		
 	/**
 	 * Reserva infantil
+	 * @param idReserva Identificador de la reserva
 	 * @param usuario Usuario que realiza la reserva
 	 * @param fecha Fecha de la reserva
 	 * @param duracion Duracion de la reserva
@@ -30,12 +31,13 @@ public abstract class ReservationCreator {
 	 * @param ninos Participantes niños de la reserva
 	 * @param tipo Tipo de la reserva
 	 * @return
-	 */
+	 **/
 	
 	public abstract RInfantileDTO creaRInf(Integer idReserva, String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer ninos, Dificultad tipo);
 	
 	/**
 	 * Reserva familiar
+	 * @param idReserva Identificador de la reserva
 	 * @param usuario Usuario que realiza la reserva
 	 * @param fecha Fecha de la reserva
 	 * @param duracion Duracion de la reserva
@@ -46,12 +48,13 @@ public abstract class ReservationCreator {
 	 * @param ninos Participantes niños de la reserva
 	 * @param tipo Tipo de la reserva
 	 * @return
-	 */
+	 **/
 	
 	public abstract RFamiliarDTO creaRFam(Integer idReserva, String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Integer ninos, Dificultad tipo);
 	
 	/**
 	 * Reserva adulta
+	 * @param idReserva Identificador de la reserva
 	 * @param usuario Usuario que realiza la reserva
 	 * @param fecha Fecha de la reserva
 	 * @param duracion Duracion de la reserva
@@ -61,7 +64,7 @@ public abstract class ReservationCreator {
 	 * @param adultos Participantes adultos de la reserva
 	 * @param tipo Tipo de la reserva
 	 * @return
-	 */
+	 **/
 	
 	public abstract RAdultDTO creaRAdu(Integer idReserva, String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento, Integer adultos, Dificultad tipo);
 }

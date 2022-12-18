@@ -34,6 +34,7 @@ public abstract class Reservation {
 	
 	/**
 	 * Constructor parametrizado
+	 * @param idReserva Identificador de la reserva
 	 * @param usuario Usuario de la reserva
 	 * @param fecha Fecha de la reserva
 	 * @param duracion Duracion de la reserva
@@ -42,7 +43,7 @@ public abstract class Reservation {
 	 * @param descuento Descuento de la reserva
 	 **/
 	
-	public Reservation(Integer idReserva, String usuario, LocalDate fecha, int duracion, String pista, float precio, int descuento) {
+	public Reservation(Integer idReserva, String usuario, LocalDate fecha, Integer duracion, String pista, Float precio, Integer descuento) {
 		this.idReserva = idReserva;
 		this.usuario = usuario;
 		this.fecha = fecha;

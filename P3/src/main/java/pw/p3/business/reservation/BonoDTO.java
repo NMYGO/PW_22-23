@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 /**
  * 
- * DTO de bonos
+ * DTO Bono
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano
@@ -36,7 +36,6 @@ public class BonoDTO{
 	
 	/**
 	 * Contructor parametrizado
-	 * @param id Identificador de bono
 	 * @param sesion Sesion nº de bono
 	 * @param bUsuario Correo de usuario del bono
 	 * @param tipo Tipo de bono
@@ -51,7 +50,6 @@ public class BonoDTO{
 	
 	/**
 	 * Contructor parametrizado
-	 * @param id Identificador de bono
 	 * @param sesion Sesion nº de bono
 	 * @param bUsuario Correo de usuario del bono
 	 * @param tipo Tipo de bono
