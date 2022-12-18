@@ -16,8 +16,25 @@ import java.util.ArrayList;
 import java.util.Properties;
 import com.mysql.jdbc.ResultSet;
 
+/**
+ * 
+ * DAO de Reserva
+ * Encargado de interactuar con la tabla reserva de la base de datos
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ **/
+
 
 public class ReservationDAO {
+	
+	/**
+	 * Solicita la reservas infantiles
+	 * @return ArrayList<DTORInfantile> de las reservas
+	 **/
 	
 	public ArrayList<RInfantileDTO> solicitarReservasInfantiles() {
 		Properties prop = new Properties();
@@ -63,6 +80,11 @@ public class ReservationDAO {
 		return reservas;
 	}
 	
+	/**
+	 * Solicita la reservas de adultos
+	 * @return ArrayList<DTORAdult> de las reservas
+	 **/
+	
 	public ArrayList<RAdultDTO> solicitarReservasAdultos() {
 		Properties prop = new Properties();
 		try{
@@ -106,6 +128,11 @@ public class ReservationDAO {
 		}
 		return reservas;
 	}
+	
+	/**
+	 * Solicita la reservas familiares
+	 * @return ArrayList<DTORFamiliar> de los reservas
+	 **/
 	
 	public ArrayList<RFamiliarDTO> solicitarReservasFamiliares() {
 		Properties prop = new Properties();
@@ -152,6 +179,13 @@ public class ReservationDAO {
 		return reservas;
 	}
 	
+	/**
+	 * Solicita la proxima reserva infantil
+	 * @param correoUsuario String Correo del usuario que solicita
+	 * @param dificultad Dificultad Dificultad de la reserva que se solicita
+	 * @return DTORInfantile de la proxima reserva infantil
+	 **/
+	
 	public RInfantileDTO solicitarProximaReservaInfantil(String correoUsuario, Dificultad dificultad) {
 		Properties prop = new Properties();
 		try{
@@ -197,6 +231,13 @@ public class ReservationDAO {
 		return reserva;
 	}
 	
+	/**
+	 * Solicita la proxima reserva adulta
+	 * @param correoUsuario String Correo del usuario que solicita
+	 * @param dificultad Dificultad Dificultad de la reserva que se solicita
+	 * @return DTORAdult de la proxima reserva adulta
+	 **/
+	
 	public RAdultDTO solicitarProximaReservaAdulto(String correoUsuario, Dificultad dificultad) {
 		Properties prop = new Properties();
 		try{
@@ -241,6 +282,13 @@ public class ReservationDAO {
 		}
 		return reserva;
 	}
+	
+	/**
+	 * Solicita la proxima reserva familiar 
+	 * @param correoUsuario String Correo del usuario que solicita
+	 * @param dificultad Dificultad Dificultad de la reserva que se solicita
+	 * @return DTORFamiliar de la proxima reserva
+	 **/
 	
 	public RFamiliarDTO solicitarProximaReservaFamiliar(String correoUsuario, Dificultad dificultad) {
 		Properties prop = new Properties();
@@ -288,6 +336,13 @@ public class ReservationDAO {
 		return reserva;
 	}
 	
+	/**
+	 * Solicita las reservas infantiles completadas  
+	 * @param correoUsuario String Correo del usuario que solicita
+	 * @param dificultad Dificultad Dificultad de la reserva que se solicita
+	 * @return ArrayList<DTORInfantile> de las reservas completadas 
+	 **/
+	
 	public ArrayList<RInfantileDTO> solicitarReservasInfantilCompletada(String correoUsuario, Dificultad dificultad) {
 		Properties prop = new Properties();
 		try{
@@ -332,6 +387,13 @@ public class ReservationDAO {
 		}
 		return reservas;
 	}
+	
+	/**
+	 * Solicita las reservas adultas completadas  
+	 * @param correoUsuario String Correo del usuario que solicita
+	 * @param dificultad Dificultad Dificultad de la reserva que se solicita
+	 * @return ArrayList<DTORAdult> de las reservas completadas 
+	 **/
 	
 	public ArrayList<RAdultDTO> solicitarReservasAdultoCompletada(String correoUsuario, Dificultad dificultad) {
 		Properties prop = new Properties();
@@ -378,6 +440,13 @@ public class ReservationDAO {
 		return reservas;
 	}
 	
+	/**
+	 * Solicita las reservas familiares completadas  
+	 * @param correoUsuario String Correo del usuario que solicita
+	 * @param dificultad Dificultad Dificultad de la reserva que se solicita
+	 * @return ArrayList<DTORInfantile> de las reservas completadas 
+	 **/
+	
 	public ArrayList<RFamiliarDTO> solicitarReservasFamiliarCompletada(String correoUsuario, Dificultad dificultad) {
 		Properties prop = new Properties();
 		try{
@@ -423,6 +492,12 @@ public class ReservationDAO {
 		}
 		return reservas;
 	}
+	
+	/**
+	 * Borra una reserva pendiente  
+	 * @param idReserva Integer Id de la reserva a eliminar
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
 	
 	public Integer deleteReservaPendiente(Integer idReserva){
 		Properties prop = new Properties();

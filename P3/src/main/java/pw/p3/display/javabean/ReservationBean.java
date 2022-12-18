@@ -4,8 +4,21 @@ import java.time.LocalDate;
 
 import pw.p3.data.Dificultad;
 
+/**
+ * 
+ * Clase que implementa un bean de reservas
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ **/
+
 public class ReservationBean implements java.io.Serializable {
 
+	/* Atributos */
+	
 	private static final long serialVersionUID = 1L;
 	
 	private Integer ninos;
@@ -14,6 +27,7 @@ public class ReservationBean implements java.io.Serializable {
 	private LocalDate fecha;
 	private String dificultad;
 	
+	/* Getters y Setters */
 	
 	public Integer getNinos() {
 		return ninos;

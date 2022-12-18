@@ -6,8 +6,21 @@ import pw.p3.business.reservation.*;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
+/**
+ * 
+ * Clase que implementa un bean auxiliar
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ **/
+
 public class AuxiliaryBean implements java.io.Serializable {
 
+	/* Atributos */
+	
 	private static final long serialVersionUID = 1L;
 	
 	private Dificultad dificultadProximaReserva;
@@ -18,6 +31,8 @@ public class AuxiliaryBean implements java.io.Serializable {
 	private ArrayList<RAdultDTO> reservasAdulto;
 	private ArrayList<RFamiliarDTO> reservasFamiliar;
 	private ArrayList<Integer> nreservas;
+	
+	/* Getters y setters */
 	
 	public Dificultad getDificultadProximaReserva() {
 		return dificultadProximaReserva;

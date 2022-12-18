@@ -1,7 +1,20 @@
 package pw.p3.display.javabean;
 
+/**
+ * 
+ * Clase que implementa un bean de cliente
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ **/
+
 public class CustomerBean implements java.io.Serializable {
 
+	/* Atributos */
+	
 	private static final long serialVersionUID = 1L;
 	
 	private String nombreUser;
@@ -10,6 +23,7 @@ public class CustomerBean implements java.io.Serializable {
 	private String passwordUser = "";
 	private Boolean adminUser;
 	
+	/* Getters y setters */
 	
 	public String getNombreUser() {
 		return nombreUser;
