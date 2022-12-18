@@ -56,7 +56,8 @@ public class BonoDTO{
 	 * @param fecha_de_caducidad Fecha de caducidad del bono
 	 **/
 	
-	public BonoDTO(Integer sesion, String bUsuario, Dificultad tipo, LocalDate fcaducidad) {
+	public BonoDTO(Integer id, Integer sesion, String bUsuario, Dificultad tipo, LocalDate fcaducidad) {
+		this.idBono = id;
 		this.sesion = sesion;
 		this.bUsuario = bUsuario;
 		this.tipo = tipo;
