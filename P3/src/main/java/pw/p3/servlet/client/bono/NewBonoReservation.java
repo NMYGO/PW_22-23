@@ -1,12 +1,17 @@
 package pw.p3.servlet.client.bono;
 
+import pw.p3.business.circuit.CircuitDTO;
+import pw.p3.business.circuit.CircuitManager;
 import pw.p3.business.reservation.*;
+import pw.p3.data.Dificultad;
 import pw.p3.display.javabean.CustomerBean;
 import pw.p3.display.javabean.ReservationBean;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.ArrayList;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,6 +32,8 @@ public class NewBonoReservation extends HttpServlet {
 		ReservationBean reservaBean = (ReservationBean)session.getAttribute("reservaBean");
 		if (customerBean != null && customerBean.getCorreoUser() != "") {
 			if(!customerBean.getAdminUser()) {
+				String path = getServletContext().getRealPath("/WEB-INF/sql.properties.txt");
+				request.setAttribute("path", path);
 				String string_duracion = request.getParameter("duracion");
 				String string_fecha = request.getParameter("fecha");
 				String dificultad = request.getParameter("dificultad");
@@ -56,27 +63,50 @@ public class NewBonoReservation extends HttpServlet {
 					}
 				} else {
 					String pista = request.getParameter("pista");
-					String id_string = request.getParameter("id");
-					Integer idBono = Integer.parseInt(id_string);
-					Integer adultos = Integer.parseInt(string_adultos);
-					Integer ninos = Integer.parseInt(string_ninos);
-					Integer duracion = Integer.parseInt(string_duracion);
-					LocalDate fecha = LocalDate.parse(string_fecha);
-					Integer descuento=0;
-					if(customerBean.getAntiguedadUser()>2) {
-						descuento = 10;
+					CircuitManager circuitos = new CircuitManager();
+					ArrayList<CircuitDTO> pistas = new ArrayList<CircuitDTO>();
+					if(dificultad.equals("ADULTO")){
+						pistas = circuitos.pistasLibres(path, reservaBean.getAdultos(), Dificultad.ADULTO);
+					}else if (dificultad.equals("INFANTIL")){
+						pistas = circuitos.pistasLibres(path, reservaBean.getNinos(), Dificultad.INFANTIL);
+					}else{
+						pistas = circuitos.pistasLibres(path, reservaBean.getNinos()+reservaBean.getAdultos(), Dificultad.FAMILIAR);
 					}
-					
-					ReservationManager reserva = new ReservationManager();
-					if(!reserva.crearReserva(customerBean.getCorreoUser(), pista, dificultad, ninos, adultos, duracion, descuento, fecha, idBono)) {
+					Integer cont = 0;
+					for (int i = 0; i < pistas.size(); i++) {
+						if(!pista.equalsIgnoreCase(pistas.get(i).getNombre())) {
+							cont++;
+						}
+					}
+					if(cont == pistas.size()) {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
 						out.println("Error. Reserva no creada");
-						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/client/getBono/newBonoReservationView.jsp");
+						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/client/indivReservation/newReservationView.jsp");
 						error.include(request, response);
 					} else {
-						RequestDispatcher correcto = request.getRequestDispatcher("index.jsp");
-						correcto.include(request, response);
+						String id_string = request.getParameter("id");
+						Integer idBono = Integer.parseInt(id_string);
+						Integer adultos = Integer.parseInt(string_adultos);
+						Integer ninos = Integer.parseInt(string_ninos);
+						Integer duracion = Integer.parseInt(string_duracion);
+						LocalDate fecha = LocalDate.parse(string_fecha);
+						Integer descuento=0;
+						if(customerBean.getAntiguedadUser()>2) {
+							descuento = 10;
+						}
+						
+						ReservationManager reserva = new ReservationManager();
+						if(!reserva.crearReserva(customerBean.getCorreoUser(), pista, dificultad, ninos, adultos, duracion, descuento, fecha, idBono)) {
+							response.setContentType("text/html");
+							PrintWriter out = response.getWriter();
+							out.println("Error. Reserva no creada");
+							RequestDispatcher error = request.getRequestDispatcher("/mvc/view/client/getBono/newBonoReservationView.jsp");
+							error.include(request, response);
+						} else {
+							RequestDispatcher correcto = request.getRequestDispatcher("index.jsp");
+							correcto.include(request, response);
+						}
 					}
 				}
 			} else {
