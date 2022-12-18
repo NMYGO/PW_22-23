@@ -58,11 +58,11 @@ if(dificultad.equals("ADULTO")){
 	pistas = circuitos.pistasLibres(reservaBean.getAdultos(), Dificultad.ADULTO);
 }else if (dificultad.equals("INFANTIL")){
 	pistas = circuitos.pistasLibres(reservaBean.getNinos(), Dificultad.INFANTIL);
-}else if (dificultad.equals("FAMILIAR")){
+}else{
 	pistas = circuitos.pistasLibres(total, Dificultad.FAMILIAR);
 }
 
-%><%=pistas.size() %>
+%>
 <br/><br/>
 <table>
 	<tr>
