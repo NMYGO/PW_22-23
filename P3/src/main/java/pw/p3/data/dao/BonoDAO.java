@@ -12,8 +12,7 @@ import java.time.LocalDate;
 
 /**
  * 
- * DAO de bonos
- * Encargado de interactuar con la tabla bono de la base de datos
+ * DAO Bono
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano
@@ -26,7 +25,7 @@ public class BonoDAO {
 	
 	/**
 	 * Solicita todos los bonos y los devuelve en un array
-	 * @return ArrayList<DTOBono> de los bonos
+	 * @return ArrayList<BonoDTO> de los bonos
 	 **/
 	
 	public ArrayList<BonoDTO> solicitarBonos() {
@@ -71,10 +70,9 @@ public class BonoDAO {
 	
 	/**
 	 * Solicita todos los bonos de un usuario y los devuelve en un array
-	 * 
-	 * @param usuario
-	 * @return
-	 */
+	 * @param usuario Correo del usuario del bono
+	 * @return ArrayList<BonoDTO> de los bonos
+	 **/
 	
 	public ArrayList<BonoDTO> solicitarBonosUsuario(String usuario) {
 		Properties prop = new Properties();
@@ -116,11 +114,10 @@ public class BonoDAO {
 	}
 	
 	/**
-	 * Solicita bono en función del usuario y tipo seleccionado
-	 * 
+	 * Solicita un bono en función del usuario y tipo seleccionados
 	 * @param usuario Correo del usuario del bono
 	 * @param tipo Tipo de bono
-	 * @return DTOBono
+	 * @return BonoDTO del bono
 	 **/
 	
 	public BonoDTO solicitarBono(String usuario, Dificultad tipo) {
@@ -166,12 +163,12 @@ public class BonoDAO {
 	
 	
 	/**
-	 * Solicitar el bono por ID y usuario
-	 * 
-	 * @param usuario
-	 * @param tipo
-	 * @return
-	 */
+	 * Solicitar el bono en funcion del identificador y usuario seleccionados
+	 * @param id Identificador del bono
+	 * @param usuario Correo del usuario del bono
+	 * @return BonoDTO del bono
+	 **/
+	
 	public BonoDTO solicitarBono(Integer id, String usuario) {
 		Properties prop = new Properties();
 		try{
@@ -223,7 +220,7 @@ public class BonoDAO {
 	
 	/**
 	 * Actualiza en la base de datos un bono específico
-	 * @param bono Bono a escribir
+	 * @param bono Bono
 	 * @return Integer que informa sobre el status de la devolucion
 	 **/
 	
@@ -261,7 +258,7 @@ public class BonoDAO {
 	
 	/**
 	 * Inserta en la base de datos un bono
-	 * @param bono Bono a escribir
+	 * @param bono Bono
 	 * @return Integer que informa sobre el status de la devolucion
 	 **/
 	
@@ -298,7 +295,7 @@ public class BonoDAO {
 	
 	/**
 	 * Elimina un bono de la base de datos
-	 * @param bono Bono a borrar
+	 * @param bono Bono
 	 * @return Integer que informa sobre el status de la devolucion
 	 **/
 	
@@ -330,8 +327,8 @@ public class BonoDAO {
 	
 	/**
 	 * Solicita a la BD las reservas de un bono de tipo infantil
-	 * @param bono Bono del que se solicitan las reservas
-	 * @return ArrayList<DTORInfantil> de reservas que se correspondan con el bono
+	 * @param bono Bono
+	 * @return ArrayList<RInfantileDTO> de reservas que se correspondan con el bono
 	 **/
 	
 	public ArrayList<RInfantileDTO> solicitarReservasInfantiles(BonoDTO bono) {
@@ -383,8 +380,8 @@ public class BonoDAO {
 	
 	/**
 	 * Solicita a la BD las reservas de un bono de tipo adulto
-	 * @param bono Bono del que se solicitan las reservas
-	 * @return ArrayList<DTORAdulto> de reservas que se correspondan con el bono
+	 * @param bono Bono
+	 * @return ArrayList<RAdultDTO> de reservas que se correspondan con el bono
 	 **/
 	
 	public ArrayList<RAdultDTO> solicitarReservasAdultos(BonoDTO bono) {
@@ -437,8 +434,8 @@ public class BonoDAO {
 	
 	/**
 	 * Solicita a la BD las reservas de un bono de tipo familiar
-	 * @param bono Bono del que se solicitan las reservas
-	 * @return ArrayList<DTORFamiliar> de reservas que se correspondan con el bono
+	 * @param bono Bono
+	 * @return ArrayList<RFamiliarDTO> de reservas que se correspondan con el bono
 	 **/
 	
 	public ArrayList<RFamiliarDTO> solicitarReservasFamiliares(BonoDTO bono) {
@@ -491,7 +488,7 @@ public class BonoDAO {
 	}
 	
 	/**
-	 * Actualiza la reserva seleccionada
+	 * Actualiza una reserva infantil
 	 * @param reserva Reserva de tipo infantil a escribir
 	 * @param idBono Identificador del bono al que pertenece la reserva
 	 * @return Integer que informa sobre el status de la devolucion
@@ -535,7 +532,7 @@ public class BonoDAO {
 	}
 	
 	/**
-	 * Inserta una nueva reserva en la base de datos
+	 * Inserta una nueva reserva infantil
 	 * @param reserva Reserva de tipo infantil a escribir
 	 * @param idBono Identificador del bono al que pertenece la reserva
 	 * @return Integer que informa sobre el status de la devolucion
@@ -623,7 +620,7 @@ public class BonoDAO {
 	}
 	
 	/**
-	 * Inserta una nueva reserva adulta en la base de datos
+	 * Inserta una nueva reserva adulta
 	 * @param reserva Reserva de tipo Adulto a escribir
 	 * @param idBono Identificador del bono al que pertenece la reserva
 	 * @return Integer que informa sobre el status de la devolucion
@@ -711,7 +708,7 @@ public class BonoDAO {
 	}
 	
 	/**
-	 * Inserta una nueva reserva familiar en la base de datos
+	 * Inserta una nueva reserva familiar
 	 * @param reserva Reserva de tipo Familiar a escribir
 	 * @param idBono Identificador del bono al que pertenece la reserva
 	 * @return Integer que informa sobre el status de la devolucion

@@ -16,8 +16,7 @@ import java.util.Properties;
 
 /**
  * 
- * DAO de kart
- * Encargado de interactuar con la tabla kart de la base de datos
+ * DAO de Kart
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano
@@ -29,8 +28,8 @@ import java.util.Properties;
 public class KartDAO {
 	
 	/**
-	 * Solicita la tabla de los karts
-	 * @return ArrayList<DTOKart> de los karts
+	 * Solicita todos los karts
+	 * @return ArrayList<KartDTO> de los karts
 	 **/
 	
 	public ArrayList<KartDTO> solicitarKarts() {
@@ -73,9 +72,9 @@ public class KartDAO {
 	}
 	
 	/**
-	 * Solicita un kart especifico
+	 * Solicita un kart especifico por id
 	 * @param id Identificador del kart
-	 * @return DTOKart
+	 * @return KartDTO
 	 **/
 	
 	public KartDTO solicitarKart(Integer id) {
@@ -118,9 +117,9 @@ public class KartDAO {
 	}
 	
 	/**
-	 * Solicita los karts de una pista concreta
+	 * Solicita los karts de una pista concreta por nombre de pista
 	 * @param nombrePista Nombre de la pista a la que pertenece el kart
-	 * @return ArrayList<DTOKart> de los karts que pertenecen a la pista
+	 * @return ArrayList<KartDTO> de los karts que pertenecen a la pista
 	 **/
 	
 	public ArrayList<KartDTO> solicitarKartsPista(String nombrePista) {
@@ -164,7 +163,7 @@ public class KartDAO {
 	
 	/**
 	 * Actualiza un kart
-	 * @param kart Kart a escribir
+	 * @param kart Kart
 	 * @return Integer que informa sobre el status de la devolucion
 	 **/
 	
@@ -201,7 +200,7 @@ public class KartDAO {
 	
 	/**
 	 * Inserta un nuevo kart
-	 * @param kart Kart a escribir
+	 * @param kart Kart
 	 * @return Integer que informa sobre el status de la devolucion
 	 **/
 	

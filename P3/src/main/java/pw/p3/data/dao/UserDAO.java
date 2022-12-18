@@ -13,7 +13,24 @@ import com.mysql.jdbc.ResultSet;
 import pw.p3.data.common.DBConnection;
 import pw.p3.business.user.UserDTO;
 
+/**
+ * 
+ * DAO Usuario
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ **/
+
 public class UserDAO {
+	
+	/**
+	 * Solicita todos los usuarios
+	 * @return ArrayList<UserDTO> de los usuarios
+	 **/
+	
 	public ArrayList<UserDTO> solicitarUsuarios() {
 		Properties prop = new Properties();
 		try{
@@ -56,6 +73,12 @@ public class UserDAO {
 		return usuarios;
 	}
 	
+	/**
+	 * Solicita un usuario especifico por correo
+	 * @param correo Correo del usuario
+	 * @return UserDTO del usuario
+	 **/
+	
 	public UserDTO solicitarUsuario(String correo) {
 		Properties prop = new Properties();
 		try{
@@ -97,6 +120,12 @@ public class UserDAO {
 		return usuario;
 	}
 	
+	/**
+	 * Inserta en la base de datos un usuario
+	 * @param usuario Usuario
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
 	public int escribirUsuarioInsert(UserDTO usuario) {
 		Properties prop = new Properties();
 		try{
@@ -129,6 +158,12 @@ public class UserDAO {
 		}
 		return status;
 	}
+	
+	/**
+	 * Actualiza en la base de datos un usuario
+	 * @param usuario Usuario
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
 	
 	public int escribirUsuarioUpdate(UserDTO usuario) {
 		Properties prop = new Properties();

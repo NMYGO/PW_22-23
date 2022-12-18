@@ -17,8 +17,7 @@ import java.util.Properties;
 
 /**
  * 
- * DAO de pista
- * Encargado de interactuar con la tabla pista de la base de datos
+ * DAO Pista
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano
@@ -30,8 +29,8 @@ import java.util.Properties;
 public class CircuitDAO {
 	
 	/**
-	 * Solicita la tabla de pistas
-	 * @return ArrayList<DTOPista> de pistas
+	 * Solicita todas las pistas
+	 * @return ArrayList<CircuitDTO> de pistas
 	 **/
 	
 	public ArrayList<CircuitDTO> solicitarPistas() {
@@ -78,7 +77,7 @@ public class CircuitDAO {
 	 * @param estado Estado de la pista
 	 * @param participantes Numero de participantes
 	 * @param dificultad Dificultad de la pista
-	 * @return ArrayList<DTOPista> de pistas libres
+	 * @return ArrayList<CircuitDTO> de pistas libres
 	 **/
 	
 	public ArrayList<CircuitDTO> solicitarPistasLibres(Boolean estado, Integer participantes, Dificultad dificultad) {
@@ -127,6 +126,12 @@ public class CircuitDAO {
 		return pistas;
 	}
 	
+	/**
+	 * Solicita las pistas disponibles por dificultad
+	 * @param dificultad Dificultad de la pista
+	 * @return ArrayList<CircuitDTO> de pistas disponibles
+	 **/
+	
 	public ArrayList<CircuitDTO> solicitarPistasDisponiblesDificultad(Dificultad dificultad) {
 		Properties prop = new Properties();
 		try{
@@ -165,6 +170,12 @@ public class CircuitDAO {
 		return pistas;
 	}
 	
+	/**
+	 * Solicita las pistas disponibles por nombre
+	 * @param nombre Nombre de la pista
+	 * @return ArrayList<CircuitDTO> de pistas disponibles
+	 **/
+	
 	public ArrayList<CircuitDTO> solicitarPistasDisponiblesNombre(String nombre) {
 		Properties prop = new Properties();
 		try{
@@ -202,6 +213,12 @@ public class CircuitDAO {
 		}
 		return pistas;
 	}
+	
+	/**
+	 * Solicita las pistas disponibles por numero de karts
+	 * @param nkarts Numero de karts
+	 * @return ArrayList<CircuitDTO> de pistas disponibles
+	 **/
 	
 	public ArrayList<CircuitDTO> solicitarPistasDisponiblesNkarts(Integer nkarts) {
 		Properties prop = new Properties();
@@ -248,9 +265,9 @@ public class CircuitDAO {
 	}
 	
 	/**
-	 * Solicita una pista específica
+	 * Solicita una pista específica por nombre
 	 * @param nombre Nombre de la pista
-	 * @return DTOPista
+	 * @return CircuitDTO de la pista
 	 **/
 	
 	public CircuitDTO solicitarPista(String nombre) {
@@ -293,7 +310,7 @@ public class CircuitDAO {
 	
 	/**
 	 * Actualiza una pista
-	 * @param pista Nombre de la pista a escribir
+	 * @param pista Pista
 	 * @return Integer que informa sobre el status de la devolucion
 	 **/
 	
@@ -330,7 +347,7 @@ public class CircuitDAO {
 	
 	/**
 	 * Inserta una nueva pista
-	 * @param pista Nombre de la pista a escribir
+	 * @param pista Pista
 	 * @return Integer que informa sobre el status de la devolucion
 	 **/
 	
