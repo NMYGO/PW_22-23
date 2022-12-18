@@ -554,7 +554,7 @@ public class BonoDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement(insertReservaBono);
+			PreparedStatement ps = connection.prepareStatement("insert into reserva (correoUsuario,duracion,precio,descuento,fecha,nombrePista,dificultad,ninos,adultos,idBono) values(?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, reserva.getUsuario());
 			ps.setInt(2, reserva.getDur());
 			ps.setFloat(3, reserva.getPrecio());
@@ -642,7 +642,7 @@ public class BonoDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement(insertReservaBono);
+			PreparedStatement ps = connection.prepareStatement("insert into reserva (correoUsuario,duracion,precio,descuento,fecha,nombrePista,dificultad,adultos,ninos,idBono) values(?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, reserva.getUsuario());
 			ps.setInt(2, reserva.getDur());
 			ps.setFloat(3, reserva.getPrecio());
@@ -730,7 +730,7 @@ public class BonoDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement(insertReservaBono);
+			PreparedStatement ps = connection.prepareStatement("insert into reserva (correoUsuario,duracion,precio,descuento,fecha,nombrePista,dificultad,adultos,ninos,idBono) values(?,?,?,?,?,?,?,?,?,?)");
 				ps.setString(1, reserva.getUsuario());
 				ps.setInt(2, reserva.getDur());
 				ps.setFloat(3, reserva.getPrecio());

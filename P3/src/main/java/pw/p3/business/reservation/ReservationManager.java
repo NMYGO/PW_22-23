@@ -75,4 +75,42 @@ public class ReservationManager{
 		}
 		return true;
 	}
+
+	public boolean crearReserva(String correoUser, String pista, String dificultad, Integer ninos, Integer adultos,
+			Integer duracion, Integer descuento, LocalDate fecha, Integer idBono) {
+		RIndividualCreator individualCreador = new RIndividualCreator();
+		Float precio=(float)0;
+		switch (duracion) {
+			case 60:
+				precio = (float)20;
+			break;
+			case 90:
+				precio = (float)30;
+			break;
+			case 120:
+				precio = (float)40;
+			break;
+		}
+		if(dificultad.equals("INFANTIL")){
+			RInfantileDTO newReserva = individualCreador.creaRInf(0,correoUser, fecha, duracion, pista, precio, descuento, ninos, Dificultad.INFANTIL);
+			BonoDAO reservaTabla = new BonoDAO();
+			if(reservaTabla.escribirReservaInfantilInsert(newReserva, idBono) == 0) {
+				return false;
+			}
+		}else if(dificultad.equals("ADULTO")) {
+			RAdultDTO newReserva = individualCreador.creaRAdu(0,correoUser, fecha, duracion, pista, precio, descuento, adultos, Dificultad.ADULTO);
+			BonoDAO reservaTabla = new BonoDAO();
+			if(reservaTabla.escribirReservaAdultoInsert(newReserva, idBono) == 0) {
+				return false;
+			}
+		}else if (dificultad.equals("FAMILIAR")) {
+			RFamiliarDTO newReserva = individualCreador.creaRFam(0,correoUser, fecha, duracion, pista, precio, descuento, ninos, adultos, Dificultad.FAMILIAR);
+			BonoDAO reservaTabla = new BonoDAO();
+			if(reservaTabla.escribirReservaFamiliarInsert(newReserva, idBono) == 0) {
+				return false;
+			}
+			
+		}
+		return true;
+	}
 }
