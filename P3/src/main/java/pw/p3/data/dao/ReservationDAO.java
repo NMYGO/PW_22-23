@@ -685,6 +685,136 @@ public class ReservationDAO {
 		}
 		return status;
 	}
-}
 	
-
+	/**
+	 * Actualiza una reserva infantil
+	 * @param reserva Reserva de tipo infantil a escribir
+	 * @param idBono Identificador del bono al que pertenece la reserva
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
+	public int escribirReservaInfantilUpdate(RInfantileDTO reserva, Integer idBono) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String updateReservaBono = prop.getProperty("updateReservaBono");
+		int status = 0;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement(updateReservaBono);
+			ps.setString(10, reserva.getUsuario());
+			ps.setInt(1, reserva.getDur());
+			ps.setFloat(2, reserva.getPrecio());
+			ps.setInt(3, reserva.getDesc());
+			ps.setString(4, reserva.getFecha().toString());
+			ps.setString(5, reserva.getPista());
+			ps.setString(6, reserva.getTipo().toString());
+			ps.setInt(7, reserva.getParticipantes());
+			ps.setInt(8, 0);
+			ps.setInt(9, idBono);
+			status = ps.executeUpdate();
+	
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return status;
+	}
+	
+	/**
+	 * Actualiza una reserva adulta
+	 * @param reserva Reserva de tipo Adulto a escribir
+	 * @param idBono Identificador del bono al que pertenece la reserva
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
+	public int escribirReservaAdultoUpdate(RAdultDTO reserva, Integer idBono) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String updateReservaBono = prop.getProperty("updateReservaBono");
+		int status = 0;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement(updateReservaBono);
+			ps.setString(10, reserva.getUsuario());
+			ps.setInt(1, reserva.getDur());
+			ps.setFloat(2, reserva.getPrecio());
+			ps.setInt(3, reserva.getDesc());
+			ps.setString(4, reserva.getFecha().toString());
+			ps.setString(5, reserva.getPista());
+			ps.setString(6, reserva.getTipo().toString());
+			ps.setInt(7, reserva.getPartipantes());
+			ps.setInt(8, 0);
+			ps.setInt(9, idBono);
+			status = ps.executeUpdate();
+	
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return status;
+	}
+	
+	/**
+	 * Actualiza una reserva familiar
+	 * @param reserva Reserva de tipo Familiar a escribir
+	 * @param idBono Identificador del bono al que pertenece la reserva
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
+	public int escribirReservaFamiliarUpdate(RFamiliarDTO reserva, Integer idBono) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String updateReservaBono = prop.getProperty("updateReservaBono");
+		int status = 0;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement(updateReservaBono);
+			ps.setString(10, reserva.getUsuario());
+			ps.setInt(1, reserva.getDur());
+			ps.setFloat(2, reserva.getPrecio());
+			ps.setInt(3, reserva.getDesc());
+			ps.setString(4, reserva.getFecha().toString());
+			ps.setString(5, reserva.getPista());
+			ps.setString(6, reserva.getTipo().toString());
+			ps.setInt(7, reserva.getadultos());
+			ps.setInt(8, reserva.getNinos());
+			ps.setInt(9, idBono);
+			status = ps.executeUpdate();
+	
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return status;
+	}
+}
