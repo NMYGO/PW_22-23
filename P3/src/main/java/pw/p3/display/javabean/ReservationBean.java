@@ -27,6 +27,8 @@ public class ReservationBean implements java.io.Serializable {
 	private LocalDate fecha;
 	private String dificultad;
 	private Integer bono;
+	private Integer reserva;
+	
 	/* Getters y Setters */
 	
 	public Integer getNinos() {
@@ -64,5 +66,11 @@ public class ReservationBean implements java.io.Serializable {
 	}
 	public void setBono(Integer bono) {
 		this.bono = bono;
+	}
+	public Integer getReserva() {
+		return reserva;
+	}
+	public void setReserva(Integer reser) {
+		this.reserva = reser;
 	}
 }

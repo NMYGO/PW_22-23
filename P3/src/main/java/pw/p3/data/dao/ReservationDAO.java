@@ -81,6 +81,55 @@ public class ReservationDAO {
 	}
 	
 	/**
+	 * Devuelve una reserva buscada por id
+	 * @param id
+	 * @return
+	 */
+	
+	public RInfantileDTO solicitarReservaInfantil(Integer id) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaBonoEspecifico = prop.getProperty("consultaBonoEspecifico");
+		RInfantileDTO reserva= new RInfantileDTO();
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement("select * from reserva where idReserva=?");
+			ps.setInt(1, id);
+			ResultSet rs = (ResultSet) ps.executeQuery();
+	
+			while (rs.next()) {			
+				reserva.setDesc(rs.getInt("descuento")); 
+				reserva.setDur(rs.getInt("duracion"));
+				reserva.setFecha(LocalDate.parse(rs.getString("fecha")));
+				reserva.setIdReserva(id);
+				reserva.setParticipantes(rs.getInt("ninos"));
+				reserva.setPista(rs.getString("nombrePista"));
+				reserva.setPrecio(rs.getInt("precio"));
+				reserva.setTipo(Dificultad.INFANTIL);
+				reserva.setUsuario(rs.getString("correoUsuario"));
+			}
+	
+			if (ps != null){ 
+				ps.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return reserva;
+	}
+	
+	/**
 	 * Solicita las reservas de adultos
 	 * @return ArrayList<RAdultDTO> de las reservas
 	 **/
@@ -127,6 +176,55 @@ public class ReservationDAO {
 			e.printStackTrace();
 		}
 		return reservas;
+	}
+	
+	/**
+	 * Devuelve una reserva buscada por id
+	 * @param id
+	 * @return
+	 */
+	
+	public RAdultDTO solicitarReservaAdulto(Integer id) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaBonoEspecifico = prop.getProperty("consultaBonoEspecifico");
+		RAdultDTO reserva= new RAdultDTO();
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement("select * from reserva where idReserva=?");
+			ps.setInt(1, id);
+			ResultSet rs = (ResultSet) ps.executeQuery();
+	
+			while (rs.next()) {			
+				reserva.setDesc(rs.getInt("descuento")); 
+				reserva.setDur(rs.getInt("duracion"));
+				reserva.setFecha(LocalDate.parse(rs.getString("fecha")));
+				reserva.setIdReserva(id);
+				reserva.setParticipantes(rs.getInt("adultos"));
+				reserva.setPista(rs.getString("nombrePista"));
+				reserva.setPrecio(rs.getInt("precio"));
+				reserva.setTipo(Dificultad.ADULTO);
+				reserva.setUsuario(rs.getString("correoUsuario"));
+			}
+	
+			if (ps != null){ 
+				ps.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return reserva;
 	}
 	
 	/**
@@ -177,6 +275,56 @@ public class ReservationDAO {
 			e.printStackTrace();
 		}
 		return reservas;
+	}
+	
+	/**
+	 * Devuelve una reserva buscada por id
+	 * @param id
+	 * @return
+	 */
+	
+	public RFamiliarDTO solicitarReservaFamiliar(Integer id) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaBonoEspecifico = prop.getProperty("consultaBonoEspecifico");
+		RFamiliarDTO reserva= new RFamiliarDTO();
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement("select * from reserva where idReserva=?");
+			ps.setInt(1, id);
+			ResultSet rs = (ResultSet) ps.executeQuery();
+	
+			while (rs.next()) {			
+				reserva.setDesc(rs.getInt("descuento")); 
+				reserva.setDur(rs.getInt("duracion"));
+				reserva.setFecha(LocalDate.parse(rs.getString("fecha")));
+				reserva.setIdReserva(id);
+				reserva.setninos(rs.getInt("ninos"));
+				reserva.setadultos(rs.getInt("adultos"));
+				reserva.setPista(rs.getString("nombrePista"));
+				reserva.setPrecio(rs.getInt("precio"));
+				reserva.setTipo(Dificultad.INFANTIL);
+				reserva.setUsuario(rs.getString("correoUsuario"));
+			}
+	
+			if (ps != null){ 
+				ps.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return reserva;
 	}
 	
 	/**
@@ -680,6 +828,168 @@ public class ReservationDAO {
 		ps.setString(2, fecha.toString());
 		status = ps.executeUpdate();
 		} catch(Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return status;
+	}
+	
+	/**
+	 * Solicita la dificultad de una pista dada por id
+	 * @param id
+	 * @return
+	 */
+	
+	public String solicitarDificultad(Integer id) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaBonoEspecifico = prop.getProperty("consultaBonoEspecifico");
+		String dificultad="";
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement("select * from reserva where idReserva=?");
+			ps.setInt(1, id);
+			ResultSet rs = (ResultSet) ps.executeQuery();
+	
+			while (rs.next()) {			
+				dificultad = rs.getString("dificultad"); 
+			}
+	
+			if (ps != null){ 
+				ps.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return dificultad;
+	}
+	
+	/**
+	 * Actualiza una reserva infantil
+	 * @param reserva Reserva de tipo infantil a escribir
+	 * @param idBono Identificador del bono al que pertenece la reserva
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
+	public int actualizarInfantil(RInfantileDTO reserva) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String updateReservaBono = prop.getProperty("updateReservaBono");
+		int status = 0;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement("update reserva set duracion=?,precio=?,fecha=?,nombrePista=?,ninos=?, where correoUsuario=?");
+			ps.setInt(1, reserva.getDur());
+			ps.setFloat(2, reserva.getPrecio());
+			ps.setString(3, reserva.getFecha().toString());
+			ps.setString(4, reserva.getPista());
+			ps.setInt(5, reserva.getParticipantes());
+			ps.setString(6, reserva.getUsuario());
+			status = ps.executeUpdate();
+	
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return status;
+	}
+	
+	/**
+	 * Actualiza una reserva adulta
+	 * @param reserva Reserva de tipo Adulto a escribir
+	 * @param idBono Identificador del bono al que pertenece la reserva
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
+	public int actualizarAdulto(RAdultDTO reserva) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String updateReservaBono = prop.getProperty("updateReservaBono");
+		int status = 0;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement("update reserva set duracion=?,precio=?,fecha=?,nombrePista=?,adultos=?, where correoUsuario=?");
+			ps.setInt(1, reserva.getDur());
+			ps.setFloat(2, reserva.getPrecio());
+			ps.setString(3, reserva.getFecha().toString());
+			ps.setString(4, reserva.getPista());
+			ps.setInt(5, reserva.getPartipantes());
+			ps.setString(6, reserva.getUsuario());
+			status = ps.executeUpdate();
+	
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return status;
+	}
+	
+	/**
+	 * Actualiza una reserva familiar
+	 * @param reserva Reserva de tipo Familiar a escribir
+	 * @param idBono Identificador del bono al que pertenece la reserva
+	 * @return Integer que informa sobre el status de la devolucion
+	 **/
+	
+	public int actualizarFamiliar(RFamiliarDTO reserva) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String updateReservaBono = prop.getProperty("updateReservaBono");
+		int status = 0;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement("update reserva set duracion=?,precio=?,fecha=?,nombrePista=?,ninos=?,adultos=?, where correoUsuario=?");
+			ps.setInt(1, reserva.getDur());
+			ps.setFloat(2, reserva.getPrecio());
+			ps.setString(3, reserva.getFecha().toString());
+			ps.setString(4, reserva.getPista());
+			ps.setInt(6, reserva.getadultos());
+			ps.setInt(5, reserva.getNinos());
+			ps.setString(7, reserva.getUsuario());
+			status = ps.executeUpdate();
+	
+			dbConnection.closeConnection();
+		} catch (Exception e){
 			System.err.println(e);
 			e.printStackTrace();
 		}

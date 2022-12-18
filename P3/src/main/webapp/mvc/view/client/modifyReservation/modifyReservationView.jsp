@@ -30,25 +30,25 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 } else {
 %>
 <h2><%= messageNextPage %></h2><br/><br/>
-<form method="get" action="/P3/newReservation">
-	<label for="dificultad">Dificultad: </label>
-	<input type="radio" name="dificultad" value="INFANTIL" checked>Infantil
-	<input type="radio" name="dificultad" value="ADULTO">Adulto
-	<input type="radio" name="dificultad" value="FAMILIAR">Familiar
+<form method="get" action="/P3/modifyReservation">
+	<label for="id"></label>
+	<input type="hidden" name="id" value='<jsp:getProperty property="reserva" name="reservaBean"/>'>
+	<label for="dificultad"></label>
+	<input type="hidden" name="dificultad" value="">
 	<br/>
 	<label for="adultos">Numero de Adultos:</label>
-	<input type="number" name="adultos" value="1" min="1"> (No se tendrá en cuenta para reservas infantiles)
+	<input type="number" name="adultos" value="" min="1"> (No se tendrá en cuenta para reservas infantiles)
 	<br/>
 	<label for="ninos">Número de niños :</label>
-	<input type="number" name="ninos" value="1" min="1">(No se tendrá en cuenta para reservas adultas)
+	<input type="number" name="ninos" value="" min="1">(No se tendrá en cuenta para reservas adultas)
 	<br/>
 	<label for="duracion">Duracion: </label>
-	<input type="radio" name="duracion" value="60" checked>60 minutos
+	<input type="radio" name="duracion" value="60">60 minutos
 	<input type="radio" name="duracion" value="90">90 minutos
 	<input type="radio" name="duracion" value="120">120 minutos
 	<br/>
 	<label for="fecha">Fecha:</label>
-	<input type="date" name="fecha" value="" required>
+	<input type="date" name="fecha" value="">
 	<br/>
 	<br/>
 	<input type="submit" value="Continuar">
