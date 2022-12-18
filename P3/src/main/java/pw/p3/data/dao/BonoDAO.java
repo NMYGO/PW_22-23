@@ -240,7 +240,7 @@ public class BonoDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement(updateBono);
+			PreparedStatement ps = connection.prepareStatement("update bono set sesion=?,fechaCaducidad=?,correoUsuario=?,tipo=? where idBono=?");
 			ps.setInt(5, bono.getId());
 			ps.setInt(1, bono.getSesion());
 			ps.setString(2, bono.getFcaducidad().toString());

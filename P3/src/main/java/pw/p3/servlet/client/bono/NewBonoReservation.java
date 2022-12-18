@@ -75,9 +75,6 @@ public class NewBonoReservation extends HttpServlet {
 						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/client/getBono/newBonoReservationView.jsp");
 						error.include(request, response);
 					} else {
-						response.setContentType("text/html");
-						PrintWriter out = response.getWriter();
-						out.println(idBono);
 						RequestDispatcher correcto = request.getRequestDispatcher("index.jsp");
 						correcto.include(request, response);
 					}
