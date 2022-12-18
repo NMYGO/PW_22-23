@@ -30,7 +30,7 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 } else {
 %>
 <h2><%= messageNextPage %></h2><br/><br/>
-Dificultad de la reserva: <%=reservaBean.getDificultad() %><%=reservaBean.getBono() %>
+<h2>Dificultad de la reserva: <%=reservaBean.getDificultad() %><%=reservaBean.getBono() %></h2><br/>
 <form method="get" action="/P3/newBonoReservation">
 	<label for="dificultad"></label>
 	<input type="hidden" name="dificultad" value='<jsp:getProperty property="dificultad" name="reservaBean"/>'>
