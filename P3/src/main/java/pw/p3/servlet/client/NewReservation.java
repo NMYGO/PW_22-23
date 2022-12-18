@@ -1,9 +1,11 @@
 package pw.p3.servlet.client;
 
 import pw.p3.business.reservation.*;
+import pw.p3.business.circuit.*;
+import pw.p3.data.*;
 import pw.p3.display.javabean.CustomerBean;
 import pw.p3.display.javabean.ReservationBean;
-
+import java.util.ArrayList;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
@@ -58,28 +60,51 @@ public class NewReservation extends HttpServlet {
 					}
 				} else {
 					String pista = request.getParameter("pista");
-					Integer adultos = Integer.parseInt(string_adultos);
-					Integer ninos = Integer.parseInt(string_ninos);
-					Integer duracion = Integer.parseInt(string_duracion);
-					LocalDate fecha = LocalDate.parse(string_fecha);
-					Integer descuento=0;
-					if(customerBean.getAntiguedadUser()>2) {
-						descuento = 10;
+					CircuitManager circuitos = new CircuitManager();
+					ArrayList<CircuitDTO> pistas = new ArrayList<CircuitDTO>();
+					if(dificultad.equals("ADULTO")){
+						pistas = circuitos.pistasLibres(path, reservaBean.getAdultos(), Dificultad.ADULTO);
+					}else if (dificultad.equals("INFANTIL")){
+						pistas = circuitos.pistasLibres(path, reservaBean.getNinos(), Dificultad.INFANTIL);
+					}else{
+						pistas = circuitos.pistasLibres(path, reservaBean.getNinos()+reservaBean.getAdultos(), Dificultad.FAMILIAR);
 					}
-					
-					ReservationManager reserva = new ReservationManager();
-					if(!reserva.crearReserva(customerBean.getCorreoUser(), pista, dificultad, ninos, adultos, duracion, descuento, fecha)) {
+					Integer cont = 0;
+					for (int i = 0; i < pistas.size(); i++) {
+						if(!pista.equalsIgnoreCase(pistas.get(i).getNombre())) {
+							cont++;
+						}
+					}
+					if(cont == pistas.size()) {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
 						out.println("Error. Reserva no creada");
 						RequestDispatcher error = request.getRequestDispatcher("/mvc/view/client/indivReservation/newReservationView.jsp");
 						error.include(request, response);
 					} else {
-						response.setContentType("text/html");
-						PrintWriter out = response.getWriter();
-						out.println("Reserva Creada");
-						RequestDispatcher correcto = request.getRequestDispatcher("index.jsp");
-						correcto.include(request, response);
+						Integer adultos = Integer.parseInt(string_adultos);
+						Integer ninos = Integer.parseInt(string_ninos);
+						Integer duracion = Integer.parseInt(string_duracion);
+						LocalDate fecha = LocalDate.parse(string_fecha);
+						Integer descuento=0;
+						if(customerBean.getAntiguedadUser()>2) {
+							descuento = 10;
+						}
+						
+						ReservationManager reserva = new ReservationManager();
+						if(!reserva.crearReserva(customerBean.getCorreoUser(), pista, dificultad, ninos, adultos, duracion, descuento, fecha)) {
+							response.setContentType("text/html");
+							PrintWriter out = response.getWriter();
+							out.println("Error. Reserva no creada");
+							RequestDispatcher error = request.getRequestDispatcher("/mvc/view/client/indivReservation/newReservationView.jsp");
+							error.include(request, response);
+						} else {
+							response.setContentType("text/html");
+							PrintWriter out = response.getWriter();
+							out.println("Reserva Creada");
+							RequestDispatcher correcto = request.getRequestDispatcher("index.jsp");
+							correcto.include(request, response);
+						}
 					}
 				}
 			} else {
