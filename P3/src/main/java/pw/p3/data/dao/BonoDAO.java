@@ -50,15 +50,62 @@ public class BonoDAO {
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 	
 			while (rs.next()) {
+				int id = rs.getInt("idBono");
 				int sesion = rs.getInt("sesion");
 				LocalDate fcaducidad = LocalDate.parse(rs.getString("fechaCaducidad"));
 				String bUsuario = rs.getString("correoUsuario");
 				Dificultad tipo = Dificultad.valueOf(rs.getString("tipo"));
-				bonos.add(new BonoDTO(sesion,bUsuario,tipo,fcaducidad));
+				bonos.add(new BonoDTO(id,sesion,bUsuario,tipo,fcaducidad));
 			}
 	
 			if (stmt != null){ 
 				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return bonos;
+	}
+	
+	/**
+	 * Solicita todos los bonos de un usuario y los devuelve en un array
+	 * 
+	 * @param usuario
+	 * @return
+	 */
+	
+	public ArrayList<BonoDTO> solicitarBonosUsuario(String usuario) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaBono = prop.getProperty("consultaBono");
+		ArrayList<BonoDTO> bonos = new ArrayList<BonoDTO>();
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement("select * from bono where correoUsuario=?");
+			ps.setString(1, usuario);
+			ResultSet rs = (ResultSet) ps.executeQuery();
+	
+			while (rs.next()) {
+				int id = rs.getInt("idBono");
+				int sesion = rs.getInt("sesion");
+				LocalDate fcaducidad = LocalDate.parse(rs.getString("fechaCaducidad"));
+				Dificultad tipo = Dificultad.valueOf(rs.getString("tipo"));
+				bonos.add(new BonoDTO(id,sesion,usuario,tipo,fcaducidad));
+			}
+	
+			if (ps != null){ 
+				ps.close(); 
 			}
 			dbConnection.closeConnection();
 		} catch (Exception e){
@@ -102,7 +149,7 @@ public class BonoDAO {
 				Integer idBono  = rs.getInt("idBono");
 				Integer sesion = rs.getInt("sesion");
 				LocalDate fechaCaducidad = LocalDate.parse(rs.getString("fechaCaducidad"));
-				bono = new BonoDTO(sesion, usuario, tipo, fechaCaducidad);
+				bono = new BonoDTO(idBono, sesion, usuario, tipo, fechaCaducidad);
 				bono.setId(idBono);
 			}
 	
@@ -119,13 +166,13 @@ public class BonoDAO {
 	
 	
 	/**
-	 * Solicitar el bono por ID
+	 * Solicitar el bono por ID y usuario
 	 * 
 	 * @param usuario
 	 * @param tipo
 	 * @return
 	 */
-	public BonoDTO solicitarBono(Integer id) {
+	public BonoDTO solicitarBono(Integer id, String usuario) {
 		Properties prop = new Properties();
 		try{
 			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
@@ -141,13 +188,12 @@ public class BonoDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			PreparedStatement ps = connection.prepareStatement("select * from bono where idBono=?");
+			PreparedStatement ps = connection.prepareStatement("select * from bono where idBono=? and correoUsuario=?");
 			ps.setString(1, id.toString());
-
+			ps.setString(2, usuario);
 			ResultSet rs = (ResultSet) ps.executeQuery();
 	
-			while (rs.next()) {
-				String usuario = rs.getString("correoUsuario");				
+			while (rs.next()) {			
 				String tipo = rs.getString("tipo"); 
 				Dificultad difi;
 				if(tipo.equals("INFANTIL")) {
@@ -157,9 +203,10 @@ public class BonoDAO {
 				}else {
 					difi=Dificultad.FAMILIAR;
 				}
+				Integer idBono = rs.getInt("idBono");
 				Integer sesion = rs.getInt("sesion");
 				LocalDate fechaCaducidad = LocalDate.parse(rs.getString("fechaCaducidad"));
-				bono = new BonoDTO(sesion, usuario, difi, fechaCaducidad);
+				bono = new BonoDTO(idBono,sesion, usuario, difi, fechaCaducidad);
 				bono.setId(id);
 			}
 	

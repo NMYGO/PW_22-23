@@ -37,66 +37,29 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 	<input type="submit" value="Elegir Bono">
 </form>
 <%
-ArrayList<BonoDTO> reservasInfantiles = (ArrayList<RInfantileDTO>)request.getAttribute("reservasInfantiles");
-ArrayList<RAdultDTO> reservasAdultas = (ArrayList<RAdultDTO>)request.getAttribute("reservasAdultas");
-ArrayList<RFamiliarDTO> reservasFamiliares = (ArrayList<RFamiliarDTO>)request.getAttribute("reservasFamiliares");
+ArrayList<BonoDTO> bonos = (ArrayList<BonoDTO>)request.getAttribute("arrayBonos");
 %>
 <br/><br/>
 <table>
 	<tr>
 	<th>ID</th>
-	<th>USUARIO</th>
-	<th>FECHA</th>
-	<th>PISTA</th>
+	<th>SESIONES USADAS</th>
+	<th>CADUCIDAD</th>
+	<th>DIFICULTAD</th>
 	</tr>
-	<tr><td colspan="4"><p>RESERVAS INFANTILES</p></td></tr>
-	<% for (int i = 0; i < reservasInfantiles.size(); i++) { %>
+	<% for (int i = 0; i < bonos.size(); i++) { %>
 	<tr>
 		<td>
-		<%= reservasInfantiles.get(i).getIdReserva() %>
+		<%= bonos.get(i).getId() %>
 		</td>
 		<td>
-		<%= reservasInfantiles.get(i).getUsuario() %>
+		<%= bonos.get(i).getSesion() %>
 		</td>
 		<td>
-		<%= reservasInfantiles.get(i).getFecha() %>
+		<%= bonos.get(i).getFcaducidad() %>
 		</td>
 		<td>
-		<%= reservasInfantiles.get(i).getPista() %>
-		</td>
-	</tr>
-	<% } %>
-	<tr><td colspan="4"><p>RESERVAS ADULTAS</p></td></tr>
-	<% for (int i = 0; i < reservasAdultas.size(); i++) { %>
-	<tr>
-		<td>
-		<%= reservasAdultas.get(i).getIdReserva() %>
-		</td>
-		<td>
-		<%= reservasAdultas.get(i).getUsuario() %>
-		</td>
-		<td>
-		<%= reservasAdultas.get(i).getFecha() %>
-		</td>
-		<td>
-		<%= reservasAdultas.get(i).getPista() %>
-		</td>
-	</tr>
-	<% } %>
-	<tr><td colspan="4"><p>RESERVAS FAMILIARES</p></td></tr>
-	<% for (int i = 0; i < reservasFamiliares.size(); i++) { %>
-	<tr>
-		<td>
-		<%= reservasFamiliares.get(i).getIdReserva() %>
-		</td>
-		<td>
-		<%= reservasFamiliares.get(i).getUsuario() %>
-		</td>
-		<td>
-		<%= reservasFamiliares.get(i).getFecha() %>
-		</td>
-		<td>
-		<%= reservasFamiliares.get(i).getPista() %>
+		<%= bonos.get(i).getTipo() %>
 		</td>
 	</tr>
 	<% } %>

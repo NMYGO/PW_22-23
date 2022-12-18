@@ -3,6 +3,7 @@ package pw.p3.servlet.client.bono;
 import pw.p3.business.reservation.*;
 import pw.p3.data.Dificultad;
 import pw.p3.data.dao.BonoDAO;
+import pw.p3.data.dao.ReservationDAO;
 import pw.p3.display.javabean.CustomerBean;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,13 +32,16 @@ public class GetActualBono extends HttpServlet {
 				String tipo_string = request.getParameter("criterio");
 				if (tipo_string != null && tipo_string.equalsIgnoreCase("actual")) {
 						String id_string = request.getParameter("id");
+						BonoDAO bonoDAO = new BonoDAO();
+						ArrayList<BonoDTO> bonos = bonoDAO.solicitarBonosUsuario(customerBean.getCorreoUser());
+						request.setAttribute("arrayBonos", bonos);
 						if(id_string != null) {
 							Integer sesion = 0;
 							Dificultad tipo = Dificultad.valueOf(tipo_string);
-							BonoDAO bonoDAO = new BonoDAO();
 							BonoDTO bono = new BonoDTO(sesion, customerBean.getCorreoUser(), tipo);
-							if (bonoDAO.solicitarBono(Integer.parseInt(id_string)) != null) {
-									bono = bonoDAO.solicitarBono(Integer.parseInt(id_string));
+							if (bonoDAO.solicitarBono(Integer.parseInt(id_string),customerBean.getCorreoUser()) != null) {
+									bono = bonoDAO.solicitarBono(Integer.parseInt(id_string), customerBean.getCorreoUser());
+									
 							} else {
 								response.setContentType("text/html");
 								PrintWriter out = response.getWriter();
@@ -46,7 +50,6 @@ public class GetActualBono extends HttpServlet {
 								vista.include(request, response);
 							}
 						} else {
-							
 							RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/getActualBonoView.jsp");
 							vista.forward(request, response);
 						}
