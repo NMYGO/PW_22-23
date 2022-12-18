@@ -10,6 +10,9 @@
 <title>Asociar Kart a Pista</title>
 <link href= "<%= request.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
+<header>
+	<a class="tuno" href="/P3/index.jsp">GESTOR DE KARTS</a>
+</header>
 <body>
 <%
 /* Posibles flujos:

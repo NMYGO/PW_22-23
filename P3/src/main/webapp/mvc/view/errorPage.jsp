@@ -8,6 +8,9 @@
 <link href= "<%= request.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet"/>
 <title>Error</title>
 </head>
+<header>
+	<a class="tuno" href="/P3/index.jsp">GESTOR DE KARTS</a>
+</header>
 <h2>HA OCURRIDO UN ERROR INESPERADO</h2>
 <body>
 <br/><br/><a href="index.jsp">Volver</a>

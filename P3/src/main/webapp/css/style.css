@@ -42,6 +42,23 @@ h1 {
 	float: left;
 }
 
+.tuno {
+	background-color: #EE0033;
+	width: 100%;
+	letter-spacing: -1px;
+	font-family: "Open Sans", Sans-serif;
+	font-weight: 800;
+	color: #FFFFFF;
+	font-size:2em;
+	margin: 0px;
+  	padding: 0px;
+ 	margin: auto;
+	padding: 0.5em;
+	width: 50%;
+	clear : none;
+	float: left;
+}
+
 a{
 	background-color: #EE0033;
 	border: 2px solid;

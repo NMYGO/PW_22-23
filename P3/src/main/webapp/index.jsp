@@ -15,11 +15,11 @@
 </head>
 <% if (customerBean == null || customerBean.getCorreoUser() == "") { %>
 	<header>
-		<h1>GESTOR DE KARTS</h1> 
+		<a class="tuno" href="/P3/index.jsp">GESTOR DE KARTS</a>
 	</header>
 <% } else {%>
 	<header>
-		<h1>GESTOR DE KARTS</h1>
+		<a class="tuno" href="/P3/index.jsp">GESTOR DE KARTS</a>
 		<nav>
 		<a href="/P3/mvc/controller/logoutController.jsp">Desconectarse</a>
 		<a href="/P3/mvc/controller/modifyUserController.jsp">Modificar Datos</a>
