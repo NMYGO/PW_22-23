@@ -38,10 +38,10 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 	<input type="hidden" name="id" value='<jsp:getProperty property="bono" name="reservaBean"/>'>
 	<br/>
 	<label for="adultos">Numero de Adultos:</label>
-	<input type="number" name="adultos" value="0"> (No se tendrá en cuenta para reservas infantiles)
+	<input type="number" name="adultos" value="1" min="1"> (No se tendrá en cuenta para reservas infantiles)
 	<br/>
 	<label for="ninos">Número de niños :</label>
-	<input type="number" name="ninos" value="0">(No se tendrá en cuenta para reservas adultas)
+	<input type="number" name="ninos" value="1" min="1">(No se tendrá en cuenta para reservas adultas)
 	<br/>
 	<label for="duracion">Duracion: </label>
 	<input type="radio" name="duracion" value="60" checked>60 minutos
