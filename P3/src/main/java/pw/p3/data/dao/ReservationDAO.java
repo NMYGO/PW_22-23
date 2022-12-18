@@ -18,8 +18,7 @@ import com.mysql.jdbc.ResultSet;
 
 /**
  * 
- * DAO de Reserva
- * Encargado de interactuar con la tabla reserva de la base de datos
+ * DAO Reserva
  * 
  * @author David Olmo Cejudo
  * @author Francisco Moreno Cano
@@ -32,8 +31,8 @@ import com.mysql.jdbc.ResultSet;
 public class ReservationDAO {
 	
 	/**
-	 * Solicita la reservas infantiles
-	 * @return ArrayList<DTORInfantile> de las reservas
+	 * Solicita las reservas infantiles
+	 * @return ArrayList<RInfantileDTO> de las reservas
 	 **/
 	
 	public ArrayList<RInfantileDTO> solicitarReservasInfantiles() {
@@ -81,8 +80,8 @@ public class ReservationDAO {
 	}
 	
 	/**
-	 * Solicita la reservas de adultos
-	 * @return ArrayList<DTORAdult> de las reservas
+	 * Solicita las reservas de adultos
+	 * @return ArrayList<RAdultDTO> de las reservas
 	 **/
 	
 	public ArrayList<RAdultDTO> solicitarReservasAdultos() {
@@ -130,8 +129,8 @@ public class ReservationDAO {
 	}
 	
 	/**
-	 * Solicita la reservas familiares
-	 * @return ArrayList<DTORFamiliar> de los reservas
+	 * Solicita las reservas familiares
+	 * @return ArrayList<RFamiliarDTO> de los reservas
 	 **/
 	
 	public ArrayList<RFamiliarDTO> solicitarReservasFamiliares() {
@@ -183,7 +182,7 @@ public class ReservationDAO {
 	 * Solicita la proxima reserva infantil
 	 * @param correoUsuario String Correo del usuario que solicita
 	 * @param dificultad Dificultad Dificultad de la reserva que se solicita
-	 * @return DTORInfantile de la proxima reserva infantil
+	 * @return RInfantileDTO de la proxima reserva infantil
 	 **/
 	
 	public RInfantileDTO solicitarProximaReservaInfantil(String correoUsuario, Dificultad dificultad) {
@@ -235,7 +234,7 @@ public class ReservationDAO {
 	 * Solicita la proxima reserva adulta
 	 * @param correoUsuario String Correo del usuario que solicita
 	 * @param dificultad Dificultad Dificultad de la reserva que se solicita
-	 * @return DTORAdult de la proxima reserva adulta
+	 * @return RAdultDTO de la proxima reserva adulta
 	 **/
 	
 	public RAdultDTO solicitarProximaReservaAdulto(String correoUsuario, Dificultad dificultad) {
@@ -287,7 +286,7 @@ public class ReservationDAO {
 	 * Solicita la proxima reserva familiar 
 	 * @param correoUsuario String Correo del usuario que solicita
 	 * @param dificultad Dificultad Dificultad de la reserva que se solicita
-	 * @return DTORFamiliar de la proxima reserva
+	 * @return RFamiliarDTO de la proxima reserva
 	 **/
 	
 	public RFamiliarDTO solicitarProximaReservaFamiliar(String correoUsuario, Dificultad dificultad) {
@@ -340,7 +339,7 @@ public class ReservationDAO {
 	 * Solicita las reservas infantiles completadas  
 	 * @param correoUsuario String Correo del usuario que solicita
 	 * @param dificultad Dificultad Dificultad de la reserva que se solicita
-	 * @return ArrayList<DTORInfantile> de las reservas completadas 
+	 * @return ArrayList<RInfantileDTO> de las reservas completadas 
 	 **/
 	
 	public ArrayList<RInfantileDTO> solicitarReservasInfantilCompletada(String correoUsuario, Dificultad dificultad) {
@@ -392,7 +391,7 @@ public class ReservationDAO {
 	 * Solicita las reservas adultas completadas  
 	 * @param correoUsuario String Correo del usuario que solicita
 	 * @param dificultad Dificultad Dificultad de la reserva que se solicita
-	 * @return ArrayList<DTORAdult> de las reservas completadas 
+	 * @return ArrayList<RAdultDTO> de las reservas completadas 
 	 **/
 	
 	public ArrayList<RAdultDTO> solicitarReservasAdultoCompletada(String correoUsuario, Dificultad dificultad) {
@@ -444,7 +443,7 @@ public class ReservationDAO {
 	 * Solicita las reservas familiares completadas  
 	 * @param correoUsuario String Correo del usuario que solicita
 	 * @param dificultad Dificultad Dificultad de la reserva que se solicita
-	 * @return ArrayList<DTORInfantile> de las reservas completadas 
+	 * @return ArrayList<RFamiliarDTO> de las reservas completadas 
 	 **/
 	
 	public ArrayList<RFamiliarDTO> solicitarReservasFamiliarCompletada(String correoUsuario, Dificultad dificultad) {
@@ -495,7 +494,7 @@ public class ReservationDAO {
 	
 	/**
 	 * Borra una reserva pendiente  
-	 * @param idReserva Integer Id de la reserva a eliminar
+	 * @param idReserva Identificador de la reserva a eliminar
 	 * @return Integer que informa sobre el status de la devolucion
 	 **/
 	
@@ -527,7 +526,7 @@ public class ReservationDAO {
 	
 	/**
 	 * Añade una reserva infantil
-	 * @param reserva Reserva Infantil a escribir
+	 * @param reserva Reserva Infantil
 	 * @return Integer que informa sobre el status de la devolucion
 	 **/
 	
@@ -568,8 +567,8 @@ public class ReservationDAO {
 	}
 	
 	/**
-	 * Inserta la reserva adulta
-	 * @param reserva Reserva Adulto a escribir
+	 * Inserta una reserva adulta
+	 * @param reserva Reserva Adulto
 	 * @return Integer que informa sobre el status de la devolucion
 	 **/
 	
@@ -611,7 +610,7 @@ public class ReservationDAO {
 	
 	/**
 	 * Inserta una reserva familiar
-	 * @param reserva Reserva Familiar a escribir
+	 * @param reserva Reserva Familiar
 	 * @return Integer que informa sobre el status de la devolucion
 	 **/
 	

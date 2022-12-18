@@ -3,6 +3,17 @@ package pw.p3.business.user;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * 
+ * DTO Usuario
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ **/
+
 public class UserDTO {
 	
 	/* Atributos */
@@ -14,6 +25,7 @@ public class UserDTO {
 	protected String correo;
 	protected String password;
 	protected Boolean administrador;
+	
 	/* Constructores */
 	
 	/**
@@ -27,6 +39,7 @@ public class UserDTO {
 	 * @param apellidos Apellidos del usuario
 	 * @param nacimiento Nacimiento del usuario
 	 * @param correo Correo unico del usuario
+	 * @param pass Contraseña del usuario
 	 **/
 	
 	public UserDTO(String nombre, String apellidos, LocalDate nacimiento, String correo, String pass) {
@@ -37,6 +50,16 @@ public class UserDTO {
 		this.correo = correo;
 		this.password = pass;
 	}
+	
+	/**
+	 * Constructor parametrizado
+	 * @param nombre Nombre del usuario
+	 * @param apellidos Apellidos del usuario
+	 * @param nacimiento Nacimiento del usuario
+	 * @param correo Correo unico del usuario
+	 * @param pass Contraseña del usuario
+	 * @param administrador Tipo del usuario
+	 **/
 	
 	public UserDTO(String nombre, String apellidos, LocalDate nacimiento, LocalDate inscripcion, String correo, String pass, Boolean administrador) {
 		this.nombre = nombre;

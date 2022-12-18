@@ -24,6 +24,12 @@ public class UserManager {
 	 **/	
 	public UserManager(){}
 	
+	/**
+	 * Funcion que calcula la antiguedad de un usuario
+	 * @param usuario Usuario
+	 * @return Devuelve la antiguedad en meses
+	 **/
+	
 	public int calcularAntiguedad(UserDTO usuario) {
 		DateTimeFormatter formateadorYY = DateTimeFormatter.ofPattern("yyyy");
 		DateTimeFormatter formateadorMM = DateTimeFormatter.ofPattern("MM");
