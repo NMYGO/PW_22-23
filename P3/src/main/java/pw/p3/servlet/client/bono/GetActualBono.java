@@ -44,6 +44,7 @@ public class GetActualBono extends HttpServlet {
 									bonoDAO.escribirBonoUpdate(bono);
 									ReservationBean reservaBean = (ReservationBean)session.getAttribute("reservaBean");
 									reservaBean.setDificultad(bono.getTipo().toString());
+									reservaBean.setBono(bono.getId());
 									RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/newBonoReservation.jsp");
 									vista.include(request, response);
 							} else {

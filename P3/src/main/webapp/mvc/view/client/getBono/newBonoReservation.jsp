@@ -29,10 +29,13 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 	nextPage = "../../index.jsp";
 } else {
 %>
-<h2><%= messageNextPage %></h2><br/><%=reservaBean.getDificultad() %><br/>
+<h2><%= messageNextPage %></h2><br/><br/>
+Dificultad de la reserva: <%=reservaBean.getDificultad() %><%=reservaBean.getBono() %>
 <form method="get" action="/P3/newBonoReservation">
 	<label for="dificultad"></label>
 	<input type="hidden" name="dificultad" value='<jsp:getProperty property="dificultad" name="reservaBean"/>'>
+	<label for="id"></label>
+	<input type="hidden" name="id" value='<jsp:getProperty property="bono" name="reservaBean"/>'>
 	<br/>
 	<label for="adultos">Numero de Adultos:</label>
 	<input type="number" name="adultos" value="0"> (No se tendrá en cuenta para reservas infantiles)

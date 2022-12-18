@@ -56,6 +56,8 @@ public class NewBonoReservation extends HttpServlet {
 					}
 				} else {
 					String pista = request.getParameter("pista");
+					String id_string = request.getParameter("id");
+					Integer idBono = Integer.parseInt(id_string);
 					Integer adultos = Integer.parseInt(string_adultos);
 					Integer ninos = Integer.parseInt(string_ninos);
 					Integer duracion = Integer.parseInt(string_duracion);
@@ -66,7 +68,7 @@ public class NewBonoReservation extends HttpServlet {
 					}
 					
 					ReservationManager reserva = new ReservationManager();
-					if(!reserva.crearReserva(customerBean.getCorreoUser(), pista, dificultad, ninos, adultos, duracion, descuento, fecha)) {
+					if(!reserva.crearReserva(customerBean.getCorreoUser(), pista, dificultad, ninos, adultos, duracion, descuento, fecha, idBono)) {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
 						out.println("Error. Reserva no creada");
@@ -75,7 +77,7 @@ public class NewBonoReservation extends HttpServlet {
 					} else {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
-						out.println("Reserva Creada");
+						out.println(idBono);
 						RequestDispatcher correcto = request.getRequestDispatcher("index.jsp");
 						correcto.include(request, response);
 					}

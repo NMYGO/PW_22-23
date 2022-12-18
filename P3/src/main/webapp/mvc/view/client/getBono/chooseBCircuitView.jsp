@@ -44,6 +44,8 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 	<input type="hidden" name="duracion" value='<jsp:getProperty property="duracion" name="reservaBean"/>'>
 	<label for="fecha"></label>
 	<input type="hidden" name="fecha" value='<jsp:getProperty property="fecha" name="reservaBean"/>'>
+	<label for="id"></label>
+	<input type="hidden" name="id" value='<jsp:getProperty property="bono" name="reservaBean"/>'>
 	<input type="submit" value="Elegir pista">
 	<br/><br/>
 </form>
