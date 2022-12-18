@@ -179,3 +179,12 @@ input[type=button], input[type=submit], input[type=reset] {
 	margin: 4px 2px;
 	cursor: pointer;
 }
+
+
+
+
+.error{
+	color:#EE0033;
+	border-color: #EE0033;
+	border-collapse: collapse;
+}

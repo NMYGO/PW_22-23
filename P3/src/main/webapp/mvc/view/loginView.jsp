@@ -28,7 +28,7 @@ if (customerBean != null && !customerBean.getCorreoUser().equals("") && !custome
 	nextPage = "../../index.jsp";
 } else { %>
 <h2><%= messageNextPage %></h2><br/><br/>
-<form method="post" action="../controller/loginController.jsp">
+<form id="loginForm" method="post" action="../controller/loginController.jsp">
 	<label for="correo">Correo: </label>
 	<input type="email" name="correo" value="" placeholder="correo@dominio" required>
 	<br/>
@@ -41,4 +41,7 @@ if (customerBean != null && !customerBean.getCorreoUser().equals("") && !custome
 }
 %>
 </body>
+<script src = "../../js/jqueryvalidation/lib/jquery.js"></script>
+<script src = "../../js/jqueryvalidation/dist/jquery.validate.js"></script>
+<script src = "../../js/login.js"></script>
 </html>
