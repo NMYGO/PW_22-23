@@ -248,7 +248,7 @@ public class CircuitDAO {
 				Dificultad dificultad = Dificultad.valueOf(rs.getString("dificultad"));
 				Integer maxkarts = rs.getInt("maxKarts");
 				kartsPista = kartTabla.solicitarKartsPista(nombre);
-				if(maxkarts >= nkarts && nkarts <= (maxkarts - kartsPista.size())) {
+				if(maxkarts >= nkarts && nkarts <= kartsPista.size()) {
 						pistas.add(new CircuitDTO(nombre, false, dificultad, maxkarts));
 				}
 			}
