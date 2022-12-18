@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import ="pw.p3.business.user.UserDTO, pw.p3.data.dao.UserDAO, java.time.LocalDate" %>
-<%@ page errorPage="errorPage.jsp" %>
+<%@ page errorPage="mvc/view/errorPage.jsp" %>
 <jsp:useBean  id="customerBean" scope="session" class="pw.p3.display.javabean.CustomerBean"></jsp:useBean>
 <%
 /* Posibles flujos:
