@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ page import ="java.util.ArrayList, java.time.LocalDate, pw.p3.business.reservation.*" %>
 <jsp:useBean  id="customerBean" scope="session" class="pw.p3.display.javabean.CustomerBean"></jsp:useBean>
-<jsp:useBean  id="dateBean" scope="application" class="pw.p3.display.javabean.DateBean"></jsp:useBean>
+<jsp:useBean  id="dateBean" scope="application" class="pw.p3.display.javabean.ReservationBean"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
