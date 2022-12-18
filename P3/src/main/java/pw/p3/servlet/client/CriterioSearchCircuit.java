@@ -17,12 +17,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * 
+ * Servlet para elegir un criterio de busqueda de pista
+ * 
+ * @author David Olmo Cejudo
+ * @author Francisco Moreno Cano
+ * @author Ángel Quintero Montes
+ * @author Diego Tabas Costa
+ *
+ **/
+
 @WebServlet(name="SearchCircuit", urlPatterns="/searchCircuit")
 public class CriterioSearchCircuit extends HttpServlet {
 	
 	/** Serial ID */
 	private static final long serialVersionUID = -8861667748359414188L;
-
+	
+	/**
+	 * Metodo Get del servlet
+	 * @param request Request
+	 * @param response Response
+	 * @return
+	 **/
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		CustomerBean customerBean = (CustomerBean)session.getAttribute("customerBean");

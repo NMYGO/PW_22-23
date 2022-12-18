@@ -22,7 +22,14 @@ public class SearchCircuitType extends HttpServlet {
 	
 	/** Serial ID */
 	private static final long serialVersionUID = -8861667773669414188L;
-
+	
+	/**
+	 * Metodo Get del servlet
+	 * @param request Request
+	 * @param response Response
+	 * @return
+	 **/
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		CustomerBean customerBean = (CustomerBean)session.getAttribute("customerBean");
