@@ -62,7 +62,7 @@ ArrayList<RFamiliarDTO> reservasFamiliares = (ArrayList<RFamiliarDTO>)request.ge
 		</td>
 	</tr>
 	<% }} %>
-	<tr><td colspan="4"><p>RESERVAS ADULTAS</p></td></tr>
+	<tr><td colspan="3"><p>RESERVAS ADULTAS</p></td></tr>
 	<% for (int i = 0; i < reservasAdultas.size(); i++) { %>
 	<tr>
 		<%if(customerBean.getCorreoUser().equals(reservasAdultas.get(i).getUsuario())){  %>
@@ -77,7 +77,7 @@ ArrayList<RFamiliarDTO> reservasFamiliares = (ArrayList<RFamiliarDTO>)request.ge
 		</td>
 	</tr>
 	<% }} %>
-	<tr><td colspan="4"><p>RESERVAS FAMILIARES</p></td></tr>
+	<tr><td colspan="3"><p>RESERVAS FAMILIARES</p></td></tr>
 	<% for (int i = 0; i < reservasFamiliares.size(); i++) { %>
 	<tr>
 		<%if(customerBean.getCorreoUser().equals(reservasFamiliares.get(i).getUsuario())){  %>
