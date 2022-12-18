@@ -54,12 +54,13 @@ CircuitManager circuitos = new CircuitManager();
 Integer total = reservaBean.getNinos()+reservaBean.getAdultos();
 String dificultad = reservaBean.getDificultad();
 ArrayList<CircuitDTO> pistas = new ArrayList<CircuitDTO>();
+String path = (String)request.getAttribute("path");
 if(dificultad.equals("ADULTO")){
-	pistas = circuitos.pistasLibres(reservaBean.getAdultos(), Dificultad.ADULTO);
+	pistas = circuitos.pistasLibres(path, reservaBean.getAdultos(), Dificultad.ADULTO);
 }else if (dificultad.equals("INFANTIL")){
-	pistas = circuitos.pistasLibres(reservaBean.getNinos(), Dificultad.INFANTIL);
+	pistas = circuitos.pistasLibres(path, reservaBean.getNinos(), Dificultad.INFANTIL);
 }else{
-	pistas = circuitos.pistasLibres(total, Dificultad.FAMILIAR);
+	pistas = circuitos.pistasLibres(path, total, Dificultad.FAMILIAR);
 }
 
 %>

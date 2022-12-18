@@ -27,6 +27,8 @@ public class NewReservation extends HttpServlet {
 		ReservationBean reservaBean = (ReservationBean)session.getAttribute("reservaBean");
 		if (customerBean != null && customerBean.getCorreoUser() != "") {
 			if(!customerBean.getAdminUser()) {
+				String path = getServletContext().getRealPath("/WEB-INF/sql.properties.txt");
+				request.setAttribute("path", path);
 				String string_duracion = request.getParameter("duracion");
 				String string_fecha = request.getParameter("fecha");
 				String dificultad = request.getParameter("dificultad");

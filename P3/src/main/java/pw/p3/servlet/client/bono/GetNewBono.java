@@ -39,7 +39,7 @@ public class GetNewBono extends HttpServlet {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
 						out.println("Error. Bono de ese tipo ya existente");
-						RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/getActualBonoView.jsp");
+						RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/getNewBonoView.jsp");
 						vista.include(request, response);
 					} else {
 						if (bonoDAO.escribirBonoInsert(bono) == 0) {
