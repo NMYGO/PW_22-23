@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import ="pw.p3.business.user.*, pw.p3.data.dao.UserDAO, java.time.LocalDate, java.time.format.DateTimeFormatter" %>
+<%@ page isErrorPage="errorPage.jsp" %>
 <jsp:useBean  id="customerBean" scope="session" class="pw.p3.display.javabean.CustomerBean"></jsp:useBean>
 <%
 /* Posibles flujos:
