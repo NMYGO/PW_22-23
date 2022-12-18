@@ -1,4 +1,4 @@
-package pw.p3.servlet.client;
+package pw.p3.servlet.client.bono;
 
 import pw.p3.business.reservation.*;
 import pw.p3.data.Dificultad;
@@ -28,34 +28,32 @@ public class GetActualBono extends HttpServlet {
 		CustomerBean customerBean = (CustomerBean)session.getAttribute("customerBean");
 		if (customerBean != null && customerBean.getCorreoUser() != "") {
 			if(!customerBean.getAdminUser()) {
-				/**A PARTIR DE AQUI A MODIFICAR **/
-				String tipo_string = request.getParameter("tipo");
-				if (tipo_string != null) {
-					Integer sesion = 0;
-					Dificultad tipo = Dificultad.valueOf(tipo_string);
-					BonoDAO bonoDAO = new BonoDAO();
-					BonoDTO bono = new BonoDTO(sesion, customerBean.getCorreoUser(), tipo);
-					
-					if (bonoDAO.solicitarBono(customerBean.getCorreoUser(), tipo) != null) {
-						response.setContentType("text/html");
-						PrintWriter out = response.getWriter();
-						out.println("Error. Bono de ese tipo ya existente");
-						RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/getNewBonoView.jsp");
-						vista.include(request, response);
-					} else {
-						if (bonoDAO.escribirBonoInsert(bono) == 0) {
-							RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/getNewBonoView.jsp");
-							vista.forward(request, response);
+				String tipo_string = request.getParameter("criterio");
+				if (tipo_string != null && tipo_string.equalsIgnoreCase("actual")) {
+						String id_string = request.getParameter("id");
+						if(id_string != null) {
+							Integer sesion = 0;
+							Dificultad tipo = Dificultad.valueOf(tipo_string);
+							BonoDAO bonoDAO = new BonoDAO();
+							BonoDTO bono = new BonoDTO(sesion, customerBean.getCorreoUser(), tipo);
+							if (bonoDAO.solicitarBono(Integer.parseInt(id_string)) != null) {
+									bono = bonoDAO.solicitarBono(Integer.parseInt(id_string));
+							} else {
+								response.setContentType("text/html");
+								PrintWriter out = response.getWriter();
+								out.println("Error. Bono de ese tipo no existe");
+								RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/getActualBonoView.jsp");
+								vista.include(request, response);
+							}
 						} else {
-							response.setContentType("text/html");
-							PrintWriter out = response.getWriter();
-							out.println("GetNewBono");
-							RequestDispatcher vista = request.getRequestDispatcher("index.jsp");
-							vista.include(request, response);
+							
+							RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/getActualBonoView.jsp");
+							vista.forward(request, response);
 						}
-					}
-					/**SE SUPONE QUE HASTA AQUI**/
 				} else {
+					response.setContentType("text/html");
+					PrintWriter out = response.getWriter();
+					out.println("Error. Tonto");
 					RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/getNewBonoView.jsp");
 					vista.forward(request, response);
 				}

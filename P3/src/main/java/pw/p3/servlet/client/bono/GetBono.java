@@ -1,4 +1,4 @@
-package pw.p3.servlet.client;
+package pw.p3.servlet.client.bono;
 
 import pw.p3.business.reservation.*;
 import pw.p3.data.dao.ReservationDAO;

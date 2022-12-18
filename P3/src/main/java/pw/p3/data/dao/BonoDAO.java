@@ -117,6 +117,63 @@ public class BonoDAO {
 		return bono;
 	}
 	
+	
+	/**
+	 * Solicitar el bono por ID
+	 * 
+	 * @param usuario
+	 * @param tipo
+	 * @return
+	 */
+	public BonoDTO solicitarBono(Integer id) {
+		Properties prop = new Properties();
+		try{
+			BufferedReader reader_sqlproperties = new BufferedReader(new FileReader(new File("sql.properties.txt")));
+			prop.load(reader_sqlproperties);
+		} catch (FileNotFoundException e) {		
+			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		String consultaBonoEspecifico = prop.getProperty("consultaBonoEspecifico");
+		BonoDTO bono = null;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			PreparedStatement ps = connection.prepareStatement("select * from bono where idBono=?");
+			ps.setString(1, id.toString());
+
+			ResultSet rs = (ResultSet) ps.executeQuery();
+	
+			while (rs.next()) {
+				String usuario = rs.getString("correoUsuario");				
+				String tipo = rs.getString("tipo"); 
+				Dificultad difi;
+				if(tipo.equals("INFANTIL")) {
+					difi=Dificultad.INFANTIL;
+				}else if(tipo.equals("ADULTO")) {
+					difi=Dificultad.ADULTO;
+				}else {
+					difi=Dificultad.FAMILIAR;
+				}
+				Integer sesion = rs.getInt("sesion");
+				LocalDate fechaCaducidad = LocalDate.parse(rs.getString("fechaCaducidad"));
+				bono = new BonoDTO(sesion, usuario, difi, fechaCaducidad);
+				bono.setId(id);
+			}
+	
+			if (ps != null){ 
+				ps.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return bono;
+	}
+	
 	/**
 	 * Actualiza en la base de datos un bono específico
 	 * @param bono Bono a escribir

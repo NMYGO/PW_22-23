@@ -1,4 +1,4 @@
-package pw.p3.servlet.client;
+package pw.p3.servlet.client.bono;
 
 import pw.p3.business.reservation.*;
 import pw.p3.data.Dificultad;
@@ -39,10 +39,13 @@ public class GetNewBono extends HttpServlet {
 						response.setContentType("text/html");
 						PrintWriter out = response.getWriter();
 						out.println("Error. Bono de ese tipo ya existente");
-						RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/getNewBonoView.jsp");
+						RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/getActualBonoView.jsp");
 						vista.include(request, response);
 					} else {
 						if (bonoDAO.escribirBonoInsert(bono) == 0) {
+							response.setContentType("text/html");
+							PrintWriter out = response.getWriter();
+							out.println("Error. Bono no se ha podido crear");
 							RequestDispatcher vista = request.getRequestDispatcher("/mvc/view/client/getBono/getNewBonoView.jsp");
 							vista.forward(request, response);
 						} else {

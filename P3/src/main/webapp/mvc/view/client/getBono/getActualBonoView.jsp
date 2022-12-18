@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import ="java.util.ArrayList, pw.p3.business.circuit.*, pw.p3.data.Dificultad" %>
+    <%@ page import ="java.util.ArrayList, pw.p3.business.reservation.*, pw.p3.data.Dificultad" %>
 <jsp:useBean  id="customerBean" scope="session" class="pw.p3.display.javabean.CustomerBean"></jsp:useBean>
     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Crear Bono</title>
+<title>Elegir Bono</title>
 <link href= "<%= request.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
@@ -21,7 +21,7 @@
 String nextPage = "../../index.jsp";
 String messageNextPage = request.getParameter("message");
 if (messageNextPage == null) {
-	messageNextPage = "getNewBonoView";
+	messageNextPage = "Elegir Bono a Usar";
 }
 
 if (customerBean == null || customerBean.getCorreoUser().equals("") || customerBean.getPasswordUser().equalsIgnoreCase("")) {
@@ -30,14 +30,77 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 } else {
 %>
 <h2><%= messageNextPage %></h2><br/><br/>
-<form method="get" action="/P3/getNewBono">
-	<label for="tipo">Tipo: </label>
-	<input type="radio" name="tipo" value="INFANTIL" checked>Infantil
-	<input type="radio" name="tipo" value="ADULTO">Adulto
-	<input type="radio" name="tipo" value="FAMILIAR">Familiar
+<form method="get" action="/P3/getActualBono">
+	<label for="id">ID bono:</label>
+	<input type="number" name="id" value="" required>
 	<br/><br/>
-	<input type="submit" value="Crear Bono">
+	<input type="submit" value="Elegir Bono">
 </form>
+<%
+ArrayList<BonoDTO> reservasInfantiles = (ArrayList<RInfantileDTO>)request.getAttribute("reservasInfantiles");
+ArrayList<RAdultDTO> reservasAdultas = (ArrayList<RAdultDTO>)request.getAttribute("reservasAdultas");
+ArrayList<RFamiliarDTO> reservasFamiliares = (ArrayList<RFamiliarDTO>)request.getAttribute("reservasFamiliares");
+%>
+<br/><br/>
+<table>
+	<tr>
+	<th>ID</th>
+	<th>USUARIO</th>
+	<th>FECHA</th>
+	<th>PISTA</th>
+	</tr>
+	<tr><td colspan="4"><p>RESERVAS INFANTILES</p></td></tr>
+	<% for (int i = 0; i < reservasInfantiles.size(); i++) { %>
+	<tr>
+		<td>
+		<%= reservasInfantiles.get(i).getIdReserva() %>
+		</td>
+		<td>
+		<%= reservasInfantiles.get(i).getUsuario() %>
+		</td>
+		<td>
+		<%= reservasInfantiles.get(i).getFecha() %>
+		</td>
+		<td>
+		<%= reservasInfantiles.get(i).getPista() %>
+		</td>
+	</tr>
+	<% } %>
+	<tr><td colspan="4"><p>RESERVAS ADULTAS</p></td></tr>
+	<% for (int i = 0; i < reservasAdultas.size(); i++) { %>
+	<tr>
+		<td>
+		<%= reservasAdultas.get(i).getIdReserva() %>
+		</td>
+		<td>
+		<%= reservasAdultas.get(i).getUsuario() %>
+		</td>
+		<td>
+		<%= reservasAdultas.get(i).getFecha() %>
+		</td>
+		<td>
+		<%= reservasAdultas.get(i).getPista() %>
+		</td>
+	</tr>
+	<% } %>
+	<tr><td colspan="4"><p>RESERVAS FAMILIARES</p></td></tr>
+	<% for (int i = 0; i < reservasFamiliares.size(); i++) { %>
+	<tr>
+		<td>
+		<%= reservasFamiliares.get(i).getIdReserva() %>
+		</td>
+		<td>
+		<%= reservasFamiliares.get(i).getUsuario() %>
+		</td>
+		<td>
+		<%= reservasFamiliares.get(i).getFecha() %>
+		</td>
+		<td>
+		<%= reservasFamiliares.get(i).getPista() %>
+		</td>
+	</tr>
+	<% } %>
+</table>
 <%
 }
 %>

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Asociar Reserva Bono</title>
+<title>Nuevo Bono</title>
 <link href= "<%= request.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
@@ -30,7 +30,6 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 } else {
 %>
 <h2><%= messageNextPage %></h2><br/><br/>
-<%--A PARTIR DE AQUI MODIFICAR --%>
 <form method="get" action="/P3/getNewBono">
 	<label for="tipo">Tipo: </label>
 	<input type="radio" name="tipo" value="INFANTIL" checked>Infantil
@@ -38,7 +37,6 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 	<input type="radio" name="tipo" value="FAMILIAR">Familiar
 	<br/><br/>
 	<input type="submit" value="Crear Bono">
-	<%--SE SUPONE QUE HASTA AQUI --%>
 </form>
 <%
 }
