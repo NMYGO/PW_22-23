@@ -51,7 +51,7 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 	<input type="date" name="fecha" value="" required>
 	<br/>
 	<br/>
-	<input type="submit" value="Elegir pista">
+	<input type="submit" value="Continuar">
 </form>
 <%
 }

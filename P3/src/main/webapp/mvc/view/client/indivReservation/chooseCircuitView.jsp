@@ -44,6 +44,7 @@ if (customerBean == null || customerBean.getCorreoUser().equals("") || customerB
 	<input type="hidden" name="duracion" value='<jsp:getProperty property="duracion" name="reservaBean"/>'>
 	<label for="fecha"></label>
 	<input type="hidden" name="fecha" value='<jsp:getProperty property="fecha" name="reservaBean"/>'>
+	<input type="submit" value="Elegir pista">
 	<br/><br/>
 </form>
 
@@ -54,14 +55,14 @@ Integer total = reservaBean.getNinos()+reservaBean.getAdultos();
 String dificultad = reservaBean.getDificultad();
 ArrayList<CircuitDTO> pistas = new ArrayList<CircuitDTO>();
 if(dificultad.equals("ADULTO")){
-	pistas = circuitos.pistasLibres(total, Dificultad.ADULTO);
+	pistas = circuitos.pistasLibres(reservaBean.getAdultos(), Dificultad.ADULTO);
 }else if (dificultad.equals("INFANTIL")){
-	pistas = circuitos.pistasLibres(total, Dificultad.INFANTIL);
+	pistas = circuitos.pistasLibres(reservaBean.getNinos(), Dificultad.INFANTIL);
 }else if (dificultad.equals("FAMILIAR")){
 	pistas = circuitos.pistasLibres(total, Dificultad.FAMILIAR);
 }
 
-%>
+%><%=pistas.size() %>
 <br/><br/>
 <table>
 	<tr>
